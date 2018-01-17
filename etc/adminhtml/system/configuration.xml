@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+ *
+ *
+ *          ..::..
+ *     ..::::::::::::..
+ *   ::'''''':''::'''''::
+ *   ::..  ..:  :  ....::
+ *   ::::  :::  :  :   ::
+ *   ::::  :::  :  ''' ::
+ *   ::::..:::..::.....::
+ *     ''::::::::::::''
+ *          ''::''
+ *
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Creative Commons License.
+ * It is available through the world-wide-web at this URL:
+ * http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
+ * If you are unable to obtain it through the world-wide-web, please send an email
+ * to servicedesk@tig.nl so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this module to newer
+ * versions in the future. If you wish to customize this module for your
+ * needs please contact servicedesk@tig.nl for more information.
+ *
+ * @copyright   Copyright (c) Total Internet Group B.V. https://tig.nl/copyright
+ * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
+ *
+-->
+<include xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_include.xsd">
+    <!--Configuration section-->
+    <group id="configuration" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+        <label>Configuration</label>
+        <frontend_model>TIG\Postcode\Block\Adminhtml\Config\Form\Field\Fieldset</frontend_model>
+        <field id="modus" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Modus</label>
+            <source_model>TIG\Postcode\Config\Source\Modus</source_model>
+            <config_path>tig_postcode/configuration/modus</config_path>
+        </field>
+
+        <!-- Customer fields:live -->
+        <field id="client_id" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Client ID</label>
+            <config_path>tig_postcode/configuration/client_id</config_path>
+            <depends>
+                <field id="modus">1</field>
+            </depends>
+        </field>
+        <field id="api_key" translate="label comment" type="obscure" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Api key</label>
+            <comment><![CDATA[Enter your API key. If you haven't got an API key, please contact our support team.]]></comment>
+            <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+            <config_path>tig_postcode/configuration/api_key</config_path>
+            <depends>
+                <field id="modus">1</field>
+            </depends>
+        </field>
+
+        <!-- Customer fields:test -->
+        <field id="client_id_test" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Client ID - TEST</label>
+            <config_path>tig_postcode/configuration/client_id_test</config_path>
+            <depends>
+                <field id="modus">2</field>
+            </depends>
+        </field>
+        <field id="api_key_test" translate="label comment" type="obscure" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Api key - TEST</label>
+            <comment><![CDATA[You can use the test credentials. Normaly these credentials are the default placeholders, if lost contact our support team.]]></comment>
+            <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+            <config_path>tig_postcode/configuration/api_key_test</config_path>
+            <depends>
+                <field id="modus">2</field>
+            </depends>
+        </field>
+    </group>
+</include>

@@ -1,0 +1,49 @@
+sudo: required
+dist: trusty
+addons:
+  apt:
+    packages:
+    - mysql-server-5.6
+    - mysql-client-core-5.6
+    - mysql-client-5.6
+
+language: php
+
+php: 7.0
+
+env:
+  global:
+    - CODE_COVERAGE=false
+
+  matrix:
+    - MAGENTO_VERSION=2.1.10
+    - MAGENTO_VERSION=2.1.11
+    - MAGENTO_VERSION=2.2.1
+    - MAGENTO_VERSION=2.2.2
+
+matrix:
+  include:
+    - php: 7.1
+      env: MAGENTO_VERSION=2.2.2 CODE_COVERAGE=true
+
+before_script:
+  - export PATH=$PATH:$HOME/.composer/vendor/bin
+  - composer config -a -g http-basic.repo.magento.com $MAGENTO_USERNAME $MAGENTO_PASSWORD
+  - bash Test/Script/ManageDependencies.sh
+  - bash Test/Script/Setup.sh
+
+script:
+  - grunt phpcs
+  - grunt lint
+  - grunt exec:ciTests
+  - if [ "$CODE_COVERAGE" = "false" ]; then php /tmp/magento2/bin/magento setup:di:compile; fi # Check for compilation errors
+
+after_success:
+  - bash Test/Script/AfterSuccess.sh
+
+cache:
+  directories:
+  - node_modules
+  - $HOME/.download_cache
+  - $HOME/.composer
+  - $HOME/.cache/composer
