@@ -38,8 +38,77 @@ class ClientConfigurationTest extends AbstractConfigurationTest
 {
     protected $instanceClass = ClientConfiguration::class;
 
-    public function testTest()
+    /**
+     * @var ModuleConfiguration|\PHPUnit_Framework_MockObject_MockObject
+     */
+    private $moduleMock;
+
+    /**
+     * @return array
+     */
+    public function modusXpathProvider()
     {
-        $this->assertEquals(true, true);
+        return [
+            'get client xpath where modus is test'  => [
+                true,
+                ClientConfiguration::XPATH_CONFIGURATION_CLIENT_ID,
+                ClientConfiguration::XPATH_CONFIGURATION_CLIENT_ID.'_test'
+            ],
+            'get client xpath where modus is not test' => [
+                false,
+                ClientConfiguration::XPATH_CONFIGURATION_CLIENT_ID,
+                ClientConfiguration::XPATH_CONFIGURATION_CLIENT_ID
+            ],
+            'get apikey xpath where modus is test'  => [
+                true,
+                ClientConfiguration::XPATH_CONFIGURATION_API_KEY,
+                ClientConfiguration::XPATH_CONFIGURATION_API_KEY.'_test'
+            ],
+            'get apikey xpath where modus is not test' => [
+                false,
+                ClientConfiguration::XPATH_CONFIGURATION_API_KEY,
+                ClientConfiguration::XPATH_CONFIGURATION_API_KEY
+            ]
+        ];
+    }
+
+    public function testGetClientId()
+    {
+        $this->setModuleMock(false);
+
+        $instance = $this->getInstance([
+            'moduleConfiguration' => $this->moduleMock
+        ]);
+
+        $value = $this->getRandomSyntax();
+        $this->setXpath(ClientConfiguration::XPATH_CONFIGURATION_CLIENT_ID, $value);
+
+        $this->assertEquals($value, $instance->getClientId());
+    }
+
+    /**
+     * @dataProvider modusXpathProvider
+     *
+     * @param $testModus
+     * @param $value
+     * @param $expected
+     */
+    public function testGetModusXpath($testModus, $value, $expected)
+    {
+        $this->setModuleMock($testModus);
+
+        $instance = $this->getInstance([
+           'moduleConfiguration' => $this->moduleMock
+        ]);
+
+        $this->assertEquals($expected, $instance->getModusXpath($value));
+    }
+
+    private function setModuleMock($testMode)
+    {
+        $this->moduleMock = $this->getFakeMock(ModuleConfiguration::class)->disableOriginalConstructor()->getMock();
+        $moduleConfigExpects = $this->moduleMock->expects($this->any());
+        $moduleConfigExpects->method('isModusTest');
+        $moduleConfigExpects->willReturn($testMode);
     }
 }

@@ -33,6 +33,7 @@ namespace TIG\Postcode\Test\Unit\Config\Provider;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Store\Model\ScopeInterface;
+use TIG\Postcode\Config\Provider\ModuleConfiguration;
 use Magento\Framework\Module\Manager as ModuleManager;
 
 use TIG\Postcode\Test\TestCase;
@@ -123,5 +124,13 @@ abstract class AbstractConfigurationTest extends TestCase
         for ($i = 0; $i <= 3; $i++) {
             yield [uniqid()];
         }
+    }
+
+    /**
+     * @param $modus
+     */
+    protected function setModus($modus)
+    {
+        $this->setXpath(ModuleConfiguration::XPATH_CONFIGURATION_MODUS, $modus, null, $this->any());
     }
 }

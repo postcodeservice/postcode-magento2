@@ -98,7 +98,7 @@ class ClientConfiguration extends AbstractConfigProvider
      *
      * @return string
      */
-    private function getModusXpath($xpath, $store = null)
+    public function getModusXpath($xpath, $store = null)
     {
         if ($this->moduleConfiguration->isModusTest($store)) {
             $xpath .= '_test';

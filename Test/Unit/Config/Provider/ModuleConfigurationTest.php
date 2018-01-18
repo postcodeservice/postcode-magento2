@@ -85,8 +85,5 @@ class ModuleConfigurationTest extends AbstractConfigurationTest
         $this->assertEquals($value, $instance->getSupportedMagentoVersions());
     }
 
-    private function setModus($modus)
-    {
-        $this->setXpath(ModuleConfiguration::XPATH_CONFIGURATION_MODUS, $modus, null, $this->any());
-    }
+
 }
