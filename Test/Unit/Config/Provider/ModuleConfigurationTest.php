@@ -37,6 +37,78 @@ class ModuleConfigurationTest extends AbstractConfigurationTest
 {
     protected $instanceClass = ModuleConfiguration::class;
 
+    public function liveModusProvider()
+    {
+        return [
+            'ModuleOutput disabled' => [false, false, '0'],
+            'ModuleOutput enabled'  => [true, true, '1'],
+        ];
+    }
+
+    /**
+     * @dataProvider liveModusProvider
+     *
+     * @param $moduleOutput
+     * @param $expected
+     * @param $modus
+     */
+    public function testIsModusLive($moduleOutput, $expected, $modus)
+    {
+        $instance = $this->getInstance();
+        $this->setModuleOutputEnabled($moduleOutput);
+        $this->setModus($modus);
+
+        $this->assertEquals($expected, $instance->isModusLive());
+    }
+
+    public function testModusProvider()
+    {
+        return [
+            'ModuleOutput disabled' => [false, false, '0'],
+            'ModuleOutput enabled'  => [true, true, '2'],
+        ];
+    }
+
+    /**
+     * @dataProvider testModusProvider
+     *
+     * @param $moduleOutput
+     * @param $expected
+     * @param $modus
+     */
+    public function testIsModusTest($moduleOutput, $expected, $modus)
+    {
+        $instance = $this->getInstance();
+        $this->setModuleOutputEnabled($moduleOutput);
+        $this->setModus($modus);
+
+        $this->assertEquals($expected, $instance->isModusTest());
+    }
+
+    public function offModusProvider()
+    {
+        return [
+            'ModuleOutput disabled' => [false, true, '0'],
+            'ModuleOutput enabled'  => [true, true, '0'],
+        ];
+    }
+
+    /**
+     * @dataProvider offModusProvider
+     *
+     * @param $moduleOutput
+     * @param $expected
+     * @param $modus
+     */
+    public function testIsModusOff($moduleOutput, $expected, $modus)
+    {
+        $instance = $this->getInstance();
+        $this->setModuleOutputEnabled($moduleOutput);
+        $this->setModus($modus);
+
+        $this->assertEquals($expected, $instance->isModusOff());
+    }
+
     public function modusProvider()
     {
         return [
