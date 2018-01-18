@@ -103,8 +103,8 @@ module.exports = function (grunt) {
     ]);
     grunt.registerTask('ci', 'This task is to be meant for running in CI only', [
         'phpcs',
-        'lint',
-        'exec:ciTests'
+        'lint'
+        // 'exec:ciTests'
     ]);
 
     grunt.registerTask('default', 'Run the default task (test)', ['test']);
