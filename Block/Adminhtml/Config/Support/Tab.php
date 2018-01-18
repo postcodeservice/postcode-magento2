@@ -48,12 +48,21 @@ class Tab extends Template implements RendererInterface
      */
     private $moduleContext;
 
+    /**
+     * Tab constructor.
+     *
+     * @param Template\Context $context
+     * @param ModuleResource   $moduleResource
+     * @param array            $data
+     */
     public function __construct(
         Template\Context $context,
         ModuleResource $moduleResource,
         array $data = []
     ) {
         parent::__construct($context, $data);
+
+        $this->moduleContext = $moduleResource;
     }
 
     /**
