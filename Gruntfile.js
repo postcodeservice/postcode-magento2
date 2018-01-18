@@ -53,22 +53,22 @@ module.exports = function (grunt) {
             unitTests: 'cd ' + magento2path + ' && vendor/phpunit/phpunit/phpunit -c "' + phpunitXmlPath + '"',
 
             // No integration test availble yet.
-            // integrationTests:
-            // 'cd ' + magento2path + 'dev/tests/integration &&' +
-            // 'php -ddisplay_errors=1 ../../../vendor/phpunit/phpunit/phpunit --testsuite "TIG Postcode Integration Tests"',
+            integrationTests:
+            'cd ' + magento2path + 'dev/tests/integration &&' +
+            'php -ddisplay_errors=1 ../../../vendor/phpunit/phpunit/phpunit --testsuite "TIG Postcode Integration Tests"',
 
-            // ciTests:
-            // 'cd ' + magento2path + 'dev/tests/integration &&' +
-            // 'php -ddisplay_errors=1 ../../../vendor/phpunit/phpunit/phpunit',
+            ciTests:
+            'cd ' + magento2path + 'dev/tests/integration &&' +
+            'php -ddisplay_errors=1 ../../../vendor/phpunit/phpunit/phpunit',
 
             phplint: 'if find . -name "*.php" ! -path "./vendor/*" -print0 | xargs -0 -n 1 -P 8 php -l | grep -v "No syntax errors detected"; then exit 1; fi',
 
             codeCoverage:
             'mkdir -p ' + buildPath + '/coverage/{unit,integration} && ' +
             'cd ' + magento2path + ' && ' +
-            'vendor/bin/phpunit -c "' + phpunitXmlPath + '" --coverage-html ' + buildPath + '/coverage/unit'
-            // 'cd dev/tests/integration &&' +
-            // '../../../vendor/bin/phpunit --testsuite "TIG Postcode Integration Tests"  --coverage-html ' + buildPath + '/coverage/integration'
+            'vendor/bin/phpunit -c "' + phpunitXmlPath + '" --coverage-html ' + buildPath + '/coverage/unit' +
+            'cd dev/tests/integration &&' +
+            '../../../vendor/bin/phpunit --testsuite "TIG Postcode Integration Tests"  --coverage-html ' + buildPath + '/coverage/integration'
         },
         jshint: {
             all: [
@@ -103,8 +103,8 @@ module.exports = function (grunt) {
     ]);
     grunt.registerTask('ci', 'This task is to be meant for running in CI only', [
         'phpcs',
-        'lint'
-        // 'exec:ciTests'
+        'lint',
+        'exec:ciTests'
     ]);
 
     grunt.registerTask('default', 'Run the default task (test)', ['test']);
