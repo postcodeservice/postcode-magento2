@@ -18,7 +18,7 @@
     "email": "servicedesk@tig.nl",
     "issues": "http://servicedesk.tig.nl/hc/nl/requests/new"
   },
-  "homepage": "www.postcodeservice.nl",
+  "homepage": "http://www.postcodeservice.nl",
   "minimum-stability": "stable",
   "autoload": {
     "files": [
