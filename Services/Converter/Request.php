@@ -31,7 +31,7 @@
  */
 namespace TIG\Postcode\Services\Converter;
 
-use TIG\Postcode\Services\Validation\Request as RequestValidation;
+use TIG\Postcode\Services\Validation\Request as ValidationRequest;
 
 class Request implements ConverterInterface
 {
@@ -40,10 +40,10 @@ class Request implements ConverterInterface
     /**
      * Request constructor.
      *
-     * @param RequestValidation $validation
+     * @param ValidationRequest $validation
      */
     public function __construct(
-        RequestValidation $validation
+        ValidationRequest $validation
     ) {
         $this->validation = $validation;
     }
