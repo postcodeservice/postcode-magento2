@@ -59,7 +59,6 @@ class Api
      */
     private $converter;
 
-
     /**
      * Api constructor.
      *
@@ -78,7 +77,6 @@ class Api
         $this->apiConfiguration    = $apiConfiguration;
         $this->clientConfiguration = $clientConfiguration;
         $this->converter           = $converter;
-
     }
 
     /**
@@ -148,7 +146,6 @@ class Api
             $this->zendClient->setParameterPost($endpoint->getRequestData());
         }
     }
-
 
     /**
      * @param EndpointInterface $endpoint

@@ -33,7 +33,13 @@ namespace TIG\Postcode;
 
 use Magento\Framework\Exception\LocalizedException;
 
+/**
+ * @codingStandardsIgnoreStart
+ */
 class Exception extends LocalizedException
 {
     // For further expansion.
 }
+/**
+ * @codingStandardsIgnoreEnd
+ */

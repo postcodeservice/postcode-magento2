@@ -49,7 +49,6 @@ class Response implements ValidationInterface
         }
 
         return true;
-
     }
 
     /**

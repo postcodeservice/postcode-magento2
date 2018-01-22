@@ -76,11 +76,11 @@ class Factory
     private function converter($type, $data)
     {
         if (!isset($this->converters[$type])) {
+            // @codingStandardsIgnoreLine
             throw new PostcodeException(__('Could not find type %1 as converter', $type));
         }
 
         return $this->converters[$type]->convert($data);
-
     }
 
     /**
@@ -91,6 +91,7 @@ class Factory
     private function checkImplementation($converter)
     {
         if (!array_key_exists(ConverterInterface::class, class_implements($converter))) {
+            // @codingStandardsIgnoreLine
             throw new PostcodeException(__('Class is not an implementation of %1', ConverterInterface::class));
         }
     }

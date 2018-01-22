@@ -76,6 +76,7 @@ class Factory
     private function validator($type, $data)
     {
         if (!isset($this->validators[$type])) {
+            // @codingStandardsIgnoreLine
             throw new PostcodeException(__('Could not find type %1 as validator', $type));
         }
 
@@ -90,6 +91,7 @@ class Factory
     private function checkImplementation($validator)
     {
         if (!array_key_exists(ValidationInterface::class, class_implements($validator))) {
+            // @codingStandardsIgnoreLine
             throw new PostcodeException(__('Class is not an implementation of %1', ValidationInterface::class));
         }
     }

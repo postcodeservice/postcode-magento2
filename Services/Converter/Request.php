@@ -35,8 +35,6 @@ use TIG\Postcode\Services\Validation\Request as RequestValidation;
 
 class Request implements ConverterInterface
 {
-    const VALIDATION_TYPE = 'request';
-
     private $validation;
 
     /**
