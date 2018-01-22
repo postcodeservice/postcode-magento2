@@ -42,7 +42,7 @@ class Request implements ConverterInterface
      *
      * The IgnoreLine is used because the Magento phpcs checks only on 'Request' part of the class and Request is
      * in as an default Magento Class like the session which can only called as a method argument.
-     * But that check is invalid for our validation class. 
+     * But that check is invalid for our validation class.
      *
      * @param ValidationRequest $validation
      */
