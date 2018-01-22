@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?><!--
- *
+<?php
+/**
  *
  *          ..::..
  *     ..::::::::::::..
@@ -28,21 +28,36 @@
  *
  * @copyright   Copyright (c) Total Internet Group B.V. https://tig.nl/copyright
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
- *
--->
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
-    <default>
-        <tig_postcode>
-            <configuration>
-                <modus>0</modus>
-                <client_id_test>1177</client_id_test>
-                <api_key_test>9SRLYBCALURPE2B</api_key_test>
-            </configuration>
-            <api>
-                <base>https://postcode.tig.nl/api</base>
-                <version>v3</version>
-                <type>json</type>
-            </api>
-        </tig_postcode>
-    </default>
-</config>
+ */
+namespace TIG\Postcode\Test\Unit\Block\Adminhtml\Config\Support;
+
+use TIG\Postcode\Block\Adminhtml\Config\Support\Tab;
+use \Magento\Framework\Module\ModuleResource;
+use TIG\Postcode\Test\TestCase;
+
+class TabTest extends TestCase
+{
+    protected $instanceClass = Tab::class;
+
+    public function testGetVersionNumber()
+    {
+        $instance = $this->getInstance([
+            'moduleResource' => $this->getModuleResourceMock()
+        ]);
+
+        $this->assertSame('1.0.0', $instance->getVersionNumber());
+    }
+
+    /**+
+     * @return \PHPUnit_Framework_MockObject_MockObject
+     */
+    private function getModuleResourceMock()
+    {
+        $mock = $this->getFakeMock(ModuleResource::class)->getMock();
+        $mockExpects = $mock->expects($this->once());
+        $mockExpects->method('getDbVersion')->with('TIG_Postcode');
+        $mockExpects->willReturn('1.0.0');
+
+        return $mock;
+    }
+}
