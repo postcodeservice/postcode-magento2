@@ -43,6 +43,7 @@ class Request implements ConverterInterface
      * @param ValidationRequest $validation
      */
     public function __construct(
+        // @codingStandardsIgnoreLine
         ValidationRequest $validation
     ) {
         $this->validation = $validation;
