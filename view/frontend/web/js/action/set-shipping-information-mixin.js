@@ -36,22 +36,22 @@ define([
     $,
     wrapper,
     quote
-){
+) {
     'use strict';
 
     return function (setShippingInformationAction) {
         return wrapper.wrap(setShippingInformationAction, function (originalAction) {
             var shippingAddress = quote.shippingAddress();
-            if (shippingAddress['extension_attributes'] === undefined) {
-                shippingAddress['extension_attributes'] = {};
+            if (shippingAddress.extension_attributes === undefined) {
+                shippingAddress.extension_attributes = {};
             }
 
             if (shippingAddress.customAttributes === undefined) {
                 return originalAction();
             }
 
-            shippingAddress['extension_attributes']['tig_housenumber']          = shippingAddress.tig_housenumber;
-            shippingAddress['extension_attributes']['tig_housenumber_addition'] = shippingAddress.tig_housenumber_addition;
+            shippingAddress.extension_attributes.tig_housenumber          = shippingAddress.tig_housenumber;
+            shippingAddress.extension_attributes.tig_housenumber_addition = shippingAddress.tig_housenumber_addition;
 
             return originalAction();
         });

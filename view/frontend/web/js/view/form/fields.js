@@ -159,8 +159,6 @@ define([
         },
 
         controllRegistry : function (address) {
-
-            debugger;
             var selector = this.parentName + '.postcode-field-group.field-group';
             var addressData = {
                 postcode    : Registry.get(selector + '.postcode').value(),

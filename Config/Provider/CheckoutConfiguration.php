@@ -78,6 +78,7 @@ class CheckoutConfiguration implements ConfigProviderInterface
     private function checkImplementation($configuration, $key)
     {
         if (!($configuration instanceof CheckoutConfigurationInterface)) {
+            // @codingStandardsIgnoreLine
             throw new Exception(__('%1 is not an implementaiton of %2', $key, CheckoutConfigurationInterface::class));
         }
     }

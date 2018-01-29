@@ -36,12 +36,8 @@ use Magento\Quote\Api\Data\AddressInterface;
 
 class Billing
 {
-    public function beforeAssign(
-        MagentoManagement $subject,
-        $cartId,
-        AddressInterface $address,
-        $useForShipping = false
-    ) {
+    // @codingStandardsIgnoreLine
+    public function beforeAssign(MagentoManagement $subject, $cartId, AddressInterface $address, $shipping = false) {
         $attributes = $address->getExtensionAttributes();
         if (!$attributes) {
             return [$cartId, $address];
@@ -53,11 +49,12 @@ class Billing
 
         $streetData = $address->getStreet();
 
+        // @codingStandardsIgnoreLine
         // @todo : Add field configuration for parsing the housenumber into first or second street field.
         $street =  $streetData[0] . ' ' . $attributes->getTigHousenumber();
 
         $address->setStreet($street);
 
-        return [$cartId, $address, $useForShipping];
+        return [$cartId, $address, $shipping];
     }
 }

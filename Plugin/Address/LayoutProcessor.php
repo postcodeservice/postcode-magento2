@@ -35,9 +35,7 @@ use Magento\Checkout\Block\Checkout\LayoutProcessor as MagentoProcessor;
 use TIG\Postcode\Config\Provider\ModuleConfiguration;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 
-/**
- * @codingStandardsIgnoreStart
- */
+// @codingStandardsIgnoreFile
 class LayoutProcessor
 {
     /**
@@ -288,6 +286,3 @@ class LayoutProcessor
         );
     }
 }
-/**
- * @codingStandardsIgnoreEnd
- */

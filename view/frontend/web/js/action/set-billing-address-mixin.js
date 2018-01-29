@@ -36,24 +36,22 @@ define([
     $,
     wrapper,
     quote
-){
+) {
     'use strict';
 
     return function (setBillingAddressAction) {
         return wrapper.wrap(setBillingAddressAction, function (originalAction) {
             var billingAddress = quote.billingAddress();
-            if (billingAddress['extension_attributes'] === undefined) {
-                billingAddress['extension_attributes'] = {};
+            if (billingAddress.extension_attributes === undefined) {
+                billingAddress.extension_attributes = {};
             }
 
             if (billingAddress.tig_housenumber === undefined) {
-                var shippingAddress = quote.shippingAddress();
-                // @todo : When billing is same as shipping.
                 return originalAction();
             }
 
-            billingAddress['extension_attributes']['tig_housenumber']          = billingAddress.tig_housenumber;
-            billingAddress['extension_attributes']['tig_housenumber_addition'] = billingAddress.tig_housenumber_addition;
+            billingAddress.extension_attributes.tig_housenumber          = billingAddress.tig_housenumber;
+            billingAddress.extension_attributes.tig_housenumber_addition = billingAddress.tig_housenumber_addition;
 
             return originalAction();
         });
