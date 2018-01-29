@@ -1,0 +1,36 @@
+/*@todo: make responive for mobile*/
+.tig-postcode-field-group {
+    float: left;
+    width: 100%;
+}
+
+.tig-postcode-field-group .field {
+    margin: 0 10px 20px 0;
+    width: 32%;
+    float: left;
+}
+
+.tig-postcode-field-group .field:last-child {
+    margin: 0 0 20px 0;
+}
+
+.tig-postcode-field-group .field._required>.label:after {
+    content: '*';
+    color: #e02b27;
+    font-size: 1.2rem;
+    margin: 0 0 0 5px;
+}
+
+.tig-postcode-validation-message {
+    float: left;
+    display: none;
+    height: 30px;
+    width: 100%;
+    color: #e02b27;
+    font-size: 1.2rem;
+    margin-top: -12px;
+}
+
+.tig_hidden {
+    display: none;
+}
