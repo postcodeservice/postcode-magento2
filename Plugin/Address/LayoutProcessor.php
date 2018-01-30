@@ -90,11 +90,7 @@ class LayoutProcessor
         $shippingFields = &$jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']
             ['children']['shippingAddress']['children']['shipping-address-fieldset']['children'];
 
-        $fieldGroup = &$shippingFields['postcode-field-group']['children']['field-group']['children'];
-
-        $fieldGroup['postcode']             = $shippingFields['postcode'];
-        $fieldGroup['housenumber']          = $this->getHouseNumberField();
-        $fieldGroup['housenumber_addition'] = $this->getHouseNumberAdditionField();
+        $shippingFields = $this->processAddress($shippingFields, 'shippingAddress', []);
 
         $this->setFieldToHide($shippingFields, 'postcode', true);
         $this->setFieldToHide($shippingFields, 'city');

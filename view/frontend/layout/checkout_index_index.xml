@@ -34,47 +34,4 @@
     <head>
         <css src="TIG_Postcode::css/style.css"/>
     </head>
-    <body>
-        <referenceBlock name="checkout.root">
-            <arguments>
-                <argument name="jsLayout" xsi:type="array">
-                    <item name="components" xsi:type="array">
-                        <item name="checkout" xsi:type="array">
-                            <item name="children" xsi:type="array">
-                                <item name="steps" xsi:type="array">
-                                    <item name="children" xsi:type="array">
-                                        <item name="shipping-step" xsi:type="array">
-                                            <item name="children" xsi:type="array">
-                                                <item name="shippingAddress" xsi:type="array">
-                                                    <item name="children" xsi:type="array">
-                                                        <item name="shipping-address-fieldset" xsi:type="array">
-                                                            <item name="children" xsi:type="array">
-                                                                <item name="postcode-field-group" xsi:type="array">
-                                                                    <item name="component" xsi:type="string">TIG_Postcode/js/view/form/fields</item>
-                                                                    <item name="type" xsi:type="string">group</item>
-                                                                    <item name="provider" xsi:type="string">checkoutProvider</item>
-                                                                    <item name="sortOrder" xsi:type="string">65</item>
-                                                                    <item name="template" xsi:type="string">TIG_Postcode/checkout/field-group</item>
-                                                                    <item name="children" xsi:type="array">
-                                                                        <item name="field-group" xsi:type="array">
-                                                                            <item name="component" xsi:type="string">uiComponent</item>
-                                                                            <item name="displayArea" xsi:type="string">field-group</item>
-                                                                        </item>
-                                                                    </item>
-                                                                </item>
-                                                            </item>
-                                                        </item>
-                                                    </item>
-                                                </item>
-                                            </item>
-                                        </item>
-                                    </item>
-                                </item>
-                            </item>
-                        </item>
-                    </item>
-                </argument>
-            </arguments>
-        </referenceBlock>
-    </body>
 </page>

@@ -28,6 +28,7 @@
  * @copyright   Copyright (c) Total Internet Group B.V. https://tig.nl/copyright
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
+// @codingStandardsIgnoreFile
 define([
     'jquery',
     'mage/utils/wrapper',
@@ -42,16 +43,12 @@ define([
     return function (setShippingInformationAction) {
         return wrapper.wrap(setShippingInformationAction, function (originalAction) {
             var shippingAddress = quote.shippingAddress();
-            if (shippingAddress.extension_attributes === undefined) {
-                shippingAddress.extension_attributes = {};
+            if (shippingAddress['extension_attributes'] === undefined) {
+                shippingAddress['extension_attributes'] = {};
             }
-
-            if (shippingAddress.customAttributes === undefined) {
-                return originalAction();
-            }
-
-            shippingAddress.extension_attributes.tig_housenumber          = shippingAddress.tig_housenumber;
-            shippingAddress.extension_attributes.tig_housenumber_addition = shippingAddress.tig_housenumber_addition;
+            debugger;
+            shippingAddress['extension_attributes']['tig_housenumber']          = shippingAddress.tig_housenumber;
+            shippingAddress['extension_attributes']['tig_housenumber_addition'] = shippingAddress.tig_housenumber_addition;
 
             return originalAction();
         });

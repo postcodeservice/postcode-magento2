@@ -28,6 +28,8 @@
  * @copyright   Copyright (c) Total Internet Group B.V. https://tig.nl/copyright
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
+/*browser:true*/
+/*global define*/
 define([
     'ko'
 ], function (
@@ -35,11 +37,43 @@ define([
 ) {
     'use strict';
 
-    var address = ko.observable(null);
-    var parent  = ko.observable(null);
-
     return {
-        address: address,
-        parent : parent
+        address: ko.observable(null),
+        lastCall: ko.observable(null),
+        sameCall: ko.observable(null),
+
+        setLastCall: function (data) {
+            this.lastCall(data);
+        },
+
+        setSameCall: function (bool) {
+            this.sameCall(bool);
+        },
+
+        isSameCall: function () {
+            return this.sameCall();
+        },
+
+        getLastCall: function (dataOnly) {
+            if (dataOnly) {
+                return this.lastCall()[1];
+            }
+            return this.lastCall();
+        },
+
+        validateLastCall: function (keyToMatch) {
+            if (!this.lastCall) {
+                return false;
+            }
+
+            if (this.lastCall[0] === keyToMatch) {
+                this.setSameCall(true);
+                return false;
+            }
+
+            this.setSameCall(false);
+
+            return true;
+        }
     };
 });

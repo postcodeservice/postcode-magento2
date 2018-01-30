@@ -39,7 +39,7 @@ class Billing
     // @codingStandardsIgnoreLine
     public function beforeAssign(MagentoManagement $subject, $cartId, AddressInterface $address, $shipping = false) {
         $attributes = $address->getExtensionAttributes();
-        if (!$attributes) {
+        if (empty($attributes)) {
             return [$cartId, $address];
         }
 

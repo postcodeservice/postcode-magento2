@@ -40,7 +40,7 @@ class Shipping
     public function beforeAssign(MagentoManagement $subject, $cartId, AddressInterface $address)
     {
         $attributes = $address->getExtensionAttributes();
-        if (!$attributes) {
+        if (empty($attributes)) {
             return [$cartId, $address];
         }
 
