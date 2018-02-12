@@ -205,14 +205,14 @@ define([
                 return null;
             }
 
-            if (!currentFormData.postcode || !currentFormData.tig_housenumber) {
+            if (!currentFormData.postcode || !currentFormData.custom_attributes.tig_housenumber) {
                 return null;
             }
 
             var addressData = {
                 postcode    : currentFormData.postcode,
-                housenumber : currentFormData.tig_housenumber,
-                addition    : currentFormData.tig_housenumber_addition
+                housenumber : currentFormData.custom_attributes.tig_housenumber,
+                addition    : currentFormData.custom_attributes.tig_housenumber_addition
             };
 
             if (JSON.stringify(addressData) !== JSON.stringify(address)) {

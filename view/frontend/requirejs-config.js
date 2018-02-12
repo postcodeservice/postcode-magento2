@@ -37,6 +37,12 @@ var config = {
             },
             'Magento_Checkout/js/action/set-billing-address' : {
                 'TIG_Postcode/js/action/set-billing-address-mixin': true
+            },
+            'Magento_Checkout/js/action/place-order': {
+                'TIG_Postcode/js/action/set-billing-address-mixin': true
+            },
+            'Magento_Checkout/js/action/create-billing-address': {
+                'TIG_Postcode/js/action/set-billing-address-mixin': true
             }
         }
     }

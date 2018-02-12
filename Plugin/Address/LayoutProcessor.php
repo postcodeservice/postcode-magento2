@@ -207,12 +207,12 @@ class LayoutProcessor
         return [
             'component'  => 'Magento_Ui/js/form/element/abstract',
             'config'     => [
-                'customScope' => $scope,
+                'customScope' => $scope . '.custom_attributes',
                 'template'    => 'ui/form/field',
                 'elementTmpl' => 'ui/form/element/input'
             ],
             'provider'   => 'checkoutProvider',
-            'dataScope'  => $scope . '.tig_housenumber',
+            'dataScope'  => $scope . '.custom_attributes.tig_housenumber',
             'label'      => __('Housenumber'),
             'sortOrder'  => '115',
             'validation' => [
@@ -232,12 +232,12 @@ class LayoutProcessor
         return [
             'component'  => 'Magento_Ui/js/form/element/abstract',
             'config'     => [
-                'customScope' => $scope,
+                'customScope' => $scope . '.custom_attributes',
                 'template'    => 'ui/form/field',
                 'elementTmpl' => 'ui/form/element/input'
             ],
             'provider'   => 'checkoutProvider',
-            'dataScope'  => $scope . '.tig_housenumber_addition',
+            'dataScope'  => $scope . '.custom_attributes.tig_housenumber_addition',
             'label'      => __('Addition'),
             'sortOrder'  => '120',
             'validation' => [

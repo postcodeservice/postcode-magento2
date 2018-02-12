@@ -43,16 +43,17 @@ define([
     return function (setBillingAddressAction) {
         return wrapper.wrap(setBillingAddressAction, function (originalAction) {
             var billingAddress = quote.billingAddress();
+
+            if (billingAddress === undefined || billingAddress.customAttributes === undefined || billingAddress.customAttributes.tig_housenumber === undefined) {
+                return originalAction();
+            }
+
             if (billingAddress['extension_attributes'] === undefined) {
                 billingAddress['extension_attributes'] = {};
             }
 
-            if (billingAddress.tig_housenumber === undefined) {
-                return originalAction();
-            }
-
-            billingAddress['extension_attributes']['tig_housenumber']          = billingAddress.tig_housenumber;
-            billingAddress['extension_attributes']['tig_housenumber_addition'] = billingAddress.tig_housenumber_addition;
+            billingAddress['extension_attributes']['tig_housenumber']          = billingAddress.customAttributes.tig_housenumber;
+            billingAddress['extension_attributes']['tig_housenumber_addition'] = billingAddress.customAttributes.tig_housenumber_addition;
 
             return originalAction();
         });
