@@ -61,7 +61,7 @@ class ModuleConfigurationTest extends AbstractConfigurationTest
         $this->assertEquals($expected, $instance->isModusLive());
     }
 
-    public function testModusProvider()
+    public function modusTestProvider()
     {
         return [
             'ModuleOutput disabled' => [false, false, '0'],
@@ -70,7 +70,7 @@ class ModuleConfigurationTest extends AbstractConfigurationTest
     }
 
     /**
-     * @dataProvider testModusProvider
+     * @dataProvider modusTestProvider
      *
      * @param $moduleOutput
      * @param $expected
@@ -156,6 +156,4 @@ class ModuleConfigurationTest extends AbstractConfigurationTest
         $this->setXpath(ModuleConfiguration::XPATH_SUPPORTED_MAGENTO_VERSION, $value);
         $this->assertEquals($value, $instance->getSupportedMagentoVersions());
     }
-
-
 }

@@ -31,37 +31,24 @@
  *
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Checkout\Block\Checkout\LayoutProcessor">
+        <plugin name="postcodeFieldGroupPlugin" type="TIG\Postcode\Plugin\Address\LayoutProcessor" />
+    </type>
 
-     <!--Services\Validation factory list -->
-    <type name="TIG\Postcode\Services\Validation\Factory">
+    <type name="Magento\Checkout\Model\CompositeConfigProvider">
         <arguments>
-            <argument name="validators" xsi:type="array">
-                <item name="request" xsi:type="object">\TIG\Postcode\Services\Validation\Request</item>
-                <item name="response" xsi:type="object">\TIG\Postcode\Services\Validation\Response</item>
+            <argument name="configProviders" xsi:type="array">
+                <item name="tig_postcode_checkout_config_provider" xsi:type="object">TIG\Postcode\Config\Provider\CheckoutConfiguration</item>
             </argument>
         </arguments>
     </type>
 
-     <!--Service\Converter factory list -->
-    <type name="TIG\Postcode\Services\Converter\Factory">
+    <type name="TIG\Postcode\Config\Provider\CheckoutConfiguration">
         <arguments>
-            <argument name="converters" xsi:type="array">
-                <item name="request" xsi:type="object">\TIG\Postcode\Services\Converter\Request</item>
-                <item name="response" xsi:type="object">\TIG\Postcode\Services\Converter\Response</item>
+            <argument name="postcodeConfiguration" xsi:type="array">
+                <item name="postcode_active" xsi:type="object">TIG\Postcode\Config\CheckoutConfiguration\IsPostcodeCheckActive</item>
+                <item name="action_url" xsi:type="object">TIG\Postcode\Config\CheckoutConfiguration\ActionUrl</item>
             </argument>
         </arguments>
     </type>
-
-    <type name="Magento\Quote\Model\ShippingAddressManagement">
-        <plugin name="postcodeShippingAddressManagement" type="TIG\Postcode\Plugin\Address\Management\Shipping" />
-    </type>
-
-    <type name="Magento\Quote\Model\BillingAddressManagement">
-        <plugin name="postcodeBillingAddressManagement" type="TIG\Postcode\Plugin\Address\Management\Billing" />
-    </type>
-
-    <type name="Magento\Checkout\Model\PaymentInformationManagement">
-        <plugin name="postcodePaymentInformationManagement" type="TIG\Postcode\Plugin\Address\Management\Payment" />
-    </type>
-
 </config>
