@@ -44,6 +44,14 @@ define([
         return wrapper.wrap(setShippingInformationAction, function (originalAction) {
             var shippingAddress = quote.shippingAddress();
 
+            if (shippingAddress === undefined || !shippingAddress) {
+                return originalAction();
+            }
+
+            if (shippingAddress.customAttributes === undefined || shippingAddress.customAttributes.tig_housenumber === undefined) {
+                return originalAction();
+            }
+
             if (shippingAddress['extension_attributes'] === undefined) {
                 shippingAddress['extension_attributes'] = {};
             }

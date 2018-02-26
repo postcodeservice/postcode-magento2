@@ -33,9 +33,21 @@ namespace TIG\Postcode\Plugin\Address\Management;
 
 use Magento\Quote\Model\ShippingAddressManagement as MagentoManagement;
 use Magento\Quote\Api\Data\AddressInterface;
+use TIG\Postcode\Services\Address\StreetFields;
 
 class Shipping
 {
+    /**
+     * @var StreetFields
+     */
+    private $streetParser;
+
+    public function __construct(
+        StreetFields $streetFields
+    ) {
+        $this->streetParser = $streetFields;
+    }
+
     // @codingStandardsIgnoreLine
     public function beforeAssign(MagentoManagement $subject, $cartId, AddressInterface $address)
     {
@@ -48,12 +60,7 @@ class Shipping
             return [$cartId, $address];
         }
 
-        $streetData = $address->getStreet();
-
-        // @codingStandardsIgnoreLine
-        // @todo : Add field configuration for parsing the housenumber into first or second street field.
-        $street =  $streetData[0] . ' ' . $attributes->getTigHousenumber();
-
+        $street = $this->streetParser->parse($address->getStreet(), $attributes);
         $address->setStreet($street);
 
         return [$cartId, $address];

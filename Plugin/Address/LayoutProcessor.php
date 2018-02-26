@@ -142,7 +142,7 @@ class LayoutProcessor
     private function processSingleBillingForm($jsLayout)
     {
         $billingFields = &$jsLayout['components']['checkout']['children']['steps']['children']['billing-step']
-                          ['children']['payment']['children']['afterMethods']['children']['billing-address-form'];
+            ['children']['payment']['children']['afterMethods']['children']['billing-address-form'];
 
         if (!isset($billingFields)) {
             return $jsLayout;
@@ -259,6 +259,7 @@ class LayoutProcessor
         if (isset($fields[$section]['config']['additionalClasses'])) {
             $additionalClass = $fields[$section]['config']['additionalClasses'];
         }
+
         if ($section == 'street' || $section == 'city') {
             $additionalClass = $additionalClass . ' ' . 'tig_hidden';
         }

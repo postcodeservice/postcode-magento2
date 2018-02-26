@@ -1,3 +1,4 @@
+<?php
 /**
  *
  *          ..::..
@@ -28,25 +29,19 @@
  * @copyright   Copyright (c) Total Internet Group B.V. https://tig.nl/copyright
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
+namespace TIG\Postcode\Config\Provider;
 
-var config = {
-    config: {
-        mixins: {
-            'Magento_Checkout/js/action/set-shipping-information': {
-                'TIG_Postcode/js/action/set-shipping-information-mixin': true
-            },
-            'Magento_Checkout/js/action/set-billing-address' : {
-                'TIG_Postcode/js/action/set-billing-address-mixin': true
-            },
-            'Magento_Checkout/js/action/place-order': {
-                'TIG_Postcode/js/action/set-billing-address-mixin': true
-            },
-            'Magento_Checkout/js/action/create-billing-address': {
-                'TIG_Postcode/js/action/set-billing-address-mixin': true
-            },
-            'Magento_Checkout/js/action/set-payment-information': {
-                'TIG_Postcode/js/action/set-billing-address-mixin': true
-            }
-        }
+class ParserConfiguration extends AbstractConfigProvider
+{
+    const XPATH_STREETMERGING = 'tig_postcode/configuration/fieldparsing_street';
+
+    /**
+     * @param null $store
+     *
+     * @return mixed
+     */
+    public function getStreetMerging($store = null)
+    {
+        return $this->getConfigFromXpath(static::XPATH_STREETMERGING, $store);
     }
-};
+}

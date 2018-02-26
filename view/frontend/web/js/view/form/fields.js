@@ -167,6 +167,11 @@ define([
                 State.setLastCall([key, data]);
                 Registry.get(self.parentName + '.street.0').set('value', data.straatnaam);
                 Registry.get(self.parentName + '.city').set('value', data.woonplaats);
+
+                // Trigger change for subscripe methods.
+                $("input[name*='street[0]']").trigger('change');
+                $("input[name*='city']").trigger('change');
+
                 type = 'success';
             }
 

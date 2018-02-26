@@ -31,11 +31,12 @@
  */
 namespace TIG\Postcode\Plugin\Address\Management;
 
-use Magento\Quote\Model\BillingAddressManagement as MagentoManagement;
+use Magento\Checkout\Model\PaymentInformationManagement;
+use Magento\Quote\Api\Data\PaymentInterface;
 use Magento\Quote\Api\Data\AddressInterface;
 use TIG\Postcode\Services\Address\StreetFields;
 
-class Billing
+class Payment
 {
     /**
      * @var StreetFields
@@ -49,19 +50,24 @@ class Billing
     }
 
     // @codingStandardsIgnoreLine
-    public function beforeAssign(MagentoManagement $subject, $cartId, AddressInterface $address, $shipping = false) {
-        $attributes = $address->getExtensionAttributes();
+    public function beforeSavePaymentInformation(
+        PaymentInformationManagement $subject,
+        $cartId,
+        PaymentInterface $paymentMethod,
+        AddressInterface $billingAddress = null
+    ) {
+        $attributes = $billingAddress->getExtensionAttributes();
         if (empty($attributes)) {
-            return [$cartId, $address];
+            return [$cartId, $paymentMethod, $billingAddress];
         }
 
         if (!$attributes->getTigHousenumber()) {
-            return [$cartId, $address];
+            return [$cartId, $paymentMethod, $billingAddress];
         }
 
-        $street = $this->streetParser->parse($address->getStreet(), $attributes);
-        $address->setStreet($street);
+        $street = $this->streetParser->parse($billingAddress->getStreet(), $attributes);
+        $billingAddress->setStreet($street);
 
-        return [$cartId, $address, $shipping];
+        return [$cartId, $paymentMethod, $billingAddress];
     }
 }

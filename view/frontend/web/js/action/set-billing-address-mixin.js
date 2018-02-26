@@ -44,7 +44,11 @@ define([
         return wrapper.wrap(setBillingAddressAction, function (originalAction) {
             var billingAddress = quote.billingAddress();
 
-            if (billingAddress === undefined || billingAddress.customAttributes === undefined || billingAddress.customAttributes.tig_housenumber === undefined) {
+            if (billingAddress === undefined || !billingAddress) {
+                return originalAction();
+            }
+
+            if (billingAddress.customAttributes === undefined || billingAddress.customAttributes.tig_housenumber === undefined) {
                 return originalAction();
             }
 

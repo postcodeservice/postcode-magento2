@@ -60,4 +60,8 @@
         <plugin name="postcodeBillingAddressManagement" type="TIG\Postcode\Plugin\Address\Management\Billing" />
     </type>
 
+    <type name="Magento\Checkout\Model\PaymentInformationManagement">
+        <plugin name="postcodePaymentInformationManagement" type="TIG\Postcode\Plugin\Address\Management\Payment" />
+    </type>
+
 </config>

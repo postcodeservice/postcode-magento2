@@ -1,3 +1,4 @@
+<?php
 /**
  *
  *          ..::..
@@ -28,25 +29,24 @@
  * @copyright   Copyright (c) Total Internet Group B.V. https://tig.nl/copyright
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
+namespace TIG\Postcode\Block\Adminhtml\Config\Parsing;
 
-var config = {
-    config: {
-        mixins: {
-            'Magento_Checkout/js/action/set-shipping-information': {
-                'TIG_Postcode/js/action/set-shipping-information-mixin': true
-            },
-            'Magento_Checkout/js/action/set-billing-address' : {
-                'TIG_Postcode/js/action/set-billing-address-mixin': true
-            },
-            'Magento_Checkout/js/action/place-order': {
-                'TIG_Postcode/js/action/set-billing-address-mixin': true
-            },
-            'Magento_Checkout/js/action/create-billing-address': {
-                'TIG_Postcode/js/action/set-billing-address-mixin': true
-            },
-            'Magento_Checkout/js/action/set-payment-information': {
-                'TIG_Postcode/js/action/set-billing-address-mixin': true
-            }
-        }
+use Magento\Framework\View\Element\Template;
+use Magento\Framework\Data\Form\Element\Renderer\RendererInterface;
+use Magento\Framework\Data\Form\Element\AbstractElement;
+
+class Streets extends Template implements RendererInterface
+{
+    const MODULE_NAME = 'TIG_Postcode';
+
+    // @codingStandardsIgnoreLine
+    protected $_template = 'TIG_Postcode::config/parsing/streets.phtml';
+
+    public function render(AbstractElement $element)
+    {
+        /** @noinspection PhpUndefinedMethodInspection */
+        $this->setElement($element);
+
+        return $this->toHtml();
     }
-};
+}
