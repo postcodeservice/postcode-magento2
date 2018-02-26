@@ -28,7 +28,7 @@
  * @copyright   Copyright (c) Total Internet Group B.V. https://tig.nl/copyright
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
-// @codingStandardsIgnoreFile
+/* jshint ignore:start */
 define([
     'jquery',
     'mage/utils/wrapper',
@@ -63,3 +63,4 @@ define([
         });
     };
 });
+/* jshint ignore:end */

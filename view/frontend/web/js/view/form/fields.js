@@ -138,8 +138,13 @@ define([
 
         getAddressData : function (postcode, housenumber) {
             var self = this;
+
+            if (self.request !== undefined) {
+                self.request.abort();
+            }
+
             self.isLoading(true);
-            $.ajax({
+            self.request = $.ajax({
                 method:'GET',
                 url : window.checkoutConfig.postcode.action_url.postcode_service,
                 data : {
