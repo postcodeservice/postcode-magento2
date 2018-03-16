@@ -78,7 +78,7 @@ class StreetFieldsTest extends TestCase
         $parseConfigurationExpects->willReturn($parseSetting);
 
         $extensionAttributes = $this->getFakeMock(AddressExtensionInterface::class)
-            ->setMethods(['getTigHousenumber', 'getTigHousenumberAddition'])->getMock();
+            ->setMethods(['getTigHousenumber', 'getTigHousenumberAddition', 'setTigHousenumber', 'setTigHousenumberAddition'])->getMock();
 
         $attributeHousenumeber = $extensionAttributes->expects($this->any())->method('getTigHousenumber');
         $attributeHousenumeber->willReturn($attributes['tig_housenumber']);
