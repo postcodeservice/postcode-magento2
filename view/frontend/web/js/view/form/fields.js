@@ -104,7 +104,7 @@ define([
 
             this.timer = setTimeout(function () {
                 self.setFieldData();
-            }, 2000);
+            }, 1000);
         },
 
         setFieldData : function () {
@@ -206,13 +206,18 @@ define([
         controllRegistry : function (address) {
             var currentFormData = this.source.get(this.customScope);
 
-            if (!currentFormData.postcode) {
-                currentFormData = this.source.shippingAddress;
-            }
-
             // Wait until the data is filled in.
             if (!currentFormData) {
                 return null;
+            }
+
+            if (currentFormData.country_id !== "NL") {
+                $('.tig_hidden').show();
+                return null;
+            }
+
+            if (!currentFormData.postcode) {
+                currentFormData = this.source.shippingAddress;
             }
 
             if (!currentFormData.postcode || !currentFormData.custom_attributes.tig_housenumber) {

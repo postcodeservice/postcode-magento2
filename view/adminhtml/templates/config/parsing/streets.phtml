@@ -31,9 +31,13 @@
  */
 ?>
 <div id="parsing-street" class="tig-postcode-parsing" data-mage-init='{"postcodeConfig":true}'>
-    <h2 ><?php echo $block->escapeHtml(__('Streetfield settings'));?></h2>
     <div>
         <div>
+            <p>
+               <strong>
+                   <?php echo $block->escapeHtml('This has no impact on the frontend, the checkout will always show one street field.'); ?>
+               </strong>
+            </p>
             <ul>
                 <li>
                     <span class="text">

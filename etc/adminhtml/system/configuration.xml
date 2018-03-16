@@ -78,25 +78,22 @@
                 <field id="modus">2</field>
             </depends>
         </field>
+    </group>
 
-        <group id="explanation" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
-            <label>Streetfield settings</label>
+    <!-- Field Parser settings -->
+    <group id="fieldparsing" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+        <label>Backend merging</label>
+        <fieldset_css>tig_postcode-section</fieldset_css>
+        <frontend_model>TIG\Postcode\Block\Adminhtml\Config\Form\Field\Fieldset</frontend_model>
+        <group id="explanation" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
             <frontend_model>TIG\Postcode\Block\Adminhtml\Config\Parsing\Streets</frontend_model>
             <fieldset_css>tig_postcode-section</fieldset_css>
-            <attribute type="expanded">1</attribute>
         </group>
-
-        <!-- Field Parser settings -->
-        <group id="fieldparsing" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
-            <fieldset_css>tig_postcode-section</fieldset_css>
-            <attribute type="expanded">1</attribute>
-            <!--Street fields-->
-            <field id="street" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
-                <label>Merging</label>
-                <source_model>TIG\Postcode\Config\Source\Parser</source_model>
-                <comment><![CDATA[Make sure you have selected the correct range within the customer/name and addres options configuration .]]></comment>
-                <config_path>tig_postcode/configuration/fieldparsing_street</config_path>
-            </field>
-        </group>
+        <!--Street fields-->
+        <field id="street" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+            <source_model>TIG\Postcode\Config\Source\Parser</source_model>
+            <comment><![CDATA[Make sure you have selected the correct range within the customer/name and addres options configuration.]]></comment>
+            <config_path>tig_postcode/configuration/fieldparsing_street</config_path>
+        </field>
     </group>
 </include>

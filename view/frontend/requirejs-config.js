@@ -48,5 +48,12 @@ var config = {
                 'TIG_Postcode/js/action/set-billing-address-mixin': true
             }
         }
+    },
+    map : {
+        '*': {
+            'Magento_Checkout/template/shipping-address/address-renderer/default.html' : 'TIG_Postcode/template/shipping-address/address-renderer/default.html',
+            'Magento_Checkout/template/shipping-information/address-renderer/default.html' : 'TIG_Postcode/template/shipping-information/address-renderer/default.html',
+            'Magento_Checkout/template/billing-address/details.html' : 'TIG_Postcode/template/billing-address/details.html'
+        }
     }
 };
