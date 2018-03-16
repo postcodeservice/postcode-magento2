@@ -92,7 +92,7 @@
         <!--Street fields-->
         <field id="street" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
             <source_model>TIG\Postcode\Config\Source\Parser</source_model>
-            <comment><![CDATA[Make sure you have selected the correct range within the customer/name and addres options configuration.]]></comment>
+            <comment><![CDATA[Make sure you have selected the correct range within the customer/name and address options configuration.]]></comment>
             <config_path>tig_postcode/configuration/fieldparsing_street</config_path>
         </field>
     </group>

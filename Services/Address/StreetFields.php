@@ -85,11 +85,13 @@ class StreetFields
      */
     private function mergeToOneField($street, AddressExtensionInterface $attributes)
     {
-        return implode(' ', [
+        $street[0] = implode(' ', [
             $street[0],
             $attributes->getTigHousenumber(),
             $attributes->getTigHousenumberAddition()
         ]);
+
+        return $street;
     }
 
     /**

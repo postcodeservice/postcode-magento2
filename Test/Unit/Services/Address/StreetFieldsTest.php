@@ -41,18 +41,13 @@ class StreetFieldsTest extends TestCase
 {
     protected $instanceClass = StreetFields::class;
 
-    public function setUp()
-    {
-        parent::setUp();
-    }
-
     public function parseProvider()
     {
         $attributes = ['tig_housenumber' => 37, 'tig_housenumber_addition' => 'A'];
 
         return [
             'parse level one' => [
-                ['kabelweg'], $attributes, Parser::ONE_STREETFIELD, 'kabelweg 37 A'
+                ['kabelweg'], $attributes, Parser::ONE_STREETFIELD, ['kabelweg 37 A']
             ],
             'parse level two' => [
                 ['kabelweg'], $attributes, Parser::TWO_STREETFIELDS, ['kabelweg', '37 A']

@@ -95,6 +95,12 @@ define([
             }
         },
 
+        observeCountry : function (value) {
+            if (value) {
+                this.updateFieldData();
+            }
+        },
+
         updateFieldData : function () {
             var self = this;
 
@@ -211,6 +217,7 @@ define([
                 return null;
             }
 
+            $('.tig_hidden').hide();
             if (currentFormData.country_id !== "NL") {
                 $('.tig_hidden').show();
                 return null;
