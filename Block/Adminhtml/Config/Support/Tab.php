@@ -43,7 +43,7 @@ class Tab extends Template implements RendererInterface
 
     // @codingStandardsIgnoreLine
     protected $_template = 'TIG_Postcode::config/support/tab.phtml';
-    
+
     /**
      * @var ModuleResource
      */

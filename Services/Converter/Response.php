@@ -32,26 +32,20 @@
 namespace TIG\Postcode\Services\Converter;
 
 use TIG\Postcode\Services\Validation\Response as ValidationResponse;
-use Magento\Framework\Serialize\Serializer\Json as JsonHelper;
 
 class Response implements ConverterInterface
 {
     private $validation;
 
-    private $jsonHelper;
-
     /**
      * Request constructor.
      *
      * @param ValidationResponse    $validation
-     * @param JsonHelper $jsonHelper
      */
     public function __construct(
-        ValidationResponse $validation,
-        JsonHelper $jsonHelper
+        ValidationResponse $validation
     ) {
         $this->validation = $validation;
-        $this->jsonHelper = $jsonHelper;
     }
 
     /**
@@ -60,7 +54,7 @@ class Response implements ConverterInterface
     public function convert($data)
     {
         if (is_string($data)) {
-            $data = $this->jsonHelper->unserialize($data);
+            json_decode($data, true);
         }
 
         if (!$this->validation->validate($data)) {
