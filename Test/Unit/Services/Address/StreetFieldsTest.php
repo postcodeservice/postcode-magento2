@@ -34,7 +34,6 @@ namespace TIG\Postcode\Test\Unit\Services\Address;
 use TIG\Postcode\Test\TestCase;
 use TIG\Postcode\Services\Address\StreetFields;
 use TIG\Postcode\Config\Provider\ParserConfiguration;
-use TIG\Postcode\Config\Source\Parser;
 use Magento\Quote\Api\Data\AddressExtensionInterface;
 
 class StreetFieldsTest extends TestCase
@@ -47,13 +46,16 @@ class StreetFieldsTest extends TestCase
 
         return [
             'parse level one' => [
-                ['kabelweg'], $attributes, Parser::ONE_STREETFIELD, ['kabelweg 37 A']
+                ['kabelweg'], $attributes, ParserConfiguration::PARSE_TYPE_ONE, ['kabelweg 37 A']
             ],
             'parse level two' => [
-                ['kabelweg'], $attributes, Parser::TWO_STREETFIELDS, ['kabelweg', '37 A']
+                ['kabelweg'], $attributes, ParserConfiguration::PARSE_TYPE_TWO, ['kabelweg', '37 A']
             ],
             'parse level three' => [
-                ['kabelweg'], $attributes, Parser::THREE_STREETFIELDS, ['kabelweg', 37, 'A']
+                ['kabelweg'], $attributes, ParserConfiguration::PARSE_TYPE_THREE, ['kabelweg', 37, 'A']
+            ],
+            'parse level four' => [
+                ['kabelweg'], $attributes, ParserConfiguration::PARSE_TYPE_FOUR, ['kabelweg', '', '37 A']
             ],
         ];
     }
@@ -69,7 +71,7 @@ class StreetFieldsTest extends TestCase
     {
         $parseConfigurationMock = $this->getFakeMock(ParserConfiguration::class)->getMock();
         $parseConfigurationExpects = $parseConfigurationMock->expects($this->once());
-        $parseConfigurationExpects->method('getStreetMerging');
+        $parseConfigurationExpects->method('getMergeType');
         $parseConfigurationExpects->willReturn($parseSetting);
 
         $extensionAttributes = $this->getFakeMock(AddressExtensionInterface::class)

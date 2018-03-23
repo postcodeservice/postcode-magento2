@@ -42,6 +42,11 @@ class Streets extends Template implements RendererInterface
     // @codingStandardsIgnoreLine
     protected $_template = 'TIG_Postcode::config/parsing/streets.phtml';
 
+    /**
+     * @param AbstractElement $element
+     *
+     * @return string
+     */
     public function render(AbstractElement $element)
     {
         /** @noinspection PhpUndefinedMethodInspection */

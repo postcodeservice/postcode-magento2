@@ -29,44 +29,48 @@
  * @copyright   Copyright (c) Total Internet Group B.V. https://tig.nl/copyright
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
-namespace TIG\Postcode\Services\Converter;
+namespace TIG\Postcode\Block\Adminhtml\Config\Credentials;
 
-use TIG\Postcode\Services\Validation\Response as ValidationResponse;
-use Magento\Framework\Serialize\Serializer\Json as JsonHelper;
+use Magento\Framework\View\Element\Template;
+use Magento\Framework\Data\Form\Element\Renderer\RendererInterface;
+use Magento\Framework\Data\Form\Element\AbstractElement;
 
-class Response implements ConverterInterface
+class Button extends Template implements RendererInterface
 {
-    private $validation;
+    const MODULE_NAME = 'TIG_Postcode';
 
-    private $jsonHelper;
+    const CREDENTIALS_URL = 'https://tig.nl/postcode-service/api/';
+
+    // @codingStandardsIgnoreLine
+    protected $_template = 'TIG_Postcode::config/credentials/button.phtml';
 
     /**
-     * Request constructor.
+     * @param AbstractElement $element
      *
-     * @param ValidationResponse    $validation
-     * @param JsonHelper $jsonHelper
+     * @return string
      */
-    public function __construct(
-        ValidationResponse $validation,
-        JsonHelper $jsonHelper
-    ) {
-        $this->validation = $validation;
-        $this->jsonHelper = $jsonHelper;
+    public function render(AbstractElement $element)
+    {
+        /** @noinspection PhpUndefinedMethodInspection */
+        $this->setElement($element);
+
+        return $this->toHtml();
     }
 
     /**
-     * {@inheritDoc}
+     * @return \Magento\Framework\Phrase
      */
-    public function convert($data)
+    public function getLabel()
     {
-        if (is_string($data)) {
-            $data = $this->jsonHelper->unserialize($data);
-        }
+        // @codingStandardsIgnoreLine
+        return __('Request Credentails');
+    }
 
-        if (!$this->validation->validate($data)) {
-            return false;
-        }
-
-        return $data;
+    /**
+     * @return string
+     */
+    public function getCredentialsUrl()
+    {
+        return static::CREDENTIALS_URL;
     }
 }

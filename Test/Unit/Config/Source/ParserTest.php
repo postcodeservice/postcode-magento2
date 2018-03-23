@@ -29,44 +29,28 @@
  * @copyright   Copyright (c) Total Internet Group B.V. https://tig.nl/copyright
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
-namespace TIG\Postcode\Services\Converter;
+namespace TIG\Postcode\Test\Unit\Config\Source;
 
-use TIG\Postcode\Services\Validation\Response as ValidationResponse;
-use Magento\Framework\Serialize\Serializer\Json as JsonHelper;
+use TIG\Postcode\Test\TestCase;
+use TIG\Postcode\Config\Source\Parser;
 
-class Response implements ConverterInterface
+class ParserTest extends TestCase
 {
-    private $validation;
+    protected $instanceClass = Parser::class;
 
-    private $jsonHelper;
-
-    /**
-     * Request constructor.
-     *
-     * @param ValidationResponse    $validation
-     * @param JsonHelper $jsonHelper
-     */
-    public function __construct(
-        ValidationResponse $validation,
-        JsonHelper $jsonHelper
-    ) {
-        $this->validation = $validation;
-        $this->jsonHelper = $jsonHelper;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function convert($data)
+    public function testToOptionsArray()
     {
-        if (is_string($data)) {
-            $data = $this->jsonHelper->unserialize($data);
-        }
+        $instance = $this->getInstance();
+        $result   = $instance->toOptionArray();
 
-        if (!$this->validation->validate($data)) {
-            return false;
-        }
+        $this->assertCount(3, $result);
 
-        return $data;
+        foreach ($result as $mode) {
+            $this->assertArrayHasKey('label', $mode);
+            $this->assertArrayHasKey('value', $mode);
+
+            $inArray = in_array($mode['value'], [1, 2, 3]);
+            $this->assertTrue($inArray);
+        }
     }
 }

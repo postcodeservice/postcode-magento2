@@ -33,7 +33,7 @@ namespace TIG\Postcode\Test\Unit\Services\Converter;
 
 use TIG\Postcode\Services\Converter;
 use TIG\Postcode\Services\Validation\Response as ValidationResponse;
-use Magento\Framework\Json\Helper\Data as JsonHelper;
+use Magento\Framework\Serialize\Serializer\Json as JsonHelper;
 
 class ResponseTest extends TestInterface
 {
@@ -94,7 +94,7 @@ class ResponseTest extends TestInterface
     {
         $mock = $this->getFakeMock(JsonHelper::class)->disableOriginalConstructor()->getMock();
         $mockExpects = $mock->expects($this->once());
-        $mockExpects->method('jsonDecode')->with($dataString);
+        $mockExpects->method('unserialize')->with($dataString);
         $mockExpects->willReturn($data);
 
         return $mock;

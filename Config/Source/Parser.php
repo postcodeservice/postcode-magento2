@@ -35,9 +35,9 @@ use Magento\Framework\Option\ArrayInterface;
 
 class Parser implements ArrayInterface
 {
-    const ONE_STREETFIELD    = 1;
-    const TWO_STREETFIELDS   = 2;
-    const THREE_STREETFIELDS = 3;
+    const STREETFIELD_ONE    = 1;
+    const STREETFIELD_TWO    = 2;
+    const STREETFIELD_THREE  = 3;
 
     /**
      * @return array
@@ -46,9 +46,9 @@ class Parser implements ArrayInterface
     {
         // @codingStandardsIgnoreStart
         $options = [
-            ['value' => static::ONE_STREETFIELD, 'label' => __('Use 1 street field')],
-            ['value' => static::TWO_STREETFIELDS, 'label' => __('Use 2 street fields')],
-            ['value' => static::THREE_STREETFIELDS, 'label' => __('Use 3 street fields')],
+            ['value' => static::STREETFIELD_ONE, 'label' => __('Street address line %1', [1])],
+            ['value' => static::STREETFIELD_TWO, 'label' => __('Street address line %1', [2])],
+            ['value' => static::STREETFIELD_THREE, 'label' => __('Street address line %1', [3])],
         ];
         // @codingStandardsIgnoreEnd
         return $options;

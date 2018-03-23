@@ -29,44 +29,21 @@
  * @copyright   Copyright (c) Total Internet Group B.V. https://tig.nl/copyright
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
-namespace TIG\Postcode\Services\Converter;
+namespace TIG\Postcode\Block\Adminhtml\Config\Form\Field;
 
-use TIG\Postcode\Services\Validation\Response as ValidationResponse;
-use Magento\Framework\Serialize\Serializer\Json as JsonHelper;
+use Magento\Config\Block\System\Config\Form\Field;
+use Magento\Framework\Data\Form\Element\AbstractElement ;
 
-class Response implements ConverterInterface
+class Disable extends Field
 {
-    private $validation;
-
-    private $jsonHelper;
-
     /**
-     * Request constructor.
+     * @param AbstractElement $element
      *
-     * @param ValidationResponse    $validation
-     * @param JsonHelper $jsonHelper
+     * @return string
      */
-    public function __construct(
-        ValidationResponse $validation,
-        JsonHelper $jsonHelper
-    ) {
-        $this->validation = $validation;
-        $this->jsonHelper = $jsonHelper;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function convert($data)
+    protected function _getElementHtml(AbstractElement $element)
     {
-        if (is_string($data)) {
-            $data = $this->jsonHelper->unserialize($data);
-        }
-
-        if (!$this->validation->validate($data)) {
-            return false;
-        }
-
-        return $data;
+        $element->setDisabled('disabled');
+        return parent::_getElementHtml($element);
     }
 }

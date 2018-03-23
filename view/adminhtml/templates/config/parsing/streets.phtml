@@ -35,35 +35,12 @@
         <div>
             <p>
                <strong>
-                   <?php echo $block->escapeHtml(__('These settings have no impact on the frontend.')); ?>
+                   <?php echo $block->escapeHtml(__('Back-end merging')); ?>
                </strong>
             </p>
-            <ul>
-                <li>
-                    <span class="text">
-                        <?php echo $block->escapeHtml(__('One street field'));?>:
-                    </span>
-                    <span class="status">
-                        <?php echo $block->escapeHtml(__('Street, housenumber and addition on field one.'));?>
-                    </span>
-                </li>
-                <li>
-                    <span class="text">
-                        <?php echo $block->escapeHtml(__('Two street fields'));?>:
-                    </span>
-                    <span class="status">
-                        <?php echo $block->escapeHtml(__('Street on field one, housenumber and addition on street field two.'));?>
-                    </span>
-                </li>
-                <li>
-                    <span class="text">
-                        <?php echo $block->escapeHtml(__('Three street fields'));?>:
-                    </span>
-                    <span class="status">
-                        <?php echo $block->escapeHtml(__('Street on field one, housenumber on two and addition on field three.'));?>
-                    </span>
-                </li>
-            </ul>
+            <?php echo $block->escapeHtml(__('These settings have impact on how street address data is stored in the database.'));?>
+            <br/>
+            <?php echo $block->escapeHtml(__('Tampering with the settings may affect the workflow of third party extensions. Use at your own risk.'));?>
         </div>
     </div>
 </div>

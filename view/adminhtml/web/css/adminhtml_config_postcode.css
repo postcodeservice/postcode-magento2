@@ -404,3 +404,40 @@
     width: 50%;
     padding: 20px;
 }
+
+/* From buttons ===================================================================================================== */
+.tig-form-button {
+    background-color: #eb5202;
+    border-color: #eb5202;
+    color: #ffffff;
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.25);
+    border: 1px solid;
+    border-radius: 0;
+    display: inline-block;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    line-height: 1.36;
+    padding: 0.6875em 1em 0.6875em 1em;
+    text-align: center;
+    vertical-align: baseline;
+}
+
+.tig-form-button:hover {
+    background-color: #ba4000;
+    border-color: #b84002;
+    box-shadow: 0 0 0 1px #007bdb;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.tig-form-button a{
+    font-size: 1.6rem;
+    letter-spacing: .025em;
+    color: #ffffff;
+    padding: 0.6rem 1em 0.6rem;
+}
+
+.tig-form-button a:hover{
+    text-decoration: none;
+}
