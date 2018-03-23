@@ -16,8 +16,7 @@ env:
     - CODE_COVERAGE=false
 
   matrix:
-    - MAGENTO_VERSION=2.1.10
-    - MAGENTO_VERSION=2.1.11
+    - MAGENTO_VERSION=2.1.12
     - MAGENTO_VERSION=2.2.1
     - MAGENTO_VERSION=2.2.2
 
