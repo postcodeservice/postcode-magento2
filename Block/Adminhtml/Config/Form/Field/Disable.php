@@ -41,6 +41,7 @@ class Disable extends Field
      *
      * @return string
      */
+    // @codingStandardsIgnoreLine
     protected function _getElementHtml(AbstractElement $element)
     {
         $element->setDisabled('disabled');
