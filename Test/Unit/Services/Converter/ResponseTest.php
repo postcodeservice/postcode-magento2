@@ -62,7 +62,7 @@ class ResponseTest extends TestInterface
     {
         $instance = $this->getInstance([
             'validation' => $this->validationResponseMock($data, $validation),
-            'jsonHelper' => $this->jsonHelperMock($dataString, $data)
+//            'jsonHelper' => $this->jsonHelperMock($dataString, $data)
         ]);
 
         $this->assertSame($expected, $instance->convert($dataString));

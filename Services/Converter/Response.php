@@ -54,7 +54,7 @@ class Response implements ConverterInterface
     public function convert($data)
     {
         if (is_string($data)) {
-            json_decode($data, true);
+            $data = json_decode($data, true);
         }
 
         if (!$this->validation->validate($data)) {
