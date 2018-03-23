@@ -40,7 +40,7 @@ class Response implements ConverterInterface
     /**
      * Request constructor.
      *
-     * @param ValidationResponse    $validation
+     * @param ValidationResponse $validation
      */
     public function __construct(
         ValidationResponse $validation

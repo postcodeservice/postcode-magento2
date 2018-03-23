@@ -197,7 +197,7 @@ define([
             }
 
             var message = $('.tig-postcode-validation-message');
-            message.html($.mage.__('Can not find the address, please fill in manually')).show();
+            message.html($.mage.__('Can not find the address based on the given postcode and house number. Are you sure these are correct? If so, please fill in the details manually.')).show();
 
             var timer;
             if (typeof timer !== 'undefined') {
@@ -206,7 +206,7 @@ define([
 
             timer = setTimeout(function () {
                 message.hide(motion);
-            }, 4000);
+            }, 5000);
         },
 
         controllRegistry : function (address) {

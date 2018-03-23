@@ -81,6 +81,9 @@
 
         <field id="credential_button" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
             <frontend_model>TIG\Postcode\Block\Adminhtml\Config\Credentials\Button</frontend_model>
+            <depends>
+                <field id="modus">1</field>
+            </depends>
         </field>
     </group>
 
