@@ -206,7 +206,7 @@ define([
 
             timer = setTimeout(function () {
                 message.hide(motion);
-            }, 5000);
+            }, 8000);
         },
 
         controllRegistry : function (address) {

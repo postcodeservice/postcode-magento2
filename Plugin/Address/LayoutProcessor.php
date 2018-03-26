@@ -213,7 +213,7 @@ class LayoutProcessor
             ],
             'provider'   => 'checkoutProvider',
             'dataScope'  => $scope . '.custom_attributes.tig_housenumber',
-            'label'      => __('Housenumber'),
+            'label'      => __('House number'),
             'sortOrder'  => '115',
             'validation' => [
                 'required-entry' => true,

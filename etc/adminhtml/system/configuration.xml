@@ -105,7 +105,7 @@
         </field>
 
         <field id="housenumber_line" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
-            <label>Housenumber field</label>
+            <label>House number field</label>
             <source_model>TIG\Postcode\Config\Source\Parser</source_model>
             <config_path>tig_postcode/configuration/fieldparsing_housenumber</config_path>
         </field>
