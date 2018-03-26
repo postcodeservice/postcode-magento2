@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+ *
+ *
+ *          ..::..
+ *     ..::::::::::::..
+ *   ::'''''':''::'''''::
+ *   ::..  ..:  :  ....::
+ *   ::::  :::  :  :   ::
+ *   ::::  :::  :  ''' ::
+ *   ::::..:::..::.....::
+ *     ''::::::::::::''
+ *          ''::''
+ *
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Creative Commons License.
+ * It is available through the world-wide-web at this URL:
+ * http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
+ * If you are unable to obtain it through the world-wide-web, please send an email
+ * to servicedesk@tig.nl so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this module to newer
+ * versions in the future. If you wish to customize this module for your
+ * needs please contact servicedesk@tig.nl for more information.
+ *
+ * @copyright   Copyright (c) Total Internet Group B.V. https://tig.nl/copyright
+ * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
+ *
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Checkout\Block\Checkout\LayoutProcessor">
+        <plugin name="postcodeFieldGroupPlugin" type="TIG\Postcode\Plugin\Address\LayoutProcessor" />
+    </type>
+
+    <type name="Magento\Checkout\Model\CompositeConfigProvider">
+        <arguments>
+            <argument name="configProviders" xsi:type="array">
+                <item name="tig_postcode_checkout_config_provider" xsi:type="object">TIG\Postcode\Config\Provider\CheckoutConfiguration</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="TIG\Postcode\Config\Provider\CheckoutConfiguration">
+        <arguments>
+            <argument name="postcodeConfiguration" xsi:type="array">
+                <item name="postcode_active" xsi:type="object">TIG\Postcode\Config\CheckoutConfiguration\IsPostcodeCheckActive</item>
+                <item name="action_url" xsi:type="object">TIG\Postcode\Config\CheckoutConfiguration\ActionUrl</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

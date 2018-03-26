@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+ *
+ *
+ *          ..::..
+ *     ..::::::::::::..
+ *   ::'''''':''::'''''::
+ *   ::..  ..:  :  ....::
+ *   ::::  :::  :  :   ::
+ *   ::::  :::  :  ''' ::
+ *   ::::..:::..::.....::
+ *     ''::::::::::::''
+ *          ''::''
+ *
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Creative Commons License.
+ * It is available through the world-wide-web at this URL:
+ * http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
+ * If you are unable to obtain it through the world-wide-web, please send an email
+ * to servicedesk@tig.nl so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this module to newer
+ * versions in the future. If you wish to customize this module for your
+ * needs please contact servicedesk@tig.nl for more information.
+ *
+ * @copyright   Copyright (c) Total Internet Group B.V. https://tig.nl/copyright
+ * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
+ *
+-->
+<include xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_include.xsd">
+    <!--Configuration section-->
+    <group id="configuration" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+        <label>Configuration</label>
+        <frontend_model>TIG\Postcode\Block\Adminhtml\Config\Form\Field\Fieldset</frontend_model>
+        <fieldset_css>tig_postcode-section</fieldset_css>
+
+        <field id="modus" translate="label tooltip" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Modus</label>
+            <source_model>TIG\Postcode\Config\Source\Modus</source_model>
+            <config_path>tig_postcode/configuration/modus</config_path>
+        </field>
+
+        <!-- Customer fields:live -->
+        <field id="client_id" translate="label tooltip" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Client ID</label>
+            <tooltip>The Client ID can be requested through the 'Request Credentials' button below. For support contact TIG.</tooltip>
+            <config_path>tig_postcode/configuration/client_id</config_path>
+            <depends>
+                <field id="modus">1</field>
+            </depends>
+        </field>
+        <field id="api_key" translate="label tooltip" type="obscure" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Api key</label>
+            <tooltip>The Api key can be requested through the 'Request Credentials' button below. For support contact TIG.</tooltip>
+            <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+            <config_path>tig_postcode/configuration/api_key</config_path>
+            <depends>
+                <field id="modus">1</field>
+            </depends>
+        </field>
+
+        <!-- Customer fields:test -->
+        <field id="client_id_test" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Client ID - TEST</label>
+            <config_path>tig_postcode/configuration/client_id_test</config_path>
+            <depends>
+                <field id="modus">2</field>
+            </depends>
+        </field>
+        <field id="api_key_test" translate="label comment" type="obscure" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Api key - TEST</label>
+            <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+            <config_path>tig_postcode/configuration/api_key_test</config_path>
+            <depends>
+                <field id="modus">2</field>
+            </depends>
+        </field>
+
+        <field id="credential_button" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+            <frontend_model>TIG\Postcode\Block\Adminhtml\Config\Credentials\Button</frontend_model>
+            <depends>
+                <field id="modus">1</field>
+            </depends>
+        </field>
+    </group>
+
+    <!-- Field Parser settings -->
+    <group id="fieldparsing" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+        <label>Advanced configuration</label>
+        <fieldset_css>tig_postcode-section</fieldset_css>
+        <frontend_model>TIG\Postcode\Block\Adminhtml\Config\Form\Field\Fieldset</frontend_model>
+        <group id="explanation" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+            <frontend_model>TIG\Postcode\Block\Adminhtml\Config\Parsing\Streets</frontend_model>
+            <fieldset_css>tig_postcode-section</fieldset_css>
+        </group>
+
+        <field id="street_line" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Street address field</label>
+            <frontend_model>TIG\Postcode\Block\Adminhtml\Config\Form\Field\Disable</frontend_model>
+            <source_model>TIG\Postcode\Config\Source\Parser</source_model>
+            <config_path>tig_postcode/configuration/fieldparsing_street</config_path>
+        </field>
+
+        <field id="housenumber_line" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>House number field</label>
+            <source_model>TIG\Postcode\Config\Source\Parser</source_model>
+            <config_path>tig_postcode/configuration/fieldparsing_housenumber</config_path>
+        </field>
+
+        <field id="addition_line" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Housenumber addition field</label>
+            <source_model>TIG\Postcode\Config\Source\Parser</source_model>
+            <config_path>tig_postcode/configuration/fieldparsing_addition</config_path>
+        </field>
+
+    </group>
+</include>
