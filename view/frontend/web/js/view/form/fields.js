@@ -197,7 +197,7 @@ define([
             }
 
             var message = $('.tig-postcode-validation-message');
-            message.html($.mage.__('Can not find the address based on the given postcode and house number. Are you sure these are correct? If so, please fill in the details manually.')).show();
+            message.html($.mage.__('Sorry, we could not find the address on the given zip code and house number combination. If you are sure that the zip code and house number are correct, please fill in the address details manually.')).show();
 
             var timer;
             if (typeof timer !== 'undefined') {

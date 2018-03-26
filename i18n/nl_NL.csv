@@ -47,4 +47,5 @@ Support,Support
 "The Api key can be requested through the 'Request Credentials' button below. For support contact TIG.","De 'Api key' kan opgevraagd worden door middel van de 'Opvragen gegevens' knop. Voor support contacteer TIG."
 "Request Credentials","Opvragen Gegevens"
 "Advanced Configuration","Geavanceerde opties"
-"Can not find the address based on the given postcode and house number. Are you sure these are correct? If so, please fill in the details manually.","Kon geen adres vinden gebaseerd op het opgegeven postcode en huisnummer. Weet u zeker dat deze correct zijn? Zo ja, vul handmatig de overige informatie in."
+"Sorry, we could not find the address on the given zip code and house number combination. If you are sure that the zip code and house number are correct, please fill in the address details manually.","Sorry, wij konden geen adresgegevens vinden met de opgegeven postcode en huisnummer combinatie. Indien u er zeker van bent dat de opgegeven postcode en huisnummer correct zijn, vul dan adresinformatie handig aan."
+"Zip/Postal Code","Postcode"
