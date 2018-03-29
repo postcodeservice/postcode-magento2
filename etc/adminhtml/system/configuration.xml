@@ -63,15 +63,18 @@
         </field>
 
         <!-- Customer fields:test -->
-        <field id="client_id_test" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+        <field id="client_id_test" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
             <label>Client ID - TEST</label>
+            <comment><![CDATA[You can use our test credentials if needed : <strong>1177</strong>]]></comment>
             <config_path>tig_postcode/configuration/client_id_test</config_path>
             <depends>
                 <field id="modus">2</field>
             </depends>
         </field>
-        <field id="api_key_test" translate="label comment" type="obscure" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+        <field id="api_key_test" translate="label comment tooltip" type="obscure" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
             <label>Api key - TEST</label>
+            <comment><![CDATA[You can use our test credentials if needed : <strong>9SRLYBCALURPE2B</strong>]]></comment>
+            <tooltip>Our test credentials are limited to 50 request per month.</tooltip>
             <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
             <config_path>tig_postcode/configuration/api_key_test</config_path>
             <depends>

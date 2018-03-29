@@ -37,8 +37,6 @@
             <stability/>
             <configuration>
                 <modus>0</modus>
-                <client_id_test>1177</client_id_test>
-                <api_key_test>9SRLYBCALURPE2B</api_key_test>
                 <fieldparsing_street>1</fieldparsing_street>
                 <fieldparsing_housenumber>1</fieldparsing_housenumber>
                 <fieldparsing_addition>1</fieldparsing_addition>

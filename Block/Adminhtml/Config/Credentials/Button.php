@@ -39,7 +39,7 @@ class Button extends Template implements RendererInterface
 {
     const MODULE_NAME = 'TIG_Postcode';
 
-    const CREDENTIALS_URL = 'https://tig.nl/postcode-service/api/';
+    const CREDENTIALS_URL = 'https://tig.nl/postcode-service/magento-2/';
 
     // @codingStandardsIgnoreLine
     protected $_template = 'TIG_Postcode::config/credentials/button.phtml';
