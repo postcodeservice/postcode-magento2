@@ -230,7 +230,7 @@ abstract class TestCase extends TestCaseFinder
      *
      * @return Filesystem\File\ReadInterface
      */
-    protected function loadFile($filename): Filesystem\File\ReadInterface
+    protected function loadFile($filename)
     {
         /** @var Filesystem $filesystem */
         $filesystem   = $this->getObject(Filesystem::class);
