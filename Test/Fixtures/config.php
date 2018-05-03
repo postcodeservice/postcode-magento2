@@ -89,7 +89,7 @@ return array (
             'Magento_GroupedProduct' => 1,
             'Magento_Tax' => 1,
             'Magento_DownloadableImportExport' => 1,
-            'Magento_Vault' => 0,
+            'Magento_Vault' => 1,
             'Magento_Security' => 1,
             'Magento_LayeredNavigation' => 1,
             'Magento_Marketplace' => 1,
