@@ -14,6 +14,11 @@
     margin: 0 0 20px 0;
 }
 
+/*Mageplaza styling*/
+.tig-postcode-field-group.mp-12 .field:last-child {
+    width: 30%;
+}
+
 .tig-postcode-field-group .field._required>.label:after {
     content: '*';
     color: #e02b27;

@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?><!--
- *
+<?php
+/**
  *
  *          ..::..
  *     ..::::::::::::..
@@ -28,25 +28,31 @@
  *
  * @copyright   Copyright (c) Total Internet Group B.V. https://tig.nl/copyright
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
- *
--->
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
-    <default>
-        <tig_postcode>
-            <supported_magento_version>2.1.0 - 2.1.12, 2.2.0 - 2.2.3</supported_magento_version>
-            <stability/>
-            <configuration>
-                <modus>0</modus>
-                <checkout_compatible>default</checkout_compatible>
-                <fieldparsing_street>1</fieldparsing_street>
-                <fieldparsing_housenumber>1</fieldparsing_housenumber>
-                <fieldparsing_addition>1</fieldparsing_addition>
-            </configuration>
-            <api>
-                <base>https://postcode.tig.nl/api</base>
-                <version>v3</version>
-                <type>json</type>
-            </api>
-        </tig_postcode>
-    </default>
-</config>
+ */
+namespace TIG\Postcode\Config\CheckoutConfiguration;
+
+use TIG\Postcode\Config\Provider\ModuleConfiguration;
+
+class GetCheckoutCompatibility implements CheckoutConfigurationInterface
+{
+    private $moduleConfiguration;
+
+    /**
+     * IsPostcodeCheckActive constructor.
+     *
+     * @param ModuleConfiguration $moduleConfiguration
+     */
+    public function __construct(
+        ModuleConfiguration $moduleConfiguration
+    ) {
+        $this->moduleConfiguration = $moduleConfiguration;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getValue()
+    {
+        return $this->moduleConfiguration->getCheckoutCompatibility();
+    }
+}

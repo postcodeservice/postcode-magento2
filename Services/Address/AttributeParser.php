@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?><!--
- *
+<?php
+/**
  *
  *          ..::..
  *     ..::::::::::::..
@@ -28,25 +28,46 @@
  *
  * @copyright   Copyright (c) Total Internet Group B.V. https://tig.nl/copyright
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
- *
--->
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
-    <default>
-        <tig_postcode>
-            <supported_magento_version>2.1.0 - 2.1.12, 2.2.0 - 2.2.3</supported_magento_version>
-            <stability/>
-            <configuration>
-                <modus>0</modus>
-                <checkout_compatible>default</checkout_compatible>
-                <fieldparsing_street>1</fieldparsing_street>
-                <fieldparsing_housenumber>1</fieldparsing_housenumber>
-                <fieldparsing_addition>1</fieldparsing_addition>
-            </configuration>
-            <api>
-                <base>https://postcode.tig.nl/api</base>
-                <version>v3</version>
-                <type>json</type>
-            </api>
-        </tig_postcode>
-    </default>
-</config>
+ */
+namespace TIG\Postcode\Services\Address;
+
+class AttributeParser
+{
+    public $tigHousenumber = null;
+
+    public $tigHousenumberAddition = null;
+
+    /**
+     * @param array $attributes
+     *
+     * @return $this
+     */
+    public function set(array $attributes)
+    {
+        if (isset($attributes['tig_housenumber'])) {
+            $this->tigHousenumber = $attributes['tig_housenumber'];
+        }
+
+        if (isset($attributes['tig_housenumber_addition'])) {
+            $this->tigHousenumberAddition = $attributes['tig_housenumber_addition'];
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return null
+     */
+    public function getTigHousenumber()
+    {
+        return $this->tigHousenumber;
+    }
+
+    /**
+     * @return null
+     */
+    public function getTigHousenumberAddition()
+    {
+        return $this->tigHousenumberAddition;
+    }
+}

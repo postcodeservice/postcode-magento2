@@ -33,6 +33,7 @@ namespace TIG\Postcode\Services\Address;
 
 use TIG\Postcode\Config\Provider\ParserConfiguration;
 use Magento\Quote\Api\Data\AddressExtensionInterface;
+use TIG\Postcode\Services\Address\AttributeParser;
 
 class StreetFields
 {
@@ -53,12 +54,12 @@ class StreetFields
     }
 
     /**
-     * @param                           $street
-     * @param AddressExtensionInterface $attributes
+     * @param                                           $street
+     * @param AddressExtensionInterface|AttributeParser $attributes
      *
      * @return mixed|string
      */
-    public function parse($street, AddressExtensionInterface $attributes)
+    public function parse($street, $attributes)
     {
         $merger = $this->parseConfiguration->getMergeType();
         if ($merger == ParserConfiguration::PARSE_TYPE_ONE) {
@@ -81,12 +82,12 @@ class StreetFields
     }
 
     /**
-     * @param                           $street
-     * @param AddressExtensionInterface $attributes
+     * @param                                           $street
+     * @param AddressExtensionInterface|AttributeParser $attributes
      *
      * @return string
      */
-    private function mergeTypeOne($street, AddressExtensionInterface $attributes)
+    private function mergeTypeOne($street, $attributes)
     {
         $street[0] = implode(' ', [
             $street[0],
@@ -98,12 +99,12 @@ class StreetFields
     }
 
     /**
-     * @param                           $street
-     * @param AddressExtensionInterface $attributes
+     * @param                                           $street
+     * @param AddressExtensionInterface|AttributeParser $attributes
      *
      * @return mixed
      */
-    private function mergeTypeTwo($street, AddressExtensionInterface $attributes)
+    private function mergeTypeTwo($street, $attributes)
     {
         $street[1] = implode(' ', [
             $attributes->getTigHousenumber(),
@@ -114,12 +115,12 @@ class StreetFields
     }
 
     /**
-     * @param                           $street
-     * @param AddressExtensionInterface $attributes
+     * @param                                           $street
+     * @param AddressExtensionInterface|AttributeParser $attributes
      *
      * @return mixed
      */
-    private function mergeTypeThree($street, AddressExtensionInterface $attributes)
+    private function mergeTypeThree($street, $attributes)
     {
         $street[1] = $attributes->getTigHousenumber();
         $street[2] = $attributes->getTigHousenumberAddition();
@@ -128,12 +129,12 @@ class StreetFields
     }
 
     /**
-     * @param                           $street
-     * @param AddressExtensionInterface $attributes
+     * @param                                           $street
+     * @param AddressExtensionInterface|AttributeParser $attributes
      *
      * @return mixed
      */
-    private function mergeTypeFour($street, AddressExtensionInterface $attributes)
+    private function mergeTypeFour($street, $attributes)
     {
         $street[1] = '';
         $street[2] = implode(' ', [

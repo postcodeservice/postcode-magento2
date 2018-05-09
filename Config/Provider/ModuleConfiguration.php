@@ -34,6 +34,7 @@ namespace TIG\Postcode\Config\Provider;
 class ModuleConfiguration extends AbstractConfigProvider
 {
     const XPATH_CONFIGURATION_MODUS       = 'tig_postcode/configuration/modus';
+    const XPATH_CHECKOUT_COMPATIBILITY    = 'tig_postcode/configuration/checkout_compatible';
     const XPATH_MODULE_STABILITY          = 'tig_postcode/stability';
     const XPATH_SUPPORTED_MAGENTO_VERSION = 'tig_postcode/supported_magento_version';
 
@@ -115,5 +116,15 @@ class ModuleConfiguration extends AbstractConfigProvider
     public function getSupportedMagentoVersions($store = null)
     {
         return $this->getConfigFromXpath(static::XPATH_SUPPORTED_MAGENTO_VERSION, $store);
+    }
+
+    /**
+     * @param null $store
+     *
+     * @return mixed
+     */
+    public function getCheckoutCompatibility($store = null)
+    {
+        return $this->getConfigFromXpath(static::XPATH_CHECKOUT_COMPATIBILITY, $store);
     }
 }

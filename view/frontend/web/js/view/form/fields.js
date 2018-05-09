@@ -30,6 +30,8 @@
  */
 define([
     'jquery',
+    'Magento_Checkout/js/model/quote',
+    'Magento_Checkout/js/model/address-converter',
     'Magento_Ui/js/form/components/group',
     'ko',
     'TIG_Postcode/js/Helper/Logger',
@@ -37,6 +39,8 @@ define([
     'uiRegistry'
 ], function (
     $,
+    quote,
+    AddressConverter,
     uiComponent,
     ko,
     Logger,
@@ -193,6 +197,7 @@ define([
 
             $('.tig_hidden').show(motion);
             if (type !== 'failed') {
+                this.renderAddressData();
                 return;
             }
 
@@ -209,12 +214,51 @@ define([
             }, 8000);
         },
 
+        // Magaplaza and other oneStepcheckouts render the billing fields on the same page.
+        renderAddressData : function () {
+            if (window.checkoutConfig.postcode.checkout === 'default' ||
+                window.checkoutConfig.postcode.checkout === 'blank'
+            ) {
+                return;
+            }
+
+            var shippingAddress = quote.shippingAddress(),
+            addressData = AddressConverter.formAddressDataToQuoteAddress(
+                this.source.get('shippingAddress')
+            );
+
+            //Copy form data to quote shipping address object (Credit: Magaplaza)
+            for (var field in addressData) {
+                if (addressData.hasOwnProperty(field) &&
+                    shippingAddress.hasOwnProperty(field) &&
+                    typeof addressData[field] != 'function' && //eslint-disable-line eqeqeq
+                    _.isEqual(shippingAddress[field], addressData[field])
+                ) {
+                    shippingAddress[field] = addressData[field];
+                } else if (typeof addressData[field] != 'function' && //eslint-disable-line eqeqeq
+                    !_.isEqual(shippingAddress[field], addressData[field])
+                ) {
+                    shippingAddress = addressData;
+                    break;
+                }
+            }
+
+            quote.shippingAddress(shippingAddress);
+        },
+
         controllRegistry : function (address) {
             var currentFormData = this.source.get(this.customScope);
 
             // Wait until the data is filled in.
             if (!currentFormData) {
                 return null;
+            }
+
+            // MagePlaza compatibility.
+            if (currentFormData.shippingAddress) {
+                var tempData = currentFormData.shippingAddress;
+                currentFormData.postcode = tempData.postcode;
+                currentFormData.custom_attributes = tempData.custom_attributes;
             }
 
             $('.tig_hidden').hide();

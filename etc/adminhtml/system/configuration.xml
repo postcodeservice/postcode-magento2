@@ -89,6 +89,13 @@
                 <field id="modus">1</field>
             </depends>
         </field>
+
+        <field id="checkout_compatible" type="select" translate="label comment" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Checkout usage</label>
+            <comment><![CDATA[Select which checkout you use for the best performance possible.]]></comment>
+            <source_model>TIG\Postcode\Config\Source\Checkouts</source_model>
+            <config_path>tig_postcode/configuration/checkout_compatible</config_path>
+        </field>
     </group>
 
     <!-- Field Parser settings -->

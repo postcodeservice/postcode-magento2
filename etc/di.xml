@@ -64,4 +64,8 @@
         <plugin name="postcodePaymentInformationManagement" type="TIG\Postcode\Plugin\Address\Management\Payment" />
     </type>
 
+    <type name="\Mageplaza\Osc\Api\CheckoutManagementInterface">
+        <plugin name="postcodeMageplazaCheckoutInformation" type="TIG\Postcode\Plugin\Mageplaza\CheckoutManagement" />
+    </type>
+
 </config>
