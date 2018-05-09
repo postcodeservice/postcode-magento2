@@ -33,7 +33,6 @@ namespace TIG\Postcode\Services\Address;
 
 use TIG\Postcode\Config\Provider\ParserConfiguration;
 use Magento\Quote\Api\Data\AddressExtensionInterface;
-use TIG\Postcode\Services\Address\AttributeParser;
 
 class StreetFields
 {

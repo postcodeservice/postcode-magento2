@@ -74,7 +74,7 @@ class CheckoutManagement
 
         $shippignAddress = $addressInformation->getShippingAddress();
         $attributes = $this->attributeParser->set($customerAttributes);
-        $street = $this->streetParser->parse($shippignAddress->getStreet(),  $attributes);
+        $street = $this->streetParser->parse($shippignAddress->getStreet(), $attributes);
         $shippignAddress->setStreet($street);
 
         $addressInformation->setShippingAddress($shippignAddress);

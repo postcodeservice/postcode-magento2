@@ -33,9 +33,9 @@ namespace TIG\Postcode\Services\Address;
 
 class AttributeParser
 {
-    public $tigHousenumber = null;
+    private $tigHousenumber = null;
 
-    public $tigHousenumberAddition = null;
+    private $tigHousenumberAddition = null;
 
     /**
      * @param array $attributes
