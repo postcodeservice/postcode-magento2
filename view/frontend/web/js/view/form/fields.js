@@ -122,7 +122,7 @@ define([
                 return;
             }
 
-            var address = this.controllRegistry(State.address());
+            var address = this.controlRegistry(State.address());
             if (!address) {
                 return;
             }
@@ -246,7 +246,7 @@ define([
             quote.shippingAddress(shippingAddress);
         },
 
-        controllRegistry : function (address) {
+        controlRegistry : function (address) {
             var currentFormData = this.source.get(this.customScope);
 
             // Wait until the data is filled in.
