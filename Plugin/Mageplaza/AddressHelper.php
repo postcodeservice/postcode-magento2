@@ -31,7 +31,6 @@
  */
 namespace TIG\Postcode\Plugin\MagePlaza;
 
-use \Mageplaza\Osc\Helper\Address;
 use TIG\Postcode\Config\Provider\ModuleConfiguration;
 
 class AddressHelper
@@ -45,13 +44,16 @@ class AddressHelper
     }
 
     /**
-     * @param Address $subject
+     * Subject => \Mageplaza\Osc\Helper\Address
+     * Compatible plugin, Mageplaza skippes grouped fields, so we need to add this manualy.
+     *
+     * @param         $subject
      * @param         $fieldPostion
      *
      * @return mixed
      */
     // @codingStandardsIgnoreLine
-    public function afterGetAddressFieldPosition(Address $subject, $fieldPostion)
+    public function afterGetAddressFieldPosition($subject, $fieldPostion)
     {
         if ($this->moduleConfig->isModusOff()) {
             return $fieldPostion;
