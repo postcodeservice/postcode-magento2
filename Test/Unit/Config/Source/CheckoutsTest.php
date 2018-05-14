@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?><!--
- *
+<?php
+/**
  *
  *          ..::..
  *     ..::::::::::::..
@@ -28,25 +28,33 @@
  *
  * @copyright   Copyright (c) Total Internet Group B.V. https://tig.nl/copyright
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
- *
--->
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
-    <default>
-        <tig_postcode>
-            <supported_magento_version>2.1.0 - 2.1.12, 2.2.0 - 2.2.3</supported_magento_version>
-            <stability/>
-            <configuration>
-                <modus>0</modus>
-                <checkout_compatible>default</checkout_compatible>
-                <fieldparsing_street>1</fieldparsing_street>
-                <fieldparsing_housenumber>1</fieldparsing_housenumber>
-                <fieldparsing_addition>1</fieldparsing_addition>
-            </configuration>
-            <api>
-                <base>https://postcode.tig.nl/api</base>
-                <version>v3</version>
-                <type>json</type>
-            </api>
-        </tig_postcode>
-    </default>
-</config>
+ */
+namespace TIG\Postcode\Test\Unit\Config\Source;
+
+use TIG\Postcode\Test\TestCase;
+use TIG\Postcode\Config\Source\Checkouts;
+
+class CheckoutsTest extends TestCase
+{
+    protected $instanceClass = Checkouts::class;
+
+    private $compatibleCheckouts = [
+        'default', 'blank', 'mageplaza'
+    ];
+
+    public function testToOptionsArray()
+    {
+        $instance = $this->getInstance();
+        $result = $instance->toOptionArray();
+
+        $this->assertCount(3, $result);
+
+        foreach ($result as $checkout) {
+            $this->assertArrayHasKey('label', $checkout);
+            $this->assertArrayHasKey('value', $checkout);
+
+            $inArray = in_array($checkout['value'], $this->compatibleCheckouts);
+            $this->assertTrue($inArray);
+        }
+    }
+}

@@ -1,4 +1,11 @@
-/*@todo: make responive for mobile*/
+/* Tools ============================================================================================================ */
+
+.tig_hidden {
+    display: none;
+}
+
+/* Default: Magento Luma checkout =================================================================================== */
+
 .tig-postcode-field-group {
     float: left;
     width: 100%;
@@ -6,20 +13,32 @@
 
 .tig-postcode-field-group .field {
     margin: 0 10px 20px 0;
-    width: 32%;
+    width: 100%;
+    max-width: 30%; /* IE Fallback */
+    max-width: calc(100%/3 - 10px);
     float: left;
 }
 
 .tig-postcode-field-group .field:last-child {
     margin: 0 0 20px 0;
+    width: 100%;
+    max-width: calc(100%/3);
 }
 
-.tig-postcode-field-group .field._required>.label:after {
-    content: '*';
-    color: #e02b27;
-    font-size: 1.2rem;
-    margin: 0 0 0 5px;
+
+.tig-postcode-field-group .field span {
+    overflow: hidden;
+    max-width: 70%;
+    display: inline-block;
+    text-overflow: ellipsis;
+    vertical-align :bottom;
 }
+
+.tig-postcode-field-group .field .control {
+    margin-top: 5px;
+}
+
+/* Validation message */
 
 .tig-postcode-validation-message {
     float: left;
@@ -33,8 +52,62 @@
     padding: 10px;
     background: #f9f9f9;
     box-sizing: border-box;
+    white-space: normal;
 }
 
-.tig_hidden {
-    display: none;
+/* Required */
+
+.tig-postcode-field-group .field._required>.label:after {
+    content: '*';
+    color: #e02b27;
+    font-size: 1.2rem;
+    margin: 0 0 0 5px;
 }
+
+/* Magento Blank checkout =========================================================================================== */
+
+/* Disable float - which is used in Luma */
+
+.blank.tig-postcode-field-group {
+    float: none;
+    width: auto;
+    display: block;
+}
+
+.blank.tig-postcode-field-group .field {
+    width: auto;
+    float:none;
+    display: inline-block;
+    max-width: 30%; /* IE Fallback */
+    max-width: calc(100%/3 - 10px);
+}
+
+.blank.tig-postcode-validation-message {
+    float:none;
+}
+
+/* Desktop exceptions */
+
+@media screen and (min-width: 768px){
+    .blank.tig-postcode-field-group {
+        margin-left: 25.8%;
+        margin-bottom: 10px;
+    }
+
+    .blank.tig-postcode-validation-message {
+        margin-left: 25.8%;
+        width: 74.2%;
+        margin-bottom: 20px;
+    }
+}
+
+/* Mage Plaza checkout ============================================================================================== */
+
+.tig-postcode-field-group.mp-12 .field:last-child {
+    width: 30%;
+}
+
+
+
+
+
