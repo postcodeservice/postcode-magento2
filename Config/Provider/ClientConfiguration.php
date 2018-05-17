@@ -34,6 +34,8 @@ namespace TIG\Postcode\Config\Provider;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\Encryption\Encryptor;
 use Magento\Framework\Module\Manager;
+use Magento\Framework\UrlInterface;
+use Magento\Store\Model\StoreManagerInterface;
 
 class ClientConfiguration extends AbstractConfigProvider
 {
@@ -51,15 +53,17 @@ class ClientConfiguration extends AbstractConfigProvider
      * @param ScopeConfigInterface $scopeConfig
      * @param Manager              $moduleManager
      * @param Encryptor            $crypt
+     * @param StoreManagerInterface $storeManager
      * @param ModuleConfiguration  $moduleConfiguration
      */
     public function __construct(
         ScopeConfigInterface $scopeConfig,
         Manager $moduleManager,
         Encryptor $crypt,
+        StoreManagerInterface $storeManager,
         ModuleConfiguration $moduleConfiguration
     ) {
-        parent::__construct($scopeConfig, $moduleManager, $crypt);
+        parent::__construct($scopeConfig, $moduleManager, $crypt, $storeManager);
         $this->moduleConfiguration = $moduleConfiguration;
     }
 
@@ -105,5 +109,13 @@ class ClientConfiguration extends AbstractConfigProvider
         }
 
         return $xpath;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDomainUrl()
+    {
+        return parent::getBaseUrl(UrlInterface::URL_TYPE_WEB);
     }
 }

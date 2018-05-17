@@ -36,6 +36,7 @@ use TIG\Postcode\Config\Provider\ApiConfiguration;
 use TIG\Postcode\Config\Provider\ClientConfiguration;
 use TIG\Postcode\Webservices\Endpoints\EndpointInterface;
 use TIG\Postcode\Services\Converter\Factory;
+use Magento\Framework\HTTP\PhpEnvironment\ServerAddress;
 
 class Api
 {
@@ -60,23 +61,31 @@ class Api
     private $converter;
 
     /**
+     * @var ServerAddress
+     */
+    private $serverAddress;
+
+    /**
      * Api constructor.
      *
      * @param ZendClient          $client
      * @param ApiConfiguration    $apiConfiguration
      * @param ClientConfiguration $clientConfiguration
      * @param Factory             $converter
+     * @param ServerAddress       $serverAddress
      */
     public function __construct(
         ZendClient $client,
         ApiConfiguration $apiConfiguration,
         ClientConfiguration $clientConfiguration,
-        Factory $converter
+        Factory $converter,
+        ServerAddress $serverAddress
     ) {
         $this->zendClient          = $client;
         $this->apiConfiguration    = $apiConfiguration;
         $this->clientConfiguration = $clientConfiguration;
         $this->converter           = $converter;
+        $this->serverAddress       = $serverAddress;
     }
 
     /**
@@ -123,7 +132,6 @@ class Api
 
         if ((int)$version < 4) {
             $params = $endpoint->getRequestData();
-
             $params['client_id']   = $this->clientConfiguration->getClientId();
             $params['secure_code'] = $this->clientConfiguration->getApiKey();
 
@@ -138,12 +146,16 @@ class Api
     {
         $this->zendClient->setMethod($endpoint->getMethod());
 
+        $params = $endpoint->getRequestData();
+        $params['domain']    = $this->clientConfiguration->getDomainUrl();
+        $params['remote_ip'] = $this->serverAddress->getServerAddress();
+
         if ($endpoint->getMethod() == ZendClient::GET) {
-            $this->zendClient->setParameterGet($endpoint->getRequestData());
+            $this->zendClient->setParameterGet($params);
         }
 
         if ($endpoint->getMethod() == ZendClient::POST) {
-            $this->zendClient->setParameterPost($endpoint->getRequestData());
+            $this->zendClient->setParameterPost($params);
         }
     }
 

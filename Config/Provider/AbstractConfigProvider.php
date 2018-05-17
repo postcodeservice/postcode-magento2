@@ -34,6 +34,8 @@ namespace TIG\Postcode\Config\Provider;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\Encryption\Encryptor;
 use Magento\Framework\Module\Manager;
+use Magento\Store\Model\StoreManagerInterface;
+use Magento\Framework\UrlInterface;
 
 abstract class AbstractConfigProvider
 {
@@ -56,18 +58,26 @@ abstract class AbstractConfigProvider
     protected $crypt;
 
     /**
-     * @param ScopeConfigInterface $scopeConfig
-     * @param Manager $moduleManager
-     * @param Encryptor            $crypt
+     * @var StoreManagerInterface
+     */
+    protected $storeManager;
+
+    /**
+     * @param ScopeConfigInterface  $scopeConfig
+     * @param Manager               $moduleManager
+     * @param Encryptor             $crypt
+     * @param StoreManagerInterface $storeManager
      */
     public function __construct(
         ScopeConfigInterface $scopeConfig,
         Manager $moduleManager,
-        Encryptor $crypt
+        Encryptor $crypt,
+        StoreManagerInterface $storeManager
     ) {
         $this->scopeConfig = $scopeConfig;
         $this->moduleManager = $moduleManager;
         $this->crypt = $crypt;
+        $this->storeManager = $storeManager;
     }
 
     /**
@@ -95,5 +105,18 @@ abstract class AbstractConfigProvider
     protected function isModuleOutputEnabled()
     {
         return $this->moduleManager->isOutputEnabled('TIG_Postcode');
+    }
+
+    /**
+     * @param $type
+     *
+     * @return mixed
+     */
+    // @codingStandardsIgnoreLine
+    protected function getBaseUrl($type = UrlInterface::URL_TYPE_WEB)
+    {
+        /** @var \Magento\Store\Api\Data\StoreInterface $store */
+        $store = $this->storeManager->getStore();
+        return $store->getBaseUrl($type);
     }
 }
