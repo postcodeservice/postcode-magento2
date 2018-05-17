@@ -31,7 +31,6 @@
  */
 namespace TIG\Postcode\Plugin\Address\Management;
 
-use Magento\Quote\Model\ShippingAddressManagement as MagentoManagement;
 use Magento\Quote\Api\Data\AddressInterface;
 use TIG\Postcode\Services\Address\StreetFields;
 
@@ -48,8 +47,15 @@ class Shipping
         $this->streetParser = $streetFields;
     }
 
+    /**
+     * @param                   $subject -> Magento\Quote\Model\ShippingAddressManagement
+     * @param                   $cartId
+     * @param AddressInterface  $address
+     *
+     * @return array
+     */
     // @codingStandardsIgnoreLine
-    public function beforeAssign(MagentoManagement $subject, $cartId, AddressInterface $address)
+    public function beforeAssign($subject, $cartId, AddressInterface $address)
     {
         $attributes = $address->getExtensionAttributes();
         if (empty($attributes)) {
