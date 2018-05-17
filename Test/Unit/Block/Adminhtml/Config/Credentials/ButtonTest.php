@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?><!--
- *
+<?php
+/**
  *
  *          ..::..
  *     ..::::::::::::..
@@ -28,13 +28,30 @@
  *
  * @copyright   Copyright (c) Total Internet Group B.V. https://tig.nl/copyright
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
- *
--->
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:TIG_Postcode:etc/tig_module.xsd">
-    <module name="TIG_Postcode" setup_version="1.1.3">
-        <sequence>
-            <module name="Magento_Quote"/>
-            <module name="Magento_Checkout"/>
-        </sequence>
-    </module>
-</config>
+ */
+namespace TIG\Postcode\Test\Unit\Block\Adminhtml\Config\Credentials;
+
+use TIG\Postcode\Test\TestCase;
+use TIG\Postcode\Block\Adminhtml\Config\Credentials\Button;
+
+class ButtonTest extends TestCase
+{
+    protected $instanceClass = Button::class;
+
+    public function testGetCredentialsUrl()
+    {
+        $instance = $this->getInstance();
+        $url = $instance->getCredentialsUrl();
+
+        $this->assertTrue(is_string($url));
+        $this->assertTrue(is_string(filter_var($url, FILTER_VALIDATE_URL)));
+    }
+
+    public function testGetLabel()
+    {
+        $instance = $this->getInstance();
+        $label = $instance->getLabel();
+
+        $this->assertTrue(is_string($label->render()));
+    }
+}

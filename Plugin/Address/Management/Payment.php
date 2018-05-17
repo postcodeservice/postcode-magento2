@@ -31,7 +31,6 @@
  */
 namespace TIG\Postcode\Plugin\Address\Management;
 
-use Magento\Checkout\Model\PaymentInformationManagement;
 use Magento\Quote\Api\Data\PaymentInterface;
 use Magento\Quote\Api\Data\AddressInterface;
 use TIG\Postcode\Services\Address\StreetFields;
@@ -49,9 +48,17 @@ class Payment
         $this->streetParser = $streetFields;
     }
 
+    /**
+     * @param                       $subject -> Magento\Checkout\Model\PaymentInformationManagement
+     * @param                       $cartId
+     * @param PaymentInterface      $paymentMethod
+     * @param AddressInterface|null $billingAddress
+     *
+     * @return array
+     */
     // @codingStandardsIgnoreLine
     public function beforeSavePaymentInformation(
-        PaymentInformationManagement $subject,
+        $subject,
         $cartId,
         PaymentInterface $paymentMethod,
         AddressInterface $billingAddress = null

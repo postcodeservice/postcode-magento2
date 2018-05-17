@@ -82,6 +82,16 @@ abstract class TestCase extends TestCaseFinder
     }
 
     /**
+     * @param $string
+     *
+     * @return bool
+     */
+    public function isHtml($string)
+    {
+        return preg_match("/\/[a-z]*>/i", $string) != 0;
+    }
+
+    /**
      * @param $method
      * @param $instance
      *
@@ -230,7 +240,7 @@ abstract class TestCase extends TestCaseFinder
      *
      * @return Filesystem\File\ReadInterface
      */
-    protected function loadFile($filename): Filesystem\File\ReadInterface
+    protected function loadFile($filename)
     {
         /** @var Filesystem $filesystem */
         $filesystem   = $this->getObject(Filesystem::class);

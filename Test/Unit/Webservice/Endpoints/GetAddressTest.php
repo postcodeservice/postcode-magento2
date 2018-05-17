@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?><!--
- *
+<?php
+/**
  *
  *          ..::..
  *     ..::::::::::::..
@@ -28,13 +28,40 @@
  *
  * @copyright   Copyright (c) Total Internet Group B.V. https://tig.nl/copyright
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
- *
--->
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:TIG_Postcode:etc/tig_module.xsd">
-    <module name="TIG_Postcode" setup_version="1.1.3">
-        <sequence>
-            <module name="Magento_Quote"/>
-            <module name="Magento_Checkout"/>
-        </sequence>
-    </module>
-</config>
+ */
+namespace TIG\Postcode\Test\Unit\Webservice\Endpoints;
+
+use TIG\Postcode\Test\TestCase;
+use TIG\Postcode\Webservices\Endpoints\GetAddress;
+use TIG\Postcode\Webservices\Api;
+
+class GetAddressTest extends TestCase
+{
+    protected $instanceClass = GetAddress::class;
+
+    public function testGetEndpoint()
+    {
+        $instance = $this->getInstance();
+        $result = $instance->getEndpoint();
+
+        $this->assertEquals('getAddress/', $result);
+    }
+
+    public function testGetMethod()
+    {
+        $instance = $this->getInstance();
+        $result = $instance->getMethod();
+
+        $this->assertEquals('GET', $result);
+    }
+
+    public function testTheRequestDataIsSetCorrectly()
+    {
+        $requestData = ['postcode' => '1014BA', 'huisnummer' => '37'];
+        $instance = $this->getInstance();
+        $instance->setRequestData($requestData);
+
+        $result = $instance->getRequestData();
+        $this->assertEquals($requestData, $result);
+    }
+}

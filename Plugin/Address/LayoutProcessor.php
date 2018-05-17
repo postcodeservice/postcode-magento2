@@ -113,7 +113,7 @@ class LayoutProcessor
         }
 
         foreach ($billingFields as $key => &$billingForm) {
-            if (!strpos($key, '-form')) {
+            if (strpos($key, '-form') === false) {
                 continue;
             }
 
