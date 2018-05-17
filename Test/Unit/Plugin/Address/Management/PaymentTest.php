@@ -45,9 +45,14 @@ class PaymentTest extends TestCase
     public function testBeforeSavePaymentInformationWithCorrectData()
     {
         $extensionAttributeMock = $this->getFakeMock(AddressExtensionInterface::class)
-            ->setMethods([
-                    'getTigHousenumber',
-                    'getTigHousenumberAddition']
+            ->setMethods(
+                ['getTigHousenumber',
+                 'getTigHousenumberAddition',
+                 'setTigHousenumber',
+                 'setTigHousenumberAddition',
+                 'getCheckoutFields',
+                 'setCheckoutFields'
+                ]
             )->getMock();
 
         $attributeHousenumber = $extensionAttributeMock->expects($this->any())->method('getTigHousenumber');
