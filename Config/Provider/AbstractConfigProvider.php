@@ -60,6 +60,7 @@ abstract class AbstractConfigProvider
     /**
      * @var StoreManagerInterface
      */
+    // @codingStandardsIgnoreLine
     protected $storeManager;
 
     /**
