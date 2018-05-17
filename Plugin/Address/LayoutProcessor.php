@@ -31,7 +31,6 @@
  */
 namespace TIG\Postcode\Plugin\Address;
 
-use Magento\Checkout\Block\Checkout\LayoutProcessor as MagentoProcessor;
 use TIG\Postcode\Config\Provider\ModuleConfiguration;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 
@@ -63,12 +62,12 @@ class LayoutProcessor
     }
 
     /**
-     * @param MagentoProcessor $subject
-     * @param array           $jsLayout
+     * @param $subject
+     * @param array $jsLayout
      *
      * @return array|mixed
      */
-    public function afterProcess(MagentoProcessor $subject, array $jsLayout)
+    public function afterProcess($subject, array $jsLayout)
     {
         if ($this->moduleConfiguration->isModusOff()) {
             return $jsLayout;
@@ -178,6 +177,7 @@ class LayoutProcessor
             'config'    => [
                 'customScope' => $scope,
                 'template'    => 'TIG_Postcode/checkout/field-group',
+                'additionalClasses' => $this->moduleConfiguration->getCheckoutCompatibility()
             ],
             'deps'      => $deps,
             'children'  => [
@@ -191,7 +191,8 @@ class LayoutProcessor
                     ]
                 ]
             ],
-            'visible' => true
+            'dataScope' => '',
+            'visible'   => true
         ];
 
         return $fieldset;

@@ -156,4 +156,13 @@ class ModuleConfigurationTest extends AbstractConfigurationTest
         $this->setXpath(ModuleConfiguration::XPATH_SUPPORTED_MAGENTO_VERSION, $value);
         $this->assertEquals($value, $instance->getSupportedMagentoVersions());
     }
+
+    public function testGetCheckoutCompatibility()
+    {
+        $value = $this->getRandomSyntax();
+        $instance = $this->getInstance();
+
+        $this->setXpath(ModuleConfiguration::XPATH_CHECKOUT_COMPATIBILITY, $value);
+        $this->assertEquals($value, $instance->getCheckoutCompatibility());
+    }
 }

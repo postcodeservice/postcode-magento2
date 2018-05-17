@@ -35,6 +35,10 @@
         <plugin name="postcodeFieldGroupPlugin" type="TIG\Postcode\Plugin\Address\LayoutProcessor" />
     </type>
 
+    <type name="Mageplaza\Osc\Helper\Address">
+        <plugin name="postcodeFieldGroupMagePlazaPlugin" type="TIG\Postcode\Plugin\Mageplaza\AddressHelper" />
+    </type>
+
     <type name="Magento\Checkout\Model\CompositeConfigProvider">
         <arguments>
             <argument name="configProviders" xsi:type="array">
@@ -48,6 +52,7 @@
             <argument name="postcodeConfiguration" xsi:type="array">
                 <item name="postcode_active" xsi:type="object">TIG\Postcode\Config\CheckoutConfiguration\IsPostcodeCheckActive</item>
                 <item name="action_url" xsi:type="object">TIG\Postcode\Config\CheckoutConfiguration\ActionUrl</item>
+                <item name="checkout" xsi:type="object">TIG\Postcode\Config\CheckoutConfiguration\GetCheckoutCompatibility</item>
             </argument>
         </arguments>
     </type>
