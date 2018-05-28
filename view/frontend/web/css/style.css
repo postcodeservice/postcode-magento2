@@ -107,7 +107,16 @@
     width: 30%;
 }
 
+/* Rubic Clean checkout ============================================================================================= */
+.danslo.tig-postcode-field-group {
+    margin: 4px 0;
+}
 
+.danslo.tig-postcode-field-group .field {
+    max-width: 100%;
+    margin: 0 10px 4px 0;
+}
 
-
-
+.danslo.tig-postcode-field-group .field:last-child {
+    max-width: calc(100%);
+}
