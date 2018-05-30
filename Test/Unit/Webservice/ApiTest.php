@@ -83,7 +83,7 @@ class ApiTest extends TestCase
         $this->clientConfiguration = $this->getFakeMock(ClientConfiguration::class, true);
         $this->converter = $this->getFakeMock(Factory::class, true);
         $this->serverAddress = $this->getFakeMock(ServerAddress::class)->disableOriginalConstructor()->getMock();
-        $this->endpoint = $this->getMock(GetAddress::class);
+        $this->endpoint = $this->getFakeMock(GetAddress::class)->disableOriginalConstructor()->getMock();
 
         return parent::setup();
     }
