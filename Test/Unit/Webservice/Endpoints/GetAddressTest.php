@@ -33,7 +33,6 @@ namespace TIG\Postcode\Test\Unit\Webservice\Endpoints;
 
 use TIG\Postcode\Test\TestCase;
 use TIG\Postcode\Webservices\Endpoints\GetAddress;
-use TIG\Postcode\Webservices\Api;
 
 class GetAddressTest extends TestCase
 {
