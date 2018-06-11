@@ -109,7 +109,7 @@ class LayoutProcessor
             ['children']['payment']['children']['payments-list']['children'];
 
         if (!isset($billingFields) || !$this->isDisplayBillingOnPaymentMethodAvailable()) {
-            return $this->processSingleBillingForm($jsLayout);
+            return $this->processSingleBillingForm($jsLayout) ?: $jsLayout;
         }
 
         foreach ($billingFields as $key => &$billingForm) {
@@ -144,7 +144,7 @@ class LayoutProcessor
             ['children']['payment']['children']['afterMethods']['children']['billing-address-form'];
 
         if (!isset($billingFields)) {
-            return $jsLayout;
+            return false;
         }
 
         $billingFields['children']['form-fields']['children'] = $this->processAddress(
