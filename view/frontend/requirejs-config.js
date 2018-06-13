@@ -35,6 +35,9 @@ var config = {
             'Magento_Checkout/js/action/set-shipping-information': {
                 'TIG_Postcode/js/action/set-shipping-information-mixin': true
             },
+            'Amasty_Checkout/js/action/set-shipping-information' : {
+                'TIG_Postcode/js/action/set-shipping-information-mixin': true
+            },
             'Magento_Checkout/js/action/set-billing-address' : {
                 'TIG_Postcode/js/action/set-billing-address-mixin': true
             },

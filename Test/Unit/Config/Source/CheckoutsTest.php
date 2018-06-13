@@ -39,7 +39,7 @@ class CheckoutsTest extends TestCase
     protected $instanceClass = Checkouts::class;
 
     private $compatibleCheckouts = [
-        'default', 'blank', 'mageplaza', 'danslo'
+        'default', 'blank', 'mageplaza', 'danslo', 'amasty'
     ];
 
     public function testToOptionsArray()
@@ -47,7 +47,7 @@ class CheckoutsTest extends TestCase
         $instance = $this->getInstance();
         $result = $instance->toOptionArray();
 
-        $this->assertCount(4, $result);
+        $this->assertCount(5, $result);
 
         foreach ($result as $checkout) {
             $this->assertArrayHasKey('label', $checkout);
