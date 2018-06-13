@@ -128,3 +128,8 @@
 .amasty.tig-postcode-field-group .field:last-child {
     max-width: calc(91%/3);
 }
+
+.amasty.tig-postcode-validation-message {
+    margin-left: 8px;
+    width: calc(97%);
+}
