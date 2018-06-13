@@ -123,6 +123,7 @@ class Api
     private function setHeaders(EndpointInterface $endpoint)
     {
         $version = str_replace('v', '', $this->apiConfiguration->getVersion());
+
         if ((int)$version >= 4) {
             $this->zendClient->setHeaders([
                 'X-Client_Id'   => $this->clientConfiguration->getClientId(),

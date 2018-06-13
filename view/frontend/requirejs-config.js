@@ -35,6 +35,9 @@ var config = {
             'Magento_Checkout/js/action/set-shipping-information': {
                 'TIG_Postcode/js/action/set-shipping-information-mixin': true
             },
+            'Amasty_Checkout/js/action/set-shipping-information' : {
+                'TIG_Postcode/js/action/set-shipping-information-mixin': true
+            },
             'Magento_Checkout/js/action/set-billing-address' : {
                 'TIG_Postcode/js/action/set-billing-address-mixin': true
             },
@@ -53,7 +56,8 @@ var config = {
         '*': {
             'Magento_Checkout/template/shipping-address/address-renderer/default.html' : 'TIG_Postcode/template/shipping-address/address-renderer/default.html',
             'Magento_Checkout/template/shipping-information/address-renderer/default.html' : 'TIG_Postcode/template/shipping-information/address-renderer/default.html',
-            'Magento_Checkout/template/billing-address/details.html' : 'TIG_Postcode/template/billing-address/details.html'
+            'Magento_Checkout/template/billing-address/details.html' : 'TIG_Postcode/template/billing-address/details.html',
+            'Amasty_CustomerAttributes/js/action/set-shipping-information-mixin' : 'TIG_Postcode/js/action/set-shipping-information-mixin'
         }
     }
 };

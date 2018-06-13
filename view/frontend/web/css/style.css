@@ -102,7 +102,6 @@
 }
 
 /* Mage Plaza checkout ============================================================================================== */
-
 .tig-postcode-field-group.mp-12 .field:last-child {
     width: 30%;
 }
@@ -119,4 +118,18 @@
 
 .danslo.tig-postcode-field-group .field:last-child {
     max-width: calc(100%);
+}
+
+/* Amasty Plaza checkout ============================================================================================ */
+.amasty.tig-postcode-field-group {
+    margin-left: 8px;
+}
+
+.amasty.tig-postcode-field-group .field:last-child {
+    max-width: calc(91%/3);
+}
+
+.amasty.tig-postcode-validation-message {
+    margin-left: 8px;
+    width: calc(97%);
 }
