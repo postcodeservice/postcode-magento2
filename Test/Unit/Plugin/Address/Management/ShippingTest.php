@@ -90,10 +90,12 @@ class ShippingTest extends TestCase
     {
         $extensionAttributeMock = $this->getFakeMock(AddressExtensionInterface::class)
             ->setMethods(
-                [
-                    'getTigHousenumber',
-                    'getCheckoutFields',
-                    'setCheckoutFields'
+                ['getTigHousenumber',
+                 'getTigHousenumberAddition',
+                 'setTigHousenumber',
+                 'setTigHousenumberAddition',
+                 'getCheckoutFields',
+                 'setCheckoutFields'
                 ]
             )->getMock();
 

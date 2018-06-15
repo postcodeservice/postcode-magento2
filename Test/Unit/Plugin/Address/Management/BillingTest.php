@@ -90,8 +90,10 @@ class BillingTest extends TestCase
     {
         $extensionAttributeMock = $this->getFakeMock(AddressExtensionInterface::class)
             ->setMethods(
-                [
-                 'getTigHousenumber',
+                ['getTigHousenumber',
+                 'getTigHousenumberAddition',
+                 'setTigHousenumber',
+                 'setTigHousenumberAddition',
                  'getCheckoutFields',
                  'setCheckoutFields'
                 ]
