@@ -76,4 +76,32 @@ class ShippingTest extends TestCase
         $result = $instance->beforeAssign(null, 1, $address);
         $this->assertEquals([1, $newAddress], $result);
     }
+
+    public function testBeforeAssignWithoutAttributes()
+    {
+        $address  = $this->getObject(Address::class);
+        $instance = $this->getInstance();
+
+        $expected = [1, $address];
+        $this->assertEquals($expected, $instance->beforeAssign(null, 1, $address));
+    }
+
+    public function testBeforeAssignWithIncorrectAttributes()
+    {
+        $extensionAttributeMock = $this->getFakeMock(AddressExtensionInterface::class)
+            ->setMethods(
+                [
+                    'getTigHousenumber',
+                    'getCheckoutFields',
+                    'setCheckoutFields'
+                ]
+            )->getMock();
+
+        $address  = $this->getObject(Address::class);
+        $address->setExtensionAttributes($extensionAttributeMock);
+        $instance = $this->getInstance();
+
+        $expected = [1, $address];
+        $this->assertEquals($expected, $instance->beforeAssign(null, 1, $address));
+    }
 }

@@ -79,4 +79,35 @@ class PaymentTest extends TestCase
         $result = $instance->beforeSavePaymentInformation(null, 1, $paymentMock, $address);
         $this->assertEquals([1, $paymentMock, $newAddress], $result);
     }
+
+    public function testBeforeAssignWithoutAttributes()
+    {
+        $address  = $this->getObject(Address::class);
+        $instance = $this->getInstance();
+
+        $paymentMock = $this->getFakeMock(PaymentInterface::class)->getMock();
+        $expected = [1, $paymentMock, $address,];
+        $this->assertEquals($expected, $instance->beforeSavePaymentInformation(null, 1, $paymentMock, $address));
+    }
+
+    public function testBeforeAssignWithIncorrectAttributes()
+    {
+        $extensionAttributeMock = $this->getFakeMock(AddressExtensionInterface::class)
+            ->setMethods(
+                [
+                    'getTigHousenumber',
+                    'getCheckoutFields',
+                    'setCheckoutFields'
+                ]
+            )->getMock();
+
+        $address  = $this->getObject(Address::class);
+        $address->setExtensionAttributes($extensionAttributeMock);
+        $instance = $this->getInstance();
+
+        $paymentMock = $this->getFakeMock(PaymentInterface::class)->getMock();
+
+        $expected = [1, $paymentMock, $address,];
+        $this->assertEquals($expected, $instance->beforeSavePaymentInformation(null, 1, $paymentMock, $address));
+    }
 }
