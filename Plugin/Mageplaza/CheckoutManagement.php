@@ -31,7 +31,6 @@
  */
 namespace TIG\Postcode\Plugin\Mageplaza;
 
-use Mageplaza\Osc\Api\CheckoutManagementInterface;
 use Magento\Checkout\Api\Data\ShippingInformationInterface;
 use TIG\Postcode\Services\Address\StreetFields;
 use TIG\Postcode\Services\Address\AttributeParser;
@@ -58,7 +57,7 @@ class CheckoutManagement
 
     // @codingStandardsIgnoreLine
     public function beforeSaveCheckoutInformation(
-        CheckoutManagementInterface $subject,
+        $subject,
         $cartId,
         ShippingInformationInterface $addressInformation,
         $customerAttributes = [],
