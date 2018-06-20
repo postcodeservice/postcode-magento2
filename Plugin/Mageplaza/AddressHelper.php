@@ -29,7 +29,7 @@
  * @copyright   Copyright (c) Total Internet Group B.V. https://tig.nl/copyright
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
-namespace TIG\Postcode\Plugin\MagePlaza;
+namespace TIG\Postcode\Plugin\Mageplaza;
 
 use TIG\Postcode\Config\Provider\ModuleConfiguration;
 
