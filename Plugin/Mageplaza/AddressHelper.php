@@ -29,13 +29,15 @@
  * @copyright   Copyright (c) Total Internet Group B.V. https://tig.nl/copyright
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
-namespace TIG\Postcode\Plugin\MagePlaza;
+namespace TIG\Postcode\Plugin\Mageplaza;
 
 use TIG\Postcode\Config\Provider\ModuleConfiguration;
 
 class AddressHelper
 {
     private $moduleConfig;
+
+    private $skipFields = ['firstname', 'lastname'];
 
     public function __construct(
         ModuleConfiguration $moduleConfiguration
@@ -48,33 +50,54 @@ class AddressHelper
      * Compatible plugin, Mageplaza skippes grouped fields, so we need to add this manualy.
      *
      * @param         $subject
-     * @param         $fieldPostion
+     * @param         $fieldPosition
      *
      * @return mixed
      */
     // @codingStandardsIgnoreLine
-    public function afterGetAddressFieldPosition($subject, $fieldPostion)
+    public function afterGetAddressFieldPosition($subject, $fieldPosition)
     {
         if ($this->moduleConfig->isModusOff()) {
-            return $fieldPostion;
+            return $fieldPosition;
         }
 
-        return $this->addPostcodeFieldGroup($fieldPostion);
+        return $this->addPostcodeFieldGroup($fieldPosition);
     }
 
     /**
-     * @param $fieldPostion
+     * @param $fieldPosition
      *
      * @return mixed
      */
-    private function addPostcodeFieldGroup($fieldPostion)
+    private function addPostcodeFieldGroup($fieldPosition)
     {
-        $fieldPostion['postcode-field-group'] = [
-            'sortOrder' => 3,
+        $fieldPosition = $this->orderFields($fieldPosition);
+
+        $fieldPosition['postcode-field-group'] = [
+            'sortOrder' => 65,
             'colspan'   => 12,
             'isNewRow'  => true
         ];
 
-        return $fieldPostion;
+        return $fieldPosition;
+    }
+
+    /**
+     * @see \Mageplaza\Osc\Block\Checkout\LayoutProcessor::addAddressOption
+     * Because the postcode-field-group is not an Mageplaza OSC field it will be ignored.
+     * Affects since OSC version 2.5.0
+     *
+     * @param $fieldPosition
+     *
+     * @return mixed
+     */
+    private function orderFields(&$fieldPosition)
+    {
+        $sortOrder = 40;
+        foreach ($fieldPosition as $key => &$field) {
+            $field['sortOrder'] = $sortOrder += 10;
+        }
+
+        return $fieldPosition;
     }
 }

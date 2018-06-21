@@ -59,11 +59,11 @@ class Billing
     public function beforeAssign($subject, $cartId, AddressInterface $address, $shipping = false) {
         $attributes = $address->getExtensionAttributes();
         if (empty($attributes)) {
-            return [$cartId, $address];
+            return [$cartId, $address, $shipping];
         }
 
         if (!$attributes->getTigHousenumber()) {
-            return [$cartId, $address];
+            return [$cartId, $address, $shipping];
         }
 
         $street = $this->streetParser->parse($address->getStreet(), $attributes);

@@ -44,7 +44,7 @@ class AddressHelperTest extends TestCase
         return [
             'modus off is false' => [
                 [], false, ['postcode-field-group' => [
-                    'sortOrder' => 3,
+                    'sortOrder' => 65,
                     'colspan'   => 12,
                     'isNewRow'  => true
                 ]]

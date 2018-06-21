@@ -47,6 +47,11 @@ class ResponseTest extends TestInterface
                 ['success' => true, 'straatnaam' => 'Kabelweg', 'woonplaats' => 'Amsterdam'],
                 ['success' => true, 'straatnaam' => 'Kabelweg', 'woonplaats' => 'Amsterdam'],
                 true
+            ],
+            'In correct Response Data' => [
+                '{"success":true,"woonplaats":"Amsterdam"}',
+                ['success' => true, 'woonplaats' => 'Amsterdam'],
+                false, false
             ]
         ];
     }
@@ -61,8 +66,7 @@ class ResponseTest extends TestInterface
     public function testResponseConverter($dataString, $data, $expected, $validation)
     {
         $instance = $this->getInstance([
-            'validation' => $this->validationResponseMock($data, $validation),
-//            'jsonHelper' => $this->jsonHelperMock($dataString, $data)
+            'validation' => $this->validationResponseMock($data, $validation)
         ]);
 
         $this->assertSame($expected, $instance->convert($dataString));
