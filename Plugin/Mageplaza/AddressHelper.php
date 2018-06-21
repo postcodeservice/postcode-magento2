@@ -88,7 +88,6 @@ class AddressHelper
      * Affects since OSC version 2.5.0
      *
      * @param $fieldPosition
-     *
      * @return mixed
      */
     private function orderFields(&$fieldPosition)
