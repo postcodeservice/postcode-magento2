@@ -84,6 +84,7 @@ class AddressHelper
 
     /**
      * @see \Mageplaza\Osc\Block\Checkout\LayoutProcessor::addAddressOption
+     * 
      * Because the postcode-field-group is not an Mageplaza OSC field it will be ignored.
      * Affects since OSC version 2.5.0
      *
