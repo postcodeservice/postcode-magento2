@@ -210,7 +210,7 @@ class LayoutProcessor
             'config'     => [
                 'customScope' => $scope . '.custom_attributes',
                 'template'    => 'ui/form/field',
-                'elementTmpl' => 'ui/form/element/input'
+                'elementTmpl' => 'TIG_Postcode/form/element/input'
             ],
             'provider'   => 'checkoutProvider',
             'dataScope'  => $scope . '.custom_attributes.tig_housenumber',
@@ -235,7 +235,7 @@ class LayoutProcessor
             'config'     => [
                 'customScope' => $scope . '.custom_attributes',
                 'template'    => 'ui/form/field',
-                'elementTmpl' => 'ui/form/element/input'
+                'elementTmpl' => 'TIG_Postcode/form/element/input'
             ],
             'provider'   => 'checkoutProvider',
             'dataScope'  => $scope . '.custom_attributes.tig_housenumber_addition',

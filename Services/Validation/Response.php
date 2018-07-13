@@ -48,6 +48,10 @@ class Response implements ValidationInterface
             return false;
         }
 
+        if (!$this->checkStreetNameValue($data)) {
+            return false;
+        }
+
         return true;
     }
 
@@ -64,5 +68,21 @@ class Response implements ValidationInterface
         }
 
         return $check == 0;
+    }
+
+    /**
+     * Importand note : Before using this method, first trigger the checkKeys method.
+     *
+     * @param $data
+     *
+     * @return bool
+     */
+    private function checkStreetNameValue($data)
+    {
+        if (strpos($data['straatnaam'], 'limiet bereikt') !== false) {
+            return false;
+        }
+
+        return true;
     }
 }
