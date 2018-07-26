@@ -104,6 +104,28 @@ class ClientConfigurationTest extends AbstractConfigurationTest
         $this->assertEquals($expected, $instance->getModusXpath($value));
     }
 
+    public function testGetApiKey()
+    {
+        $this->setModuleMock(true);
+        $instance = $this->getInstance();
+
+        $value = $this->getRandomSyntax();
+        $this->setXpath(ClientConfiguration::XPATH_CONFIGURATION_API_KEY, $value);
+
+        $returnCryped = $this->getRandomSyntax();
+        $this->setDecryptedKey($value, $returnCryped);
+
+        $this->assertEquals($returnCryped, $instance->getApiKey());
+    }
+
+    public function testGetDomainUrl()
+    {
+        $url = 'https://postnl.lok';
+        $instance = $this->getInstance();
+        $this->setBaseUrl($url);
+        $this->assertEquals($url, $instance->getDomainUrl());
+    }
+
     private function setModuleMock($testMode)
     {
         $this->moduleMock = $this->getFakeMock(ModuleConfiguration::class)->disableOriginalConstructor()->getMock();
