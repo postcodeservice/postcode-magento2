@@ -35,6 +35,9 @@ use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Store\Model\ScopeInterface;
 use TIG\Postcode\Config\Provider\ModuleConfiguration;
 use Magento\Framework\Module\Manager as ModuleManager;
+use Magento\Store\Model\StoreManagerInterface;
+use Magento\Store\Model\Store;
+use Magento\Framework\Encryption\Encryptor;
 
 use TIG\Postcode\Test\TestCase;
 
@@ -50,11 +53,23 @@ abstract class AbstractConfigurationTest extends TestCase
      */
     protected $moduleManagerMock;
 
+    /**
+     * @var StoreManagerInterface|\PHPUnit_Framework_MockObject_MockObject
+     */
+    protected $storeManagerMock;
+
+    /**
+     * @var Encryptor|\PHPUnit_Framework_MockObject_MockObject
+     */
+    protected $cryptMock;
+
     protected function initConfigMocks()
     {
         $this->scopeConfigMock   = $this->getMock(ScopeConfigInterface::class);
         $this->moduleManagerMock = $this->getFakeMock(ModuleManager::class)
             ->disableOriginalConstructor()->getMock();
+        $this->storeManagerMock  = $this->getFakeMock(StoreManagerInterface::class)->getMock();
+        $this->cryptMock         = $this->getFakeMock(Encryptor::class)->disableOriginalConstructor()->getMock();
     }
 
     /**
@@ -68,6 +83,8 @@ abstract class AbstractConfigurationTest extends TestCase
 
         $args['scopeConfig']   = $this->scopeConfigMock;
         $args['moduleManager'] = $this->moduleManagerMock;
+        $args['storeManager']  = $this->storeManagerMock;
+        $args['crypt']         = $this->cryptMock;
 
         return parent::getInstance($args);
     }
@@ -114,6 +131,23 @@ abstract class AbstractConfigurationTest extends TestCase
         $moduleOutPutMock->method('isOutputEnabled');
         $moduleOutPutMock->with('TIG_Postcode');
         $moduleOutPutMock->willReturn($enabled);
+    }
+
+    protected function setDecryptedKey($key, $returnValue)
+    {
+        $cryptOutputMock = $this->cryptMock->expects($this->once());
+        $cryptOutputMock->method('decrypt');
+        $cryptOutputMock->with($key);
+        $cryptOutputMock->willReturn($returnValue);
+    }
+
+    protected function setBaseUrl($url)
+    {
+        $storeMock = $this->getFakeMock(Store::class)->disableOriginalConstructor()->getMock();
+        $storeMock->expects($this->once())->method('getBaseUrl')->with('web')->willReturn($url);
+
+        $managerMock = $this->storeManagerMock->expects($this->once());
+        $managerMock->method('getStore')->willReturn($storeMock);
     }
 
     /**

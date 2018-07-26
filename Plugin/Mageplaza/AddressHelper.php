@@ -36,9 +36,7 @@ use TIG\Postcode\Config\Provider\ModuleConfiguration;
 class AddressHelper
 {
     private $moduleConfig;
-
-    private $skipFields = ['firstname', 'lastname'];
-
+    
     public function __construct(
         ModuleConfiguration $moduleConfiguration
     ) {

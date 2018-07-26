@@ -71,4 +71,23 @@ class ApiConfigurationTest extends AbstractConfigurationTest
         $this->setXpath(ApiConfiguration::XPATH_API_TYPE, $this->type);
         $this->assertEquals($this->type, $this->instance->getType());
     }
+
+    public function testGetBaseUri()
+    {
+        $this->setXpathConsecutive(
+            [
+                ApiConfiguration::XPATH_API_BASE,
+                ApiConfiguration::XPATH_API_VERSION,
+                ApiConfiguration::XPATH_API_TYPE
+            ],
+            [
+                $this->base,
+                $this->version,
+                $this->type
+            ]
+        );
+
+        $expected = $this->base . '/' . $this->version . '/' . $this->type . '/';
+        $this->assertEquals($expected, $this->instance->getBaseUri());
+    }
 }

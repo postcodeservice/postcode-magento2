@@ -116,7 +116,7 @@ abstract class AbstractConfigProvider
     // @codingStandardsIgnoreLine
     protected function getBaseUrl($type = UrlInterface::URL_TYPE_WEB)
     {
-        /** @var \Magento\Store\Api\Data\StoreInterface $store */
+        /** @var \Magento\Store\Model\Store $store */
         $store = $this->storeManager->getStore();
         return $store->getBaseUrl($type);
     }

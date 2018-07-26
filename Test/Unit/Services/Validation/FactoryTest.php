@@ -129,7 +129,11 @@ class FactoryTest extends TestCase
             'Incorrect format of Data' => [
                 'This should be an array',
                 false
-            ]
+            ],
+            'Limit calls response' => [
+                ['succes' => true, 'straatnaam' => 'Opvraag limiet bereikt', 'stad' => 'Amsterdam'],
+                false
+            ],
         ];
     }
 
