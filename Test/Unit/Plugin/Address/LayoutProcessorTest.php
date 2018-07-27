@@ -52,7 +52,11 @@ class LayoutProcessorTest extends TestCase
                                         'children' => [
                                             'shipping-address-fieldset' => [
                                                 'children' => [
-                                                    'postcode' => []
+                                                    'postcode' => [
+                                                        'config' => [
+                                                            'additionalClasses' => 'test'
+                                                        ]
+                                                    ]
                                                 ]
                                             ]
                                         ]
