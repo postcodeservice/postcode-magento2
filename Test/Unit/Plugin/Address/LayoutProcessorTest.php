@@ -176,24 +176,76 @@ class LayoutProcessorTest extends TestCase
         ]
     ];
 
+    private $addressFieldsWithoutBilling = [
+        'components' => [
+            'checkout' => [
+                'children' => [
+                    'steps' => [
+                        'children' => [
+                            'shipping-step' => [
+                                'children' => [
+                                    'shippingAddress' => [
+                                        'children' => [
+                                            'shipping-address-fieldset' => [
+                                                'children' => [
+                                                    'postcode' => [
+                                                        'config' => [
+                                                            'additionalClasses' => 'test'
+                                                        ]
+                                                    ]
+                                                ]
+                                            ]
+                                        ]
+                                    ]
+                                ]
+                            ],
+                            'billing-step' => [
+                                'children' => [
+                                    'payment' => [
+                                        'children' => [
+                                            'payments-list' => [
+                                                'children' => [
+                                                    'form-fields' => [
+                                                        'children' => [
+                                                            'postcode' => []
+                                                        ]
+                                                    ]
+                                                ]
+                                            ]
+                                        ]
+                                    ]
+                                ]
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+        ]
+    ];
+
     /**
      * @return array
      */
     public function dataProvider()
     {
         return [
-            'isDisplayBillingOnPaymentMethodAvailble true' => [true, $this->addressFields],
-            'isDisplayBillingOnPaymentMethodAvailble false' => [false, $this->addressFieldsForMultipleBillingFields]
+            'isDisplayBillingOnPaymentMethodAvailble true' => [true, $this->addressFields, true],
+            'isDisplayBillingOnPaymentMethodAvailble false' => [false, $this->addressFieldsForMultipleBillingFields, true],
+            'isDisplayBillingOnPaymentMethodAvailble true without billingfields' =>
+            [
+                true, $this->addressFieldsWithoutBilling, false
+            ]
         ];
     }
 
     /**
      * @param $isDisplayBillingOnPaymentMethodAvailble
      * @param $fields
+     * @param $hasBilling
      *
      * @dataProvider dataProvider
      */
-    public function testAfterProcess($isDisplayBillingOnPaymentMethodAvailble, $fields)
+    public function testAfterProcess($isDisplayBillingOnPaymentMethodAvailble, $fields, $hasBilling)
     {
         $instance = $this->getInstance([
             'moduleConfiguration' => $this->getModuleMock(),
@@ -202,9 +254,17 @@ class LayoutProcessorTest extends TestCase
 
         $result = $instance->afterProcess(null, $fields);
 
+
+        if (!$hasBilling) {
+            $billingField = $result['components']['checkout']['children']['steps']['children']['billing-step']
+                            ['children']['payment']['children']['payments-list']['children'];
+            $this->assertTrue(count($billingField) == 1);
+            return;
+        }
+
         $checkBillingFields = $result['components']['checkout']['children']['steps']['children']['billing-step']
-                              ['children']['payment']['children']['afterMethods']['children']['billing-address-form']
-                              ['children']['form-fields']['children'];
+                                  ['children']['payment']['children']['afterMethods']['children']['billing-address-form']
+                                  ['children']['form-fields']['children'];
 
         $checkShippingFields = $result['components']['checkout']['children']['steps']['children']['shipping-step']
                                ['children']['shippingAddress']['children']['shipping-address-fieldset']['children'];
@@ -217,7 +277,7 @@ class LayoutProcessorTest extends TestCase
 
         $this->assertArrayHasKey('postcode-field-group', $checkBillingFields);
         $this->assertArrayHasKey('postcode-field-group', $checkShippingFields);
-
+        
     }
 
     public function testAfterProcessWhereModusIsOff()
