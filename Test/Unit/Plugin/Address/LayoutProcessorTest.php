@@ -40,6 +40,81 @@ class LayoutProcessorTest extends TestCase
 {
     protected $instanceClass = LayoutProcessor::class;
 
+    private $addressFieldsForMultipleBillingFields = [
+        'components' => [
+            'checkout' => [
+                'children' => [
+                    'steps' => [
+                        'children' => [
+                            'shipping-step' => [
+                                'children' => [
+                                    'shippingAddress' => [
+                                        'children' => [
+                                            'shipping-address-fieldset' => [
+                                                'children' => [
+                                                    'postcode' => [
+                                                        'config' => [
+                                                            'additionalClasses' => 'test'
+                                                        ]
+                                                    ]
+                                                ]
+                                            ]
+                                        ]
+                                    ]
+                                ]
+                            ],
+                            'billing-step' => [
+                                'children' => [
+                                    'payment' => [
+                                        'children' => [
+                                            'payments-list' => [
+                                                'children' => [
+                                                    'test' => [
+                                                        'children' => [
+                                                            'form-fields' => [
+                                                                'children' => [
+                                                                    'postcode' => []
+                                                                ]
+                                                            ]
+                                                        ]
+                                                    ],
+                                                    'test-form' => [
+                                                        'children' => [
+                                                            'form-fields' => [
+                                                                'children' => [
+                                                                    'postcode' => []
+                                                                ]
+                                                            ],
+                                                        ],
+                                                        'dataScopePrefix' => 'billing'
+                                                    ]
+                                                ]
+                                            ],
+                                            'afterMethods' => [
+                                                'children' => [
+                                                    'billing-address-form' => [
+                                                        'children' => [
+                                                            'form-fields' => [
+                                                                'children' => [
+                                                                    'postcode' => []
+                                                                ]
+                                                            ]
+                                                        ],
+                                                        'dataScopePrefix' => 'billing'
+                                                    ]
+                                                ]
+                                            ]
+                                        ]
+                                    ]
+                                ]
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+        ]
+    ];
+
     private $addressFields = [
         'components' => [
             'checkout' => [
@@ -101,14 +176,31 @@ class LayoutProcessorTest extends TestCase
         ]
     ];
 
-    public function testAfterProcessBillingNotOnPaymentMethod()
+    /**
+     * @return array
+     */
+    public function dataProvider()
+    {
+        return [
+            'isDisplayBillingOnPaymentMethodAvailble true' => [true, $this->addressFields],
+            'isDisplayBillingOnPaymentMethodAvailble false' => [false, $this->addressFieldsForMultipleBillingFields]
+        ];
+    }
+
+    /**
+     * @param $isDisplayBillingOnPaymentMethodAvailble
+     * @param $fields
+     *
+     * @dataProvider dataProvider
+     */
+    public function testAfterProcess($isDisplayBillingOnPaymentMethodAvailble, $fields)
     {
         $instance = $this->getInstance([
             'moduleConfiguration' => $this->getModuleMock(),
-            'scopeConfig' => $this->getScopeConfigMock(true)
+            'scopeConfig' => $this->getScopeConfigMock($isDisplayBillingOnPaymentMethodAvailble)
         ]);
 
-        $result = $instance->afterProcess(null, $this->addressFields);
+        $result = $instance->afterProcess(null, $fields);
 
         $checkBillingFields = $result['components']['checkout']['children']['steps']['children']['billing-step']
                               ['children']['payment']['children']['afterMethods']['children']['billing-address-form']
@@ -116,6 +208,12 @@ class LayoutProcessorTest extends TestCase
 
         $checkShippingFields = $result['components']['checkout']['children']['steps']['children']['shipping-step']
                                ['children']['shippingAddress']['children']['shipping-address-fieldset']['children'];
+
+        if (!$isDisplayBillingOnPaymentMethodAvailble) {
+            $checkBillingFields = $result['components']['checkout']['children']['steps']['children']['billing-step']
+                                  ['children']['payment']['children']['payments-list']['children']['test-form']
+                                  ['children']['form-fields']['children'];
+        }
 
         $this->assertArrayHasKey('postcode-field-group', $checkBillingFields);
         $this->assertArrayHasKey('postcode-field-group', $checkShippingFields);
