@@ -1,6 +1,6 @@
 {
   "name": "TIG_Postcode",
-  "version": "1.1.8",
+  "version": "1.1.9",
   "description": "TIG Postcode service extension for Magento 2",
   "main": "Gruntfile.js",
   "scripts": {

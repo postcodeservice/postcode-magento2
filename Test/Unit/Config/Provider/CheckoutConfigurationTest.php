@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?><!--
- *
+<?php
+/**
  *
  *          ..::..
  *     ..::::::::::::..
@@ -28,13 +28,35 @@
  *
  * @copyright   Copyright (c) Total Internet Group B.V. https://tig.nl/copyright
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
- *
--->
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:TIG_Postcode:etc/tig_module.xsd">
-    <module name="TIG_Postcode" setup_version="1.1.9">
-        <sequence>
-            <module name="Magento_Quote"/>
-            <module name="Magento_Checkout"/>
-        </sequence>
-    </module>
-</config>
+ */
+namespace TIG\Postcode\Test\Unit\Config\Provider;
+
+use TIG\Postcode\Test\TestCase;
+use \TIG\Postcode\Config\Provider\CheckoutConfiguration;
+use \TIG\Postcode\Config\CheckoutConfiguration\GetCheckoutCompatibility;
+
+class CheckoutConfigurationTest extends TestCase
+{
+    protected $instanceClass = CheckoutConfiguration::class;
+
+    public function testGetConfig()
+    {
+        $checkoutCompatibleMock = $this->getFakeMock(GetCheckoutCompatibility::class)->disableOriginalConstructor()
+            ->getMock();
+        $checkoutCompatibleMock->expects($this->once())->method('getValue')->willReturn('this is a test');
+
+        $instance = $this->getInstance([
+            'postcodeConfiguration' => [
+                'test' => $checkoutCompatibleMock
+            ]
+        ]);
+
+        $result = [
+            'postcode' => [
+                'test' => 'this is a test'
+            ]
+        ];
+
+        $this->assertEquals($result, $instance->getConfig());
+    }
+}
