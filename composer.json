@@ -3,7 +3,7 @@
   "description": "TIG Magento 2 Postcode extension",
   "require": {
     "php": "~5.6|~7.0|~7.1",
-    "magento/framework": ">=100.1.0,<=100.1.14|>=101.0.0,<=101.0.5"
+    "magento/framework": ">=100.1.0,<=100.1.15|>=101.0.0,<=101.0.6"
   },
   "type": "magento2-module",
   "version": "1.1.9",

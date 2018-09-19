@@ -33,7 +33,6 @@ namespace TIG\Postcode\Block\Adminhtml\Config\Support;
 
 use Magento\Framework\View\Element\Template;
 use Magento\Framework\Data\Form\Element\Renderer\RendererInterface;
-use Magento\Framework\Module\ModuleResource;
 use Magento\Framework\Data\Form\Element\AbstractElement;
 use TIG\Postcode\Config\Provider\ModuleConfiguration;
 
@@ -41,13 +40,10 @@ class Tab extends Template implements RendererInterface
 {
     const MODULE_NAME = 'TIG_Postcode';
 
+    const EXTENTION_VERSION = '1.1.10';
+
     // @codingStandardsIgnoreLine
     protected $_template = 'TIG_Postcode::config/support/tab.phtml';
-
-    /**
-     * @var ModuleResource
-     */
-    private $moduleContext;
 
     /**
      * @var ModuleConfiguration
@@ -58,19 +54,16 @@ class Tab extends Template implements RendererInterface
      * Tab constructor.
      *
      * @param Template\Context    $context
-     * @param ModuleResource      $moduleResource
      * @param ModuleConfiguration $moduleConfiguration
      * @param array               $data
      */
     public function __construct(
         Template\Context $context,
-        ModuleResource $moduleResource,
         ModuleConfiguration $moduleConfiguration,
         array $data = []
     ) {
         parent::__construct($context, $data);
 
-        $this->moduleContext = $moduleResource;
         $this->moduleConfiguration = $moduleConfiguration;
     }
 
@@ -92,9 +85,7 @@ class Tab extends Template implements RendererInterface
      */
     public function getVersionNumber()
     {
-        $version = $this->moduleContext->getDbVersion(static::MODULE_NAME);
-
-        return $version;
+        return static::EXTENTION_VERSION;
     }
 
     /**

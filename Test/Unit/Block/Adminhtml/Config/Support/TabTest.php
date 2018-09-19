@@ -32,7 +32,7 @@
 namespace TIG\Postcode\Test\Unit\Block\Adminhtml\Config\Support;
 
 use TIG\Postcode\Block\Adminhtml\Config\Support\Tab;
-use \Magento\Framework\Module\ModuleResource;
+use TIG\Postcode\Config\Provider\ModuleConfiguration;
 use TIG\Postcode\Test\TestCase;
 
 class TabTest extends TestCase
@@ -41,22 +41,28 @@ class TabTest extends TestCase
 
     public function testGetVersionNumber()
     {
+        $instance = $this->getInstance();
+        $this->assertSame('1.1.10', $instance->getVersionNumber());
+    }
+
+    public function testGetSupportedMagentoVersions()
+    {
         $instance = $this->getInstance([
-            'moduleResource' => $this->getModuleResourceMock()
+           'moduleConfiguration' => $this->getConfigurationMock()
         ]);
 
-        $this->assertSame('1.0.0', $instance->getVersionNumber());
+        $this->assertSame('2.1.0 - 2.1.15, 2.2.0 - 2.2.6', $instance->getSupportedMagentoVersions());
     }
 
     /**+
      * @return \PHPUnit_Framework_MockObject_MockObject
      */
-    private function getModuleResourceMock()
+    private function getConfigurationMock()
     {
-        $mock = $this->getFakeMock(ModuleResource::class)->getMock();
+        $mock = $this->getFakeMock(ModuleConfiguration::class)->getMock();
         $mockExpects = $mock->expects($this->once());
-        $mockExpects->method('getDbVersion')->with('TIG_Postcode');
-        $mockExpects->willReturn('1.0.0');
+        $mockExpects->method('getSupportedMagentoVersions');
+        $mockExpects->willReturn('2.1.0 - 2.1.15, 2.2.0 - 2.2.6');
 
         return $mock;
     }
