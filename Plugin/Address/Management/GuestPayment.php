@@ -77,6 +77,6 @@ class GuestPayment
         $street = $this->streetParser->parse($billingAddress->getStreet(), $attributes);
         $billingAddress->setStreet($street);
 
-        return [$cartId, $email,$paymentMethod, $billingAddress];
+        return [$cartId, $email, $paymentMethod, $billingAddress];
     }
 }
