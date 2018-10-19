@@ -49,7 +49,7 @@ class GuestPayment
     }
 
     /**
-     * @param                       $subject -> Magento\Checkout\Model\PaymentInformationManagement
+     * @param                       $subject -> Magento\Checkout\Model\GuestPaymentInformationManagement
      * @param                       $cartId
      * @param                       $email
      * @param PaymentInterface      $paymentMethod
