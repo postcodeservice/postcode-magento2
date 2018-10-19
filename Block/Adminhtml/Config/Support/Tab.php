@@ -40,7 +40,7 @@ class Tab extends Template implements RendererInterface
 {
     const MODULE_NAME = 'TIG_Postcode';
 
-    const EXTENTION_VERSION = '1.1.10';
+    const EXTENTION_VERSION = '1.1.11';
 
     // @codingStandardsIgnoreLine
     protected $_template = 'TIG_Postcode::config/support/tab.phtml';
