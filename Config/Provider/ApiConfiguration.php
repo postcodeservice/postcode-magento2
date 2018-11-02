@@ -33,9 +33,13 @@ namespace TIG\Postcode\Config\Provider;
 
 class ApiConfiguration extends AbstractConfigProvider
 {
-    const XPATH_API_BASE    = 'tig_postcode/api/base';
-    const XPATH_API_VERSION = 'tig_postcode/api/version';
-    const XPATH_API_TYPE    = 'tig_postcode/api/type';
+    const XPATH_API_BASE                 = 'tig_postcode/api/base';
+    const XPATH_API_VERSION              = 'tig_postcode/api/version';
+    const XPATH_API_TYPE                 = 'tig_postcode/api/type';
+
+    const XPATH_API_BE_BASE              = 'tig_postcode/api_be/base';
+    const XPATH_API_BE_POSTCODE_VERSION  = 'tig_postcode/api_be/postcode_version';
+    const XPATH_API_BE_STREET_VERSION    = 'tig_postcode/api_be/street_version';
 
     /**
      * @return string
@@ -45,24 +49,49 @@ class ApiConfiguration extends AbstractConfigProvider
         return $this->getBase() . '/' . $this->getVersion() . '/' . $this->getType() . '/';
     }
 
-    /**
-     * @param null $store
-     *
-     * @return mixed
-     */
-    public function getBase($store = null)
+
+    public function getBeBaseUri()
     {
-        return $this->getConfigFromXpath(static::XPATH_API_BASE, $store);
+        return $this->getBase('BE') . '/';
     }
 
     /**
-     * @param null $store
+     * @param null   $store
+     * @param string $country
      *
      * @return mixed
      */
-    public function getVersion($store = null)
+    public function getBase($country = 'NL', $store = null)
     {
-        return $this->getConfigFromXpath(static::XPATH_API_VERSION, $store);
+        $xpath = static::XPATH_API_BASE;
+        if ($country == 'BE') {
+            $xpath = static::XPATH_API_BE_BASE;
+        }
+
+        return $this->getConfigFromXpath($xpath, $store);
+    }
+
+    /**
+     * Versioning for BE is not live yet. Implement this function in getBeBaseUri when this goes live.
+     *
+     * @param null          $store
+     * @param string        $country
+     * @param string|null   $endpoint
+     *
+     * @return mixed
+     */
+    public function getVersion($country = 'NL', $endpoint = null, $store = null)
+    {
+        $xpath = static::XPATH_API_VERSION;
+        if ($country == 'BE' && $endpoint == 'postcode-find') {
+            $xpath = static::XPATH_API_BE_POSTCODE_VERSION;
+        }
+
+        if ($country == 'BE' && $endpoint == 'street-find') {
+            $xpath = static::XPATH_API_BE_STREET_VERSION;
+        }
+
+        return $this->getConfigFromXpath($xpath, $store);
     }
 
     /**

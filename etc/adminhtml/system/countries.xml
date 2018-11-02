@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?><!--
+ *
+ *
+ *          ..::..
+ *     ..::::::::::::..
+ *   ::'''''':''::'''''::
+ *   ::..  ..:  :  ....::
+ *   ::::  :::  :  :   ::
+ *   ::::  :::  :  ''' ::
+ *   ::::..:::..::.....::
+ *     ''::::::::::::''
+ *          ''::''
+ *
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Creative Commons License.
+ * It is available through the world-wide-web at this URL:
+ * http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
+ * If you are unable to obtain it through the world-wide-web, please send an email
+ * to servicedesk@tig.nl so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this module to newer
+ * versions in the future. If you wish to customize this module for your
+ * needs please contact servicedesk@tig.nl for more information.
+ *
+ * @copyright   Copyright (c) Total Internet Group B.V. https://tig.nl/copyright
+ * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
+ *
+-->
+<include xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_include.xsd">
+    <!--Configuration section-->
+    <group id="countries" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+        <label>Countries</label>
+        <frontend_model>TIG\Postcode\Block\Adminhtml\Config\Form\Field\Fieldset</frontend_model>
+        <fieldset_css>tig_postcode-section</fieldset_css>
+
+        <field id="enable_nl_check" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Enable Netherlands check</label>
+            <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+            <config_path>tig_postcode/countries/enable_nl_check</config_path>
+        </field>
+
+        <field id="enable_be_check" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Enable Belgium check</label>
+            <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+            <config_path>tig_postcode/countries/enable_be_check</config_path>
+        </field>
+
+    </group>
+</include>

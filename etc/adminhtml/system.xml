@@ -39,6 +39,7 @@
             <class>postcode-section</class>
             <include path="TIG_Postcode::system/support.xml"/>
             <include path="TIG_Postcode::system/configuration.xml" />
+            <include path="TIG_Postcode::system/countries.xml" />
         </section>
     </system>
 </config>

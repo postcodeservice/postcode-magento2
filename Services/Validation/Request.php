@@ -52,6 +52,19 @@ class Request implements ValidationInterface
     }
 
     /**
+     * @param $keys
+     */
+    public function setKeys($keys)
+    {
+        $this->keysToContain = $keys;
+    }
+
+    public function getKeys()
+    {
+        return $this->keysToContain;
+    }
+
+    /**
      * @param $data
      *
      * @return bool

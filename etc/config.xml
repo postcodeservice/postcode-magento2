@@ -47,6 +47,11 @@
                 <version>v3</version>
                 <type>json</type>
             </api>
+            <api_be>
+                <base>https://postcode-be.tig.nl/api/be</base>
+                <postcode_version>v2</postcode_version>
+                <street_version>v2</street_version>
+            </api_be>
         </tig_postcode>
     </default>
 </config>

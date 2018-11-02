@@ -31,69 +31,12 @@
  */
 namespace TIG\Postcode\Webservices\Endpoints;
 
-use TIG\Postcode\Webservices\Api;
-
-class GetAddress implements EndpointInterface
+class GetAddress extends EndpointAbstract
 {
-    private $endpoint = 'getAddress/';
+    protected $endpoint = 'getAddress/';
 
-    private $method = 'GET';
+    protected $country = 'NL';
 
-    private $data = [];
-
-    /**
-     * @var Api
-     */
-    private $api;
-
-    /**
-     * GetAddress constructor.
-     *
-     * @param Api $api
-     */
-    public function __construct(
-        Api $api
-    ) {
-        $this->api = $api;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function call()
-    {
-        return $this->api->getRequest($this);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getEndpoint()
-    {
-        return $this->endpoint;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getRequestData()
-    {
-        return $this->data;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function setRequestData(array $data)
-    {
-        $this->data = $data;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getMethod()
-    {
-        return $this->method;
-    }
+    protected $requestKeys = ['postcode', 'huisnummer'];
+    protected $responseKeys = ['success', 'straatnaam', 'woonplaats'];
 }

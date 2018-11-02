@@ -103,7 +103,7 @@ class Api
 
         try {
             $response = $this->zendClient->request();
-            $response = $this->converter->convert('response', $response->getBody());
+            $response = $this->converter->convert('response', $response->getBody(), $endpoint->getResponseKeys());
         } catch (\Zend_Http_Client_Exception $exception) {
             $response = [
                 'success' => false,
@@ -162,10 +162,16 @@ class Api
 
     /**
      * @param EndpointInterface $endpoint
+     *
+     * @throws \Zend_Http_Client_Exception
      */
     private function setUri(EndpointInterface $endpoint)
     {
         $uri = $this->apiConfiguration->getBaseUri() . $endpoint->getEndpoint();
+        if ($endpoint->getCountry() == 'BE') {
+            $uri = $this->apiConfiguration->getBeBaseUri() . $endpoint->getEndpoint();
+        }
+
         $this->zendClient->setUri($uri);
     }
 }

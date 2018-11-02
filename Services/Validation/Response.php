@@ -44,7 +44,11 @@ class Response implements ValidationInterface
             return false;
         }
 
-        if (!$this->checkKeys($data)) {
+        if ($this->checkIfRecursive($data)) {
+            return $this->validateElements($data);
+        }
+
+        if (!$this->validateResult($data)) {
             return false;
         }
 
@@ -53,6 +57,14 @@ class Response implements ValidationInterface
         }
 
         return true;
+    }
+
+    /**
+     * @param $keys
+     */
+    public function setKeys($keys)
+    {
+        $this->keysToContain = $keys;
     }
 
     /**
@@ -81,6 +93,50 @@ class Response implements ValidationInterface
     {
         if (strpos($data['straatnaam'], 'limiet bereikt') !== false) {
             return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * @param array $result
+     *
+     * @return bool
+     */
+    private function validateResult($result)
+    {
+        if (!$this->checkKeys($result)) {
+            return false;
+        }
+
+        return true;
+    }
+
+
+    /**
+     * BE returns multiple results whereas NL always returns one result. This method is to determine
+     * if multiple results were returned.
+     *
+     * @param array $data
+     *
+     * @return bool
+     */
+    private function checkIfRecursive($data)
+    {
+        return count($data) != count($data, COUNT_RECURSIVE);
+    }
+
+    /**
+     * @param $data
+     *
+     * @return bool
+     */
+    private function validateElements($data)
+    {
+        foreach ($data as $result) {
+            if (!$this->checkKeys($result)) {
+                return false;
+            }
         }
 
         return true;

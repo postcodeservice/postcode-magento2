@@ -1,5 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?><!--
- *
+<?php
+
+/**
  *
  *          ..::..
  *     ..::::::::::::..
@@ -18,22 +19,25 @@
  * It is available through the world-wide-web at this URL:
  * http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  * If you are unable to obtain it through the world-wide-web, please send an email
- * to servicedesk@tig.nl so we can send you a copy immediately.
+ * to servicedesk@totalinternetgroup.nl so we can send you a copy immediately.
  *
  * DISCLAIMER
  *
  * Do not edit or add to this file if you wish to upgrade this module to newer
  * versions in the future. If you wish to customize this module for your
- * needs please contact servicedesk@tig.nl for more information.
+ * needs please contact servicedesk@totalinternetgroup.nl for more information.
  *
  * @copyright   Copyright (c) Total Internet Group B.V. https://tig.nl/copyright
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
- *
--->
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Api/etc/extension_attributes.xsd">
-    <extension_attributes for="Magento\Quote\Api\Data\AddressInterface">
-        <attribute code="tig_housenumber" type="string" />
-        <attribute code="tig_housenumber_addition" type="string" />
-        <attribute code="tig_zipcodezone" type="string" />
-    </extension_attributes>
-</config>
+ */
+namespace TIG\Postcode\Webservices\Endpoints;
+
+class GetBeStreet extends EndpointAbstract
+{
+    protected $endpoint = 'street-find/';
+
+    protected $country = 'BE';
+
+    protected $requestKeys = ['zipcode', 'city', 'street'];
+    protected $responseKeys = ['straat'];
+}
