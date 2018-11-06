@@ -31,6 +31,7 @@
  */
 namespace TIG\Postcode\Webservices\Endpoints;
 
+// @codingStandardsIgnoreFile
 class GetAddress extends EndpointAbstract
 {
     protected $endpoint = 'getAddress/';

@@ -76,7 +76,7 @@ define([
             });
 
             /** If zipcodezone is available, we can assume the be check is on **/
-            Registry.get(self.parentName + '.zipcodezone', function() {
+            Registry.get(self.parentName + '.zipcodezone', function () {
                 self.beAutocomplete = true;
             });
 

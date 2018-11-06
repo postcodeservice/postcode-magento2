@@ -68,8 +68,8 @@ define([
                     zipcodezoneElement,
                     cityElement,
                     streetElement,
-                    postcodeElement)
-                {
+                    postcodeElement
+                ) {
                     zipcodezoneElement.show();
                     streetElement.show();
                     cityElement.hide();
@@ -89,8 +89,8 @@ define([
                     zipcodezoneElement,
                     cityElement,
                     streetElement,
-                    postcodeElement)
-                {
+                    postcodeElement
+                ) {
                     zipcodezoneElement.hide();
                     cityElement.show();
                     postcodeElement.validation.required = true;
@@ -148,7 +148,7 @@ define([
              */
             autocompleteZipcodezone : function (tigClass) {
                 var self = this;
-                $(tigClass + " .input-text").each(function() {
+                $(tigClass + " .input-text").each(function () {
                     $(this).autocomplete({
                         source : function (zipcodezone, response) {
                             if (!self.isCountryBe()) {

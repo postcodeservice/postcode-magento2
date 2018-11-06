@@ -34,6 +34,7 @@ namespace TIG\Postcode\Webservices\Endpoints;
 
 use TIG\Postcode\Webservices\Api;
 
+// @codingStandardsIgnoreFile
 abstract class EndpointAbstract implements EndpointInterface
 {
     protected $endpoint;

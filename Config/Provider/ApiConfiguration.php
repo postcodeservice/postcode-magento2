@@ -49,7 +49,6 @@ class ApiConfiguration extends AbstractConfigProvider
         return $this->getBase() . '/' . $this->getVersion() . '/' . $this->getType() . '/';
     }
 
-
     public function getBeBaseUri()
     {
         return $this->getBase('BE') . '/';

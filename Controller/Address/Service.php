@@ -103,25 +103,31 @@ class Service extends Action
         $method = $params[$country];
 
         $endpoint = $this->getEndpoint($country, $method);
-
         $params = $this->converter->convert('request', $params, $endpoint->getRequestKeys());
         if (!$params) {
-            return $this->returnJson([
-                'success' => false,
-                'error'   => __('Request validation failed')
-            ]);
+            return $this->returnFailure(__('Request validation failed'));
         }
 
         $endpoint->setRequestData($params);
         $result = $endpoint->call();
         if (!$result) {
-            return $this->returnJson([
-                'success' => false,
-                'error'   => __('Response validation failed')
-            ]);
+            return $this->returnFailure(__('Response validation failed'));
         }
 
         return $this->returnJson($result);
+    }
+
+    /**
+     * @param string $error
+     *
+     * @return \Magento\Framework\Controller\Result\Json
+     */
+    private function returnFailure($error)
+    {
+        return $this->returnJson([
+            'success' => false,
+            'error'   => $error
+        ]);
     }
 
     /**

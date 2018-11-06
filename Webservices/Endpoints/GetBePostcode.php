@@ -32,6 +32,7 @@
  */
 namespace TIG\Postcode\Webservices\Endpoints;
 
+// @codingStandardsIgnoreFile
 class GetBePostcode extends EndpointAbstract
 {
     protected $endpoint = 'postcode-find/';

@@ -112,7 +112,6 @@ class Response implements ValidationInterface
         return true;
     }
 
-
     /**
      * BE returns multiple results whereas NL always returns one result. This method is to determine
      * if multiple results were returned.
@@ -133,12 +132,18 @@ class Response implements ValidationInterface
      */
     private function validateElements($data)
     {
-        foreach ($data as $result) {
-            if (!$this->checkKeys($result)) {
-                return false;
+        $success = false;
+        array_walk(
+            $data,
+            function ($result) use (&$success) {
+                if (!$this->checkKeys($result)) {
+                    $success = false;
+                    return;
+                }
+                $success = true;
             }
-        }
+        );
 
-        return true;
+        return $success;
     }
 }
