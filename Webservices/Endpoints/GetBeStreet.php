@@ -32,6 +32,7 @@
  */
 namespace TIG\Postcode\Webservices\Endpoints;
 
+// @codingStandardsIgnoreFile
 class GetBeStreet extends EndpointAbstract
 {
     protected $endpoint = 'street-find/';
