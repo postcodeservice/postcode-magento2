@@ -108,7 +108,7 @@ class ServiceTest extends TestCase
     private function getBePostcodeCallMock($returns = false, $params)
     {
         $addressMock = $this->getFakeMock(GetBePostcode::class)->setMethods([
-            'setRequestData', 'call'
+            'setRequestData', 'call', 'getCountry', 'getMethod'
         ])->getMock();
 
         $setExpects = $addressMock->expects($this->any());
@@ -129,7 +129,7 @@ class ServiceTest extends TestCase
     private function getBeStreetCallMock($returns = false, $params)
     {
         $addressMock = $this->getFakeMock(GetBeStreet::class)->setMethods([
-            'setRequestData', 'call'
+            'setRequestData', 'call', 'getCountry', 'getMethod'
         ])->getMock();
 
         $setExpects = $addressMock->expects($this->any());
