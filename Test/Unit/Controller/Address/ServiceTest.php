@@ -37,6 +37,8 @@ use Magento\Backend\App\Action\Context;
 use Magento\Framework\App\RequestInterface;
 use TIG\Postcode\Services\Converter\Factory;
 use TIG\Postcode\Webservices\Endpoints\GetAddress;
+use TIG\Postcode\Webservices\Endpoints\GetBePostcode;
+use TIG\Postcode\Webservices\Endpoints\GetBeStreet;
 use Magento\Framework\Controller\Result\JsonFactory;
 use Magento\Framework\Controller\Result\Json;
 
@@ -64,7 +66,9 @@ class ServiceTest extends TestCase
             'context' => $this->getContextMock($params),
             'jsonFactory' => $this->getJsonFactory(),
             'converterFactory' => $this->getConverterMock($converterFails, $params),
-            'getAddress' => $this->getAddressCallMock(false, $params)
+            'getAddress' => $this->getAddressCallMock(false, $params),
+            'GetBePostcode' => $this->getBePostcodeCallMock(false, $params),
+            'GetBeStreet' => $this->getBeStreetCallMock(false, $params),
         ]);
 
         $result = $instance->execute();
@@ -92,8 +96,58 @@ class ServiceTest extends TestCase
         $callExpects = $addressMock->expects($this->any());
         $callExpects->method('call')->willReturn($returns);
 
+        $countryExpects = $addressMock->expects($this->any());
+        $countryExpects->method('getCountry')->willReturn('nl');
+
+        $methodExpects = $addressMock->expects($this->any());
+        $methodExpects->method('getMethod')->willReturn('postcodecheck');
+
         return $addressMock;
     }
+
+    private function getBePostcodeCallMock($returns = false, $params)
+    {
+        $addressMock = $this->getFakeMock(GetBePostcode::class)->setMethods([
+            'setRequestData', 'call'
+        ])->getMock();
+
+        $setExpects = $addressMock->expects($this->any());
+        $setExpects->method('setRequestData')->with($params);
+
+        $callExpects = $addressMock->expects($this->any());
+        $callExpects->method('call')->willReturn($returns);
+
+        $countryExpects = $addressMock->expects($this->any());
+        $countryExpects->method('getCountry')->willReturn('be');
+
+        $methodExpects = $addressMock->expects($this->any());
+        $methodExpects->method('getMethod')->willReturn('getpostcode');
+
+        return $addressMock;
+    }
+
+    private function getBeStreetCallMock($returns = false, $params)
+    {
+        $addressMock = $this->getFakeMock(GetBeStreet::class)->setMethods([
+            'setRequestData', 'call'
+        ])->getMock();
+
+        $setExpects = $addressMock->expects($this->any());
+        $setExpects->method('setRequestData')->with($params);
+
+        $callExpects = $addressMock->expects($this->any());
+        $callExpects->method('call')->willReturn($returns);
+
+        $countryExpects = $addressMock->expects($this->any());
+        $countryExpects->method('getCountry')->willReturn('be');
+
+        $methodExpects = $addressMock->expects($this->any());
+        $methodExpects->method('getMethod')->willReturn('getstreet');
+
+        return $addressMock;
+    }
+
+
 
     private function getConverterMock($returns = true, $params = [])
     {
