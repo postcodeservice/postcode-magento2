@@ -170,7 +170,7 @@ define([
                                 }
                                 var selectBoxArr = [];
                                 $.each(data, function (key, value) {
-                                    selectBoxArr.push(data[key].postcode + ' - ' + data[key].plaats)
+                                    selectBoxArr.push(data[key].postcode + ' - ' + data[key].plaats);
                                 });
 
                                 response(selectBoxArr);
@@ -239,7 +239,7 @@ define([
                                 }
                                 var selectBoxArr = [];
                                 $.each(data, function (key, value) {
-                                    selectBoxArr.push(value.straat)
+                                    selectBoxArr.push(value.straat);
                                 });
 
                                 response(selectBoxArr);
@@ -273,6 +273,6 @@ define([
 
                 return false;
             }
-        })
+        });
     };
 });

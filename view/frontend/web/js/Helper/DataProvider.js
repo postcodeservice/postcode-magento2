@@ -38,5 +38,5 @@ define(function () {
         setPostcodeNlOn: function (postcodeNLOn) {
             isPostcodeNLOn = postcodeNLOn;
         }
-    }
+    };
 });
