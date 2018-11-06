@@ -1,0 +1,12 @@
+<input class="input-text" type="text" data-bind="
+    afterRender: addAutocomplete,
+    value: value,
+    valueUpdate: 'keyup',
+    hasFocus: focused,
+    attr: {
+        name: inputName,
+        placeholder: placeholder,
+        'aria-required': required,
+        'aria-invalid': error() ? true : 'false',
+        disabled: disabled
+    }"  autocomplete="off" />

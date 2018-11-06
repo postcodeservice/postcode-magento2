@@ -61,7 +61,8 @@ define([
                 observeCountry     : '${ $.parentName }.country_id:value'
             },
             sameCall : false,
-            timer    : undefined
+            timer    : undefined,
+            beAutocomplete : false
         },
 
         initialize : function () {
@@ -72,6 +73,11 @@ define([
             Registry.async(this.provider)(function () {
                 self.initModules();
                 self.updateFieldData();
+            });
+
+            /** If zipcodezone is available, we can assume the be check is on **/
+            Registry.get(self.parentName + '.zipcodezone', function() {
+                self.beAutocomplete = true;
             });
 
             return this;
@@ -118,6 +124,7 @@ define([
         },
 
         setFieldData : function () {
+            var self = this;
             if (!this.source) {
                 return;
             }
@@ -247,6 +254,10 @@ define([
         },
 
         controlRegistry : function (address) {
+            var self = this;
+            if ($("[name*='" + self.customScope + ".country_id']").length < 1) {
+                return;
+            }
             var currentFormData = this.source.get(this.customScope);
 
             // Wait until the data is filled in.

@@ -49,6 +49,9 @@ var config = {
             },
             'Magento_Checkout/js/action/set-payment-information': {
                 'TIG_Postcode/js/action/set-billing-address-mixin': true
+            },
+            'Magento_Ui/js/form/element/abstract': {
+                'TIG_Postcode/js/view/form/be/autocompleteElement': true
             }
         }
     },

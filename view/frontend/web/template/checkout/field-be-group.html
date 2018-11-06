@@ -1,0 +1,6 @@
+<div class="tig-postcode-be-field-group" data-bind="css: additionalClasses, visible:visible">
+    <!-- ko foreach: getRegion('field-group') -->
+    <!-- ko template: getTemplate() --><!-- /ko -->
+    <!--/ko-->
+</div>
+<span class="tig-postcode-validation-message" data-bind="text : message, css: window.checkoutConfig.postcode.checkout"></span>
