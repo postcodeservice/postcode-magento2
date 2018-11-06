@@ -82,6 +82,12 @@ class RequestTest extends TestInterface
         $mockExpects->method('validate')->with($data);
         $mockExpects->willReturn($return);
 
+        if ($return) {
+            $mockExpects = $mock->expects($this->once());
+            $mockExpects->method('getKeys');
+            $mockExpects->willReturn(['postcode', 'huisnummer']);
+        }
+
         return $mock;
     }
 }
