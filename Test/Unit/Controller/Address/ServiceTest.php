@@ -67,8 +67,8 @@ class ServiceTest extends TestCase
             'jsonFactory' => $this->getJsonFactory(),
             'converterFactory' => $this->getConverterMock($converterFails, $params),
             'getAddress' => $this->getAddressCallMock(false, $params),
-            'GetBePostcode' => $this->getBePostcodeCallMock(false, $params),
-            'GetBeStreet' => $this->getBeStreetCallMock(false, $params),
+            'getBePostcode' => $this->getBePostcodeCallMock(false, $params),
+            'getBeStreet' => $this->getBeStreetCallMock(false, $params),
         ]);
 
         $result = $instance->execute();
@@ -87,7 +87,7 @@ class ServiceTest extends TestCase
     private function getAddressCallMock($returns = false, $params)
     {
         $addressMock = $this->getFakeMock(GetAddress::class)->setMethods([
-            'setRequestData', 'call'
+            'setRequestData', 'call', 'getCountry', 'getMethod'
         ])->getMock();
 
         $setExpects = $addressMock->expects($this->any());
