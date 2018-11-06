@@ -99,8 +99,9 @@ class Service extends Action
     public function execute()
     {
         $params = $this->getRequest()->getParams();
-        $country = key($params);
-        $method = $params[$country];
+
+        $country = $this->getCountry($params);
+        $method = $this->getMethod($params, $country);
 
         $endpoint = $this->getEndpoint($country, $method);
         $params = $this->converter->convert('request', $params, $endpoint->getRequestKeys());
@@ -115,6 +116,35 @@ class Service extends Action
         }
 
         return $this->returnJson($result);
+    }
+
+    /**
+     * @param $params
+     * @param $country
+     *
+     * @return string
+     */
+    private function getMethod($params, $country)
+    {
+        if (isset($params[$country])) {
+            return $params[$country];
+        }
+
+        return 'postcodecheck';
+    }
+
+    /**
+     * @param $params
+     *
+     * @return string
+     */
+    private function getCountry($params)
+    {
+        if (key($params) == 'be' || key($params) == 'nl') {
+            return key($params);
+        }
+
+        return 'nl';
     }
 
     /**

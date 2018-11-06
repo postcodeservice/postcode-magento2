@@ -248,7 +248,7 @@ class LayoutProcessorTest extends TestCase
     public function testAfterProcess($isDisplayBillingOnPaymentMethodAvailble, $fields, $hasBilling)
     {
         $instance = $this->getInstance([
-            'moduleConfiguration' => $this->getModuleMock(),
+            'moduleConfiguration' => $this->getModuleMock(false, true),
             'scopeConfig' => $this->getScopeConfigMock($isDisplayBillingOnPaymentMethodAvailble)
         ]);
 
@@ -311,15 +311,27 @@ class LayoutProcessorTest extends TestCase
 
     /**
      * @param bool $returns
+     * @param bool $nl
+     * @param bool $be
      *
      * @return \PHPUnit_Framework_MockObject_MockObject
      */
-    private function getModuleMock($returns = false)
+    private function getModuleMock($returns = false, $nl = false, $be = false)
     {
         $moduleMock = $this->getFakeMock(ModuleConfiguration::class)->getMock();
         $moduleExpects = $moduleMock->expects($this->once());
         $moduleExpects->method('isModusOff');
         $moduleExpects->willReturn($returns);
+
+        if (!$returns) {
+            $moduleCheckNl = $moduleMock->expects($this->once());
+            $moduleCheckNl->method('isNLCheckEnabled');
+            $moduleCheckNl->willReturn($nl);
+
+            $moduleCheckBe = $moduleMock->expects($this->once());
+            $moduleCheckBe->method('isBECheckEnabled');
+            $moduleCheckBe->willReturn($be);
+        }
 
         return $moduleMock;
     }
