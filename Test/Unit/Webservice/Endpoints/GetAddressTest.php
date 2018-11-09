@@ -63,4 +63,11 @@ class GetAddressTest extends TestCase
         $result = $instance->getRequestData();
         $this->assertEquals($requestData, $result);
     }
+
+    public function testGetCountry()
+    {
+        $instance = $this->getInstance();
+        $result = $instance->getCountry();
+        $this->assertEquals('NL', $result);
+    }
 }
