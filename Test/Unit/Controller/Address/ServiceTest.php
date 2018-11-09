@@ -49,8 +49,40 @@ class ServiceTest extends TestCase
     public function dataProvider()
     {
         return [
-            'request converter fails' => [false, []],
-            'call fails' => [['postcode' => '1014BA', 'huisnummer' => '37'], ['postcode' => '1014BA', 'huisnummer' => '37']]
+            'request converter fails' => [
+                false,
+                []
+            ],
+            'call fails'              => [
+                [
+                    'postcode' => '1014BA', 'huisnummer' => '37'
+                ],
+                [
+                    'postcode' => '1014BA', 'huisnummer' => '37'
+                ]
+            ],
+            'be postcode succeeds'    => [
+                [
+                    'be' => 'getpostcode', 'zipcodezone' => '1000'
+                ],
+                [
+                    'be' => 'getpostcode', 'zipcodezone' => '1000'
+                ]
+            ],
+            'be street succeeds'      => [
+                [
+                    'be'      => 'getstreet',
+                    'city'    => 'Brussel',
+                    'zipcode' => '1000',
+                    'street'  => 'Zandstraat'
+                ],
+                [
+                    'be'      => 'getstreet',
+                    'city'    => 'Brussel',
+                    'zipcode' => '1000',
+                    'street'  => 'Zandstraat'
+                ]
+            ]
         ];
     }
 
@@ -66,9 +98,9 @@ class ServiceTest extends TestCase
             'context' => $this->getContextMock($params),
             'jsonFactory' => $this->getJsonFactory(),
             'converterFactory' => $this->getConverterMock($converterFails, $params),
-            'getAddress' => $this->getAddressCallMock(false, $params),
-            'getBePostcode' => $this->getBePostcodeCallMock(false, $params),
-            'getBeStreet' => $this->getBeStreetCallMock(false, $params),
+            'getAddress' => $this->getAddressCallMock($converterFails, $params),
+            'getBePostcode' => $this->getBePostcodeCallMock($converterFails, $params),
+            'getBeStreet' => $this->getBeStreetCallMock($converterFails, $params),
         ]);
 
         $result = $instance->execute();
@@ -146,8 +178,6 @@ class ServiceTest extends TestCase
 
         return $addressMock;
     }
-
-
 
     private function getConverterMock($returns = true, $params = [])
     {
