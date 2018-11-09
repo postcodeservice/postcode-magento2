@@ -60,6 +60,14 @@ class Response implements ValidationInterface
     }
 
     /**
+     * @return array
+     */
+    public function getKeys()
+    {
+        return $this->keysToContain;
+    }
+
+    /**
      * @param $keys
      */
     public function setKeys($keys)

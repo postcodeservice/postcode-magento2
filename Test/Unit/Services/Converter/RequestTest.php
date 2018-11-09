@@ -66,6 +66,8 @@ class RequestTest extends TestInterface
             'validation' => $this->validationRequestMock($data, $validation)
         ]);
 
+        $instance->setValidationKeys(['postcode', 'huisnummer']);
+
         $this->assertSame($expected, $instance->convert($data));
     }
 

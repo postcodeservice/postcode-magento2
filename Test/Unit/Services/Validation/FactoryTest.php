@@ -133,7 +133,17 @@ class FactoryTest extends TestCase
             'Limit calls response' => [
                 ['succes' => true, 'straatnaam' => 'Opvraag limiet bereikt', 'stad' => 'Amsterdam'],
                 false
-            ],
+            ]
+        ];
+    }
+
+    public function responseDataProviderBe()
+    {
+        return [
+            'Correct Recursive Data array' => [
+                [['postcode' => '1000', 'plaats' => 'Brussel'], ['postcode' => '1060', 'plaats' => 'Brussel']],
+                true
+            ]
         ];
     }
 
@@ -145,5 +155,24 @@ class FactoryTest extends TestCase
     public function testResponseValidator($data, $expected)
     {
         $this->assertSame($expected, $this->instance->validate('response', $data));
+    }
+
+    /**
+     * @dataProvider responseDataProviderBe
+     * @param $data
+     * @param $expected
+     */
+    public function testResponseValidatorForBECall($data, $expected)
+    {
+        $object = $this->getObject(Validation\Response::class);
+        $object->setKeys(['postcode', 'plaats']);
+
+        $instance = $this->getInstance([
+            'validators' => [
+                'response' => $object
+            ]
+        ]);
+
+        $this->assertSame($expected, $instance->validate('response', $data));
     }
 }

@@ -69,6 +69,8 @@ class ResponseTest extends TestInterface
             'validation' => $this->validationResponseMock($data, $validation)
         ]);
 
+        $instance->setValidationKeys(['success', 'straat', 'woonplaats']);
+
         $this->assertSame($expected, $instance->convert($dataString));
     }
 
