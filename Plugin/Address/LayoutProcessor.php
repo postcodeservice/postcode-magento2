@@ -323,7 +323,8 @@ class LayoutProcessor
             'config'     => [
                 'customScope' => $scope . '.custom_attributes',
                 'template'    => 'ui/form/field',
-                'elementTmpl' => 'TIG_Postcode/form/element/autocomplete'
+                'elementTmpl' => 'TIG_Postcode/form/element/autocomplete',
+                'additionalClasses' => 'tig_zipcodezone_autocomplete'
             ],
             'provider'   => 'checkoutProvider',
             'dataScope'  => $scope . '.custom_attributes.tig_zipcodezone',
@@ -372,14 +373,6 @@ class LayoutProcessor
      */
     private function setFieldToAutocomplete(&$fields)
     {
-        $additionalClass = null;
-        if (isset($fields['zipcodezone']['config']['additionalClasses'])) {
-            $additionalClass = $fields['zipcodezone']['config']['additionalClasses'];
-        }
-
-        $additionalClass .= ' tig_zipcodezone_autocomplete';
-        $fields['zipcodezone']['config']['additionalClasses'] = $additionalClass;
-
         $additionalClass = null;
         if (isset($fields['street']['children'][0]['config']['additionalClasses'])) {
             $additionalClass = $fields['street']['children'][0]['config']['additionalClasses'];

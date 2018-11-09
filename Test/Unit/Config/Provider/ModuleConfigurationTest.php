@@ -90,6 +90,7 @@ class ModuleConfigurationTest extends AbstractConfigurationTest
         return [
             'ModuleOutput disabled' => [false, true, '0'],
             'ModuleOutput enabled'  => [true, true, '0'],
+            'ModuleOutput enabled & modus on'  => [true, false, '2']
         ];
     }
 
@@ -164,5 +165,49 @@ class ModuleConfigurationTest extends AbstractConfigurationTest
 
         $this->setXpath(ModuleConfiguration::XPATH_CHECKOUT_COMPATIBILITY, $value);
         $this->assertEquals($value, $instance->getCheckoutCompatibility());
+    }
+
+    public function checkNLEnabledProvider()
+    {
+        return [
+            'nl_on' => [ModuleConfiguration::XPATH_NETHERLANDS_CHECK, 1, 1],
+            'nl_off' => [ModuleConfiguration::XPATH_NETHERLANDS_CHECK, 0, 0]
+        ];
+    }
+
+    public function checkBEEnabledProvider()
+    {
+        return [
+            'be_on' => [ModuleConfiguration::XPATH_BELGIAN_CHECK, 1, 1],
+            'be_off' => [ModuleConfiguration::XPATH_BELGIAN_CHECK, 0, 0]
+        ];
+    }
+
+    /**
+     * @param $xpath
+     * @param $enabled
+     * @param $expected
+     *
+     * @dataProvider checkNLEnabledProvider
+     */
+    public function testIsNLEnabled($xpath, $enabled, $expected)
+    {
+        $instance = $this->getInstance();
+        $this->setXpath($xpath, $enabled);
+        $this->assertEquals($expected, $instance->isNLCheckEnabled());
+    }
+
+    /**
+     * @param $xpath
+     * @param $enabled
+     * @param $expected
+     *
+     * @dataProvider checkBEEnabledProvider
+     */
+    public function testIsBEEnabled($xpath, $enabled, $expected)
+    {
+        $instance = $this->getInstance();
+        $this->setXpath($xpath, $enabled);
+        $this->assertEquals($expected, $instance->isBECheckEnabled());
     }
 }

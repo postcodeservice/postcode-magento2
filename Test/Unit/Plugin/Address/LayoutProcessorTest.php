@@ -56,6 +56,15 @@ class LayoutProcessorTest extends TestCase
                                                         'config' => [
                                                             'additionalClasses' => 'test'
                                                         ]
+                                                    ],
+                                                    'street' => [
+                                                        'children' => [
+                                                            0 => [
+                                                                'config' => [
+                                                                    'additionalClasses' => 'test'
+                                                                ]
+                                                            ]
+                                                        ]
                                                     ]
                                                 ]
                                             ]
@@ -235,6 +244,17 @@ class LayoutProcessorTest extends TestCase
             [
                 true, $this->addressFieldsWithoutBilling, false
             ]
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public function beDataProvider()
+    {
+        return [
+            'test without additional classes' => [$this->addressFieldsForMultipleBillingFields],
+//            'test with additional classes' => [$this->addressFieldsForAdditionalClasses]
         ];
     }
 

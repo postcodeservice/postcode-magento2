@@ -49,9 +49,14 @@ class ApiConfiguration extends AbstractConfigProvider
         return $this->getBase() . '/' . $this->getVersion() . '/' . $this->getType() . '/';
     }
 
-    public function getBeBaseUri()
+    /**
+     * @param string $endpoint
+     *
+     * @return string
+     */
+    public function getBeBaseUri($endpoint)
     {
-        return $this->getBase('BE') . '/';
+        return $this->getBase('BE') . '/' . $this->getVersion('BE', $endpoint) . '/';
     }
 
     /**
@@ -74,7 +79,7 @@ class ApiConfiguration extends AbstractConfigProvider
      * Versioning for BE is not live yet. Implement this function in getBeBaseUri when this goes live.
      *
      * @param null          $store
-     * @param string        $country
+     * @param string|null   $country
      * @param string|null   $endpoint
      *
      * @return mixed
@@ -82,11 +87,11 @@ class ApiConfiguration extends AbstractConfigProvider
     public function getVersion($country = 'NL', $endpoint = null, $store = null)
     {
         $xpath = static::XPATH_API_VERSION;
-        if ($country == 'BE' && $endpoint == 'postcode-find') {
+        if ($country == 'BE' && $endpoint == 'postcode-find/') {
             $xpath = static::XPATH_API_BE_POSTCODE_VERSION;
         }
 
-        if ($country == 'BE' && $endpoint == 'street-find') {
+        if ($country == 'BE' && $endpoint == 'street-find/') {
             $xpath = static::XPATH_API_BE_STREET_VERSION;
         }
 
