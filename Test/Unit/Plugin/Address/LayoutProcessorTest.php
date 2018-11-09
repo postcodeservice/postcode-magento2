@@ -280,6 +280,28 @@ class LayoutProcessorTest extends TestCase
 
     }
 
+    public function testBeAfterProcess()
+    {
+        $instance = $this->getInstance([
+            'moduleConfiguration' => $this->getModuleMock(false, false, true),
+            'scopeConfig' => $this->getScopeConfigMock(true)
+        ]);
+
+        $result = $instance->afterProcess(null, $this->addressFieldsForMultipleBillingFields);
+
+        $checkShippingFields = $result['components']['checkout']['children']['steps']['children']['shipping-step']
+                               ['children']['shippingAddress']['children']['shipping-address-fieldset']['children'];
+
+
+        $checkBillingFields = $result['components']['checkout']['children']['steps']['children']['billing-step']
+                              ['children']['payment']['children']['payments-list']['children']['test-form']
+                              ['children']['form-fields']['children'];
+
+
+        $this->assertArrayHasKey('zipcodezone', $checkBillingFields);
+        $this->assertArrayHasKey('zipcodezone', $checkShippingFields);
+    }
+
     public function testAfterProcessWhereModusIsOff()
     {
         $instance = $this->getInstance([
@@ -299,7 +321,7 @@ class LayoutProcessorTest extends TestCase
     private function getScopeConfigMock($returns = false)
     {
         $scopeMock = $this->getFakeMock(ScopeConfigInterface::class)->getMock();
-        $scopeExpects = $scopeMock->expects($this->once());
+        $scopeExpects = $scopeMock->expects($this->any());
         $scopeExpects->method('getValue')->with(
             'checkout/options/display_billing_address_on',
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
@@ -324,11 +346,11 @@ class LayoutProcessorTest extends TestCase
         $moduleExpects->willReturn($returns);
 
         if (!$returns) {
-            $moduleCheckNl = $moduleMock->expects($this->once());
+            $moduleCheckNl = $moduleMock->expects($this->any());
             $moduleCheckNl->method('isNLCheckEnabled');
             $moduleCheckNl->willReturn($nl);
 
-            $moduleCheckBe = $moduleMock->expects($this->once());
+            $moduleCheckBe = $moduleMock->expects($this->any());
             $moduleCheckBe->method('isBECheckEnabled');
             $moduleCheckBe->willReturn($be);
         }
