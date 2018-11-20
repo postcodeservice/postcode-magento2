@@ -178,8 +178,8 @@ class ModuleConfigurationTest extends AbstractConfigurationTest
     public function checkBEEnabledProvider()
     {
         return [
-            'be_on' => [ModuleConfiguration::XPATH_BELGIAN_CHECK, 1, 1],
-            'be_off' => [ModuleConfiguration::XPATH_BELGIAN_CHECK, 0, 0]
+            'be_on' => [ModuleConfiguration::XPATH_BELGIUM_CHECK, 1, 1],
+            'be_off' => [ModuleConfiguration::XPATH_BELGIUM_CHECK, 0, 0]
         ];
     }
 

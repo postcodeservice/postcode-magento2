@@ -140,7 +140,7 @@ class Service extends Action
      */
     private function getCountry($params)
     {
-        if (key($params) == 'be' || key($params) == 'nl') {
+        if (key($params) == 'be') {
             return key($params);
         }
 

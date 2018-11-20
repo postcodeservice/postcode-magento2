@@ -124,7 +124,6 @@ define([
         },
 
         setFieldData : function () {
-            var self = this;
             if (!this.source) {
                 return;
             }
@@ -255,7 +254,12 @@ define([
 
         controlRegistry : function (address) {
             var self = this;
+            /**
+             * Country ID is not available yet and will default to NL, causing unexpected behaviour when a customer
+             * has a quote with another country in it.
+             */
             if ($("[name*='" + self.customScope + ".country_id']").length < 1) {
+                $('.tig_hidden').show();
                 return;
             }
             var currentFormData = this.source.get(this.customScope);

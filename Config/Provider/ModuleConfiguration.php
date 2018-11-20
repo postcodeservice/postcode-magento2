@@ -38,7 +38,7 @@ class ModuleConfiguration extends AbstractConfigProvider
     const XPATH_MODULE_STABILITY          = 'tig_postcode/stability';
     const XPATH_SUPPORTED_MAGENTO_VERSION = 'tig_postcode/supported_magento_version';
     const XPATH_NETHERLANDS_CHECK         = 'tig_postcode/countries/enable_nl_check';
-    const XPATH_BELGIAN_CHECK             = 'tig_postcode/countries/enable_be_check';
+    const XPATH_BELGIUM_CHECK             = 'tig_postcode/countries/enable_be_check';
 
     /**
      * Should return on of these values
@@ -147,6 +147,6 @@ class ModuleConfiguration extends AbstractConfigProvider
      */
     public function isBECheckEnabled($store = null)
     {
-        return (bool) $this->getConfigFromXpath(static::XPATH_BELGIAN_CHECK, $store);
+        return (bool) $this->getConfigFromXpath(static::XPATH_BELGIUM_CHECK, $store);
     }
 }
