@@ -317,9 +317,8 @@ class LayoutProcessorTest extends TestCase
                               ['children']['payment']['children']['payments-list']['children']['test-form']
                               ['children']['form-fields']['children'];
 
-
-        $this->assertArrayHasKey('zipcodezone', $checkBillingFields);
-        $this->assertArrayHasKey('zipcodezone', $checkShippingFields);
+        $this->assertContains('tig_zipcodezone_autocomplete', $checkBillingFields['postcode']['config']['additionalClasses']);
+        $this->assertContains('tig_zipcodezone_autocomplete', $checkShippingFields['postcode']['config']['additionalClasses']);
     }
 
     public function testAfterProcessWhereModusIsOff()

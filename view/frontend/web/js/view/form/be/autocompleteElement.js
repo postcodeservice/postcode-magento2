@@ -33,70 +33,44 @@ define([
                 }
             },
 
-            /** if switchToBe is true, hide the city and postcode fields and show the zipcodezone field
-             *  otherwise switch back to defaults of Magento
+            /**
+             *  if switchToBe is true, disable the street field when zipcode is empty
+             *  otherwise switch back to defaults of Magento.
              **/
             switchToBe : function (switchToBe) {
                 var self = this;
-                var fields = [
-                    self.parentName + '.zipcodezone',
-                    self.parentName + '.city',
-                    self.parentName + '.street.0'
-                ];
-
-                if (self.isNLPostcodeCheckOn()) {
-                    fields.push(self.parentName + '.postcode-field-group.field-group.postcode');
-                } else {
-                    fields.push(self.parentName + '.postcode');
-                }
-
                 if (switchToBe) {
-                    self.hideAddressFields(fields);
+                    self.hideAddressFields();
 
                     return;
                 }
-                self.showAddressFields(fields);
+                self.showAddressFields();
             },
 
-            /** Hide the postcode and city field, show the zipcodezone field and disable the street field **/
-            hideAddressFields : function (fields) {
-                /** city field conflicts with the NL service, so we temp remove the tig_hidden class **/
-                $('.tig_hidden').show();
-                $('.tig_be_hidden').removeClass('tig_hidden');
+            /** Disable the street field (but only if zipcode is empty). **/
+            hideAddressFields : function () {
+                var self = this;
 
-                Registry.get(fields, function (
-                    zipcodezoneElement,
-                    cityElement,
-                    streetElement,
-                    postcodeElement
-                ) {
-                    zipcodezoneElement.show();
-                    streetElement.show();
-                    cityElement.hide();
-                    postcodeElement.validation.required = false;
-                    postcodeElement.hide();
-                });
-
-                if (!$('.tig_zipcodezone_autocomplete .input-text').val()) {
-                    $('.tig_street_autocomplete .input-text').attr('disabled', true);
+                var postcodeElement = self.parentName + '.postcode';
+                if (self.isNLPostcodeCheckOn()) {
+                    postcodeElement = self.parentName + '.postcode-field-group.field-group.postcode';
                 }
+
+                Registry.get([postcodeElement, self.parentName + '.street.0'], function (
+                    postcodeElement, streetElement
+                ) {
+                    if (!postcodeElement.value()) {
+                        streetElement.disable();
+                    }
+                });
             },
 
-            /** Back to the Magento default **/
-            showAddressFields : function (fields) {
-                $('.tig_be_hidden').addClass('tig_hidden');
-                Registry.get(fields, function (
-                    zipcodezoneElement,
-                    cityElement,
-                    streetElement,
-                    postcodeElement
-                ) {
-                    zipcodezoneElement.hide();
-                    cityElement.show();
-                    postcodeElement.validation.required = true;
-                    postcodeElement.show();
+            /** Back to the Magento default. **/
+            showAddressFields : function () {
+                var self = this;
+                Registry.get(self.parentName + '.street.0', function (streetElement) {
+                    streetElement.enable();
                 });
-                $('.tig_street_autocomplete .input-text').attr('disabled', false);
             },
 
             addAutocomplete : function () {
@@ -110,40 +84,10 @@ define([
                 if (tigClass === '.tig_street_autocomplete') {
                     self.autocompleteStreet(tigClass);
                 }
-                if (!self.isCountryNl()) {
-                    self.switchToBe(this.source.get(this.customScope).country_id === 'BE');
-                }
-                if (self.isCountryBe()) {
-                    self.initDisableStreetField();
-                }
-            },
-
-            initDisableStreetField : function () {
-                var self = this;
-                if (self.containers.length > 0) {
-                    self.disableStreetField();
-
-                    self.switchToBe(self.isCountryBe());
-                }
             },
 
             /**
-             * We only reach this at initialisation because
-             * that's the only moment when this.parentName equals street field
-             **/
-            disableStreetField : function () {
-                var self = this;
-                var fields = [self.containers[0].parentName + '.zipcodezone', self.parentName + '.0'];
-
-                Registry.get(fields, function (zipcodezoneElement, streetElement) {
-                    if (!zipcodezoneElement.value()) {
-                        streetElement.disable();
-                    }
-                });
-            },
-
-            /**
-             * set the auto complete for the zipcodezone field
+             * set the auto complete for the zipcode field.
              * @param tigClass
              */
             autocompleteZipcodezone : function (tigClass) {
@@ -179,23 +123,34 @@ define([
                             });
                         },
                         select : function (event, ui) {
-                            Registry.get([
-                                self.parentName + '.postcode',
-                                self.parentName + '.city'
-                            ], function (postcodeElement, cityElement) {
-                                postcodeElement.set('value', ui.item.value.substring(0, 4));
+                            var fields = [
+                                self.parentName + '.city',
+                                self.parentName + '.street.0'
+                            ];
+                            if (self.customScope === 'shippingAddress' && self.isNLPostcodeCheckOn()) {
+                                fields = [
+                                    self.containers[0].containers[0].parentName + '.city',
+                                    self.containers[0].containers[0].parentName + '.street.0'
+                                ];
+                            }
+
+                            Registry.get(fields, function (
+                                cityElement,
+                                streetElement
+                            ) {
                                 cityElement.set('value', ui.item.value.substring(7, ui.item.value.length));
-                                $('.tig_street_autocomplete .input-text').attr('disabled', false);
+                                streetElement.enable();
                                 $("input[name*='postcode']").trigger('change');
                                 $("input[name*='city']").trigger('change');
                             });
+                            ui.item.value = ui.item.value.substring(0, 4);
                         }
                     });
                 });
             },
 
             /**
-             * set the auto complete for the street field after zipcodezone is filled
+             * set the auto complete for the street field after zipcodezone is filled.
              * @param tigClass
              */
             autocompleteStreet : function (tigClass) {
@@ -216,6 +171,7 @@ define([
                                 self.containers[0].parentName + '.city',
                                 self.parentName + '.0'
                             ], function (postcodeElement, cityElement, streetElement) {
+                                debugger;
                                 postcode = postcodeElement.value;
                                 city = cityElement.value;
                                 street = streetElement.value;
@@ -257,22 +213,8 @@ define([
             isCountryBe : function () {
                 var currentFormData = this.source.get(this.dataScope.split('.')[0]);
 
-                if (currentFormData && currentFormData.country_id === 'BE') {
-                    return true;
-                }
-
-                return false;
+                return currentFormData && currentFormData.country_id === 'BE';
             },
-
-            isCountryNl : function () {
-                var currentFormData = this.source.get(this.dataScope.split('.')[0]);
-
-                if (currentFormData && currentFormData.country_id === 'NL') {
-                    return true;
-                }
-
-                return false;
-            }
         });
     };
 });
