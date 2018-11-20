@@ -56,8 +56,8 @@ define([
                     self.parentName + '.street.0'
                 ];
                 if (self.isNLPostcodeCheckOn()) {
-                    [
-                        fields = self.parentName + '.postcode-field-group.field-group.postcode',
+                    fields = [
+                        self.parentName + '.postcode-field-group.field-group.postcode',
                         self.parentName + '.street.0'
                     ];
                 }
