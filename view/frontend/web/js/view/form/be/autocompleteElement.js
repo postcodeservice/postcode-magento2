@@ -51,19 +51,18 @@ define([
             hideAddressFields : function () {
                 var self = this;
 
-                var postcodeElement = self.parentName + '.postcode';
+                var fields = [
+                    self.parentName + '.postcode',
+                    self.parentName + '.street.0'
+                ];
                 if (self.isNLPostcodeCheckOn()) {
-                    postcodeElement = self.parentName + '.postcode-field-group.field-group.postcode';
+                    [
+                        fields = self.parentName + '.postcode-field-group.field-group.postcode',
+                        self.parentName + '.street.0'
+                    ];
                 }
 
-                Registry.get(
-                    [
-                        postcodeElement,
-                        self.parentName + '.street.0'
-                    ], function (
-                    postcodeElement,
-                    streetElement
-                ) {
+                Registry.get(fields, function (postcodeElement, streetElement) {
                     if (!postcodeElement.value()) {
                         streetElement.disable();
                     }
