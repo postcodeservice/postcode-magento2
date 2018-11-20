@@ -171,7 +171,6 @@ define([
                                 self.containers[0].parentName + '.city',
                                 self.parentName + '.0'
                             ], function (postcodeElement, cityElement, streetElement) {
-                                debugger;
                                 postcode = postcodeElement.value;
                                 city = cityElement.value;
                                 street = streetElement.value;
