@@ -56,8 +56,13 @@ define([
                     postcodeElement = self.parentName + '.postcode-field-group.field-group.postcode';
                 }
 
-                Registry.get([postcodeElement, self.parentName + '.street.0'], function (
-                    postcodeElement, streetElement
+                Registry.get(
+                    [
+                        postcodeElement,
+                        self.parentName + '.street.0'
+                    ], function (
+                    postcodeElement,
+                    streetElement
                 ) {
                     if (!postcodeElement.value()) {
                         streetElement.disable();
