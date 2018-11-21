@@ -32,3 +32,6 @@ Extension status,Extension status
 "Can not find the address, please fill in manually","Can not find the address, please fill in manually"
 "Housenumber","Housenumber"
 "Addition","Addition"
+"Please select a postcode before filling the street field.","Please select a postcode before filling the street field."
+"Enable Netherlands check","Enable Netherlands check"
+"Enable Belgium check","Enable Belgium check"

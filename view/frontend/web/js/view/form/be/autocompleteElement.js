@@ -40,15 +40,15 @@ define([
             switchToBe : function (switchToBe) {
                 var self = this;
                 if (switchToBe) {
-                    self.hideAddressFields();
+                    self.disableStreetField();
 
                     return;
                 }
-                self.showAddressFields();
+                self.enableStreetField();
             },
 
             /** Disable the street field (but only if zipcode is empty). **/
-            hideAddressFields : function () {
+            disableStreetField : function () {
                 var self = this;
 
                 var fields = [
@@ -64,17 +64,23 @@ define([
 
                 Registry.get(fields, function (postcodeElement, streetElement) {
                     if (!postcodeElement.value()) {
+                        // This is for setting the init placeholder
+                        streetElement.placeholder =
+                            $.mage.__('Please select a postcode before filling the street field.');
                         streetElement.disable();
                     }
+                    $('.tig_street_autocomplete .input-text').attr('placeholder',
+                        $.mage.__('Please select a postcode before filling the street field.'));
                 });
             },
 
             /** Back to the Magento default. **/
-            showAddressFields : function () {
+            enableStreetField : function () {
                 var self = this;
                 Registry.get(self.parentName + '.street.0', function (streetElement) {
                     streetElement.enable();
                 });
+                $('.tig_street_autocomplete .input-text').attr('placeholder', '');
             },
 
             addAutocomplete : function () {
@@ -144,10 +150,10 @@ define([
                             ) {
                                 cityElement.set('value', ui.item.value.substring(7, ui.item.value.length));
                                 streetElement.enable();
-                                $("input[name*='postcode']").trigger('change');
-                                $("input[name*='city']").trigger('change');
                             });
                             ui.item.value = ui.item.value.substring(0, 4);
+                            $("input[name*='postcode']").trigger('change');
+                            $("input[name*='city']").trigger('change');
                         }
                     });
                 });

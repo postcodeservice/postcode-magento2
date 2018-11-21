@@ -4,6 +4,10 @@
     display: none;
 }
 
+.ui-autocomplete-loading {
+    background:url('../images/indicator.gif') no-repeat right center !important;
+}
+
 /* Default: Magento Luma checkout =================================================================================== */
 
 .tig-postcode-field-group {

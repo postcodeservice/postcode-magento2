@@ -331,6 +331,7 @@ class LayoutProcessor
         $additionalClass .= ' tig_zipcodezone_autocomplete';
         $fields['postcode']['config']['additionalClasses'] = $additionalClass;
         $fields['postcode']['config']['elementTmpl'] = 'TIG_Postcode/form/element/autocomplete';
+        $fields['postcode']['sortOrder'] = '65';
 
         $additionalClass = null;
         if (isset($fields['street']['children'][0]['config']['additionalClasses'])) {
