@@ -237,6 +237,7 @@ class LayoutProcessor
             'dataScope' => '',
             'visible'   => true
         ];
+        $fields['country_id']['sortOrder'] = '64';
 
         return $fieldset;
     }
@@ -323,7 +324,6 @@ class LayoutProcessor
      */
     private function setFieldToAutocomplete(&$fields)
     {
-
         $additionalClass = null;
         if (isset($fields['postcode']['config']['additionalClasses'])) {
             $additionalClass = $fields['postcode']['config']['additionalClasses'];
@@ -341,6 +341,8 @@ class LayoutProcessor
         $additionalClass .= ' tig_street_autocomplete';
         $fields['street']['children'][0]['config']['additionalClasses'] = $additionalClass;
         $fields['street']['children'][0]['config']['elementTmpl'] = 'TIG_Postcode/form/element/autocomplete';
+
+        $fields['country_id']['sortOrder'] = '64';
     }
 
     /**

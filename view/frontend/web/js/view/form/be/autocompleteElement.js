@@ -61,7 +61,7 @@ define([
                         self.parentName + '.street.0'
                     ];
                 }
-                var placeholder = $.mage.__('Please select a postcode before filling the street field.')
+                var placeholder = $.mage.__('Please select a postcode before filling the street field.');
                 Registry.get(fields, function (postcodeElement, streetElement) {
                     if (!postcodeElement.value()) {
                         // This is for setting the init placeholder
@@ -100,6 +100,7 @@ define([
              */
             autocompleteZipcodezone : function (tigClass) {
                 var self = this;
+
                 $(tigClass + " .input-text").each(function () {
                     $(this).autocomplete({
                         source : function (zipcodezone, response) {
@@ -111,7 +112,8 @@ define([
                                 url    : window.checkoutConfig.postcode.action_url.postcode_be_getpostcode,
                                 data   : {
                                     zipcodezone : zipcodezone.term
-                                }
+                                },
+                                menu : this.menu
                             }).done(function (data) {
                                 /**
                                  * This part will refresh the data inside the array
@@ -126,6 +128,7 @@ define([
                                 });
 
                                 response(selectBoxArr);
+                                this.menu.element.addClass(self.customScope + ".tigAutocomplete");
                             }).fail(function (data) {
                                 console.log(data);
                             });
@@ -152,6 +155,14 @@ define([
                             ui.item.value = ui.item.value.substring(0, 4);
                             $("input[name*='postcode']").trigger('change');
                             $("input[name*='city']").trigger('change');
+                        },
+                        close : function (event) {
+                            var menuElement = $('.' + self.customScope + '\\.tigAutocomplete')
+                            if (event.originalEvent.type !== 'menuselect' && !menuElement.is(":visible")) {
+                                menuElement.show();
+
+                                return false;
+                            }
                         }
                     });
                 });
