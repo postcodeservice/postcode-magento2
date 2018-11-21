@@ -61,16 +61,14 @@ define([
                         self.parentName + '.street.0'
                     ];
                 }
-
+                var placeholder = $.mage.__('Please select a postcode before filling the street field.')
                 Registry.get(fields, function (postcodeElement, streetElement) {
                     if (!postcodeElement.value()) {
                         // This is for setting the init placeholder
-                        streetElement.placeholder =
-                            $.mage.__('Please select a postcode before filling the street field.');
+                        streetElement.placeholder = placeholder;
                         streetElement.disable();
                     }
-                    $('.tig_street_autocomplete .input-text').attr('placeholder',
-                        $.mage.__('Please select a postcode before filling the street field.'));
+                    $('.tig_street_autocomplete .input-text').attr('placeholder', placeholder);
                 });
             },
 
