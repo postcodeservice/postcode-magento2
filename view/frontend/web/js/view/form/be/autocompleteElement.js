@@ -157,7 +157,7 @@ define([
                             $("input[name*='city']").trigger('change');
                         },
                         close : function (event) {
-                            var menuElement = $('.' + self.customScope + '\\.tigAutocomplete')
+                            var menuElement = $('.' + self.customScope + '\\.tigAutocomplete');
                             if (event.originalEvent.type !== 'menuselect' && !menuElement.is(":visible")) {
                                 menuElement.show();
 
