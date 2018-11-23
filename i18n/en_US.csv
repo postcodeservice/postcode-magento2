@@ -35,3 +35,6 @@ Extension status,Extension status
 "Please select a postcode before filling the street field.","Please select a postcode before filling the street field."
 "Enable Netherlands check","Enable Netherlands check"
 "Enable Belgium check","Enable Belgium check"
+"No results found.","No results found."
+"Busy with loading zipcodes...","Busy with loading zipcodes..."
+"Busy with loading streets...","Busy with loading streets..."

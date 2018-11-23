@@ -8,6 +8,19 @@
     background:url('../images/indicator.gif') no-repeat right center !important;
 }
 
+.ui-corner-all a {
+    position: relative;
+    padding: 3px 1em 3px .4em;
+    margin-top: 4px;
+    cursor: pointer;
+    list-style-image: url(data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7);
+    text-decoration: none;
+}
+
+.ui-menu .ui-menu-item li {
+    margin-top: 4px;
+}
+
 /* Default: Magento Luma checkout =================================================================================== */
 
 .tig-postcode-field-group {
@@ -29,6 +42,17 @@
     max-width: calc(100%/3);
 }
 
+.tig-postcode-field-group .tig-postcode-be {
+    max-width: calc(50% - 5px);
+}
+
+.tig-postcode-field-group .tig-housenumber-be {
+    max-width: 25%;
+}
+
+.address .tig-postcode-field-group .tig-housenumber-addition-be {
+    max-width: 22%;
+}
 
 .tig-postcode-field-group .field span {
     overflow: hidden;
@@ -84,6 +108,18 @@
     display: inline-block;
     max-width: 30%; /* IE Fallback */
     max-width: calc(100%/3 - 10px);
+}
+
+.blank.tig-postcode-field-group .tig-postcode-be {
+    max-width: calc(50% - 5px);
+}
+
+.blank.tig-postcode-field-group .tig-housenumber-be {
+    max-width: 25%;
+}
+
+.address .blank.tig-postcode-field-group .tig-housenumber-addition-be {
+    max-width: 22%;
 }
 
 .blank.tig-postcode-validation-message {

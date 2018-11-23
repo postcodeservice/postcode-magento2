@@ -20,7 +20,9 @@ define([
         return originalElement.extend({
             defaults : {
                 imports : {
-                    observeCountry : '${ $.parentName }.country_id:value'
+                    observeCountry : '${ $.parentName }.country_id:value',
+                    observePostcode    : '${ $.parentName }.postcode-field-group.field-group.postcode:value',
+                    observeStreet    : '${ $.parentName }.street.0:value'
                 },
                 isNLPostcodeCheckOn : ko.observable(DataProvider.isPostcodeNLOn())
             },
@@ -31,6 +33,19 @@ define([
                 if (value) {
                     self.switchToBe(value === 'BE');
                 }
+            },
+
+            /**
+             * When going through the autocompleteZipcodezone function, var self gets defined. When going back and forth
+             * through shipping/billing steps the 'this' scope will change, but stays the same within
+             * autocompleteZipcodezone. This observer makes the customScope/Parentname for the current scope available.
+             **/
+            observePostcode : function () {
+                window.customSelf = this;
+            },
+
+            observeStreet : function () {
+                window.customSelf = this;
             },
 
             /**
@@ -67,18 +82,27 @@ define([
                         // This is for setting the init placeholder
                         streetElement.placeholder = placeholder;
                         streetElement.disable();
+                        $('.tig_street_autocomplete .input-text').attr('placeholder', placeholder);
                     }
-                    $('.tig_street_autocomplete .input-text').attr('placeholder', placeholder);
+                    $('.tig_zipcodezone_autocomplete').addClass('tig-postcode-be');
+                    $("div[name*='tig_housenumber']").addClass('tig-housenumber-be');
+                    $("div[name*='tig_housenumber_addition']").addClass('tig-housenumber-addition-be');
                 });
+
+                $('.tig_zipcodezone_autocomplete .input-text').attr('autocomplete', 'no');
+                $('.tig_street_autocomplete .input-text').attr('autocomplete', 'no');
             },
 
             /** Back to the Magento default. **/
             enableStreetField : function () {
                 var self = this;
                 Registry.get(self.parentName + '.street.0', function (streetElement) {
+                    streetElement.placeholder = '';
                     streetElement.enable();
+                    $('.tig_zipcodezone_autocomplete').removeClass('tig-postcode-be');
+                    $("div[name*='tig_housenumber']").removeClass('tig-housenumber-be');
+                    $("div[name*='tig_housenumber_addition']").removeClass('tig-housenumber-addition-be');
                 });
-                $('.tig_street_autocomplete .input-text').attr('placeholder', '');
             },
 
             addAutocomplete : function () {
@@ -92,6 +116,8 @@ define([
                 if (tigClass === '.tig_street_autocomplete') {
                     self.autocompleteStreet(tigClass);
                 }
+
+                self.switchToBe(self.isCountryBe());
             },
 
             /**
@@ -104,22 +130,32 @@ define([
                 $(tigClass + " .input-text").each(function () {
                     $(this).autocomplete({
                         source : function (zipcodezone, response) {
+                            this.menu.element.addClass(self.customScope + ".tigAutocomplete");
                             if (!self.isCountryBe()) {
+                                /**
+                                 * Somehow the loader occasionally pops up on different countries.
+                                 * Here we force remove the loader.
+                                  */
+                                this.element.removeClass('ui-autocomplete-loading');
+                                response([]);
                                 return;
                             }
+                            response([$.mage.__('Busy with loading zipcodes...')]);
                             $.ajax({
                                 method : 'GET',
                                 url    : window.checkoutConfig.postcode.action_url.postcode_be_getpostcode,
                                 data   : {
                                     zipcodezone : zipcodezone.term
                                 },
-                                menu : this.menu
+                                zipcodeElement : this
                             }).done(function (data) {
                                 /**
                                  * This part will refresh the data inside the array
                                  */
+                                this.zipcodeElement.element.removeClass('ui-autocomplete-loading');
+
                                 if (data.success == false) {
-                                    console.log('Zero results found');
+                                    response([$.mage.__('No results found.')]);
                                     return;
                                 }
                                 var selectBoxArr = [];
@@ -128,37 +164,49 @@ define([
                                 });
 
                                 response(selectBoxArr);
-                                this.menu.element.addClass(self.customScope + ".tigAutocomplete");
                             }).fail(function (data) {
                                 console.log(data);
                             });
                         },
                         select : function (event, ui) {
-                            var fields = [
-                                self.parentName + '.city',
-                                self.parentName + '.street.0'
-                            ];
-                            if (self.customScope === 'shippingAddress' && self.isNLPostcodeCheckOn()) {
-                                fields = [
-                                    self.containers[0].containers[0].parentName + '.city',
-                                    self.containers[0].containers[0].parentName + '.street.0'
-                                ];
+                            /** Prevent weird values being inserted into the postcode / city fields **/
+                            if (ui.item.value == $.mage.__('Busy with loading zipcodes...') ||
+                                ui.item.value == $.mage.__('No results found.')) {
+
+                                ui.item.value = '';
+                                return false;
                             }
+                            var fields = [
+                                window.customSelf.parentName + '.city',
+                                window.customSelf.parentName + '.street.0'
+                            ];
+                            //
+                            // if (window.customSelf.customScope === 'shippingAddress' && self.isNLPostcodeCheckOn()) {
+                            //     fields = [
+                            //         window.customSelf.containers[0].containers[0].parentName + '.city',
+                            //         window.customSelf.containers[0].containers[0].parentName + '.street.0'
+                            //     ];
+                            // }
 
                             Registry.get(fields, function (
                                 cityElement,
                                 streetElement
                             ) {
                                 cityElement.set('value', ui.item.value.substring(7, ui.item.value.length));
+                                $('.tig_street_autocomplete .input-text').attr('placeholder', '');
+                                streetElement.placeholder = '';
                                 streetElement.enable();
+                                $("input[name*='postcode']").trigger('change');
+                                $("input[name*='city']").trigger('change');
                             });
                             ui.item.value = ui.item.value.substring(0, 4);
-                            $("input[name*='postcode']").trigger('change');
-                            $("input[name*='city']").trigger('change');
                         },
                         close : function (event) {
-                            var menuElement = $('.' + self.customScope + '\\.tigAutocomplete');
-                            if (event.originalEvent.type !== 'menuselect' && !menuElement.is(":visible")) {
+                            var menuElement = $('.' + window.customSelf.customScope + '\\.tigAutocomplete');
+                            if (event.originalEvent !== undefined &&
+                                event.originalEvent.type !== 'menuselect' &&
+                                !menuElement.is(":visible")
+                            ) {
                                 menuElement.show();
 
                                 return false;
@@ -183,16 +231,23 @@ define([
                     $(this).autocomplete({
                         source : function (request, response) {
                             if (!self.isCountryBe()) {
+                                /**
+                                 * Somehow the loader occasionally pops up on different countries.
+                                 * Here we force remove the loader.
+                                  */
+                                this.element.removeClass('ui-autocomplete-loading');
+                                response([]);
                                 return;
                             }
+                            response([$.mage.__('Busy with loading streets...')]);
                             Registry.get([
-                                self.containers[0].parentName + '.postcode',
-                                self.containers[0].parentName + '.city',
-                                self.parentName + '.0'
+                                window.customSelf.parentName + '.postcode',
+                                window.customSelf.parentName + '.city',
+                                window.customSelf.parentName + '.street.0'
                             ], function (postcodeElement, cityElement, streetElement) {
-                                postcode = postcodeElement.value;
-                                city = cityElement.value;
-                                street = streetElement.value;
+                                postcode = postcodeElement.value();
+                                city = cityElement.value();
+                                street = streetElement.value();
                             });
 
                             $.ajax({
@@ -202,13 +257,16 @@ define([
                                     zipcode : postcode,
                                     city    : city,
                                     street  : street
-                                }
+                                },
+                                streetElement : this
                             }).done(function (data) {
                                 /**
                                  * This part will refresh the data inside the array
                                  */
+                                this.streetElement.element.removeClass('ui-autocomplete-loading');
+
                                 if (data.success == false) {
-                                    console.log('Zero results found');
+                                    response([$.mage.__('No results found.')]);
                                     return;
                                 }
                                 var selectBoxArr = [];
@@ -221,7 +279,15 @@ define([
                                 console.log(data);
                             });
                         },
-                        select : function () {
+                        select : function (event, ui) {
+                            /** Prevent weird values being inserted into the postcode / city fields **/
+                            if (ui.item.value == $.mage.__('Busy with loading zipcodes...') ||
+                                ui.item.value == $.mage.__('No results found.')) {
+
+                                ui.item.value = '';
+                                return false;
+                            }
+
                             $("input[name*='street']").trigger('change');
                         }
                     });
