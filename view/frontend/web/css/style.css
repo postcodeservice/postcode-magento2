@@ -10,15 +10,20 @@
 
 .ui-corner-all a {
     position: relative;
-    padding: 3px 1em 3px .4em;
+    border: 1px solid white;
+    float: left;
+    width: 100%;
+    padding: 10px;
     margin-top: 4px;
     cursor: pointer;
     list-style-image: url(data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7);
     text-decoration: none;
+    box-sizing: border-box;
 }
 
-.ui-menu .ui-menu-item li {
-    margin-top: 4px;
+.ui-menu .ui-menu-item {
+    margin: 0;
+    display: block;
 }
 
 /* Default: Magento Luma checkout =================================================================================== */

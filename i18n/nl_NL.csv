@@ -56,5 +56,6 @@ Support,Support
 "Enable Netherlands check","Zet Nederlandse check aan"
 "Enable Belgium check","Zet Belgische check aan"
 "No results found.","Geen resultaten gevonden."
+"No results found. Please fill in manually.","Geen resultaten gevonden. Vul s.v.p. handmatig in."
 "Busy with loading zipcodes...","Bezig met ophalen van postcodes..."
 "Busy with loading streets...","Bezig met ophalen van straatnamen..."

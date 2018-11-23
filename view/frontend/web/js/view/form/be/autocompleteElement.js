@@ -172,7 +172,6 @@ define([
                             /** Prevent weird values being inserted into the postcode / city fields **/
                             if (ui.item.value == $.mage.__('Busy with loading zipcodes...') ||
                                 ui.item.value == $.mage.__('No results found.')) {
-
                                 ui.item.value = '';
                                 return false;
                             }
@@ -180,13 +179,6 @@ define([
                                 window.customSelf.parentName + '.city',
                                 window.customSelf.parentName + '.street.0'
                             ];
-                            //
-                            // if (window.customSelf.customScope === 'shippingAddress' && self.isNLPostcodeCheckOn()) {
-                            //     fields = [
-                            //         window.customSelf.containers[0].containers[0].parentName + '.city',
-                            //         window.customSelf.containers[0].containers[0].parentName + '.street.0'
-                            //     ];
-                            // }
 
                             Registry.get(fields, function (
                                 cityElement,
@@ -196,8 +188,6 @@ define([
                                 $('.tig_street_autocomplete .input-text').attr('placeholder', '');
                                 streetElement.placeholder = '';
                                 streetElement.enable();
-                                $("input[name*='postcode']").trigger('change');
-                                $("input[name*='city']").trigger('change');
                             });
                             ui.item.value = ui.item.value.substring(0, 4);
                         },
@@ -211,6 +201,8 @@ define([
 
                                 return false;
                             }
+                            $("input[name*='postcode']").trigger('change');
+                            $("input[name*='city']").trigger('change');
                         }
                     });
                 });
@@ -266,7 +258,7 @@ define([
                                 this.streetElement.element.removeClass('ui-autocomplete-loading');
 
                                 if (data.success == false) {
-                                    response([$.mage.__('No results found.')]);
+                                    response([$.mage.__('No results found. Please fill in manually.')]);
                                     return;
                                 }
                                 var selectBoxArr = [];
@@ -282,8 +274,7 @@ define([
                         select : function (event, ui) {
                             /** Prevent weird values being inserted into the postcode / city fields **/
                             if (ui.item.value == $.mage.__('Busy with loading zipcodes...') ||
-                                ui.item.value == $.mage.__('No results found.')) {
-
+                                ui.item.value == $.mage.__('No results found. Please fill in manually.')) {
                                 ui.item.value = '';
                                 return false;
                             }
