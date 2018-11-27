@@ -191,7 +191,7 @@ define([
                                 .textContent = ui.item.value.substring(4, ui.item.value.length);
                             ui.item.value = ui.item.value.substring(0, 4);
                         },
-                        close  : function (event) {
+                        close : function (event) {
                             var menuElement = $('.' + window.customSelf.customScope + '\\.tigAutocomplete');
                             if (event.originalEvent !== undefined &&
                                 event.originalEvent.type !== 'menuselect' &&
@@ -203,7 +203,8 @@ define([
                             }
                             $("input[name*='postcode']").trigger('change');
                             $("input[name*='city']").trigger('change');
-                        }
+                        },
+                        delay : 0
                     });
                 });
             },
@@ -280,7 +281,8 @@ define([
                             }
 
                             $("input[name*='street']").trigger('change');
-                        }
+                        },
+                        delay : 0
                     });
                 });
             },
