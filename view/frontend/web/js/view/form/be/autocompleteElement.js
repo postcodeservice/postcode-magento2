@@ -180,8 +180,10 @@ define([
                                 window.customSelf.parentName + '.street.0'
                             ];
 
-                            Registry.get(fields, function (cityElement,
-                                                           streetElement) {
+                            Registry.get(fields, function (
+                                cityElement,
+                                streetElement
+                            ) {
                                 cityElement.set('value', ui.item.value.substring(7, ui.item.value.length));
                                 $('.tig_street_autocomplete .input-text').attr('placeholder', '');
                                 streetElement.placeholder = '';
