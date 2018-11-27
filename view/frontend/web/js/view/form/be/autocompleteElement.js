@@ -110,11 +110,11 @@ define([
 
                 var tigClass = "." + Object.keys(this.additionalClasses)[0];
                 if (tigClass === '.tig_zipcodezone_autocomplete') {
-                    self.autocompleteZipcodezone(tigClass);
+                    self.autocompleteZipcodezone();
                 }
 
                 if (tigClass === '.tig_street_autocomplete') {
-                    self.autocompleteStreet(tigClass);
+                    self.autocompleteStreet();
                 }
 
                 self.switchToBe(self.isCountryBe());
@@ -126,8 +126,8 @@ define([
              */
             autocompleteZipcodezone : function (tigClass) {
                 var self = this;
-
-                $(tigClass + " .input-text").each(function () {
+                $(".tig_zipcodezone_autocomplete .input-text").each(function () {
+                    $(this).parent().append('<span class="tig-autocomplete-result-city"></span>');
                     $(this).autocomplete({
                         source : function (zipcodezone, response) {
                             this.menu.element.addClass(self.customScope + ".tigAutocomplete");
@@ -135,16 +135,16 @@ define([
                                 /**
                                  * Somehow the loader occasionally pops up on different countries.
                                  * Here we force remove the loader.
-                                  */
+                                 */
                                 this.element.removeClass('ui-autocomplete-loading');
                                 response([]);
                                 return;
                             }
                             response([$.mage.__('Busy with loading zipcodes...')]);
                             $.ajax({
-                                method : 'GET',
-                                url    : window.checkoutConfig.postcode.action_url.postcode_be_getpostcode,
-                                data   : {
+                                method         : 'GET',
+                                url            : window.checkoutConfig.postcode.action_url.postcode_be_getpostcode,
+                                data           : {
                                     zipcodezone : zipcodezone.term
                                 },
                                 zipcodeElement : this
@@ -180,18 +180,18 @@ define([
                                 window.customSelf.parentName + '.street.0'
                             ];
 
-                            Registry.get(fields, function (
-                                cityElement,
-                                streetElement
-                            ) {
+                            Registry.get(fields, function (cityElement,
+                                                           streetElement) {
                                 cityElement.set('value', ui.item.value.substring(7, ui.item.value.length));
                                 $('.tig_street_autocomplete .input-text').attr('placeholder', '');
                                 streetElement.placeholder = '';
                                 streetElement.enable();
                             });
+                            event.target.parentElement.getElementsByClassName('tig-autocomplete-result-city')[0]
+                                .textContent = ui.item.value.substring(4, ui.item.value.length);
                             ui.item.value = ui.item.value.substring(0, 4);
                         },
-                        close : function (event) {
+                        close  : function (event) {
                             var menuElement = $('.' + window.customSelf.customScope + '\\.tigAutocomplete');
                             if (event.originalEvent !== undefined &&
                                 event.originalEvent.type !== 'menuselect' &&
@@ -219,7 +219,7 @@ define([
                 var city = null;
                 var street = null;
 
-                $(tigClass + " .input-text").each(function () {
+                $(".tig_street_autocomplete .input-text").each(function () {
                     $(this).autocomplete({
                         source : function (request, response) {
                             if (!self.isCountryBe()) {

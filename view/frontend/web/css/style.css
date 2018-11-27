@@ -97,6 +97,20 @@
     margin: 0 0 0 5px;
 }
 
+.tig_zipcodezone_autocomplete .control {
+    position: relative;
+}
+
+.tig-autocomplete-result-city {
+    position: absolute;
+    top: 6.5px;
+    left: 46px;
+    color: #909090;
+    max-width: 100px;
+    white-space: nowrap;
+    pointer-events: none;
+}
+
 /* Magento Blank checkout =========================================================================================== */
 
 /* Disable float - which is used in Luma */
