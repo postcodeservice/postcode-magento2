@@ -313,7 +313,7 @@ define([
             },
 
             isCountryBe : function () {
-                var currentFormData = this.source.get(this.dataScope.split('.')[0]);
+                var currentFormData = this.source.get(window.customSelf.customScope);
 
                 return currentFormData && currentFormData.country_id === 'BE';
             },
