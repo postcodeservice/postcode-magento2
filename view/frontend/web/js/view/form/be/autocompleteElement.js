@@ -185,7 +185,7 @@ define([
                                 });
 
                                 response(selectBoxArr);
-                                setTimeout(function(zipcodeElement) {
+                                setTimeout(function (zipcodeElement) {
                                     zipcodeElement.element.off('keydown');
                                 }, 250, this.zipcodeElement);
                             }).fail(function (data) {
