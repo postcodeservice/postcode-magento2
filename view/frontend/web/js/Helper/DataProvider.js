@@ -37,6 +37,13 @@ define(function () {
 
         setPostcodeNlOn: function (postcodeNLOn) {
             isPostcodeNLOn = postcodeNLOn;
+        },
+
+        getPostcodeGroup: function () {
+            if (this.isPostcodeNLOn()) {
+                return '${ $.parentName }.postcode-field-group.field-group.postcode:value';
+            }
+            return '${ $.parentName }.postcode:value';
         }
     };
 });

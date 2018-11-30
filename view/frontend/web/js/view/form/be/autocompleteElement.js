@@ -21,7 +21,7 @@ define([
             defaults : {
                 imports : {
                     observeCountry : '${ $.parentName }.country_id:value',
-                    observePostcode    : '${ $.parentName }.postcode-field-group.field-group.postcode:value',
+                    observePostcode    : DataProvider.getPostcodeGroup(),
                     observeStreet    : '${ $.parentName }.street.0:value'
                 },
                 isNLPostcodeCheckOn : ko.observable(DataProvider.isPostcodeNLOn())
@@ -47,10 +47,13 @@ define([
                     /** Empty out the zipcode field when value is removed. **/
                     var menuElement = $('.' + window.customSelf.customScope + '\\.tigAutocomplete');
                     menuElement.hide();
-                    var zipcodeElement = $('div[name="' + window.customSelf.customScope + '.postcode"]');
+                }
 
+                if (value !== window.currentZipcode) {
+                    var zipcodeElement = $('div[name="' + window.customSelf.customScope + '.postcode"]');
                     zipcodeElement.find('.tig-autocomplete-result-city').text('');
                 }
+                window.currentZipcode = value;
             },
 
             observeStreet : function () {
@@ -171,7 +174,6 @@ define([
 
                                 // Force remove the loader & re-enable tabbing out of the field.
                                 this.zipcodeElement.element.removeClass('ui-autocomplete-loading');
-                                this.zipcodeElement.element.off('keydown');
 
                                 if (data.success == false) {
                                     response([$.mage.__('No results found.')]);
@@ -183,6 +185,9 @@ define([
                                 });
 
                                 response(selectBoxArr);
+                                setTimeout(function(zipcodeElement) {
+                                    zipcodeElement.element.off('keydown');
+                                }, 250, this.zipcodeElement);
                             }).fail(function (data) {
                                 console.log(data);
                             });
@@ -211,6 +216,7 @@ define([
                             event.target.parentElement.getElementsByClassName('tig-autocomplete-result-city')[0]
                                 .textContent = ui.item.value.substring(4, ui.item.value.length);
                             ui.item.value = ui.item.value.substring(0, 4);
+                            window.currentZipcode = ui.item.value;
                         },
                         close : function (event) {
                             var menuElement = $('.' + window.customSelf.customScope + '\\.tigAutocomplete');
@@ -294,7 +300,7 @@ define([
                         },
                         select : function (event, ui) {
                             /** Prevent weird values being inserted into the postcode / city fields **/
-                            if (ui.item.value == $.mage.__('Busy with loading zipcodes...') ||
+                            if (ui.item.value == $.mage.__('Busy with loading streets...') ||
                                 ui.item.value == $.mage.__('No results found. Please fill in manually.')) {
                                 ui.item.value = '';
                                 return false;

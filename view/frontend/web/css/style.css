@@ -4,6 +4,10 @@
     display: none;
 }
 
+.ui-autocomplete {
+    z-index: 950;
+}
+
 .ui-autocomplete-loading {
     background:url('../images/indicator.gif') no-repeat right center !important;
 }
@@ -48,11 +52,11 @@
 }
 
 .tig-postcode-field-group .tig-postcode-be {
-    max-width: calc(50% - 5px);
+    max-width: calc(46% - 5px);
 }
 
 .tig-postcode-field-group .tig-housenumber-be {
-    max-width: 25%;
+    max-width: 28%;
 }
 
 .address .tig-postcode-field-group .tig-housenumber-addition-be {
@@ -105,7 +109,7 @@
     position: absolute;
     top: 6.5px;
     left: 46px;
-    color: #909090;
+    color: #ccc;
     max-width: 100px;
     white-space: nowrap;
     pointer-events: none;
