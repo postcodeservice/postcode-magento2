@@ -52,6 +52,10 @@
                 <postcode_version>v2</postcode_version>
                 <street_version>v2</street_version>
             </api_be>
+            <countries>
+                <enable_nl_check>1</enable_nl_check>
+                <enable_be_check>0</enable_be_check>
+            </countries>
         </tig_postcode>
     </default>
 </config>

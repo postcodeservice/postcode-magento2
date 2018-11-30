@@ -40,8 +40,17 @@ define([
              * through shipping/billing steps the 'this' scope will change, but stays the same within
              * autocompleteZipcodezone. This observer makes the customScope/Parentname for the current scope available.
              **/
-            observePostcode : function () {
+            observePostcode : function (value) {
                 window.customSelf = this;
+
+                if (!value) {
+                    /** Empty out the zipcode field when value is removed. **/
+                    var menuElement = $('.' + window.customSelf.customScope + '\\.tigAutocomplete');
+                    menuElement.hide();
+                    var zipcodeElement = $('div[name="' + window.customSelf.customScope + '.postcode"]');
+
+                    zipcodeElement.find('.tig-autocomplete-result-city').text('');
+                }
             },
 
             observeStreet : function () {
@@ -122,9 +131,8 @@ define([
 
             /**
              * set the auto complete for the zipcode field.
-             * @param tigClass
              */
-            autocompleteZipcodezone : function (tigClass) {
+            autocompleteZipcodezone : function () {
                 var self = this;
                 $(".tig_zipcodezone_autocomplete .input-text").each(function () {
                     $(this).parent().append('<span class="tig-autocomplete-result-city"></span>');
@@ -141,6 +149,14 @@ define([
                                 return;
                             }
                             response([$.mage.__('Busy with loading zipcodes...')]);
+                            /**
+                             * Prevent tabbing while zipcode is still loading.
+                             */
+                            this.element.on('keydown', function (objEvent) {
+                                if (objEvent.keyCode == 9) {
+                                    objEvent.preventDefault();
+                                }
+                            });
                             $.ajax({
                                 method         : 'GET',
                                 url            : window.checkoutConfig.postcode.action_url.postcode_be_getpostcode,
@@ -152,7 +168,10 @@ define([
                                 /**
                                  * This part will refresh the data inside the array
                                  */
+
+                                // Force remove the loader & re-enable tabbing out of the field.
                                 this.zipcodeElement.element.removeClass('ui-autocomplete-loading');
+                                this.zipcodeElement.element.off('keydown');
 
                                 if (data.success == false) {
                                     response([$.mage.__('No results found.')]);
@@ -213,9 +232,8 @@ define([
 
             /**
              * set the auto complete for the street field after zipcodezone is filled.
-             * @param tigClass
              */
-            autocompleteStreet : function (tigClass) {
+            autocompleteStreet : function () {
                 var self = this;
 
                 var postcode = null;
@@ -283,8 +301,7 @@ define([
                             }
 
                             $("input[name*='street']").trigger('change');
-                        },
-                        delay : 0
+                        }
                     });
                 });
             },
