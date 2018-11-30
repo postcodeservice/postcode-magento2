@@ -28,10 +28,10 @@ define([
             },
 
             observeCountry : function (value) {
-                var self = this;
+                window.customSelf = this;
 
                 if (value) {
-                    self.switchToBe(value === 'BE');
+                    window.customSelf.switchToBe(value === 'BE');
                 }
             },
 
