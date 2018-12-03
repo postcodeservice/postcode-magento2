@@ -7,7 +7,7 @@
     "magento/module-quote": "101.0.5|101.0.6"
   },
   "type": "magento2-module",
-  "version": "1.2.0",
+  "version": "1.2.0-RC1",
   "license": "CC-BY-NC-ND-3.0",
   "authors": [
     {
@@ -21,7 +21,7 @@
     "issues": "http://servicedesk.tig.nl/hc/nl/requests/new"
   },
   "homepage": "http://www.postcodeservice.nl",
-  "minimum-stability": "stable",
+  "minimum-stability": "rc",
   "autoload": {
     "files": [
       "registration.php"
