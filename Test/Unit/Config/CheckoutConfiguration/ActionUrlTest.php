@@ -41,19 +41,29 @@ class ActionUrlTest extends TestCase
 
     public function testGetValue()
     {
-        $expectsUrl = 'http://test.nl/postcode/address/service/';
+        $expectsPostcodeNLUrl = 'http://test.nl/postcode/address/service/';
+        $expectsPostcodeBEUrl = 'http://test.nl/postcode/address/service/be/getpostcode';
+        $expectsStreetBEUrl   = 'http://test.nl/postcode/address/service/be/getstreet';
 
         $urlInterfaceMock = $this->getFakeMock(UrlInterface::class)->getMock();
-        $expects = $urlInterfaceMock->expects($this->once());
-        $expects->method('getUrl')->with('postcode/address/service', ['_secure' => true]);
-        $expects->willReturn($expectsUrl);
+        $expects          = $urlInterfaceMock->expects($this->exactly(3));
+        $expects->method('getUrl')->withConsecutive(
+            ['postcode/address/service', ['_secure' => true]],
+            ['postcode/address/service/be/getpostcode', ['_secure' => true]],
+            ['postcode/address/service/be/getstreet', ['_secure' => true]]
+        );
+        $expects->willReturnOnConsecutiveCalls($expectsPostcodeNLUrl, $expectsPostcodeBEUrl, $expectsStreetBEUrl);
 
-        $instance = $this->getInstance([
-            'urlBuilder' => $urlInterfaceMock
-        ]);
+        $instance = $this->getInstance(
+            [
+                'urlBuilder' => $urlInterfaceMock
+            ]
+        );
 
         $returns = [
-            'postcode_service' => $expectsUrl
+            'postcode_service'        => $expectsPostcodeNLUrl,
+            'postcode_be_getpostcode' => $expectsPostcodeBEUrl,
+            'postcode_be_getstreet'   => $expectsStreetBEUrl
         ];
 
         $this->assertEquals($returns, $instance->getValue());

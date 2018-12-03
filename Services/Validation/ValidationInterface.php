@@ -41,4 +41,11 @@ interface ValidationInterface
      * @return bool|mixed
      */
     public function validate($data);
+
+    /**
+     * Defaulted validation keys are postcode and housenumber. Other services might require different params.
+     *
+     * @param $keys
+     */
+    public function setKeys($keys);
 }

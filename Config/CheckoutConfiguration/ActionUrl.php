@@ -57,7 +57,15 @@ class ActionUrl implements CheckoutConfigurationInterface
     public function getValue()
     {
         return [
-            'postcode_service' => $this->urlBuilder->getUrl('postcode/address/service', ['_secure' => true])
+            'postcode_service'        => $this->urlBuilder->getUrl('postcode/address/service', ['_secure' => true]),
+            'postcode_be_getpostcode' => $this->urlBuilder->getUrl(
+                'postcode/address/service/be/getpostcode',
+                ['_secure' => true]
+            ),
+            'postcode_be_getstreet'   => $this->urlBuilder->getUrl(
+                'postcode/address/service/be/getstreet',
+                ['_secure' => true]
+            )
         ];
     }
 }

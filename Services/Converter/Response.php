@@ -49,6 +49,14 @@ class Response implements ConverterInterface
     }
 
     /**
+     * @param $keys
+     */
+    public function setValidationKeys($keys)
+    {
+        $this->validation->setKeys($keys);
+    }
+
+    /**
      * {@inheritDoc}
      */
     public function convert($data)

@@ -54,6 +54,14 @@ class Request implements ConverterInterface
     }
 
     /**
+     * @param $keys
+     */
+    public function setValidationKeys($keys)
+    {
+        $this->validation->setKeys($keys);
+    }
+
+    /**
      * {@inheritDoc}
      */
     public function convert($data)
@@ -62,9 +70,11 @@ class Request implements ConverterInterface
             return false;
         }
 
-        return [
-            'postcode'   => $data['postcode'],
-            'huisnummer' => $data['huisnummer']
-        ];
+        $converted = [];
+        foreach ($this->validation->getKeys() as $key) {
+            $converted[$key] = $data[$key];
+        }
+
+        return $converted;
     }
 }

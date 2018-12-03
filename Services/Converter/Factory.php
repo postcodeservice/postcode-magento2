@@ -52,32 +52,38 @@ class Factory
     }
 
     /**
-     * @param $type
-     * @param $data
+     * @param       $type
+     * @param       $data
+     * @param array $keys
      *
      * @return mixed
      */
-    public function convert($type, $data)
+    public function convert($type, $data, $keys = null)
     {
         foreach ($this->converters as $converter) {
             $this->checkImplementation($converter);
         }
 
-        return $this->converter($type, $data);
+        return $this->converter($type, $data, $keys);
     }
 
     /**
-     * @param $type
-     * @param $data
+     * @param       $type
+     * @param       $data
+     * @param array $keys
      *
      * @return mixed
      * @throws PostcodeException
      */
-    private function converter($type, $data)
+    private function converter($type, $data, $keys)
     {
         if (!isset($this->converters[$type])) {
             // @codingStandardsIgnoreLine
             throw new PostcodeException(__('Could not find type %1 as converter', $type));
+        }
+
+        if ($keys) {
+            $this->converters[$type]->setValidationKeys($keys);
         }
 
         return $this->converters[$type]->convert($data);

@@ -33,12 +33,13 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
     <system>
         <section id="tig_postcode" translate="label" type="text" sortOrder="350" showInDefault="1" showInWebsite="1" showInStore="1">
-            <label>Postcode Service</label>
+            <label>Postcode Service NL/BE</label>
             <tab>sales</tab>
             <resource>Sales_Postcode::configuration</resource>
             <class>postcode-section</class>
             <include path="TIG_Postcode::system/support.xml"/>
             <include path="TIG_Postcode::system/configuration.xml" />
+            <include path="TIG_Postcode::system/countries.xml" />
         </section>
     </system>
 </config>

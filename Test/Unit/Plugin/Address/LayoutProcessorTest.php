@@ -56,6 +56,15 @@ class LayoutProcessorTest extends TestCase
                                                         'config' => [
                                                             'additionalClasses' => 'test'
                                                         ]
+                                                    ],
+                                                    'street' => [
+                                                        'children' => [
+                                                            0 => [
+                                                                'config' => [
+                                                                    'additionalClasses' => 'test'
+                                                                ]
+                                                            ]
+                                                        ]
                                                     ]
                                                 ]
                                             ]
@@ -239,6 +248,17 @@ class LayoutProcessorTest extends TestCase
     }
 
     /**
+     * @return array
+     */
+    public function beDataProvider()
+    {
+        return [
+            'test without additional classes' => [$this->addressFieldsForMultipleBillingFields],
+//            'test with additional classes' => [$this->addressFieldsForAdditionalClasses]
+        ];
+    }
+
+    /**
      * @param $isDisplayBillingOnPaymentMethodAvailble
      * @param $fields
      * @param $hasBilling
@@ -248,7 +268,7 @@ class LayoutProcessorTest extends TestCase
     public function testAfterProcess($isDisplayBillingOnPaymentMethodAvailble, $fields, $hasBilling)
     {
         $instance = $this->getInstance([
-            'moduleConfiguration' => $this->getModuleMock(),
+            'moduleConfiguration' => $this->getModuleMock(false, true),
             'scopeConfig' => $this->getScopeConfigMock($isDisplayBillingOnPaymentMethodAvailble)
         ]);
 
@@ -280,6 +300,27 @@ class LayoutProcessorTest extends TestCase
 
     }
 
+    public function testBeAfterProcess()
+    {
+        $instance = $this->getInstance([
+            'moduleConfiguration' => $this->getModuleMock(false, false, true),
+            'scopeConfig' => $this->getScopeConfigMock(true)
+        ]);
+
+        $result = $instance->afterProcess(null, $this->addressFieldsForMultipleBillingFields);
+
+        $checkShippingFields = $result['components']['checkout']['children']['steps']['children']['shipping-step']
+                               ['children']['shippingAddress']['children']['shipping-address-fieldset']['children'];
+
+
+        $checkBillingFields = $result['components']['checkout']['children']['steps']['children']['billing-step']
+                              ['children']['payment']['children']['payments-list']['children']['test-form']
+                              ['children']['form-fields']['children'];
+
+        $this->assertContains('tig_zipcodezone_autocomplete', $checkBillingFields['postcode']['config']['additionalClasses']);
+        $this->assertContains('tig_zipcodezone_autocomplete', $checkShippingFields['postcode']['config']['additionalClasses']);
+    }
+
     public function testAfterProcessWhereModusIsOff()
     {
         $instance = $this->getInstance([
@@ -299,7 +340,7 @@ class LayoutProcessorTest extends TestCase
     private function getScopeConfigMock($returns = false)
     {
         $scopeMock = $this->getFakeMock(ScopeConfigInterface::class)->getMock();
-        $scopeExpects = $scopeMock->expects($this->once());
+        $scopeExpects = $scopeMock->expects($this->any());
         $scopeExpects->method('getValue')->with(
             'checkout/options/display_billing_address_on',
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
@@ -311,15 +352,27 @@ class LayoutProcessorTest extends TestCase
 
     /**
      * @param bool $returns
+     * @param bool $nl
+     * @param bool $be
      *
      * @return \PHPUnit_Framework_MockObject_MockObject
      */
-    private function getModuleMock($returns = false)
+    private function getModuleMock($returns = false, $nl = false, $be = false)
     {
         $moduleMock = $this->getFakeMock(ModuleConfiguration::class)->getMock();
         $moduleExpects = $moduleMock->expects($this->once());
         $moduleExpects->method('isModusOff');
         $moduleExpects->willReturn($returns);
+
+        if (!$returns) {
+            $moduleCheckNl = $moduleMock->expects($this->any());
+            $moduleCheckNl->method('isNLCheckEnabled');
+            $moduleCheckNl->willReturn($nl);
+
+            $moduleCheckBe = $moduleMock->expects($this->any());
+            $moduleCheckBe->method('isBECheckEnabled');
+            $moduleCheckBe->willReturn($be);
+        }
 
         return $moduleMock;
     }

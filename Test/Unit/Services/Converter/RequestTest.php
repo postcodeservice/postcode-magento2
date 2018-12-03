@@ -66,6 +66,8 @@ class RequestTest extends TestInterface
             'validation' => $this->validationRequestMock($data, $validation)
         ]);
 
+        $instance->setValidationKeys(['postcode', 'huisnummer']);
+
         $this->assertSame($expected, $instance->convert($data));
     }
 
@@ -81,6 +83,12 @@ class RequestTest extends TestInterface
         $mockExpects = $mock->expects($this->once());
         $mockExpects->method('validate')->with($data);
         $mockExpects->willReturn($return);
+
+        if ($return) {
+            $mockExpects = $mock->expects($this->once());
+            $mockExpects->method('getKeys');
+            $mockExpects->willReturn(['postcode', 'huisnummer']);
+        }
 
         return $mock;
     }

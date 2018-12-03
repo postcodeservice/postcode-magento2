@@ -167,5 +167,176 @@ class ApiTest extends TestCase
 
         $this->getInstance()->getRequest($this->endpoint);
     }
+
+    public function testApiInstanceForVersionAbove4()
+    {
+        $resetZendParams = $this->zendClient->expects($this->once());
+        $resetZendParams->method('resetParameters');
+
+        //SetUri
+        $uri = 'https://api.fakelocation.com/v4/json/';
+        $apiConfigUri = $this->apiConfiguration->expects($this->once());
+        $apiConfigUri->method('getBaseUri')->willReturn($uri);
+
+        $endpointGetEndpoint = $this->endpoint->expects($this->once());
+        $endpointGetEndpoint->method('getEndpoint')->willReturn('getAddress/');
+
+        $zendClientUri = $this->zendClient->expects($this->once());
+        $zendClientUri->method('setUri')->with($uri.'getAddress/');
+
+        $requestData = ['postcode' => '1014BA', 'huisnummer' => '37'];
+        $requestDataWithHeader = ['postcode' => '1014BA', 'huisnummer' => '37'];
+
+        $this->endpoint->expects($this->any())
+            ->method('getRequestData')->willReturnOnConsecutiveCalls($requestData, $requestDataWithHeader);
+
+        $clientConfigId = $this->clientConfiguration->expects($this->once());
+        $clientConfigId->method('getClientId')->willReturn('11111');
+
+        $clientConfigApi = $this->clientConfiguration->expects($this->once());
+        $clientConfigApi->method('getApiKey')->willReturn('APIKEY');
+
+        //SetParameters
+        $endpointMethod = $this->endpoint->expects($this->exactly(3));
+        $endpointMethod->method('getMethod')->willReturn(ZendClient::GET);
+
+        $zendClientSetMethod = $this->zendClient->expects($this->once());
+        $zendClientSetMethod->method('setMethod')->with(ZendClient::GET);
+
+        $clientConfigDomain = $this->clientConfiguration->expects($this->once());
+        $clientConfigDomain->method('getDomainUrl')->willReturn('www.fakedomain.com');
+
+        $serverIp = $this->serverAddress->expects($this->once());
+        $serverIp->method('getServerAddress')->willReturn('127.0.0.1');
+
+        $completedRequestParams = ['postcode' => '1014BA', 'huisnummer' => '37',
+                                   'domain' => 'www.fakedomain.com', 'remote_ip' => '127.0.0.1'
+        ];
+
+        $zendClientParams = $this->zendClient->expects($this->once());
+        $zendClientParams->method('setParameterGet')->with($completedRequestParams);
+
+        $fakeResponse = new \Zend_Http_Response('200', array(), '{}');
+
+        $zendRequest = $this->zendClient->expects($this->once());
+        $zendRequest->method('request')->willReturn($fakeResponse);
+
+        $this->getInstance()->getRequest($this->endpoint);
+    }
+
+    public function testApiInstanceForVersionAbove4AsPost()
+    {
+        $resetZendParams = $this->zendClient->expects($this->once());
+        $resetZendParams->method('resetParameters');
+
+        //SetUri
+        $uri = 'https://api.fakelocation.com/v4/json/';
+        $apiConfigUri = $this->apiConfiguration->expects($this->once());
+        $apiConfigUri->method('getBaseUri')->willReturn($uri);
+
+        $endpointGetEndpoint = $this->endpoint->expects($this->once());
+        $endpointGetEndpoint->method('getEndpoint')->willReturn('getAddress/');
+
+        $zendClientUri = $this->zendClient->expects($this->once());
+        $zendClientUri->method('setUri')->with($uri.'getAddress/');
+
+        $requestData = ['postcode' => '1014BA', 'huisnummer' => '37'];
+        $requestDataWithHeader = ['postcode' => '1014BA', 'huisnummer' => '37'];
+
+        $this->endpoint->expects($this->any())
+            ->method('getRequestData')->willReturnOnConsecutiveCalls($requestData, $requestDataWithHeader);
+
+        $clientConfigId = $this->clientConfiguration->expects($this->once());
+        $clientConfigId->method('getClientId')->willReturn('11111');
+
+        $clientConfigApi = $this->clientConfiguration->expects($this->once());
+        $clientConfigApi->method('getApiKey')->willReturn('APIKEY');
+
+        //SetParameters
+        $endpointMethod = $this->endpoint->expects($this->exactly(3));
+        $endpointMethod->method('getMethod')->willReturn(ZendClient::POST);
+
+        $zendClientSetMethod = $this->zendClient->expects($this->once());
+        $zendClientSetMethod->method('setMethod')->with(ZendClient::POST);
+
+        $clientConfigDomain = $this->clientConfiguration->expects($this->once());
+        $clientConfigDomain->method('getDomainUrl')->willReturn('www.fakedomain.com');
+
+        $serverIp = $this->serverAddress->expects($this->once());
+        $serverIp->method('getServerAddress')->willReturn('127.0.0.1');
+
+        $completedRequestParams = ['postcode' => '1014BA', 'huisnummer' => '37',
+                                   'domain' => 'www.fakedomain.com', 'remote_ip' => '127.0.0.1'
+        ];
+
+        $zendClientParams = $this->zendClient->expects($this->once());
+        $zendClientParams->method('setParameterPost')->with($completedRequestParams);
+
+        $fakeResponse = new \Zend_Http_Response('200', array(), '{}');
+
+        $zendRequest = $this->zendClient->expects($this->once());
+        $zendRequest->method('request')->willReturn($fakeResponse);
+
+        $this->getInstance()->getRequest($this->endpoint);
+    }
+
+    public function testApiInstanceForBePostcode()
+    {
+        $resetZendParams = $this->zendClient->expects($this->once());
+        $resetZendParams->method('resetParameters');
+
+        //SetUri
+        $uri = 'https://api.fakelocation.com/be/v4/';
+        $apiConfigUri = $this->apiConfiguration->expects($this->once());
+        $apiConfigUri->method('getBeBaseUri')->willReturn($uri);
+
+        $endpointGetEndpoint = $this->endpoint->expects($this->exactly(3));
+        $endpointGetEndpoint->method('getEndpoint')->willReturn('postcode-find/');
+
+        $endpointGetEndpointCountry = $this->endpoint->expects($this->exactly(2));
+        $endpointGetEndpointCountry->method('getCountry')->willReturn('BE');
+
+        $zendClientUri = $this->zendClient->expects($this->once());
+        $zendClientUri->method('setUri')->with($uri.'postcode-find/');
+
+        $requestData = ['zipcodezone' => '1000'];
+        $requestDataWithHeader = ['zipcodezone' => '1000'];
+
+        $this->endpoint->expects($this->any())
+            ->method('getRequestData')->willReturnOnConsecutiveCalls($requestData, $requestDataWithHeader);
+
+        $clientConfigId = $this->clientConfiguration->expects($this->once());
+        $clientConfigId->method('getClientId')->willReturn('11111');
+
+        $clientConfigApi = $this->clientConfiguration->expects($this->once());
+        $clientConfigApi->method('getApiKey')->willReturn('APIKEY');
+
+        //SetParameters
+        $endpointMethod = $this->endpoint->expects($this->exactly(3));
+        $endpointMethod->method('getMethod')->willReturn(ZendClient::GET);
+
+        $zendClientSetMethod = $this->zendClient->expects($this->once());
+        $zendClientSetMethod->method('setMethod')->with(ZendClient::GET);
+
+        $clientConfigDomain = $this->clientConfiguration->expects($this->once());
+        $clientConfigDomain->method('getDomainUrl')->willReturn('www.fakedomain.com');
+
+        $serverIp = $this->serverAddress->expects($this->once());
+        $serverIp->method('getServerAddress')->willReturn('127.0.0.1');
+
+        $completedRequestParams = ['zipcodezone' => '1000',
+                                   'domain' => 'www.fakedomain.com', 'remote_ip' => '127.0.0.1'
+        ];
+
+        $zendClientParams = $this->zendClient->expects($this->once());
+        $zendClientParams->method('setParameterGet')->with($completedRequestParams);
+
+        $fakeResponse = new \Zend_Http_Response('200', array(), '{}');
+
+        $zendRequest = $this->zendClient->expects($this->once());
+        $zendRequest->method('request')->willReturn($fakeResponse);
+
+        $this->getInstance()->getRequest($this->endpoint);
+    }
 }
 

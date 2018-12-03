@@ -44,7 +44,11 @@ class Response implements ValidationInterface
             return false;
         }
 
-        if (!$this->checkKeys($data)) {
+        if ($this->checkIfRecursive($data)) {
+            return $this->validateElements($data);
+        }
+
+        if (!$this->validateResult($data)) {
             return false;
         }
 
@@ -53,6 +57,22 @@ class Response implements ValidationInterface
         }
 
         return true;
+    }
+
+    /**
+     * @return array
+     */
+    public function getKeys()
+    {
+        return $this->keysToContain;
+    }
+
+    /**
+     * @param $keys
+     */
+    public function setKeys($keys)
+    {
+        $this->keysToContain = $keys;
     }
 
     /**
@@ -84,5 +104,54 @@ class Response implements ValidationInterface
         }
 
         return true;
+    }
+
+    /**
+     * @param array $result
+     *
+     * @return bool
+     */
+    private function validateResult($result)
+    {
+        if (!$this->checkKeys($result)) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * BE returns multiple results whereas NL always returns one result. This method is to determine
+     * if multiple results were returned.
+     *
+     * @param array $data
+     *
+     * @return bool
+     */
+    private function checkIfRecursive($data)
+    {
+        return count($data) != count($data, COUNT_RECURSIVE);
+    }
+
+    /**
+     * @param $data
+     *
+     * @return bool
+     */
+    private function validateElements($data)
+    {
+        $success = false;
+        array_walk(
+            $data,
+            function ($result) use (&$success) {
+                if (!$this->checkKeys($result)) {
+                    $success = false;
+                    return;
+                }
+                $success = true;
+            }
+        );
+
+        return $success;
     }
 }
