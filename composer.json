@@ -21,7 +21,7 @@
     "issues": "http://servicedesk.tig.nl/hc/nl/requests/new"
   },
   "homepage": "http://www.postcodeservice.nl",
-  "minimum-stability": "rc",
+  "minimum-stability": "RC",
   "autoload": {
     "files": [
       "registration.php"
