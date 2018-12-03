@@ -4,6 +4,32 @@
     display: none;
 }
 
+.ui-autocomplete {
+    z-index: 950;
+}
+
+.ui-autocomplete-loading {
+    background:url('../images/indicator.gif') no-repeat right center !important;
+}
+
+.ui-corner-all a {
+    position: relative;
+    border: 1px solid white;
+    float: left;
+    width: 100%;
+    padding: 10px;
+    margin-top: 4px;
+    cursor: pointer;
+    list-style-image: url(data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7);
+    text-decoration: none;
+    box-sizing: border-box;
+}
+
+.ui-menu .ui-menu-item {
+    margin: 0;
+    display: block;
+}
+
 /* Default: Magento Luma checkout =================================================================================== */
 
 .tig-postcode-field-group {
@@ -25,6 +51,17 @@
     max-width: calc(100%/3);
 }
 
+.tig-postcode-field-group .tig-postcode-be {
+    max-width: calc(46% - 5px);
+}
+
+.tig-postcode-field-group .tig-housenumber-be {
+    max-width: 28%;
+}
+
+.address .tig-postcode-field-group .tig-housenumber-addition-be {
+    max-width: 22%;
+}
 
 .tig-postcode-field-group .field span {
     overflow: hidden;
@@ -64,6 +101,20 @@
     margin: 0 0 0 5px;
 }
 
+.tig_zipcodezone_autocomplete .control {
+    position: relative;
+}
+
+.tig-autocomplete-result-city {
+    position: absolute;
+    top: 6.5px;
+    left: 46px;
+    color: #ccc;
+    max-width: 100px;
+    white-space: nowrap;
+    pointer-events: none;
+}
+
 /* Magento Blank checkout =========================================================================================== */
 
 /* Disable float - which is used in Luma */
@@ -80,6 +131,18 @@
     display: inline-block;
     max-width: 30%; /* IE Fallback */
     max-width: calc(100%/3 - 10px);
+}
+
+.blank.tig-postcode-field-group .tig-postcode-be {
+    max-width: calc(50% - 5px);
+}
+
+.blank.tig-postcode-field-group .tig-housenumber-be {
+    max-width: 25%;
+}
+
+.address .blank.tig-postcode-field-group .tig-housenumber-addition-be {
+    max-width: 22%;
 }
 
 .blank.tig-postcode-validation-message {

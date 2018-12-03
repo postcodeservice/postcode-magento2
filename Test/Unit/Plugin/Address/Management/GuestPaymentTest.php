@@ -51,7 +51,9 @@ class GuestPaymentTest extends TestCase
                  'setTigHousenumber',
                  'setTigHousenumberAddition',
                  'getCheckoutFields',
-                 'setCheckoutFields'
+                 'setCheckoutFields',
+                 'getTigZipcodezone',
+                 'setTigZipcodezone'
                 ]
             )->getMock();
 
@@ -99,7 +101,9 @@ class GuestPaymentTest extends TestCase
                  'setTigHousenumber',
                  'setTigHousenumberAddition',
                  'getCheckoutFields',
-                 'setCheckoutFields'
+                 'setCheckoutFields',
+                 'getTigZipcodezone',
+                 'setTigZipcodezone'
                 ]
             )->getMock();
 

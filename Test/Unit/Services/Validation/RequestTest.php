@@ -41,4 +41,11 @@ class RequestTest extends TestInterface
     {
         $this->assertFalse($this->getInstance()->validate('request'));
     }
+
+    public function testSetAndGetKeys()
+    {
+        $instance = $this->getInstance();
+        $instance->setKeys(['postcode', 'huisnummer']);
+        $this->assertEquals($instance->getKeys(), ['postcode', 'huisnummer']);
+    }
 }

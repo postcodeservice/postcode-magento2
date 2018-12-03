@@ -73,8 +73,51 @@ class LayoutProcessor
             return $jsLayout;
         }
 
-        $jsLayout = $this->processShippingFields($jsLayout);
-        $jsLayout = $this->processBillingFields($jsLayout);
+        if ($this->moduleConfiguration->isBECheckEnabled()) {
+            $jsLayout = $this->processBeShippingFields($jsLayout);
+            $jsLayout = $this->processBeBillingFields($jsLayout);
+        }
+
+        if ($this->moduleConfiguration->isNLCheckEnabled()) {
+            $jsLayout = $this->processShippingFields($jsLayout);
+            $jsLayout = $this->processBillingFields($jsLayout);
+        }
+
+        return $jsLayout;
+    }
+
+    /**
+     * @param $jsLayout
+     *
+     * @return mixed
+     */
+    private function processBeShippingFields($jsLayout)
+    {
+        $shippingFields = &$jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']
+                           ['children']['shippingAddress']['children']['shipping-address-fieldset']['children'];
+
+        $this->setFieldToAutocomplete($shippingFields);
+
+        return $jsLayout;
+    }
+
+    /**
+     * @param $jsLayout
+     *
+     * @return mixed
+     */
+    private function processBeBillingFields($jsLayout)
+    {
+        $billingFields = &$jsLayout['components']['checkout']['children']['steps']['children']['billing-step']
+                          ['children']['payment']['children']['payments-list']['children'];
+
+        foreach ($billingFields as $key => &$billingForm) {
+            if (strpos($key, '-form') === false) {
+                continue;
+            }
+
+            $this->setFieldToAutocomplete($billingForm['children']['form-fields']['children']);
+        }
 
         return $jsLayout;
     }
@@ -194,6 +237,7 @@ class LayoutProcessor
             'dataScope' => '',
             'visible'   => true
         ];
+        $fields['country_id']['sortOrder'] = '64';
 
         return $fieldset;
     }
@@ -250,9 +294,11 @@ class LayoutProcessor
 
     /**
      * Sets visible on false for the shipping fields that are re-writend by the postcode service.
-     * @param $fields
-     * @param $section
-     * @param $disableRequired
+     *
+     * @param      $fields
+     * @param      $section
+     * @param bool $disableRequired
+     * @param bool $be
      */
     private function setFieldToHide(&$fields, $section, $disableRequired = false)
     {
@@ -271,6 +317,32 @@ class LayoutProcessor
         }
 
         $fields[$section]['config']['additionalClasses'] = $additionalClass;
+    }
+
+    /**
+     * @param $fields
+     */
+    private function setFieldToAutocomplete(&$fields)
+    {
+        $additionalClass = null;
+        if (isset($fields['postcode']['config']['additionalClasses'])) {
+            $additionalClass = $fields['postcode']['config']['additionalClasses'];
+        }
+        $additionalClass .= ' tig_zipcodezone_autocomplete';
+        $fields['postcode']['config']['additionalClasses'] = $additionalClass;
+        $fields['postcode']['config']['elementTmpl'] = 'TIG_Postcode/form/element/autocomplete';
+        $fields['postcode']['sortOrder'] = '65';
+
+        $additionalClass = null;
+        if (isset($fields['street']['children'][0]['config']['additionalClasses'])) {
+            $additionalClass = $fields['street']['children'][0]['config']['additionalClasses'];
+        }
+
+        $additionalClass .= ' tig_street_autocomplete';
+        $fields['street']['children'][0]['config']['additionalClasses'] = $additionalClass;
+        $fields['street']['children'][0]['config']['elementTmpl'] = 'TIG_Postcode/form/element/autocomplete';
+
+        $fields['country_id']['sortOrder'] = '64';
     }
 
     /**

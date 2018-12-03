@@ -50,7 +50,9 @@ class ShippingTest extends TestCase
                  'setTigHousenumber',
                  'setTigHousenumberAddition',
                  'getCheckoutFields',
-                 'setCheckoutFields'
+                 'setCheckoutFields',
+                 'getTigZipcodezone',
+                 'setTigZipcodezone'
                 ]
             )->getMock();
 
@@ -95,7 +97,9 @@ class ShippingTest extends TestCase
                  'setTigHousenumber',
                  'setTigHousenumberAddition',
                  'getCheckoutFields',
-                 'setCheckoutFields'
+                 'setCheckoutFields',
+                 'getTigZipcodezone',
+                 'setTigZipcodezone'
                 ]
             )->getMock();
 

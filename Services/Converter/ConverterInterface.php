@@ -41,4 +41,11 @@ interface ConverterInterface
      * @return array|bool
      */
     public function convert($data);
+
+    /**
+     * Defaulted validation keys are postcode and housenumber. Other services might require different params.
+     *
+     * @param $keys
+     */
+    public function setValidationKeys($keys);
 }

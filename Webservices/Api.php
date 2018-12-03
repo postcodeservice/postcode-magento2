@@ -103,7 +103,7 @@ class Api
 
         try {
             $response = $this->zendClient->request();
-            $response = $this->converter->convert('response', $response->getBody());
+            $response = $this->converter->convert('response', $response->getBody(), $endpoint->getResponseKeys());
         } catch (\Zend_Http_Client_Exception $exception) {
             $response = [
                 'success' => false,
@@ -124,20 +124,21 @@ class Api
     {
         $version = str_replace('v', '', $this->apiConfiguration->getVersion());
 
-        if ((int)$version >= 4) {
+        if ((int)$version >= 4 || $endpoint->getCountry() === 'BE') {
+            $this->zendClient->setConfig(['strict' => false]);
             $this->zendClient->setHeaders([
                 'X-Client_Id'   => $this->clientConfiguration->getClientId(),
                 'X-Secure_Code' => $this->clientConfiguration->getApiKey()
             ]);
+
+            return;
         }
 
-        if ((int)$version < 4) {
-            $params = $endpoint->getRequestData();
-            $params['client_id']   = $this->clientConfiguration->getClientId();
-            $params['secure_code'] = $this->clientConfiguration->getApiKey();
+        $params = $endpoint->getRequestData();
+        $params['client_id']   = $this->clientConfiguration->getClientId();
+        $params['secure_code'] = $this->clientConfiguration->getApiKey();
 
-            $endpoint->setRequestData($params);
-        }
+        $endpoint->setRequestData($params);
     }
 
     /**
@@ -162,10 +163,16 @@ class Api
 
     /**
      * @param EndpointInterface $endpoint
+     *
+     * @throws \Zend_Http_Client_Exception
      */
     private function setUri(EndpointInterface $endpoint)
     {
         $uri = $this->apiConfiguration->getBaseUri() . $endpoint->getEndpoint();
+        if ($endpoint->getCountry() == 'BE') {
+            $uri = $this->apiConfiguration->getBeBaseUri($endpoint->getEndpoint()) . $endpoint->getEndpoint();
+        }
+
         $this->zendClient->setUri($uri);
     }
 }

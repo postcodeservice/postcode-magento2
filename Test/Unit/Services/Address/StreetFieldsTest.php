@@ -81,7 +81,9 @@ class StreetFieldsTest extends TestCase
                  'setTigHousenumber',
                  'setTigHousenumberAddition',
                  'getCheckoutFields',
-                 'setCheckoutFields'
+                 'setCheckoutFields',
+                 'getTigZipcodezone',
+                 'setTigZipcodezone'
                 ]
             )->getMock();
 

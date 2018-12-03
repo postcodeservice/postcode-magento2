@@ -59,4 +59,19 @@ interface EndpointInterface
      * @return string
      */
     public function getMethod();
+
+    /**
+     * @return string
+     */
+    public function getCountry();
+
+    /**
+     * @return array
+     */
+    public function getRequestKeys();
+
+    /**
+     * @return array
+     */
+    public function getResponseKeys();
 }

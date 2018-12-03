@@ -35,6 +35,8 @@ use Magento\Framework\App\Action\Context;
 use Magento\Framework\App\Action\Action;
 use Magento\Framework\Controller\Result\JsonFactory;
 use TIG\Postcode\Webservices\Endpoints\GetAddress;
+use TIG\Postcode\Webservices\Endpoints\GetBePostcode;
+use TIG\Postcode\Webservices\Endpoints\GetBeStreet;
 use TIG\Postcode\Services\Converter\Factory;
 
 class Service extends Action
@@ -55,24 +57,40 @@ class Service extends Action
     private $getAddress;
 
     /**
+     * @var GetBePostcode
+     */
+    private $getBePostcode;
+
+    /**
+     * @var GetBeStreet
+     */
+    private $getBeStreet;
+
+    /**
      * Service constructor.
      *
-     * @param Context     $context
-     * @param JsonFactory $jsonFactory
-     * @param Factory     $converterFactory
-     * @param GetAddress  $getAddress
+     * @param Context        $context
+     * @param JsonFactory    $jsonFactory
+     * @param Factory        $converterFactory
+     * @param GetAddress     $getAddress
+     * @param GetBePostcode  $getBePostcode
+     * @param GetBeStreet    $getBeStreet
      */
     public function __construct(
         Context $context,
         JsonFactory $jsonFactory,
         Factory $converterFactory,
-        GetAddress $getAddress
+        GetAddress $getAddress,
+        GetBePostcode $getBePostcode,
+        GetBeStreet $getBeStreet
     ) {
         parent::__construct($context);
 
-        $this->jsonFactory = $jsonFactory;
-        $this->converter   = $converterFactory;
-        $this->getAddress  = $getAddress;
+        $this->jsonFactory    = $jsonFactory;
+        $this->converter      = $converterFactory;
+        $this->getAddress     = $getAddress;
+        $this->getBePostcode  = $getBePostcode;
+        $this->getBeStreet    = $getBeStreet;
     }
 
     /**
@@ -81,24 +99,65 @@ class Service extends Action
     public function execute()
     {
         $params = $this->getRequest()->getParams();
-        $params = $this->converter->convert('request', $params);
+
+        $country = $this->getCountry($params);
+        $method = $this->getMethod($params, $country);
+
+        $endpoint = $this->getEndpoint($country, $method);
+        $params = $this->converter->convert('request', $params, $endpoint->getRequestKeys());
         if (!$params) {
-            return $this->returnJson([
-                'success' => false,
-                'error'   => __('Request validation failed')
-            ]);
+            return $this->returnFailure(__('Request validation failed'));
         }
 
-        $this->getAddress->setRequestData($params);
-        $result = $this->getAddress->call();
+        $endpoint->setRequestData($params);
+        $result = $endpoint->call();
         if (!$result) {
-            return $this->returnJson([
-                'success' => false,
-                'error'   => __('Response validation failed')
-            ]);
+            return $this->returnFailure(__('Response validation failed'));
         }
 
         return $this->returnJson($result);
+    }
+
+    /**
+     * @param $params
+     * @param $country
+     *
+     * @return string
+     */
+    private function getMethod($params, $country)
+    {
+        if (isset($params[$country])) {
+            return $params[$country];
+        }
+
+        return 'postcodecheck';
+    }
+
+    /**
+     * @param $params
+     *
+     * @return string
+     */
+    private function getCountry($params)
+    {
+        if (key($params) == 'be') {
+            return key($params);
+        }
+
+        return 'nl';
+    }
+
+    /**
+     * @param string $error
+     *
+     * @return \Magento\Framework\Controller\Result\Json
+     */
+    private function returnFailure($error)
+    {
+        return $this->returnJson([
+            'success' => false,
+            'error'   => $error
+        ]);
     }
 
     /**
@@ -110,5 +169,18 @@ class Service extends Action
     {
         $response = $this->jsonFactory->create();
         return $response->setData($data);
+    }
+
+    private function getEndpoint($country, $method)
+    {
+        if ($country == 'be' && $method == 'getpostcode') {
+            return $this->getBePostcode;
+        }
+
+        if ($country == 'be' && $method == 'getstreet') {
+            return $this->getBeStreet;
+        }
+
+        return $this->getAddress;
     }
 }

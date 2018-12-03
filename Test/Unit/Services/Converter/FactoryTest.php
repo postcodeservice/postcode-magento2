@@ -33,6 +33,7 @@ namespace TIG\Postcode\Test\Unit\Services\Converter;
 
 use TIG\Postcode\Test\TestCase;
 use TIG\Postcode\Services\Converter;
+use TIG\Postcode\Services\Converter\Request;
 
 class FactoryTest extends TestCase
 {
@@ -85,5 +86,27 @@ class FactoryTest extends TestCase
         }
 
         $this->fail('Should trow an exception, but got none');
+    }
+
+    public function testCorrectConvertion()
+    {
+        $requestMock = $this->getFakeMock(Request::class)->getMock();
+        $requestMock->expects($this->once())->method('convert')->willReturn(
+            ['success' => true, 'straatnaam' => 'Kabelweg', 'woonplaats' => 'Amsterdam']
+        );
+
+        $instance = $this->getInstance(
+            [
+                'converters' => [
+                    'correct' => $requestMock
+                ]
+            ]
+        );
+
+        $this->assertEquals(
+            $instance->convert(
+                'correct', ['postcode' => '1014BA', 'huisnummer' => 37], ['success', 'straatnaam', 'woonplaats']
+            ), ['success' => true, 'straatnaam' => 'Kabelweg', 'woonplaats' => 'Amsterdam']
+        );
     }
 }

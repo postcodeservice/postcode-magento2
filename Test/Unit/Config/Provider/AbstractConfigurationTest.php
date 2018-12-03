@@ -127,7 +127,7 @@ abstract class AbstractConfigurationTest extends TestCase
 
     protected function setModuleOutputEnabled($enabled = true)
     {
-        $moduleOutPutMock = $this->moduleManagerMock->expects($this->once());
+        $moduleOutPutMock = $this->moduleManagerMock->expects($this->any());
         $moduleOutPutMock->method('isOutputEnabled');
         $moduleOutPutMock->with('TIG_Postcode');
         $moduleOutPutMock->willReturn($enabled);

@@ -38,8 +38,14 @@ class ApiConfigurationTest extends AbstractConfigurationTest
     protected $instanceClass = ApiConfiguration::class;
 
     private $base = 'https://postcode.tig.nl/api';
+    private $beBase = 'https://postcode-be.tig.nl/api/be';
 
-    private $version = 'v3';
+    private $version         = 'v3';
+    private $postcodeVersion = 'v2';
+    private $streetVersion   = 'v2';
+
+    private $postcodeEndpoint = 'postcode-find/';
+    private $streetEndpoint   = 'street-find/';
 
     private $type = 'json';
 
@@ -58,6 +64,12 @@ class ApiConfigurationTest extends AbstractConfigurationTest
     {
         $this->setXpath(ApiConfiguration::XPATH_API_BASE, $this->base);
         $this->assertEquals($this->base, $this->instance->getBase());
+    }
+
+    public function testBeGetBase()
+    {
+        $this->setXpath(ApiConfiguration::XPATH_API_BE_BASE, $this->beBase);
+        $this->assertEquals($this->beBase, $this->instance->getBase('BE'));
     }
 
     public function testGetVersion()
@@ -89,5 +101,43 @@ class ApiConfigurationTest extends AbstractConfigurationTest
 
         $expected = $this->base . '/' . $this->version . '/' . $this->type . '/';
         $this->assertEquals($expected, $this->instance->getBaseUri());
+    }
+
+    public function testGetBeBasePostcodeUri()
+    {
+        $this->setXpathConsecutive(
+            [
+                ApiConfiguration::XPATH_API_BE_BASE,
+                ApiConfiguration::XPATH_API_BE_POSTCODE_VERSION,
+                ApiConfiguration::XPATH_API_BE_STREET_VERSION,
+            ],
+            [
+                $this->beBase,
+                $this->postcodeVersion,
+                $this->streetVersion
+            ]
+        );
+
+        $expected = $this->beBase . '/' . $this->postcodeVersion . '/';
+        $this->assertEquals($expected, $this->instance->getBeBaseUri($this->postcodeEndpoint));
+    }
+
+    public function testGetBeBaseStreetUri()
+    {
+        $this->setXpathConsecutive(
+            [
+                ApiConfiguration::XPATH_API_BE_BASE,
+                ApiConfiguration::XPATH_API_BE_POSTCODE_VERSION,
+                ApiConfiguration::XPATH_API_BE_STREET_VERSION,
+            ],
+            [
+                $this->beBase,
+                $this->postcodeVersion,
+                $this->streetVersion
+            ]
+        );
+
+        $expected = $this->beBase . '/' . $this->streetVersion . '/';
+        $this->assertEquals($expected, $this->instance->getBeBaseUri($this->streetEndpoint));
     }
 }

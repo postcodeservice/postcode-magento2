@@ -34,5 +34,6 @@
     <extension_attributes for="Magento\Quote\Api\Data\AddressInterface">
         <attribute code="tig_housenumber" type="string" />
         <attribute code="tig_housenumber_addition" type="string" />
+        <attribute code="tig_zipcodezone" type="string" />
     </extension_attributes>
 </config>

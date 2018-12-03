@@ -37,6 +37,8 @@ class ModuleConfiguration extends AbstractConfigProvider
     const XPATH_CHECKOUT_COMPATIBILITY    = 'tig_postcode/configuration/checkout_compatible';
     const XPATH_MODULE_STABILITY          = 'tig_postcode/stability';
     const XPATH_SUPPORTED_MAGENTO_VERSION = 'tig_postcode/supported_magento_version';
+    const XPATH_NETHERLANDS_CHECK         = 'tig_postcode/countries/enable_nl_check';
+    const XPATH_BELGIUM_CHECK             = 'tig_postcode/countries/enable_be_check';
 
     /**
      * Should return on of these values
@@ -126,5 +128,25 @@ class ModuleConfiguration extends AbstractConfigProvider
     public function getCheckoutCompatibility($store = null)
     {
         return $this->getConfigFromXpath(static::XPATH_CHECKOUT_COMPATIBILITY, $store);
+    }
+
+    /**
+     * @param null $store
+     *
+     * @return bool
+     */
+    public function isNLCheckEnabled($store = null)
+    {
+        return (bool) $this->getConfigFromXpath(static::XPATH_NETHERLANDS_CHECK, $store);
+    }
+
+    /**
+     * @param null $store
+     *
+     * @return bool
+     */
+    public function isBECheckEnabled($store = null)
+    {
+        return (bool) $this->getConfigFromXpath(static::XPATH_BELGIUM_CHECK, $store);
     }
 }
