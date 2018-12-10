@@ -100,9 +100,6 @@ define([
                     $("div[name*='tig_housenumber']").addClass('tig-housenumber-be');
                     $("div[name*='tig_housenumber_addition']").addClass('tig-housenumber-addition-be');
                 });
-
-                $('.tig_zipcodezone_autocomplete .input-text').attr('autocomplete', 'no');
-                $('.tig_street_autocomplete .input-text').attr('autocomplete', 'no');
             },
 
             /** Back to the Magento default. **/
@@ -129,7 +126,9 @@ define([
                     self.autocompleteStreet();
                 }
 
-                self.switchToBe(self.isCountryBe());
+                // Force auto complete off
+                $('.tig_zipcodezone_autocomplete .input-text').attr('autocomplete', 'no');
+                $('.tig_street_autocomplete .input-text').attr('autocomplete', 'no');
             },
 
             /**
