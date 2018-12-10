@@ -212,30 +212,31 @@ class LayoutProcessor
      */
     private function processAddress($fieldset, $scope, $deps)
     {
-        $fieldset['postcode-field-group'] = [
-            'component' => 'TIG_Postcode/js/view/form/fields',
-            'type'      => 'group',
-            'provider'  => 'checkoutProvider',
-            'sortOrder' => '65',
-            'config'    => [
-                'customScope' => $scope,
-                'template'    => 'TIG_Postcode/checkout/field-group',
+        $fieldset['postcode-field-group']  = [
+            'validation' => null,
+            'component'  => 'TIG_Postcode/js/view/form/fields',
+            'type'       => 'group',
+            'provider'   => 'checkoutProvider',
+            'sortOrder'  => '65',
+            'config'     => [
+                'customScope'       => $scope,
+                'template'          => 'TIG_Postcode/checkout/field-group',
                 'additionalClasses' => $this->moduleConfiguration->getCheckoutCompatibility()
             ],
-            'deps'      => $deps,
-            'children'  => [
+            'deps'       => $deps,
+            'children'   => [
                 'field-group' => [
                     'component'   => 'uiComponent',
                     'displayArea' => 'field-group',
-                    'children'  => [
+                    'children'    => [
                         'postcode'             => $fieldset['postcode'],
                         'housenumber'          => $this->getHouseNumberField($scope),
                         'housenumber_addition' => $this->getHouseNumberAdditionField($scope)
                     ]
                 ]
             ],
-            'dataScope' => '',
-            'visible'   => true
+            'dataScope'  => '',
+            'visible'    => true
         ];
         $fields['country_id']['sortOrder'] = '64';
 

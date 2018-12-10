@@ -46,8 +46,8 @@ class Checkouts implements ArrayInterface
             ['value' => 'default', 'label' => __('Two Step Checkout Luma')],
             ['value' => 'blank', 'label' => __('Two Step Checkout Blank')],
             ['value' => 'mageplaza', 'label' => __('Mageplaza One Step Checkout')],
-            ['value' => 'danslo', 'label' => __('Rubic Clean Checkout')],
-            ['value' => 'amasty', 'label' => __('Amasty One Step Checkout')]
+            ['value' => 'danslo', 'label' => __('Rubic Clean Checkout v2.0.0')],
+            ['value' => 'amasty', 'label' => __('Amasty One Step Checkout v1.6.0 - v1.8.17')]
         ];
         // @codingStandardsIgnoreEnd
 
