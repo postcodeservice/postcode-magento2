@@ -57,10 +57,6 @@ class Shipping
     // @codingStandardsIgnoreLine
     public function beforeAssign($subject, $cartId, AddressInterface $address)
     {
-        if (!$address) {
-            return [$cartId, $address];
-        }
-
         $attributes = $address->getExtensionAttributes();
         if (empty($attributes)) {
             return [$cartId, $address];
