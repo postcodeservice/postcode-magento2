@@ -63,6 +63,10 @@ class Payment
         PaymentInterface $paymentMethod,
         AddressInterface $billingAddress = null
     ) {
+        if (!$billingAddress) {
+            return [$cartId, $paymentMethod, $billingAddress];
+        }
+
         $attributes = $billingAddress->getExtensionAttributes();
         if (empty($attributes)) {
             return [$cartId, $paymentMethod, $billingAddress];

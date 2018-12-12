@@ -65,6 +65,10 @@ class GuestPayment
         PaymentInterface $paymentMethod,
         AddressInterface $billingAddress = null
     ) {
+        if (!$billingAddress) {
+            return [$cartId, $email, $paymentMethod, $billingAddress];
+        }
+
         $attributes = $billingAddress->getExtensionAttributes();
         if (empty($attributes)) {
             return [$cartId, $email, $paymentMethod, $billingAddress];
