@@ -73,7 +73,8 @@ class LayoutProcessor
             return $jsLayout;
         }
 
-        if ($this->moduleConfiguration->isBECheckEnabled()) {
+        if ($this->moduleConfiguration->getCheckoutCompatibility() != 'mageplaza'
+            && $this->moduleConfiguration->isBECheckEnabled()) {
             $jsLayout = $this->processBeShippingFields($jsLayout);
             $jsLayout = $this->processBeBillingFields($jsLayout);
         }
