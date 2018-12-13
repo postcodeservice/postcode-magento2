@@ -34,6 +34,7 @@ namespace TIG\Postcode\Test\Unit\Config\Provider;
 use TIG\Postcode\Test\TestCase;
 use \TIG\Postcode\Config\Provider\CheckoutConfiguration;
 use \TIG\Postcode\Config\CheckoutConfiguration\GetCheckoutCompatibility;
+use TIG\Postcode\Test\Unit\Config\CheckoutConfiguration\GetCheckoutCompatibilityTest;
 
 class CheckoutConfigurationTest extends TestCase
 {
@@ -58,5 +59,28 @@ class CheckoutConfigurationTest extends TestCase
         ];
 
         $this->assertEquals($result, $instance->getConfig());
+    }
+
+    public function testGetConfigWithInvalidClass()
+    {
+        $wrongClassMock = $this->getFakeMock(GetCheckoutCompatibilityTest::class)->disableOriginalConstructor()
+            ->getMock();
+
+        $instance = $this->getInstance([
+            'postcodeConfiguration' => [
+                'test' => $wrongClassMock
+            ]
+        ]);
+
+        try {
+            $instance->getConfig();
+        } catch (\Exception $exception) {
+            $shouldReceive = 'test is not an implementation of ' .
+                \TIG\Postcode\Config\CheckoutConfiguration\CheckoutConfigurationInterface::class;
+            $this->assertEquals($shouldReceive, $exception->getMessage());
+            return;
+        }
+
+        $this->fail('Should trow an exception, but got none');
     }
 }

@@ -31,6 +31,7 @@
  */
 namespace TIG\Postcode\Test\Unit\Webservice;
 
+use TIG\Postcode\Exception;
 use TIG\Postcode\Webservices\Api;
 use TIG\Postcode\Test\TestCase;
 
@@ -337,6 +338,16 @@ class ApiTest extends TestCase
         $zendRequest->method('request')->willReturn($fakeResponse);
 
         $this->getInstance()->getRequest($this->endpoint);
+    }
+
+    public function testApiWithHttpClientException()
+    {
+        $zendRequest = $this->zendClient->expects($this->once());
+        $zendRequest->method('request')->willThrowException(new \Zend_Http_Client_Exception());
+
+        $response = $this->getInstance()->getRequest($this->endpoint);
+
+        $this->assertEquals(false, $response['success']);
     }
 }
 

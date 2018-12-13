@@ -123,7 +123,7 @@ class FactoryTest extends TestCase
                 true
             ],
             'Incorrect keys in Data array' => [
-                ['succes' => true, 'straatnaam' => 'kabelweg', 'stad' => 'Amsterdam'],
+                ['success' => true, 'straatnaam' => 'kabelweg', 'stad' => 'Amsterdam'],
                 false
             ],
             'Incorrect format of Data' => [
@@ -131,7 +131,7 @@ class FactoryTest extends TestCase
                 false
             ],
             'Limit calls response' => [
-                ['succes' => true, 'straatnaam' => 'Opvraag limiet bereikt', 'stad' => 'Amsterdam'],
+                ['success' => true, 'straatnaam' => 'Opvraag limiet bereikt', 'woonplaats' => 'Amsterdam'],
                 false
             ]
         ];
@@ -143,6 +143,10 @@ class FactoryTest extends TestCase
             'Correct Recursive Data array' => [
                 [['postcode' => '1000', 'plaats' => 'Brussel'], ['postcode' => '1060', 'plaats' => 'Brussel']],
                 true
+            ],
+            'Incorrect Recursive Data array' => [
+                [['zipcode' => '1000', 'woonplaats' => 'Brussel'], ['zipcode' => '1060', 'woonplaats' => 'Brussel']],
+                false
             ]
         ];
     }
