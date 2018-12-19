@@ -51,6 +51,5 @@
                 <field id="tig_postcode/configuration/checkout_compatible" negative="1">mageplaza</field>
             </depends>
         </field>
-
     </group>
 </include>

@@ -96,6 +96,14 @@
             <source_model>TIG\Postcode\Config\Source\Checkouts</source_model>
             <config_path>tig_postcode/configuration/checkout_compatible</config_path>
         </field>
+
+        <group id="mageplaza_explanation" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+            <frontend_model>TIG\Postcode\Block\Adminhtml\Config\Checkout\Mageplaza</frontend_model>
+            <fieldset_css>tig_postcode-section</fieldset_css>
+            <depends>
+                <field id="checkout_compatible">mageplaza</field>
+            </depends>
+        </group>
     </group>
 
     <!-- Field Parser settings -->
