@@ -61,4 +61,8 @@ Support,Support
 "Busy with loading streets...","Bezig met ophalen van straatnamen..."
 "Supporting Dutch and Belgian addresses","Ondersteuning voor Nederlandse en Belgische addressen"
 "Countries","Landen"
-
+"Using MagePlaza OneStepCheckout","Gebruik van MagePlaza OneStepCheckout"
+"The codes to support the MagePlaza OneStepCheckout extension has been moved to a new extension.","De codes om de MagePlaza OneStepCheckout te ondersteunen zijn verhuist naar een losse extensie."
+"Please follow the instructions in the following link to make this extension compatible with the MagePlaza extension.","Om de MagePlaza extensie compatible te maken met de Postcode extensie dient u de stappen te volgen in de volgende handleiding:"
+"Click here to see which checkout extensions are supported, and how to install the checkout support extension.","Klik hier om te zien welke checkout extensies ondersteund worden, en hoe je de checkout support extensie moet installeren."
+"Checkout support extension installation manual","Checkout support extensie installatie handleiding"
