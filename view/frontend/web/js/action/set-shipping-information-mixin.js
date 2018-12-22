@@ -57,8 +57,8 @@ define([
             }
 
             // < M2.3.0
-            shippingAddress['extension_attributes']['tig_housenumber']          = shippingAddress.customAttributes.tig_housenumber;	             if (shippingAddress.customAttributes !== undefined || shippingAddress.customAttributes.tig_housenumber !== undefined) {
-                shippingAddress['extension_attributes']['tig_housenumber_addition'] = shippingAddress.customAttributes.tig_housenumber_addition;	                 shippingAddress['extension_attributes']['tig_housenumber']          = shippingAddress.customAttributes.tig_housenumber;
+            if (shippingAddress.customAttributes !== undefined || shippingAddress.customAttributes.tig_housenumber !== undefined) {
+                shippingAddress['extension_attributes']['tig_housenumber']          = shippingAddress.customAttributes.tig_housenumber;
                 shippingAddress['extension_attributes']['tig_housenumber_addition'] = shippingAddress.customAttributes.tig_housenumber_addition;
             }
             // >= M2.3.0
