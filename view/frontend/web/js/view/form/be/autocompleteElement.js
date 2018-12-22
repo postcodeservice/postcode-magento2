@@ -304,7 +304,8 @@ define([
                                 ui.item.value = '';
                                 return false;
                             }
-
+                        },
+                        close : function (event, ui) {
                             $("input[name*='street']").trigger('change');
                         }
                     });
