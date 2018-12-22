@@ -48,7 +48,7 @@ define([
                 return originalAction();
             }
 
-            if (shippingAddress.customAttributes === undefined || shippingAddress.customAttributes.tig_housenumber === undefined) {
+            if (shippingAddress.customAttributes === undefined) {
                 return originalAction();
             }
 
@@ -56,8 +56,16 @@ define([
                 shippingAddress['extension_attributes'] = {};
             }
 
-            shippingAddress['extension_attributes']['tig_housenumber']          = shippingAddress.customAttributes.tig_housenumber;
-            shippingAddress['extension_attributes']['tig_housenumber_addition'] = shippingAddress.customAttributes.tig_housenumber_addition;
+            // < M2.3.0
+            shippingAddress['extension_attributes']['tig_housenumber']          = shippingAddress.customAttributes.tig_housenumber;	             if (shippingAddress.customAttributes !== undefined || shippingAddress.customAttributes.tig_housenumber !== undefined) {
+                shippingAddress['extension_attributes']['tig_housenumber_addition'] = shippingAddress.customAttributes.tig_housenumber_addition;	                 shippingAddress['extension_attributes']['tig_housenumber']          = shippingAddress.customAttributes.tig_housenumber;
+                shippingAddress['extension_attributes']['tig_housenumber_addition'] = shippingAddress.customAttributes.tig_housenumber_addition;
+            }
+            // >= M2.3.0
+            if (shippingAddress.customAttributes[0].attribute_code === 'tig_housenumber') {
+                shippingAddress['extension_attributes']['tig_housenumber']          = shippingAddress.customAttributes[0].value;
+                shippingAddress['extension_attributes']['tig_housenumber_addition'] = shippingAddress.customAttributes[1].value;
+            }
 
             return originalAction();
         });
