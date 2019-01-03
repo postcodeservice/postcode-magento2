@@ -3,8 +3,8 @@
   "description": "TIG Magento 2 Postcode extension",
   "require": {
     "php": "~7.0|~7.1|~7.2",
-    "magento/module-checkout": "100.2.6|100.2.7",
-    "magento/module-quote": "101.0.5|101.0.6"
+    "magento/module-checkout": "100.2.6|100.2.7|100.3.0",
+    "magento/module-quote": "101.0.5|101.0.6|101.1.0"
   },
   "type": "magento2-module",
   "version": "1.2.0",
