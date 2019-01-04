@@ -60,6 +60,7 @@ define([
             if (billingAddress.customAttributes !== undefined || billingAddress.customAttributes.tig_housenumber !== undefined) {
                 billingAddress['extension_attributes']['tig_housenumber']          = billingAddress.customAttributes.tig_housenumber;
                 billingAddress['extension_attributes']['tig_housenumber_addition'] = billingAddress.customAttributes.tig_housenumber_addition;
+                return originalAction();
             }
             // >= M2.3.0
             if (billingAddress.customAttributes[0].attribute_code === 'tig_housenumber') {

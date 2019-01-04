@@ -21,13 +21,17 @@ define([
             defaults : {
                 imports : {
                     observeCountry : '${ $.parentName }.country_id:value',
-                    observePostcode    : DataProvider.getPostcodeGroup(),
+                    observePostcode    : '${ $.parentName }.postcode-field-group.field-group.postcode:value',
                     observeStreet    : '${ $.parentName }.street.0:value'
                 },
-                isNLPostcodeCheckOn : ko.observable(DataProvider.isPostcodeNLOn())
+                isBePostcodeCheckOn : ko.observable(DataProvider.isPostcodeBeOn())
             },
 
             observeCountry : function (value) {
+                if (!this.isBePostcodeCheckOn()) {
+                    return;
+                }
+
                 window.customSelf = this;
 
                 if (value) {
@@ -41,6 +45,10 @@ define([
              * autocompleteZipcodezone. This observer makes the customScope/Parentname for the current scope available.
              **/
             observePostcode : function (value) {
+                if (!this.isBePostcodeCheckOn()) {
+                    return;
+                }
+
                 window.customSelf = this;
 
                 if (!value) {
@@ -57,6 +65,10 @@ define([
             },
 
             observeStreet : function () {
+                if (!this.isBePostcodeCheckOn()) {
+                    return;
+                }
+
                 window.customSelf = this;
             },
 
@@ -78,16 +90,12 @@ define([
             disableStreetField : function () {
                 var self = this;
 
+
                 var fields = [
-                    self.parentName + '.postcode',
+                    self.parentName + '.postcode-field-group.field-group.postcode',
                     self.parentName + '.street.0'
                 ];
-                if (self.isNLPostcodeCheckOn()) {
-                    fields = [
-                        self.parentName + '.postcode-field-group.field-group.postcode',
-                        self.parentName + '.street.0'
-                    ];
-                }
+
                 var placeholder = $.mage.__('Please select a postcode before filling the street field.');
                 Registry.get(fields, function (postcodeElement, streetElement) {
                     if (!postcodeElement.value()) {
@@ -259,7 +267,7 @@ define([
                             }
                             response([$.mage.__('Busy with loading streets...')]);
                             Registry.get([
-                                window.customSelf.parentName + '.postcode',
+                                window.customSelf.parentName + '.postcode-field-group.field-group.postcode',
                                 window.customSelf.parentName + '.city',
                                 window.customSelf.parentName + '.street.0'
                             ], function (postcodeElement, cityElement, streetElement) {
