@@ -39,22 +39,22 @@ class DataProviderTest extends TestCase
 {
     protected $instanceClass = DataProvider::class;
 
-    public function testIsPostcodeNLOn()
+    public function testIsPostcodeBeOn()
     {
         $instance = $this->getInstance([
             'configuration' => $this->getConfigurationMock(true)
         ]);
 
-        $this->assertEquals(true, $instance->isPostcodeNLCheckOn());
+        $this->assertEquals(true, $instance->isPostcodeBeCheckOn());
     }
 
-    public function testIsPostcodeNLOff()
+    public function testIsPostcodeBeOff()
     {
         $instance = $this->getInstance([
             'configuration' => $this->getConfigurationMock(false)
         ]);
 
-        $this->assertEquals(false, $instance->isPostcodeNLCheckOn());
+        $this->assertEquals(false, $instance->isPostcodeBeCheckOn());
     }
 
     /**+
@@ -66,7 +66,7 @@ class DataProviderTest extends TestCase
     {
         $mock = $this->getFakeMock(ModuleConfiguration::class)->getMock();
         $mockExpects = $mock->expects($this->once());
-        $mockExpects->method('isNLCheckEnabled');
+        $mockExpects->method('isBeCheckEnabled');
         $mockExpects->willReturn($enabled);
 
         return $mock;

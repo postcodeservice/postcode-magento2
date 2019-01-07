@@ -73,7 +73,8 @@ class LayoutProcessor
             return $jsLayout;
         }
 
-        if ($this->moduleConfiguration->isBECheckEnabled()) {
+        if ($this->moduleConfiguration->getCheckoutCompatibility() != 'mageplaza'
+            && $this->moduleConfiguration->isBECheckEnabled()) {
             $jsLayout = $this->processBeShippingFields($jsLayout);
             $jsLayout = $this->processBeBillingFields($jsLayout);
         }
@@ -97,6 +98,9 @@ class LayoutProcessor
                            ['children']['shippingAddress']['children']['shipping-address-fieldset']['children'];
 
         $this->setFieldToAutocomplete($shippingFields);
+        if (!$this->moduleConfiguration->isNLCheckEnabled()) {
+            $shippingFields = $this->processBeAddress($shippingFields, 'shippingAddress', []);
+        }
 
         return $jsLayout;
     }
@@ -117,7 +121,33 @@ class LayoutProcessor
             }
 
             $this->setFieldToAutocomplete($billingForm['children']['form-fields']['children']);
+            if (!$this->moduleConfiguration->isNLCheckEnabled()) {
+                $billingForm['children']['form-fields']['children'] = $this->processBeAddress(
+                    $billingForm['children']['form-fields']['children'],
+                    $billingForm['dataScopePrefix'],
+                    []
+                );
+            }
         }
+
+        return $jsLayout;
+    }
+
+    /**
+     * Hide the original postcode field and retrieve the postcode-field-group even when the NL check is off
+     *
+     * @param $fieldset
+     * @param $scope
+     * @param $deps
+     *
+     * @return mixed
+     */
+    private function processBeAddress($fieldset, $scope, $deps)
+    {
+        $jsLayout = $this->processAddress($fieldset, $scope, $deps);
+        $jsLayout['postcode-field-group']['component'] = 'Magento_Ui/js/form/components/group';
+        $jsLayout['postcode-field-group']['config']['template'] = 'TIG_Postcode/checkout/field-be-group';
+        $this->setFieldToHide($jsLayout, 'postcode', true);
 
         return $jsLayout;
     }
@@ -212,32 +242,33 @@ class LayoutProcessor
      */
     private function processAddress($fieldset, $scope, $deps)
     {
-        $fieldset['postcode-field-group'] = [
-            'component' => 'TIG_Postcode/js/view/form/fields',
-            'type'      => 'group',
-            'provider'  => 'checkoutProvider',
-            'sortOrder' => '65',
-            'config'    => [
-                'customScope' => $scope,
-                'template'    => 'TIG_Postcode/checkout/field-group',
+        $fieldset['postcode-field-group']  = [
+            'validation' => null,
+            'component'  => 'TIG_Postcode/js/view/form/fields',
+            'type'       => 'group',
+            'provider'   => 'checkoutProvider',
+            'sortOrder'  => '65',
+            'config'     => [
+                'customScope'       => $scope,
+                'template'          => 'TIG_Postcode/checkout/field-group',
                 'additionalClasses' => $this->moduleConfiguration->getCheckoutCompatibility()
             ],
-            'deps'      => $deps,
-            'children'  => [
+            'deps'       => $deps,
+            'children'   => [
                 'field-group' => [
                     'component'   => 'uiComponent',
                     'displayArea' => 'field-group',
-                    'children'  => [
+                    'children'    => [
                         'postcode'             => $fieldset['postcode'],
                         'housenumber'          => $this->getHouseNumberField($scope),
                         'housenumber_addition' => $this->getHouseNumberAdditionField($scope)
                     ]
                 ]
             ],
-            'dataScope' => '',
-            'visible'   => true
+            'dataScope'  => '',
+            'visible'    => true
         ];
-        $fields['country_id']['sortOrder'] = '64';
+        $fieldset['country_id']['sortOrder'] = '64';
 
         return $fieldset;
     }

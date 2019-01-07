@@ -32,7 +32,7 @@
 -->
 <include xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_include.xsd">
     <!--Configuration section-->
-    <group id="countries" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+    <group id="countries" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
         <label>Countries</label>
         <frontend_model>TIG\Postcode\Block\Adminhtml\Config\Form\Field\Fieldset</frontend_model>
         <fieldset_css>tig_postcode-section</fieldset_css>
@@ -47,7 +47,9 @@
             <label>Enable Belgium check</label>
             <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
             <config_path>tig_postcode/countries/enable_be_check</config_path>
+            <depends>
+                <field id="tig_postcode/configuration/checkout_compatible" negative="1">mageplaza</field>
+            </depends>
         </field>
-
     </group>
 </include>

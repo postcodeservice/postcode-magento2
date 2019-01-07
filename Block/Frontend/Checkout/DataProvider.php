@@ -67,8 +67,8 @@ class DataProvider extends Template implements BlockInterface
     /**
      * @return bool
      */
-    public function isPostcodeNLCheckOn()
+    public function isPostcodeBeCheckOn()
     {
-        return $this->configuration->isNLCheckEnabled();
+        return $this->configuration->isBECheckEnabled();
     }
 }

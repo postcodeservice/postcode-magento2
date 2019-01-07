@@ -18,22 +18,40 @@
  * It is available through the world-wide-web at this URL:
  * http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  * If you are unable to obtain it through the world-wide-web, please send an email
- * to servicedesk@totalinternetgroup.nl so we can send you a copy immediately.
+ * to servicedesk@tig.nl so we can send you a copy immediately.
  *
  * DISCLAIMER
  *
  * Do not edit or add to this file if you wish to upgrade this module to newer
  * versions in the future. If you wish to customize this module for your
- * needs please contact servicedesk@totalinternetgroup.nl for more information.
+ * needs please contact servicedesk@tig.nl for more information.
  *
  * @copyright   Copyright (c) Total Internet Group B.V. https://tig.nl/copyright
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
-?>
-<script type="text/javascript">
-    require([
-        'TIG_Postcode/js/Helper/DataProvider'
-    ], function(DataProvider) {
-        DataProvider.setPostcodeBeOn('<?php /* @escapeNotVerified */ echo $block->isPostcodeBeCheckOn();?>');
-    })
-</script>
+namespace TIG\Postcode\Block\Adminhtml\Config\Checkout;
+
+use Magento\Framework\View\Element\Template;
+use Magento\Framework\Data\Form\Element\Renderer\RendererInterface;
+use Magento\Framework\Data\Form\Element\AbstractElement;
+
+class Mageplaza extends Template implements RendererInterface
+{
+    const MODULE_NAME = 'TIG_Postcode';
+
+    // @codingStandardsIgnoreLine
+    protected $_template = 'TIG_Postcode::config/checkout/mageplaza.phtml';
+
+    /**
+     * @param AbstractElement $element
+     *
+     * @return string
+     */
+    public function render(AbstractElement $element)
+    {
+        /** @noinspection PhpUndefinedMethodInspection */
+        $this->setElement($element);
+
+        return $this->toHtml();
+    }
+}

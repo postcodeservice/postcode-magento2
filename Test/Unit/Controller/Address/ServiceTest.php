@@ -107,6 +107,28 @@ class ServiceTest extends TestCase
         $this->assertTrue($result instanceof \Magento\Framework\Controller\Result\Json);
     }
 
+    /**
+     * @param $converterFails
+     * @param $params
+     *
+     * @dataProvider dataProvider
+     */
+    public function testExecuteWithEmptyResultShouldAlwaysReturnJsonObject($converterFails, $params)
+    {
+        $instance = $this->getInstance([
+            'context' => $this->getContextMock($params),
+            'jsonFactory' => $this->getJsonFactory(),
+            'converterFactory' => $this->getConverterMock($converterFails, $params),
+            'getAddress' => $this->getAddressCallMock($converterFails, $params, true),
+            'getBePostcode' => $this->getBePostcodeCallMock($converterFails, $params),
+            'getBeStreet' => $this->getBeStreetCallMock($converterFails, $params),
+        ]);
+
+
+        $result = $instance->execute();
+        $this->assertTrue($result instanceof \Magento\Framework\Controller\Result\Json);
+    }
+
     private function getJsonFactory()
     {
         $jsonFactoryMock = $this->getFakeMock(JsonFactory::class)->setMethods(['create'])->getMock();
@@ -116,7 +138,7 @@ class ServiceTest extends TestCase
 
     }
 
-    private function getAddressCallMock($returns = false, $params)
+    private function getAddressCallMock($returns = false, $params, $failResponse = false)
     {
         $addressMock = $this->getFakeMock(GetAddress::class)->setMethods([
             'setRequestData', 'call', 'getCountry', 'getMethod'
@@ -126,7 +148,12 @@ class ServiceTest extends TestCase
         $setExpects->method('setRequestData')->with($params);
 
         $callExpects = $addressMock->expects($this->any());
-        $callExpects->method('call')->willReturn($returns);
+
+        if ($failResponse) {
+            $callExpects->method('call')->willReturn(false);
+        } else {
+            $callExpects->method('call')->willReturn($returns);
+        }
 
         $countryExpects = $addressMock->expects($this->any());
         $countryExpects->method('getCountry')->willReturn('nl');

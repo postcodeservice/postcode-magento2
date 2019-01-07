@@ -92,6 +92,18 @@ class GuestPaymentTest extends TestCase
         $this->assertEquals($expected, $instance->beforeSavePaymentInformation(null, 1, 'test@tig.nl', $paymentMock, $address));
     }
 
+    public function testBeforeAssignWithoutAddress()
+    {
+        $address = null;
+        $instance = $this->getInstance();
+
+        $paymentMock = $this->getFakeMock(PaymentInterface::class)->getMock();
+        $expected    = [1, 'test@tig.nl', $paymentMock, $address];
+        $this->assertEquals(
+            $expected, $instance->beforeSavePaymentInformation(null, 1, 'test@tig.nl', $paymentMock, $address)
+        );
+    }
+
     public function testBeforeAssignWithIncorrectAttributes()
     {
         $extensionAttributeMock = $this->getFakeMock(AddressExtensionInterface::class)

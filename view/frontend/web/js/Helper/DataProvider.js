@@ -29,21 +29,14 @@
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
 define(function () {
-    var isPostcodeNLOn = 1;
+    var isPostcodeBeOn = 0;
     return {
-        isPostcodeNLOn: function () {
-            return isPostcodeNLOn;
+        isPostcodeBeOn: function () {
+            return isPostcodeBeOn;
         },
 
-        setPostcodeNlOn: function (postcodeNLOn) {
-            isPostcodeNLOn = postcodeNLOn;
+        setPostcodeBeOn: function (postcodeBeOn) {
+            isPostcodeBeOn = postcodeBeOn;
         },
-
-        getPostcodeGroup: function () {
-            if (this.isPostcodeNLOn()) {
-                return '${ $.parentName }.postcode-field-group.field-group.postcode:value';
-            }
-            return '${ $.parentName }.postcode:value';
-        }
     };
 });

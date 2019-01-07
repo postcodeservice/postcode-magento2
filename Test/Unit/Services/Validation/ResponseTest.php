@@ -41,4 +41,10 @@ class ResponseTest extends TestInterface
     {
         $this->assertFalse($this->getInstance()->validate('response'));
     }
+
+    public function testDefaultGetKeys()
+    {
+        $expected = ['success', 'straatnaam', 'woonplaats'];
+        $this->assertEquals($expected, $this->getInstance()->getKeys());
+    }
 }

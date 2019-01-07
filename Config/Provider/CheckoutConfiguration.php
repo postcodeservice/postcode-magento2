@@ -79,7 +79,7 @@ class CheckoutConfiguration implements ConfigProviderInterface
     {
         if (!($configuration instanceof CheckoutConfigurationInterface)) {
             // @codingStandardsIgnoreLine
-            throw new Exception(__('%1 is not an implementaiton of %2', $key, CheckoutConfigurationInterface::class));
+            throw new Exception(__('%1 is not an implementation of %2', $key, CheckoutConfigurationInterface::class));
         }
     }
 }
