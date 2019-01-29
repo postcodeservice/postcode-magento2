@@ -265,19 +265,6 @@
     padding: 2rem 1rem 2rem 1rem;
 }
 
-.postcode-section .admin__page-nav-link:after {
-    float:right;
-    width: 30px;
-    height: 30px;
-    margin-top:-5px;
-    margin-right: 3px;
-
-    background-image: url(../images/logo_tig.png) !important;
-    background-size: 25px !important;
-    background-repeat:no-repeat;
-    content: ' ';
-}
-
 /* Identity - Toolbar =============================================================================================== */
 
 .postcode-config-page .page-actions-inner {
