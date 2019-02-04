@@ -7,7 +7,7 @@
     "magento/module-quote": "101.0.5|101.0.6|101.1.0"
   },
   "type": "magento2-module",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "license": "CC-BY-NC-ND-3.0",
   "authors": [
     {
