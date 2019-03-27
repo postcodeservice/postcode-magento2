@@ -7,18 +7,18 @@
     "magento/module-quote": "101.0.5|101.0.6|101.0.7|101.1.0|101.1.1"
   },
   "type": "magento2-module",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "license": "CC-BY-NC-ND-3.0",
   "authors": [
     {
       "name": "TIG",
-      "email": "servicedesk@tig.nl",
+      "email": "support@tig.nl",
       "homepage": "http://tig.nl"
     }
   ],
   "support": {
-    "email": "servicedesk@tig.nl",
-    "issues": "http://servicedesk.tig.nl/hc/nl/requests/new"
+    "email": "support@tig.nl",
+    "issues": "https://portal.tig.nl"
   },
   "homepage": "http://www.postcodeservice.nl",
   "minimum-stability": "stable",
