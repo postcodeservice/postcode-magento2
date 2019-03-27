@@ -28,6 +28,6 @@ Explanation of your *issue* in arbitrary form goes here. Please make sure the [d
 If work on your *issue* requires account credentials please provide them or explain how one can obtain them.
 
 
-### TIG supportdesk
+### Support TIG
 
 On Github we will respond in English even when the question was asked in Dutch.
