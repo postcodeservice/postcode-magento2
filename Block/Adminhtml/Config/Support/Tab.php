@@ -85,7 +85,7 @@ class Tab extends Template implements RendererInterface
      */
     public function getVersionNumber()
     {
-        return static::EXTESTION_VERSION;
+        return static::EXTENSION_VERSION;
     }
 
     /**
