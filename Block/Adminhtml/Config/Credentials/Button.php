@@ -49,6 +49,7 @@ class Button extends Template implements RendererInterface
      *
      * @return string
      */
+    // @codeCoverageIgnoreStart
     public function render(AbstractElement $element)
     {
         /** @noinspection PhpUndefinedMethodInspection */
@@ -56,6 +57,7 @@ class Button extends Template implements RendererInterface
 
         return $this->toHtml();
     }
+    // @codeCoverageIgnoreEnd
 
     /**
      * @return \Magento\Framework\Phrase
