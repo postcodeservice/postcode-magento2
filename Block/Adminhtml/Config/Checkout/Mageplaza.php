@@ -47,7 +47,6 @@ class Mageplaza extends Template implements RendererInterface
      *
      * @return string
      */
-    // @codeCoverageIgnoreStart
     public function render(AbstractElement $element)
     {
         /** @noinspection PhpUndefinedMethodInspection */
@@ -55,5 +54,4 @@ class Mageplaza extends Template implements RendererInterface
 
         return $this->toHtml();
     }
-    // @codeCoverageIgnoreEnd
 }
