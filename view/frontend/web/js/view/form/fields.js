@@ -108,6 +108,7 @@ define([
         observeCountry : function (value) {
             if (value) {
                 this.updateFieldData();
+                this.renderFieldsAndMessage();
             }
         },
 
