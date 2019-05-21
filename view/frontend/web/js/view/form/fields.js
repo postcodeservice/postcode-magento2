@@ -106,6 +106,13 @@ define([
         },
 
         observeCountry : function (value) {
+            var message = $('.tig-postcode-validation-message');
+
+            if (value !== 'NL') {
+                message.hide();
+                return;
+            }
+
             if (value) {
                 this.updateFieldData();
             }
