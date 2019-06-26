@@ -40,6 +40,7 @@ class BodyClass extends Template implements BlockInterface
     /**
      * @return $this
      */
+    // @codeCoverageIgnoreStart
     // @codingStandardsIgnoreLine
     protected function _prepareLayout()
     {
@@ -49,4 +50,5 @@ class BodyClass extends Template implements BlockInterface
 
         return parent::_prepareLayout();
     }
+    // @codeCoverageIgnoreEnd
 }
