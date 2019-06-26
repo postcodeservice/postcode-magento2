@@ -41,10 +41,12 @@ class Disable extends Field
      *
      * @return string
      */
+    // @codeCoverageIgnoreStart
     // @codingStandardsIgnoreLine
     protected function _getElementHtml(AbstractElement $element)
     {
         $element->setDisabled('disabled');
         return parent::_getElementHtml($element);
     }
+    // @codeCoverageIgnoreEnd
 }
