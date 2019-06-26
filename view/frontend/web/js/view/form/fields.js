@@ -106,6 +106,13 @@ define([
         },
 
         observeCountry : function (value) {
+            var message = $('.tig-postcode-validation-message');
+
+            if (value !== 'NL') {
+                message.hide();
+                return;
+            }
+
             if (value) {
                 this.updateFieldData();
             }
@@ -200,24 +207,16 @@ define([
         },
 
         renderFieldsAndMessage : function (motion, type) {
+            var message = $('.tig-postcode-validation-message');
 
             $('.tig_hidden').show(motion);
             if (type !== 'failed') {
                 this.renderAddressData();
+                message.hide(motion);
                 return;
             }
 
-            var message = $('.tig-postcode-validation-message');
             message.html($.mage.__('Sorry, we could not find the address on the given zip code and house number combination. If you are sure that the zip code and house number are correct, please fill in the address details manually.')).show();
-
-            var timer;
-            if (typeof timer !== 'undefined') {
-                clearTimeout(timer);
-            }
-
-            timer = setTimeout(function () {
-                message.hide(motion);
-            }, 8000);
         },
 
         // Magaplaza and other oneStepcheckouts render the billing fields on the same page.
