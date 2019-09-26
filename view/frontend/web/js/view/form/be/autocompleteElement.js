@@ -19,6 +19,7 @@ define([
     return function (originalElement) {
         return originalElement.extend({
             defaults : {
+                message   : ko.observable(null),
                 imports : {
                     observeCountry : '${ $.parentName }.country_id:value',
                     observePostcode    : '${ $.parentName }.postcode-field-group.field-group.postcode:value',
@@ -149,6 +150,7 @@ define([
                     $(this).autocomplete({
                         source : function (zipcodezone, response) {
                             this.menu.element.addClass(self.customScope + ".tigAutocomplete");
+                            this.menu.element.addClass('tigJqueryUiClass');
                             if (!self.isCountryBe()) {
                                 /**
                                  * Somehow the loader occasionally pops up on different countries.
@@ -256,6 +258,7 @@ define([
                 $(".tig_street_autocomplete .input-text").each(function () {
                     $(this).autocomplete({
                         source : function (request, response) {
+                            this.menu.element.addClass('tigJqueryUiClass');
                             if (!self.isCountryBe()) {
                                 /**
                                  * Somehow the loader occasionally pops up on different countries.
