@@ -29,32 +29,29 @@
  * @copyright   Copyright (c) Total Internet Group B.V. https://tig.nl/copyright
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
-namespace TIG\Postcode\Test\Unit\Config\Source;
+namespace TIG\Postcode\Block\Adminhtml\Config\Checkout;
 
-use TIG\Postcode\Test\TestCase;
-use TIG\Postcode\Config\Source\Checkouts;
+use Magento\Framework\View\Element\Template;
+use Magento\Framework\Data\Form\Element\Renderer\RendererInterface;
+use Magento\Framework\Data\Form\Element\AbstractElement;
 
-class CheckoutsTest extends TestCase
+class Onestepcheckout extends Template implements RendererInterface
 {
-    protected $instanceClass = Checkouts::class;
+    const MODULE_NAME = 'TIG_Postcode';
 
-    private $compatibleCheckouts = [
-        'default', 'blank', 'onestepcheckout', 'mageplaza', 'danslo', 'amasty'
-    ];
+    // @codingStandardsIgnoreLine
+    protected $_template = 'TIG_Postcode::config/checkout/onestepcheckout.phtml';
 
-    public function testToOptionsArray()
+    /**
+     * @param AbstractElement $element
+     *
+     * @return string
+     */
+    public function render(AbstractElement $element)
     {
-        $instance = $this->getInstance();
-        $result = $instance->toOptionArray();
+        /** @noinspection PhpUndefinedMethodInspection */
+        $this->setElement($element);
 
-        $this->assertCount(5, $result);
-
-        foreach ($result as $checkout) {
-            $this->assertArrayHasKey('label', $checkout);
-            $this->assertArrayHasKey('value', $checkout);
-
-            $inArray = in_array($checkout['value'], $this->compatibleCheckouts);
-            $this->assertTrue($inArray);
-        }
+        return $this->toHtml();
     }
 }
