@@ -47,7 +47,7 @@ class CheckoutsTest extends TestCase
         $instance = $this->getInstance();
         $result = $instance->toOptionArray();
 
-        $this->assertCount(5, $result);
+        $this->assertCount(6, $result);
 
         foreach ($result as $checkout) {
             $this->assertArrayHasKey('label', $checkout);
