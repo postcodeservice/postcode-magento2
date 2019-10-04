@@ -29,29 +29,29 @@
  * @copyright   Copyright (c) Total Internet Group B.V. https://tig.nl/copyright
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
-namespace TIG\Postcode\Config\Source;
+namespace TIG\Postcode\Block\Adminhtml\Config\Checkout;
 
-use Magento\Framework\Option\ArrayInterface;
+use Magento\Framework\View\Element\Template;
+use Magento\Framework\Data\Form\Element\Renderer\RendererInterface;
+use Magento\Framework\Data\Form\Element\AbstractElement;
 
-class Checkouts implements ArrayInterface
+class Onestepcheckout extends Template implements RendererInterface
 {
-    /**
-     * Return option array for compatiblity checkout modus.
-     * @return array
-     */
-    public function toOptionArray()
-    {
-        // @codingStandardsIgnoreStart
-        $options = [
-            ['value' => 'default', 'label' => __('Two Step Checkout Luma')],
-            ['value' => 'blank', 'label' => __('Two Step Checkout Blank')],
-            ['value' => 'onestepcheckout', 'label' => __('Iosc Onestepcheckout v1.2.036')],
-            ['value' => 'mageplaza', 'label' => __('Mageplaza One Step Checkout v2.5.0 - v2.6.1')],
-            ['value' => 'danslo', 'label' => __('Rubic Clean Checkout v1.1.0 - v2.0.0')],
-            ['value' => 'amasty', 'label' => __('Amasty One Step Checkout v1.6.0 - v1.8.17')]
-        ];
-        // @codingStandardsIgnoreEnd
+    const MODULE_NAME = 'TIG_Postcode';
 
-        return $options;
+    // @codingStandardsIgnoreLine
+    protected $_template = 'TIG_Postcode::config/checkout/onestepcheckout.phtml';
+
+    /**
+     * @param AbstractElement $element
+     *
+     * @return string
+     */
+    public function render(AbstractElement $element)
+    {
+        /** @noinspection PhpUndefinedMethodInspection */
+        $this->setElement($element);
+
+        return $this->toHtml();
     }
 }

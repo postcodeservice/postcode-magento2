@@ -1,0 +1,51 @@
+<?php
+/**
+ *
+ *          ..::..
+ *     ..::::::::::::..
+ *   ::'''''':''::'''''::
+ *   ::..  ..:  :  ....::
+ *   ::::  :::  :  :   ::
+ *   ::::  :::  :  ''' ::
+ *   ::::..:::..::.....::
+ *     ''::::::::::::''
+ *          ''::''
+ *
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Creative Commons License.
+ * It is available through the world-wide-web at this URL:
+ * http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
+ * If you are unable to obtain it through the world-wide-web, please send an email
+ * to servicedesk@totalinternetgroup.nl so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this module to newer
+ * versions in the future. If you wish to customize this module for your
+ * needs please contact servicedesk@tig.nl for more information.
+ *
+ * @copyright   Copyright (c) Total Internet Group B.V. https://tig.nl/copyright
+ * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
+ */
+?>
+<div id="using-onestepcheckout" class="tig-postcode-using-onestepcheckout" data-mage-init='{"postcodeConfig":true}'>
+    <div>
+        <div>
+            <p>
+                <strong>
+                    <?php echo $block->escapeHtml(__('Using iDev OneStepCheckout')); ?>
+                </strong>
+            </p>
+            <?php echo $block->escapeHtml(__('The codes to support the iDev OneStepCheckout extension requires the installation of our support extension.'));?>
+            <br/>
+            <?php echo $block->escapeHtml(__('Please follow the instructions in the following link to make this extension compatible with the OneStepCheckout extension.'));?>
+            <br/>
+            <a target="_blank" href="https://confluence.tig.nl/x/GoNUAw" title="<?php echo $block->escapeHtml(__('Click here to see which checkout extensions are supported, and how to install the checkout support extension.'));?>">
+                <?php echo $block->escapeHtml(__('Checkout support extension installation manual'));?>
+                <img class="external_link" src="<?php echo $this->getViewFileUrl('TIG_Postcode::images/external_link_32.png')?>" alt="<?php echo $block->escapeHtml(__('Checkout support extension installation manual'));?>" width="16" height="16"/>
+            </a>
+        </div>
+    </div>
+</div>
