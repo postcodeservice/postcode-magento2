@@ -7,7 +7,8 @@ define([
     'jquery',
     'uiRegistry',
     'ko',
-    'TIG_Postcode/js/Helper/DataProvider'
+    'TIG_Postcode/js/Helper/DataProvider',
+    'jquery/ui'
 ], function (
     $,
     Registry,
