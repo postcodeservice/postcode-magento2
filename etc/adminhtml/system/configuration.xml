@@ -104,6 +104,13 @@
                 <field id="checkout_compatible">mageplaza</field>
             </depends>
         </group>
+        <group id="onestepcheckout_explanation" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+            <frontend_model>TIG\Postcode\Block\Adminhtml\Config\Checkout\Onestepcheckout</frontend_model>
+            <fieldset_css>tig_postcode-section</fieldset_css>
+            <depends>
+                <field id="checkout_compatible">onestepcheckout</field>
+            </depends>
+        </group>
     </group>
 
     <!-- Field Parser settings -->
