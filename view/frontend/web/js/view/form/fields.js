@@ -72,13 +72,13 @@ define([
             // PSM2-116 - If customAttributes exist, the address already contains a tig_housenumber.
             // Sometimes extension attributes get lost, fill them every time the address changes.
             quote.shippingAddress.subscribe(function (address) {
-                if (address['extension_attributes'] === undefined) {
-                    address['extension_attributes'] = {};
+                if (address.extension_attributes === undefined) {
+                    address.extension_attributes = {};
                 }
 
-                if (address.customAttributes[0] !== undefined && address.customAttributes[0].attribute_code === 'tig_housenumber') {
-                    address['extension_attributes']['tig_housenumber']          = address.customAttributes[0].value;
-                    address['extension_attributes']['tig_housenumber_addition'] = address.customAttributes[1].value;
+                if (address.customAttributes !== undefined && address.customAttributes[0] !== undefined && address.customAttributes[0].attribute_code === 'tig_housenumber') {
+                    address.extension_attributes.tig_housenumber          = address.customAttributes[0].value;
+                    address.extension_attributes.tig_housenumber_addition = address.customAttributes[1].value;
                 }
             });
 
