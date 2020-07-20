@@ -8,7 +8,7 @@ define([
     'uiRegistry',
     'ko',
     'TIG_Postcode/js/Helper/DataProvider',
-    'jquery/ui'
+    'jquery-ui-modules/autocomplete'
 ], function (
     $,
     Registry,
