@@ -1,5 +1,13 @@
 /* Tools ============================================================================================================ */
 
+.tig_street_autocomplete {
+    position: relative;
+}
+
+.tigJqueryUiClass {
+    max-width: 100%;
+}
+
 .tig_hidden {
     display: none;
 }
