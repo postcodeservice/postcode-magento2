@@ -103,7 +103,6 @@ define([
                     if (!postcodeElement.value()) {
                         // This is for setting the init placeholder
                         streetElement.placeholder = placeholder;
-                        streetElement.disable();
                         $('.tig_street_autocomplete .input-text').attr('placeholder', placeholder);
                     }
                     $('.tig_zipcodezone_autocomplete').addClass('tig-postcode-be');
@@ -260,6 +259,7 @@ define([
                     $(this).autocomplete({
                         source : function (request, response) {
                             this.menu.element.addClass('tigJqueryUiClass');
+                            this.menu.element.appendTo(this.element.closest('.tig_street_autocomplete'));
                             if (!self.isCountryBe()) {
                                 /**
                                  * Somehow the loader occasionally pops up on different countries.

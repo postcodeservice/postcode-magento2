@@ -56,7 +56,7 @@ Support,Support
 "Enable Netherlands check","Zet Nederlandse check aan"
 "Enable Belgium check","Zet Belgische check aan"
 "No results found.","Geen resultaten gevonden."
-"No results found. Please fill in manually.","Wij kunnen uw straat niet automatisch lokaliseren. Is het juist?"
+"No results found. Please fill in manually.","Wij kunnen uw straat niet automatisch ophalen. Zijn de postcode en plaats correct ingevuld?"
 "Busy with loading zipcodes...","Bezig met ophalen van postcodes..."
 "Busy with loading streets...","Bezig met ophalen van straatnamen..."
 "Supporting Dutch and Belgian addresses","Ondersteuning voor Nederlandse en Belgische addressen"
