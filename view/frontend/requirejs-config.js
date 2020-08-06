@@ -54,7 +54,7 @@ var config = {
                 'TIG_Postcode/js/view/form/be/autocompleteElement': true
             },
             'mage/menu': {
-                'TIG_Postcode/js/lib/mage/menu-mixin': true
+                'TIG_Postcode/js/lib/mage/mage-mixin': true
             }
         }
     },
