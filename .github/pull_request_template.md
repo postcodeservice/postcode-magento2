@@ -7,7 +7,7 @@
 
 ---
 
-### Make sure you are using the *latest* version: https://tig.nl/totale-aanbod-extensies/postcode-service-magento-2/
+### Make sure you are using the *latest* version: https://github.com/tig-nl/postcode-magento2/releases/
 Issues with outdated version will be rejected.
 - [ ] I've **verified** and **I assure** that I'm running the latest version of the TIG Buckaroo Magento extension.
 

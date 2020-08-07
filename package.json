@@ -9,9 +9,9 @@
   "author": "TIG",
   "license": "CC-BY-NC-ND-3.0",
   "bugs": {
-    "url": "https://servicedesk.tig.nl"
+    "url": "https://postcodeservice.nl"
   },
-  "homepage": "https://tig.nl/postcode-service/",
+  "homepage": "https://postcodeservice.nl/",
   "devDependencies": {
     "grunt": "^1.0.1",
     "grunt-contrib-jshint": "^1.1.0",

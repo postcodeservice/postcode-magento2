@@ -78,8 +78,8 @@ class GuestPaymentTest extends TestCase
             'streetFields' => $parseMock
         ]);
 
-        $result = $instance->beforeSavePaymentInformation(null, 1, 'test@tig.nl', $paymentMock, $address);
-        $this->assertEquals([1, 'test@tig.nl', $paymentMock, $newAddress], $result);
+        $result = $instance->beforeSavePaymentInformation(null, 1, 'test@postcodeservice.nl', $paymentMock, $address);
+        $this->assertEquals([1, 'test@postcodeservice.nl', $paymentMock, $newAddress], $result);
     }
 
     public function testBeforeAssignWithoutAttributes()
@@ -88,8 +88,8 @@ class GuestPaymentTest extends TestCase
         $instance = $this->getInstance();
 
         $paymentMock = $this->getFakeMock(PaymentInterface::class)->getMock();
-        $expected = [1, 'test@tig.nl', $paymentMock, $address,];
-        $this->assertEquals($expected, $instance->beforeSavePaymentInformation(null, 1, 'test@tig.nl', $paymentMock, $address));
+        $expected = [1, 'test@postcodeservice.nl', $paymentMock, $address,];
+        $this->assertEquals($expected, $instance->beforeSavePaymentInformation(null, 1, 'test@postcodeservice.nl', $paymentMock, $address));
     }
 
     public function testBeforeAssignWithoutAddress()
@@ -98,9 +98,9 @@ class GuestPaymentTest extends TestCase
         $instance = $this->getInstance();
 
         $paymentMock = $this->getFakeMock(PaymentInterface::class)->getMock();
-        $expected    = [1, 'test@tig.nl', $paymentMock, $address];
+        $expected    = [1, 'test@postcodeservice.nl', $paymentMock, $address];
         $this->assertEquals(
-            $expected, $instance->beforeSavePaymentInformation(null, 1, 'test@tig.nl', $paymentMock, $address)
+            $expected, $instance->beforeSavePaymentInformation(null, 1, 'test@postcodeservice.nl', $paymentMock, $address)
         );
     }
 
@@ -125,7 +125,7 @@ class GuestPaymentTest extends TestCase
 
         $paymentMock = $this->getFakeMock(PaymentInterface::class)->getMock();
 
-        $expected = [1, 'test@tig.nl', $paymentMock, $address,];
-        $this->assertEquals($expected, $instance->beforeSavePaymentInformation(null, 1, 'test@tig.nl', $paymentMock, $address));
+        $expected = [1, 'test@postcodeservice.nl', $paymentMock, $address,];
+        $this->assertEquals($expected, $instance->beforeSavePaymentInformation(null, 1, 'test@postcodeservice.nl', $paymentMock, $address));
     }
 }
