@@ -12,15 +12,15 @@
   "authors": [
     {
       "name": "TIG",
-      "email": "support@tig.nl",
-      "homepage": "http://tig.nl"
+      "email": "support@postcodeservice.nl",
+      "homepage": "https://postcodeservice.nl/"
     }
   ],
   "support": {
-    "email": "support@tig.nl",
+    "email": "support@postcodeservice.nl",
     "issues": "https://portal.tig.nl"
   },
-  "homepage": "http://www.postcodeservice.nl",
+  "homepage": "https://postcodeservice.nl/",
   "minimum-stability": "stable",
   "autoload": {
     "files": [
