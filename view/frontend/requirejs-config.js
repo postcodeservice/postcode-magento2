@@ -52,6 +52,9 @@ var config = {
             },
             'Magento_Ui/js/form/element/abstract': {
                 'TIG_Postcode/js/view/form/be/autocompleteElement': true
+            },
+            'mage/menu': {
+                'TIG_Postcode/js/lib/mage/mage-mixin': true
             }
         }
     },
