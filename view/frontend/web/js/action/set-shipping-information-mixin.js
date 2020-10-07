@@ -64,11 +64,11 @@ define([
             }
             // >= M2.3.0
             if (shippingAddress.customAttributes.length > 0) {
-                shippingAddress.customAttributes.forEach(function(element) {
-                    if(element.customAttributes.attribute_code === 'tig_housenumber') {
-                        shippingAddress['extension_attributes']['tig_housenumber']       = element.customAttributes.value;
-                    } else if (element.customAttributes.attribute_code === 'tig_housenumber_addition') {
-                        shippingAddress['extension_attributes']['tig_housenumber_addition'] = element.customAttributes.value;
+                shippingAddress.customAttributes.forEach(function(customAttribute) {
+                    if(customAttribute.attribute_code === 'tig_housenumber') {
+                        shippingAddress['extension_attributes']['tig_housenumber']       = customAttribute.value;
+                    } else if (customAttribute.attribute_code === 'tig_housenumber_addition') {
+                        shippingAddress['extension_attributes']['tig_housenumber_addition'] = customAttribute.value;
                     }
                 });
             }
