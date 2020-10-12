@@ -55,6 +55,9 @@ var config = {
             },
             'mage/menu': {
                 'TIG_Postcode/js/lib/mage/mage-mixin': true
+            },
+            'MyParcelNL_Magento/js/view/delivery-options': {
+                'TIG_Postcode/js/view/myparcel/delivery-options-mixin': true
             }
         }
     },
