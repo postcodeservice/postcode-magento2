@@ -33,7 +33,7 @@
  */
 define([
     'jquery',
-    'jquery-ui-modules/menu',
+    'jquery-ui-modules/menu'
 ], function ($) {
     'use strict';
 
