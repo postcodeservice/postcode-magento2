@@ -121,13 +121,81 @@ define([
         observeCountry : function (value) {
             var message = $('.tig-postcode-validation-message');
 
+            this.toggleAddressFields(value);
+
             if (value !== 'NL') {
                 message.hide();
                 return;
             }
 
-            if (value) {
+            if (value && value === 'NL') {
                 this.updateFieldData();
+            }
+        },
+
+        /**
+         * Hide or show every address line that's not the first address line when NL or BE is
+         * selected. Restore the original checkout fields when NL or BE is NOT selected.
+         */
+        toggleAddressFields : function(country) {
+            var fields = [
+                this.parentName + '.street',
+                this.parentName + '.city',
+                this.parentName + '.postcode-field-group.field-group.postcode',
+                this.parentName + '.postcode-field-group.field-group.housenumber',
+                this.parentName + '.postcode-field-group.field-group.housenumber_addition'
+            ];
+
+            Registry.get(fields, function (
+                streetElement,
+                cityElement,
+                postcodeElement,
+                housenumberElement,
+                housenumberAdditionalElement
+            ) {
+                streetElement.visible(!(country === 'BE' || country === 'NL'));
+                cityElement.visible(!(country === 'BE' || country === 'NL'));
+                housenumberElement.visible(country === 'BE' || country === 'NL');
+                housenumberAdditionalElement.visible(country === 'BE' || country === 'NL');
+
+                // In some countries housenumber is not required
+                housenumberElement.required(country === 'BE' || country === 'NL');
+                housenumberElement.validation['required-entry'] = (country === 'BE' || country === 'NL');
+
+                // Next three lines are for initial load. Fields are available in uiRegistry, but not yet in jQuery.
+                postcodeElement.additionalClasses['tig-postcode-full-width'] = !(country === 'NL' || country === 'BE');
+                streetElement.additionalClasses['tig_hidden'] = (country === 'NL' || country === 'BE');
+                cityElement.additionalClasses['tig_hidden'] = (country === 'NL' || country === 'BE');
+
+                var postcodeField = $('.tig-postcode-field-group div[name$=postcode]');
+                var streetField = $('div[name$=street]');
+                var cityField = $('div[name$=city]');
+                /* jshint ignore:start */
+                country === 'NL' || country === 'BE' ? postcodeField.removeClass('tig-postcode-full-width') : postcodeField.addClass('tig-postcode-full-width');
+                country === 'NL' || country === 'BE' ? streetField.removeClass('tig_hidden') : streetField.addClass('tig_hidden');
+                country === 'NL' || country === 'BE' ? cityField.removeClass('tig_hidden') : cityField.addClass('tig_hidden');
+                /* jshint ignore:end */
+
+                if (country === 'BE' || country === 'NL') {
+                    $('.tig_hidden').hide(200);
+
+                    return;
+                }
+
+                $('.tig_hidden').show(200);
+            });
+
+            // Handle street fields separately in a for loop. they could be disabled in the configs.
+            var streetFields = [
+                this.parentName + '.street.1',
+                this.parentName + '.street.2',
+                this.parentName + '.street.3'
+            ];
+
+            for (var i=0; i < streetFields.length; i++) {
+                Registry.get(streetFields[i], function (streetElement) {
+                    streetElement.visible(!(country === 'BE' || country === 'NL'))
+                })
             }
         },
 
