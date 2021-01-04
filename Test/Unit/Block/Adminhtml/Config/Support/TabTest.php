@@ -62,7 +62,7 @@ class TabTest extends TestCase
         $mock = $this->getFakeMock(ModuleConfiguration::class)->getMock();
         $mockExpects = $mock->expects($this->once());
         $mockExpects->method('getSupportedMagentoVersions');
-        $mockExpects->willReturn('2.2.6 - 2.2.11, 2.3.0 - 2.3.5');
+        $mockExpects->willReturn('2.2.6 - 2.2.11, 2.3.0 - 2.3.6, 2.4.0 - 2.4.1');
 
         return $mock;
     }
