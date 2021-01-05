@@ -30,7 +30,6 @@ set -x
 # @copyright   Copyright (c) Total Internet Group B.V. https://tig.nl/copyright
 # @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
 
-composer self-update --1
 if [ "$CODE_COVERAGE" = "false" ]; then
     phpenv config-rm xdebug.ini
 fi
