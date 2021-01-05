@@ -137,7 +137,7 @@ define([
          * Hide or show every address line that's not the first address line when NL or BE is
          * selected. Restore the original checkout fields when NL or BE is NOT selected.
          */
-        toggleAddressFields : function(country) {
+        toggleAddressFields : function (country) {
             var fields = [
                 this.parentName + '.street',
                 this.parentName + '.city',
