@@ -24,6 +24,7 @@ matrix:
       env: MAGENTO_VERSION=2.2.6 CODE_COVERAGE=true
 
 before_script:
+  - composer self-update --1
   - export PATH=$PATH:$HOME/.composer/vendor/bin
   - composer config -a -g http-basic.repo.magento.com $MAGENTO_USERNAME $MAGENTO_PASSWORD
   - bash Test/Script/ManageDependencies.sh
