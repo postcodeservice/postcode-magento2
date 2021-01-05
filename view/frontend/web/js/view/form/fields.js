@@ -164,8 +164,8 @@ define([
 
                 // Next three lines are for initial load. Fields are available in uiRegistry, but not yet in jQuery.
                 postcodeElement.additionalClasses['tig-postcode-full-width'] = !(country === 'NL' || country === 'BE');
-                streetElement.additionalClasses['tig_hidden'] = (country === 'NL' || country === 'BE');
-                cityElement.additionalClasses['tig_hidden'] = (country === 'NL' || country === 'BE');
+                streetElement.additionalClasses.tig_hidden = (country === 'NL' || country === 'BE');
+                cityElement.additionalClasses.tig_hidden = (country === 'NL' || country === 'BE');
 
                 var postcodeField = $('.tig-postcode-field-group div[name$=postcode]');
                 var streetField = $('div[name$=street]');
@@ -192,11 +192,13 @@ define([
                 this.parentName + '.street.3'
             ];
 
+            /* jshint ignore:start */
             for (var i=0; i < streetFields.length; i++) {
                 Registry.get(streetFields[i], function (streetElement) {
-                    streetElement.visible(!(country === 'BE' || country === 'NL'))
-                })
+                    streetElement.visible(!(country === 'BE' || country === 'NL'));
+                });
             }
+            /* jshint ignore:end */
         },
 
         updateFieldData : function () {
