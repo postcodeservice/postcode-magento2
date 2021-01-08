@@ -40,6 +40,7 @@
             <include path="TIG_Postcode::system/support.xml"/>
             <include path="TIG_Postcode::system/configuration.xml" />
             <include path="TIG_Postcode::system/countries.xml" />
+            <include path="TIG_Postcode::system/checkout.xml" />
         </section>
     </system>
 </config>

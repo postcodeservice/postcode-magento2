@@ -66,3 +66,6 @@ Support,Support
 "Please follow the instructions in the following link to make this extension compatible with the MagePlaza extension.","Om de MagePlaza extensie compatible te maken met de Postcode extensie dient u de stappen te volgen in de volgende handleiding:"
 "Click here to see which checkout extensions are supported, and how to install the checkout support extension.","Klik hier om te zien welke checkout extensies ondersteund worden, en hoe je de checkout support extensie moet installeren."
 "Checkout support extension installation manual","Checkout support extensie installatie handleiding"
+"Change the sort order of the Postcode field in the checkout.","Verander de sorteer volgorde van het veld 'Postcode' in de checkout."
+"Change the sort order of the City field in the checkout.","Verander de sorteer volgorde van het veld 'Plaats' in de checkout."
+"Change the sort order of the Country field in the checkout.","Verander de sorteer volgorde van het veld 'Land' in de checkout."

@@ -46,3 +46,6 @@ Extension status,Extension status
 "Please follow the instructions in the following link to make this extension compatible with the MagePlaza extension.","Please follow the instructions in the following link to make this extension compatible with the MagePlaza extension."
 "Click here to see which checkout extensions are supported, and how to install the checkout support extension.","Click here to see which checkout extensions are supported, and how to install the checkout support extension."
 "Checkout support extension installation manual","Checkout support extension installation manual"
+"Change the sort order of the Postcode field in the checkout.","Change the sort order of the Postcode field in the checkout."
+"Change the sort order of the City field in the checkout.","Change the sort order of the City field in the checkout."
+"Change the sort order of the Country field in the checkout.","Change the sort order of the Country field in the checkout."

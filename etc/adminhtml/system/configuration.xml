@@ -114,7 +114,7 @@
     </group>
 
     <!-- Field Parser settings -->
-    <group id="fieldparsing" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+    <group id="fieldparsing" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
         <label>Advanced configuration</label>
         <fieldset_css>tig_postcode-section</fieldset_css>
         <frontend_model>TIG\Postcode\Block\Adminhtml\Config\Form\Field\Fieldset</frontend_model>

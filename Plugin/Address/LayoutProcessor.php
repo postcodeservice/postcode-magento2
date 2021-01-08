@@ -247,7 +247,7 @@ class LayoutProcessor
             'component'  => 'TIG_Postcode/js/view/form/fields',
             'type'       => 'group',
             'provider'   => 'checkoutProvider',
-            'sortOrder'  => '65',
+            'sortOrder'  => $this->moduleConfiguration->getPostcodeSortOrder(),
             'config'     => [
                 'customScope'       => $scope,
                 'template'          => 'TIG_Postcode/checkout/field-group',
@@ -268,7 +268,8 @@ class LayoutProcessor
             'dataScope'  => '',
             'visible'    => true
         ];
-        $fieldset['country_id']['sortOrder'] = '64';
+        $fieldset['country_id']['sortOrder'] = $this->moduleConfiguration->getCountrySortOrder();
+        $fieldset['city']['sortOrder'] = $this->moduleConfiguration->getCitySortOrder();
 
         return $fieldset;
     }
@@ -362,7 +363,7 @@ class LayoutProcessor
         $additionalClass .= ' tig_zipcodezone_autocomplete';
         $fields['postcode']['config']['additionalClasses'] = $additionalClass;
         $fields['postcode']['config']['elementTmpl'] = 'TIG_Postcode/form/element/autocomplete';
-        $fields['postcode']['sortOrder'] = '65';
+        $fields['postcode']['sortOrder'] = $this->moduleConfiguration->getPostcodeSortOrder();
 
         $additionalClass = null;
         if (isset($fields['street']['children'][0]['config']['additionalClasses'])) {
@@ -373,7 +374,8 @@ class LayoutProcessor
         $fields['street']['children'][0]['config']['additionalClasses'] = $additionalClass;
         $fields['street']['children'][0]['config']['elementTmpl'] = 'TIG_Postcode/form/element/autocomplete';
 
-        $fields['country_id']['sortOrder'] = '64';
+        $fields['country_id']['sortOrder'] = $this->moduleConfiguration->getCountrySortOrder();
+        $fields['city']['sortOrder'] = $this->moduleConfiguration->getCitySortOrder();
     }
 
     /**

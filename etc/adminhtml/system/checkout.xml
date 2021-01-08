@@ -32,24 +32,25 @@
 -->
 <include xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_include.xsd">
     <!--Configuration section-->
-    <group id="countries" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
-        <label>Countries</label>
+    <group id="checkout" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+        <label>Checkout</label>
         <frontend_model>TIG\Postcode\Block\Adminhtml\Config\Form\Field\Fieldset</frontend_model>
         <fieldset_css>tig_postcode-section</fieldset_css>
 
-        <field id="enable_nl_check" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
-            <label>Enable Netherlands check</label>
-            <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
-            <config_path>tig_postcode/countries/enable_nl_check</config_path>
+        <field id="postcode_sort_order" translate="label tooltip" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Postcode Sort Order</label>
+            <comment><![CDATA[Change the sort order of the Postcode field in the checkout.]]></comment>
+            <config_path>tig_postcode/checkout/postcode_sort_order</config_path>
         </field>
-
-        <field id="enable_be_check" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
-            <label>Enable Belgium check</label>
-            <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
-            <config_path>tig_postcode/countries/enable_be_check</config_path>
-            <depends>
-                <field id="tig_postcode/configuration/checkout_compatible" negative="1">mageplaza</field>
-            </depends>
+        <field id="city_sort_order" translate="label tooltip" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>City Sort Order</label>
+            <comment><![CDATA[Change the sort order of the City field in the checkout.]]></comment>
+            <config_path>tig_postcode/checkout/city_sort_order</config_path>
+        </field>
+        <field id="country_sort_order" translate="label tooltip" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Country Sort Order</label>
+            <comment><![CDATA[Change the sort order of the Country field in the checkout.]]></comment>
+            <config_path>tig_postcode/checkout/country_sort_order</config_path>
         </field>
     </group>
 </include>
