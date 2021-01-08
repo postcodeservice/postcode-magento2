@@ -100,6 +100,12 @@
     white-space: normal;
 }
 
+
+.tig-postcode-field-group .field.tig-postcode-full-width {
+    max-width: 100%;
+}
+
+
 /* Required */
 
 .tig-postcode-field-group .field._required>.label:after {
