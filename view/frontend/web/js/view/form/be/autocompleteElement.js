@@ -141,6 +141,7 @@ define([
                 var self = this;
                 Registry.get(self.parentName + '.street.0', function (streetElement) {
                     streetElement.placeholder = '';
+                    $('.tig_street_autocomplete .input-text').attr('placeholder', '');
                     streetElement.enable();
                     $('.tig_zipcodezone_autocomplete').removeClass('tig-postcode-be');
                     $("div[name*='tig_housenumber']").removeClass('tig-housenumber-be');
