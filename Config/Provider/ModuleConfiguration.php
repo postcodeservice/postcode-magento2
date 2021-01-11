@@ -39,9 +39,6 @@ class ModuleConfiguration extends AbstractConfigProvider
     const XPATH_SUPPORTED_MAGENTO_VERSION = 'tig_postcode/supported_magento_version';
     const XPATH_NETHERLANDS_CHECK         = 'tig_postcode/countries/enable_nl_check';
     const XPATH_BELGIUM_CHECK             = 'tig_postcode/countries/enable_be_check';
-    const XPATH_POSTCODE_SORT_ORDER       = 'tig_postcode/checkout/postcode_sort_order';
-    const XPATH_CITY_SORT_ORDER           = 'tig_postcode/checkout/city_sort_order';
-    const XPATH_COUNTRY_SORT_ORDER        = 'tig_postcode/checkout/country_sort_order';
 
     /**
      * Should return on of these values
@@ -151,35 +148,5 @@ class ModuleConfiguration extends AbstractConfigProvider
     public function isBECheckEnabled($store = null)
     {
         return (bool) $this->getConfigFromXpath(static::XPATH_BELGIUM_CHECK, $store);
-    }
-
-    /**
-     * @param null $store
-     *
-     * @return string
-     */
-    public function getPostcodeSortOrder($store = null)
-    {
-        return $this->getConfigFromXpath(static::XPATH_POSTCODE_SORT_ORDER, $store);
-    }
-
-    /**
-     * @param null $store
-     *
-     * @return string
-     */
-    public function getCitySortOrder($store = null)
-    {
-        return $this->getConfigFromXpath(static::XPATH_CITY_SORT_ORDER, $store);
-    }
-
-    /**
-     * @param null $store
-     *
-     * @return string
-     */
-    public function getCountrySortOrder($store = null)
-    {
-        return $this->getConfigFromXpath(static::XPATH_COUNTRY_SORT_ORDER, $store);
     }
 }

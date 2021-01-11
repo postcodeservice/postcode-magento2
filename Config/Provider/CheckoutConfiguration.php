@@ -32,25 +32,33 @@
 namespace TIG\Postcode\Config\Provider;
 
 use Magento\Checkout\Model\ConfigProviderInterface;
+use Magento\Framework\App\Config\ScopeConfigInterface;
+use Magento\Framework\Encryption\Encryptor;
+use Magento\Framework\Module\Manager;
+use Magento\Store\Model\StoreManagerInterface;
 use TIG\Postcode\Config\CheckoutConfiguration\CheckoutConfigurationInterface;
 use TIG\Postcode\Exception;
 
-class CheckoutConfiguration implements ConfigProviderInterface
+class CheckoutConfiguration extends AbstractConfigProvider implements ConfigProviderInterface
 {
+    const XPATH_POSTCODE_SORT_ORDER = 'tig_postcode/checkout/postcode_sort_order';
+    const XPATH_CITY_SORT_ORDER     = 'tig_postcode/checkout/city_sort_order';
+    const XPATH_COUNTRY_SORT_ORDER  = 'tig_postcode/checkout/country_sort_order';
+
     /**
      * @var array
      */
     private $postcodeConfiguration;
 
-    /**
-     * CheckoutConfiguration constructor.
-     *
-     * @param array $postcodeConfiguration
-     */
     public function __construct(
+        ScopeConfigInterface $scopeConfig,
+        Manager $moduleManager,
+        Encryptor $crypt,
+        StoreManagerInterface $storeManager,
         $postcodeConfiguration = []
     ) {
         $this->postcodeConfiguration = $postcodeConfiguration;
+        parent::__construct($scopeConfig, $moduleManager, $crypt, $storeManager);
     }
 
     /**
@@ -81,5 +89,36 @@ class CheckoutConfiguration implements ConfigProviderInterface
             // @codingStandardsIgnoreLine
             throw new Exception(__('%1 is not an implementation of %2', $key, CheckoutConfigurationInterface::class));
         }
+    }
+
+
+    /**
+     * @param null $store
+     *
+     * @return string
+     */
+    public function getPostcodeSortOrder($store = null)
+    {
+        return $this->getConfigFromXpath(static::XPATH_POSTCODE_SORT_ORDER, $store);
+    }
+
+    /**
+     * @param null $store
+     *
+     * @return string
+     */
+    public function getCitySortOrder($store = null)
+    {
+        return $this->getConfigFromXpath(static::XPATH_CITY_SORT_ORDER, $store);
+    }
+
+    /**
+     * @param null $store
+     *
+     * @return string
+     */
+    public function getCountrySortOrder($store = null)
+    {
+        return $this->getConfigFromXpath(static::XPATH_COUNTRY_SORT_ORDER, $store);
     }
 }
