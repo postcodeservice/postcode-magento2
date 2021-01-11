@@ -31,6 +31,7 @@
  */
 namespace TIG\Postcode\Plugin\Address;
 
+use TIG\Postcode\Config\Provider\CheckoutConfiguration;
 use TIG\Postcode\Config\Provider\ModuleConfiguration;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 
@@ -48,17 +49,25 @@ class LayoutProcessor
     private $scopeConfig;
 
     /**
+     * @var CheckoutConfiguration
+     */
+    private $checkoutConfiguration;
+
+    /**
      * AddressLayoutProcessor constructor.
      *
-     * @param ModuleConfiguration $moduleConfiguration
-     * @param ScopeConfigInterface $scopeConfig
+     * @param ModuleConfiguration   $moduleConfiguration
+     * @param CheckoutConfiguration $checkoutConfiguration
+     * @param ScopeConfigInterface  $scopeConfig
      */
     public function __construct(
         ModuleConfiguration $moduleConfiguration,
+        CheckoutConfiguration $checkoutConfiguration,
         ScopeConfigInterface $scopeConfig
     ) {
         $this->moduleConfiguration = $moduleConfiguration;
         $this->scopeConfig         = $scopeConfig;
+        $this->checkoutConfiguration = $checkoutConfiguration;
     }
 
     /**
@@ -247,7 +256,7 @@ class LayoutProcessor
             'component'  => 'TIG_Postcode/js/view/form/fields',
             'type'       => 'group',
             'provider'   => 'checkoutProvider',
-            'sortOrder'  => $this->moduleConfiguration->getPostcodeSortOrder(),
+            'sortOrder'  => $this->checkoutConfiguration->getPostcodeSortOrder(),
             'config'     => [
                 'customScope'       => $scope,
                 'template'          => 'TIG_Postcode/checkout/field-group',
@@ -268,8 +277,8 @@ class LayoutProcessor
             'dataScope'  => '',
             'visible'    => true
         ];
-        $fieldset['country_id']['sortOrder'] = $this->moduleConfiguration->getCountrySortOrder();
-        $fieldset['city']['sortOrder'] = $this->moduleConfiguration->getCitySortOrder();
+        $fieldset['country_id']['sortOrder'] = $this->checkoutConfiguration->getCountrySortOrder();
+        $fieldset['city']['sortOrder'] = $this->checkoutConfiguration->getCitySortOrder();
 
         return $fieldset;
     }
@@ -363,7 +372,7 @@ class LayoutProcessor
         $additionalClass .= ' tig_zipcodezone_autocomplete';
         $fields['postcode']['config']['additionalClasses'] = $additionalClass;
         $fields['postcode']['config']['elementTmpl'] = 'TIG_Postcode/form/element/autocomplete';
-        $fields['postcode']['sortOrder'] = $this->moduleConfiguration->getPostcodeSortOrder();
+        $fields['postcode']['sortOrder'] = $this->checkoutConfiguration->getPostcodeSortOrder();
 
         $additionalClass = null;
         if (isset($fields['street']['children'][0]['config']['additionalClasses'])) {
@@ -374,8 +383,8 @@ class LayoutProcessor
         $fields['street']['children'][0]['config']['additionalClasses'] = $additionalClass;
         $fields['street']['children'][0]['config']['elementTmpl'] = 'TIG_Postcode/form/element/autocomplete';
 
-        $fields['country_id']['sortOrder'] = $this->moduleConfiguration->getCountrySortOrder();
-        $fields['city']['sortOrder'] = $this->moduleConfiguration->getCitySortOrder();
+        $fields['country_id']['sortOrder'] = $this->checkoutConfiguration->getCountrySortOrder();
+        $fields['city']['sortOrder'] = $this->checkoutConfiguration->getCitySortOrder();
     }
 
     /**
