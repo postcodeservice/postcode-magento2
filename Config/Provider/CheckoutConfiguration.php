@@ -91,7 +91,6 @@ class CheckoutConfiguration extends AbstractConfigProvider implements ConfigProv
         }
     }
 
-
     /**
      * @param null $store
      *
