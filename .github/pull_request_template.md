@@ -9,12 +9,12 @@
 
 ### Make sure you are using the *latest* version: https://github.com/tig-nl/postcode-magento2/releases/
 Issues with outdated version will be rejected.
-- [ ] I've **verified** and **I assure** that I'm running the latest version of the TIG Buckaroo Magento extension.
+- [ ] I've **verified** and **I assure** that I'm running the latest version of the TIG Postcode Magento 2 extension.
 
 ---
 
 ### What is the purpose of your *issue*?
-- [ ] Bug report (encountered problems with the TIG Buckaroo Magento extension)
+- [ ] Bug report (encountered problems with the TIG Postcode Magento 2 extension)
 - [ ] Site support request (request for adding support for a new site)
 - [ ] Feature request (request for a new functionality)
 - [ ] Question
