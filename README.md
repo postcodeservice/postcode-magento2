@@ -9,4 +9,4 @@ composer require tig/postcode-magento2
 
 
 For further installation guidance
-https://developers.postcodeserivce.com
+https://developers.postcodeservice.com/
