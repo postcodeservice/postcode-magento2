@@ -68,6 +68,10 @@
         <plugin name="postcodeGuestPaymentInformationManagement" type="TIG\Postcode\Plugin\Address\Management\GuestPayment" />
     </type>
 
+    <type name="Magento\Customer\Model\Metadata\Form">
+        <plugin name="postcodeCustomerForm" type="TIG\Postcode\Plugin\Address\Management\CustomerForm" />
+    </type>
+
     <type name="\Mageplaza\Osc\Api\CheckoutManagementInterface">
         <plugin name="postcodeMageplazaCheckoutInformation" type="TIG\Postcode\Plugin\Mageplaza\CheckoutManagement" />
     </type>
