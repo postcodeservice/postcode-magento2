@@ -36,6 +36,14 @@ use Magento\Framework\App\RequestInterface;
 
 class CustomerForm
 {
+    /**
+     * @param Form             $subject
+     * @param                  $result
+     * @param RequestInterface $request
+     *
+     * @return mixed
+     */
+    // @codingStandardsIgnoreLine
     public function afterExtractData(Form $subject, $result, RequestInterface $request)
     {
         if ($request->getPostValue('country_id') != 'NL') {
