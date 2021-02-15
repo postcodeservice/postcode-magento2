@@ -53,8 +53,14 @@ class CustomerForm
         $housenumber = $request->getPostValue('tig-housenumber');
         $housenrAddition = $request->getPostValue('tig-housenumber-addition');
 
+        $street = $result['street'];
+
+        if (is_array($street) && array_key_exists(0, $street)) {
+            $street = $street[0];
+        }
+
         $result['street'] = [
-            $result['street'][0],
+            $street,
             $housenumber,
             $housenrAddition
         ];

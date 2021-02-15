@@ -40,6 +40,12 @@
                 self.request.abort('avoidMulticall');
             }
 
+            if (!$.isArray(formData) || formData.length === 0) {
+                var errorMessage = $.mage.__('Please enter a valid zip code and house number.');
+                handleError(errorMessage);
+                return;
+            }
+
             self.request = $.ajax({
                 method:'GET',
                 url: '<?= $block->escapeHtml($block->getPostcodeUrl());?>',
@@ -210,19 +216,19 @@
 
         housenumberElement.appendTo(postcodeContainer);
 
-        var housenrAdditionElement = $('.field.zip').clone();
-        housenrAdditionElement.removeClass('zip').removeClass('required').addClass('tig-housenumber-addition');
-        housenrAdditionElement.find('label').attr('for', 'tig-housenumber-addition');
-        housenrAdditionElement.find('label span').text('<?= $block->escapeHtml(__('Addition')); ?>');
+        var housenoAdditionElement = $('.field.zip').clone();
+        housenoAdditionElement.removeClass('zip').removeClass('required').addClass('tig-housenumber-addition');
+        housenoAdditionElement.find('label').attr('for', 'tig-housenumber-addition');
+        housenoAdditionElement.find('label span').text('<?= $block->escapeHtml(__('Addition')); ?>');
 
-        var housenrAdditionInput = housenrAdditionElement.find('.control input');
-        housenrAdditionInput.attr('title', '<?= $block->escapeHtml(__('Addition')); ?>');
-        housenrAdditionInput.attr('name', 'tig-housenumber-addition');
-        housenrAdditionInput.attr('id', 'tig-housenumber-addition');
-        housenrAdditionInput.val($('.field.street').find('.control input:eq(2)').val());
-        housenrAdditionInput.removeClass('validate-zip-international');
+        var housenoAdditionInput = housenoAdditionElement.find('.control input');
+        housenoAdditionInput.attr('title', '<?= $block->escapeHtml(__('Addition')); ?>');
+        housenoAdditionInput.attr('name', 'tig-housenumber-addition');
+        housenoAdditionInput.attr('id', 'tig-housenumber-addition');
+        housenoAdditionInput.val($('.field.street').find('.control input:eq(2)').val());
+        housenoAdditionInput.removeClass('validate-zip-international');
 
-        housenrAdditionElement.appendTo(postcodeContainer);
+        housenoAdditionElement.appendTo(postcodeContainer);
 
         var validationMessage = '<div class="tig-postcode-validation-message"></div>';
         $(validationMessage).insertAfter('.tig-postcode-field-group');
