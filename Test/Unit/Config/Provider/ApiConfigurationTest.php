@@ -37,8 +37,8 @@ class ApiConfigurationTest extends AbstractConfigurationTest
 {
     protected $instanceClass = ApiConfiguration::class;
 
-    private $base = 'https://postcode.tig.nl/api';
-    private $beBase = 'https://postcode-be.tig.nl/api/be';
+    private $base = 'https://api.postcodeservice.com/nl/';
+    private $beBase = 'https://api.postcodeservice.com/be/';
 
     private $version         = 'v3';
     private $postcodeVersion = 'v2';
