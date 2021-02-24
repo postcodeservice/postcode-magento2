@@ -34,6 +34,7 @@ namespace TIG\Postcode\Block\Frontend\Customer\Address;
 use Magento\Backend\Block\Template;
 use Magento\Framework\UrlInterface;
 use Magento\Framework\View\Element\BlockInterface;
+use TIG\Postcode\Config\Provider\ModuleConfiguration;
 
 class Edit extends Template implements BlockInterface
 {
@@ -49,25 +50,57 @@ class Edit extends Template implements BlockInterface
     private $urlBuilder;
 
     /**
-     * @param Template\Context $context
-     * @param UrlInterface     $urlBuilder
-     * @param array            $data
+     * @var ModuleConfiguration
+     */
+    private $moduleConfiguration;
+
+    /**
+     * @param Template\Context    $context
+     * @param UrlInterface        $urlBuilder
+     * @param ModuleConfiguration $moduleConfiguration
+     * @param array               $data
      */
     public function __construct(
         Template\Context $context,
         UrlInterface $urlBuilder,
+        ModuleConfiguration $moduleConfiguration,
         array $data = []
     ) {
         $this->urlBuilder = $urlBuilder;
+        $this->moduleConfiguration = $moduleConfiguration;
 
         parent::__construct($context, $data);
     }
 
     /**
-     * @return bool
+     * @return string
      */
     public function getPostcodeUrl()
     {
         return $this->urlBuilder->getUrl('postcode/address/service', ['_secure' => true]);
+    }
+
+    /**
+     * @return string
+     */
+    public function getBePostcodeUrl()
+    {
+        return $this->urlBuilder->getUrl('postcode/address/service/be/getpostcode', ['_secure' => true]);
+    }
+
+    /**
+     * @return string
+     */
+    public function getBeStreetUrl()
+    {
+        return $this->urlBuilder->getUrl('postcode/address/service/be/getstreet', ['_secure' => true]);
+    }
+
+    /**
+     * @return string
+     */
+    public function isPostcodeBeCheckOn()
+    {
+        return ($this->moduleConfiguration->isBECheckEnabled() ? "true" : "false");
     }
 }
