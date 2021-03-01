@@ -384,6 +384,11 @@ define([
 
             State.address(address);
             return address;
+        },
+    
+        // Compatibility with Mageplaza - #POSTCODENL-235
+        value: function () {
+            return null;
         }
     });
 });
