@@ -83,6 +83,10 @@
     margin-top: 5px;
 }
 
+.tig-billing-housenumber {
+    display: inline;
+}
+
 /* Validation message */
 
 .tig-postcode-validation-message {
