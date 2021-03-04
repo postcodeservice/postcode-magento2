@@ -276,8 +276,9 @@
                     this.menu.element.addClass("tigAutocomplete");
                     this.menu.element.addClass('tigJqueryUiClass');
                     var country = $('.field.country .control select').val();
+                    var postcodeBeCheckOn = '<?= $block->escapeHtml($block->isPostcodeBeCheckOn());?>';
 
-                    if (country !== 'BE' || '<?= $block->escapeHtml($block->isPostcodeBeCheckOn());?>' === 'false') {
+                    if (country !== 'BE' || postcodeBeCheckOn === 'false') {
                         /**
                          * Somehow the loader occasionally pops up on different countries.
                          * Here we force remove the loader.
@@ -306,7 +307,7 @@
                         // Force remove the loader & re-enable tabbing out of the field.
                         this.zipcodeElement.element.removeClass('ui-autocomplete-loading');
 
-                        if (data.success == false) {
+                        if (data.success === false) {
                             response([$.mage.__('No results found.')]);
                             return;
                         }
@@ -363,8 +364,9 @@
                     this.menu.element.addClass('tigJqueryUiClass');
                     this.menu.element.appendTo(this.element.closest('.tig-street-autocomplete'));
                     var country = $('.field.country .control select').val();
+                    var postcodeBeCheckOn = '<?= $block->escapeHtml($block->isPostcodeBeCheckOn());?>';
 
-                    if (country !== 'BE' || '<?= $block->escapeHtml($block->isPostcodeBeCheckOn());?>' === 'false') {
+                    if (country !== 'BE' || postcodeBeCheckOn === 'false') {
                         /** Somehow the loader occasionally pops up on different countries.
                          * Here we force remove the loader. */
                         this.element.removeClass('ui-autocomplete-loading');
@@ -389,7 +391,7 @@
                          */
                         this.streetElement.element.removeClass('ui-autocomplete-loading');
 
-                        if (data.success == false) {
+                        if (data.success === false) {
                             response([$.mage.__('No results found. Please fill in manually.')]);
                             return;
                         }

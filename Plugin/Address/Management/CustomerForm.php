@@ -48,7 +48,7 @@ class CustomerForm
     {
         $country = $request->getPostValue('country_id');
 
-        if ($country!= 'NL' && $country!= 'BE') {
+        if ($country !== 'NL' && $country !== 'BE') {
             return $result;
         }
 
