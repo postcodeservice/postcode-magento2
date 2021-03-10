@@ -36,7 +36,8 @@ define([
     'ko',
     'TIG_Postcode/js/Helper/Logger',
     'TIG_Postcode/js/Address/State',
-    'uiRegistry'
+    'uiRegistry',
+    'underscore'
 ], function (
     $,
     quote,
@@ -45,7 +46,8 @@ define([
     ko,
     Logger,
     State,
-    Registry
+    Registry,
+    _
 ) {
     'use strict';
 
@@ -65,9 +67,85 @@ define([
             beAutocomplete : false
         },
 
+        addToAddress: function (address, customAttributes) {
+            _.each(address[customAttributes], function(attr) {
+                if(_.isUndefined(attr['attribute_code'])) {
+                    return;
+                }
+
+                if(attr.attribute_code === 'tig_housenumber' && attr.value !== '') {
+                    address.street[1] = attr.value;
+                }
+
+                if(attr.attribute_code === 'tig_housenumber_addition' && attr.value !== '') {
+                    address.street[2] = attr.value;
+                }
+            }.bind(this));
+
+            return address;
+        },
+
+        updateAddresses: function (options, originalOptions, jqXHR) {
+            console.log(options.url);
+
+            if (typeof originalOptions.data === "string") {
+                var data = $.parseJSON(originalOptions.data);
+                console.log(data);
+
+                // Handle Magento inconsistencies
+                var customAttributes = 'custom_attributes';
+
+                if (!_.isUndefined(data.address) && !_.isUndefined(data.address[customAttributes])) {
+                    data.address = this.addToAddress(data.address, customAttributes)
+                }
+
+                customAttributes = 'customAttributes';
+
+                if (!_.isUndefined(data.addressInformation) &&
+                    !_.isUndefined(data.addressInformation.shipping_address) &&
+                    !_.isUndefined(data.addressInformation.shipping_address[customAttributes])) {
+                    data.addressInformation.shipping_address = this.addToAddress(data.addressInformation.shipping_address, customAttributes)
+                }
+
+                if (!_.isUndefined(data.addressInformation) &&
+                    !_.isUndefined(data.addressInformation.billing_address) &&
+                    !_.isUndefined(data.addressInformation.billing_address[customAttributes])) {
+                    data.addressInformation.billing_address = this.addToAddress(data.addressInformation.billing_address, customAttributes)
+                }
+
+                if (!_.isUndefined(data.billingAddress) &&
+                    !_.isUndefined(data.billingAddress[customAttributes])) {
+                    data.billingAddress = this.addToAddress(data.billingAddress, customAttributes)
+                }
+
+
+
+                options.data = JSON.stringify(data);
+            } else {
+                console.log(originalOptions.data);
+            }
+        },
+
         initialize : function () {
             this._super()
                 ._setClasses();
+
+            $.ajaxPrefilter(
+                function ( options, originalOptions, jqXHR ) {
+                    var allowedMethods = ["POST","DELETE","PUT"];
+                    var allowedUrls = _.filter(['checkout/onepage/update', 'rest/'], function (url) {
+                        return options.url.indexOf(url) !== -1;
+                    });
+
+                    if ($.inArray(options.type.toUpperCase(), allowedMethods) === -1 ||
+                        allowedUrls.length < 1) {
+                        return;
+                    }
+
+                    this.updateAddresses(options, originalOptions, jqXHR);
+                }.bind(this)
+            );
+
 
             // PSM2-116 - If customAttributes exist, the address already contains a tig_housenumber.
             // Sometimes extension attributes get lost, fill them every time the address changes.
@@ -385,7 +463,7 @@ define([
             State.address(address);
             return address;
         },
-    
+
         // Compatibility with Mageplaza - #POSTCODENL-235
         value: function () {
             return null;
