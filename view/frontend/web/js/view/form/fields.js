@@ -147,7 +147,6 @@ define([
                 }.bind(this)
             );
 
-
             // PSM2-116 - If customAttributes exist, the address already contains a tig_housenumber.
             // Sometimes extension attributes get lost, fill them every time the address changes.
             quote.shippingAddress.subscribe(function (address) {
