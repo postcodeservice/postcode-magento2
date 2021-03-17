@@ -49,3 +49,5 @@ Extension status,Extension status
 "Change the sort order of the Postcode field in the checkout.","Change the sort order of the Postcode field in the checkout."
 "Change the sort order of the City field in the checkout.","Change the sort order of the City field in the checkout."
 "Change the sort order of the Country field in the checkout.","Change the sort order of the Country field in the checkout."
+"Unexpected error occurred. Please fill in the address details manually.","Unexpected error occurred. Please fill in the address details manually."
+"Please enter a valid zip code and house number.","Please enter a valid zip code and house number."

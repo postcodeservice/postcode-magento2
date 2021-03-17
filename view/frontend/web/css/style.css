@@ -38,6 +38,11 @@
     display: block;
 }
 
+input._disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
 /* Default: Magento Luma checkout =================================================================================== */
 
 .tig-postcode-field-group {
@@ -109,6 +114,15 @@
     max-width: 100%;
 }
 
+/* Account Address Edit Page ============================================================================================ */
+.tig-postcode-field-group-account .field span {
+    max-width: 100%;
+}
+
+.tig-postcode-field-group-account .field:last-child,
+.tig-postcode-field-group-account .field {
+    margin-bottom: 0;
+}
 
 /* Required */
 
