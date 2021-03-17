@@ -131,6 +131,7 @@ define([
             this._super()
                 ._setClasses();
 
+            // Credits to OneStepCheckout.com and @speedupmate (https://gist.github.com/speedupmate) for this logic and solution
             $.ajaxPrefilter(
                 function ( options, originalOptions, jqXHR ) {
                     var allowedMethods = ["POST","DELETE","PUT"];
