@@ -46,7 +46,9 @@ class CustomerForm
     // @codingStandardsIgnoreLine
     public function afterExtractData(Form $subject, $result, RequestInterface $request)
     {
-        if ($request->getPostValue('country_id') != 'NL') {
+        $country = $request->getPostValue('country_id');
+
+        if ($country !== 'NL' && $country !== 'BE') {
             return $result;
         }
 
