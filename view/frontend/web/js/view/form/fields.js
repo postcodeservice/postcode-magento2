@@ -68,17 +68,25 @@ define([
         },
 
         addToAddress: function (address, customAttributes) {
+            // Subtract one, as the index is 0
+            var housenumberIndex = window.checkoutConfig.postcode.streetparser.housenumberParsing - 1;
+            var housenumberAdditionIndex = window.checkoutConfig.postcode.streetparser.housenumberAdditionParsing - 1;
+
             _.each(address[customAttributes], function(attr) {
-                if(_.isUndefined(attr['attribute_code'])) {
+                if(_.isUndefined(attr.attribute_code || attr.value === '')) {
                     return;
                 }
 
-                if(attr.attribute_code === 'tig_housenumber' && attr.value !== '') {
-                    address.street[1] = attr.value;
+                var value;
+                // Simply concating provides the housenumber "undefined 37", because street[1] can be undefined.
+                if(attr.attribute_code === 'tig_housenumber') {
+                    value = [address.street[housenumberIndex], attr.value].join(' ');
+                    address.street[housenumberIndex] = value.trim();
                 }
 
-                if(attr.attribute_code === 'tig_housenumber_addition' && attr.value !== '') {
-                    address.street[2] = attr.value;
+                if(attr.attribute_code === 'tig_housenumber_addition') {
+                    value = [address.street[housenumberAdditionIndex], attr.value].join(' ');
+                    address.street[housenumberAdditionIndex] = value.trim()
                 }
             }.bind(this));
 
@@ -86,11 +94,8 @@ define([
         },
 
         updateAddresses: function (options, originalOptions, jqXHR) {
-            console.log(options.url);
-
             if (typeof originalOptions.data === "string") {
                 var data = $.parseJSON(originalOptions.data);
-                console.log(data);
 
                 // Handle Magento inconsistencies
                 var customAttributes = 'custom_attributes';
@@ -118,11 +123,7 @@ define([
                     data.billingAddress = this.addToAddress(data.billingAddress, customAttributes)
                 }
 
-
-
                 options.data = JSON.stringify(data);
-            } else {
-                console.log(originalOptions.data);
             }
         },
 
