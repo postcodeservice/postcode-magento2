@@ -69,3 +69,5 @@ Support,Support
 "Change the sort order of the Postcode field in the checkout.","Verander de sorteer volgorde van het veld 'Postcode' in de checkout."
 "Change the sort order of the City field in the checkout.","Verander de sorteer volgorde van het veld 'Plaats' in de checkout."
 "Change the sort order of the Country field in the checkout.","Verander de sorteer volgorde van het veld 'Land' in de checkout."
+"Unexpected error occurred. Please fill in the address details manually.","Er is een onverwachte fout opgetreden. Vul s.v.p. handmatig uw adresgegevens in."
+"Please enter a valid zip code and house number.","Vul s.v.p. een valide postcode en huisnummer in."

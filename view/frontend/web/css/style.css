@@ -20,7 +20,7 @@
     background:url('../images/indicator.gif') no-repeat right center !important;
 }
 
-.ui-corner-all a {
+.tigJqueryUiClass.ui-corner-all a {
     position: relative;
     border: 1px solid white;
     float: left;
@@ -36,6 +36,11 @@
 .ui-menu .ui-menu-item {
     margin: 0;
     display: block;
+}
+
+input._disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
 }
 
 /* Default: Magento Luma checkout =================================================================================== */
@@ -109,6 +114,19 @@
     max-width: 100%;
 }
 
+/* Account Address Edit Page ============================================================================================ */
+.tig-postcode-field-group-account .field span {
+    max-width: 100%;
+}
+
+.tig-postcode-field-group-account .field:last-child,
+.tig-postcode-field-group-account .field {
+    margin-bottom: 0;
+}
+
+.tig-postcode-field-group-account .field.tig-housenumber-addition-be {
+    max-width: 22%;
+}
 
 /* Required */
 

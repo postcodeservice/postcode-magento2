@@ -52,4 +52,8 @@
         </arguments>
     </type>
 
+    <type name="Magento\Customer\Model\Metadata\Form">
+        <plugin name="postcodeCustomerForm" type="TIG\Postcode\Plugin\Address\Management\CustomerForm" />
+    </type>
+
 </config>
