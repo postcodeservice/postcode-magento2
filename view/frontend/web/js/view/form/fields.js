@@ -86,7 +86,7 @@ define([
 
                 if(attr.attribute_code === 'tig_housenumber_addition') {
                     value = [address.street[housenumberAdditionIndex], attr.value].join(' ');
-                    address.street[housenumberAdditionIndex] = value.trim()
+                    address.street[housenumberAdditionIndex] = value.trim();
                 }
             }.bind(this));
 
@@ -101,7 +101,7 @@ define([
                 var customAttributes = 'custom_attributes';
 
                 if (!_.isUndefined(data.address) && !_.isUndefined(data.address[customAttributes])) {
-                    data.address = this.addToAddress(data.address, customAttributes)
+                    data.address = this.addToAddress(data.address, customAttributes);
                 }
 
                 customAttributes = 'customAttributes';
@@ -109,18 +109,18 @@ define([
                 if (!_.isUndefined(data.addressInformation) &&
                     !_.isUndefined(data.addressInformation.shipping_address) &&
                     !_.isUndefined(data.addressInformation.shipping_address[customAttributes])) {
-                    data.addressInformation.shipping_address = this.addToAddress(data.addressInformation.shipping_address, customAttributes)
+                    data.addressInformation.shipping_address = this.addToAddress(data.addressInformation.shipping_address, customAttributes);
                 }
 
                 if (!_.isUndefined(data.addressInformation) &&
                     !_.isUndefined(data.addressInformation.billing_address) &&
                     !_.isUndefined(data.addressInformation.billing_address[customAttributes])) {
-                    data.addressInformation.billing_address = this.addToAddress(data.addressInformation.billing_address, customAttributes)
+                    data.addressInformation.billing_address = this.addToAddress(data.addressInformation.billing_address, customAttributes);
                 }
 
                 if (!_.isUndefined(data.billingAddress) &&
                     !_.isUndefined(data.billingAddress[customAttributes])) {
-                    data.billingAddress = this.addToAddress(data.billingAddress, customAttributes)
+                    data.billingAddress = this.addToAddress(data.billingAddress, customAttributes);
                 }
 
                 return JSON.stringify(data);
