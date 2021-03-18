@@ -72,19 +72,19 @@ define([
             var housenumberIndex = window.checkoutConfig.postcode.streetparser.housenumberParsing - 1;
             var housenumberAdditionIndex = window.checkoutConfig.postcode.streetparser.housenumberAdditionParsing - 1;
 
-            _.each(address[customAttributes], function(attr) {
-                if(_.isUndefined(attr.attribute_code || attr.value === '')) {
+            _.each(address[customAttributes], function (attr) {
+                if (_.isUndefined(attr.attribute_code || attr.value === '')) {
                     return;
                 }
 
                 var value;
                 // Simply concating provides the housenumber "undefined 37", because street[1] can be undefined.
-                if(attr.attribute_code === 'tig_housenumber') {
+                if (attr.attribute_code === 'tig_housenumber') {
                     value = [address.street[housenumberIndex], attr.value].join(' ');
                     address.street[housenumberIndex] = value.trim();
                 }
 
-                if(attr.attribute_code === 'tig_housenumber_addition') {
+                if (attr.attribute_code === 'tig_housenumber_addition') {
                     value = [address.street[housenumberAdditionIndex], attr.value].join(' ');
                     address.street[housenumberAdditionIndex] = value.trim();
                 }
