@@ -93,9 +93,9 @@ define([
             return address;
         },
 
-        updateAddresses: function (options, originalOptions, jqXHR) {
-            if (typeof originalOptions.data === "string") {
-                var data = $.parseJSON(originalOptions.data);
+        updateAddresses: function (options) {
+            if (typeof options.data === "string") {
+                var data = $.parseJSON(options.data);
 
                 // Handle Magento inconsistencies
                 var customAttributes = 'custom_attributes';
@@ -123,7 +123,7 @@ define([
                     data.billingAddress = this.addToAddress(data.billingAddress, customAttributes)
                 }
 
-                options.data = JSON.stringify(data);
+                return JSON.stringify(data);
             }
         },
 
@@ -141,10 +141,10 @@ define([
 
                     if ($.inArray(options.type.toUpperCase(), allowedMethods) === -1 ||
                         allowedUrls.length < 1) {
-                        return;
+                        return options;
                     }
 
-                    this.updateAddresses(options, originalOptions, jqXHR);
+                    return this.updateAddresses(options);
                 }.bind(this)
             );
 
