@@ -29,46 +29,39 @@
  * @copyright   Copyright (c) Total Internet Group B.V. https://tig.nl/copyright
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
-namespace TIG\Postcode\Plugin\Address\Management;
+namespace TIG\Postcode\Config\CheckoutConfiguration;
 
-use Magento\Quote\Api\Data\AddressInterface;
-use TIG\Postcode\Services\Address\StreetFields;
+use TIG\Postcode\Config\Provider\ModuleConfiguration;
+use TIG\Postcode\Config\Provider\ParserConfiguration;
 
-class Billing
+class StreetParser implements CheckoutConfigurationInterface
 {
-    /**
-     * @var StreetFields
-     */
-    private $streetParser;
+    private $moduleConfiguration;
 
+    /**
+     * @var ParserConfiguration
+     */
+    private $parserConfiguration;
+
+    /**
+     * IsPostcodeCheckActive constructor.
+     *
+     * @param ParserConfiguration $parserConfiguration
+     */
     public function __construct(
-        StreetFields $streetFields
+        ParserConfiguration $parserConfiguration
     ) {
-        $this->streetParser = $streetFields;
+        $this->parserConfiguration = $parserConfiguration;
     }
 
     /**
-     * @param                  $subject -> Magento\Quote\Model\BillingAddressManagement
-     * @param                  $cartId
-     * @param AddressInterface $address
-     * @param bool             $shipping
-     *
-     * @return array
+     * @return mixed
      */
-    // @codingStandardsIgnoreLine
-    public function beforeAssign($subject, $cartId, AddressInterface $address, $shipping = false) {
-        $attributes = $address->getExtensionAttributes();
-        if (empty($attributes)) {
-            return [$cartId, $address, $shipping];
-        }
-
-        if (!$attributes->getTigHousenumber()) {
-            return [$cartId, $address, $shipping];
-        }
-
-        $street = $this->streetParser->parse($address->getStreet(), $attributes);
-        $address->setStreet($street);
-
-        return [$cartId, $address, $shipping];
+    public function getValue()
+    {
+        return [
+            'housenumberParsing'         => $this->parserConfiguration->getHousenumberMerging(),
+            'housenumberAdditionParsing' => $this->parserConfiguration->getAdditionMerging()
+        ];
     }
 }

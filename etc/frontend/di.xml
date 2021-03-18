@@ -50,6 +50,7 @@
     <type name="TIG\Postcode\Config\Provider\CheckoutConfiguration">
         <arguments>
             <argument name="postcodeConfiguration" xsi:type="array">
+                <item name="streetparser" xsi:type="object">TIG\Postcode\Config\CheckoutConfiguration\StreetParser</item>
                 <item name="postcode_active" xsi:type="object">TIG\Postcode\Config\CheckoutConfiguration\IsPostcodeCheckActive</item>
                 <item name="action_url" xsi:type="object">TIG\Postcode\Config\CheckoutConfiguration\ActionUrl</item>
                 <item name="checkout" xsi:type="object">TIG\Postcode\Config\CheckoutConfiguration\GetCheckoutCompatibility</item>
