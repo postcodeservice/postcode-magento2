@@ -131,22 +131,26 @@ define([
             this._super()
                 ._setClasses();
 
-            // Credits to OneStepCheckout.com and @speedupmate (https://gist.github.com/speedupmate) for this logic and solution
-            $.ajaxPrefilter(
-                function ( options, originalOptions, jqXHR ) {
-                    var allowedMethods = ["POST","DELETE","PUT"];
-                    var allowedUrls = _.filter(['checkout/onepage/update', 'rest/'], function (url) {
-                        return options.url.indexOf(url) !== -1;
-                    });
+            // Only allow this prefilter once, to prevent updating addresses multiple times
+            if (window.checkoutConfig.postcode.is_initialized === undefined) {
+                // Credits to OneStepCheckout.com and @speedupmate (https://gist.github.com/speedupmate) for this logic and solution
+                $.ajaxPrefilter(
+                    function ( options, originalOptions, jqXHR ) {
+                        var allowedMethods = ["POST","DELETE","PUT"];
+                        var allowedUrls = _.filter(['checkout/onepage/update', 'rest/'], function (url) {
+                            return options.url.indexOf(url) !== -1;
+                        });
 
-                    if ($.inArray(options.type.toUpperCase(), allowedMethods) === -1 ||
-                        allowedUrls.length < 1) {
-                        return options;
-                    }
+                        if ($.inArray(options.type.toUpperCase(), allowedMethods) === -1 ||
+                            allowedUrls.length < 1) {
+                            return false;
+                        }
 
-                    return this.updateAddresses(options);
-                }.bind(this)
-            );
+                        options.data = this.updateAddresses(options);
+                    }.bind(this)
+                );
+                window.checkoutConfig.postcode.is_initialized = true;
+            }
 
             // PSM2-116 - If customAttributes exist, the address already contains a tig_housenumber.
             // Sometimes extension attributes get lost, fill them every time the address changes.
