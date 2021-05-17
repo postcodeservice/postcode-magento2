@@ -12,12 +12,12 @@
   "authors": [
     {
       "name": "TIG",
-      "email": "support@postcodeservice.nl",
+      "email": "support@postcodeservice.com",
       "homepage": "https://postcodeservice.nl/"
     }
   ],
   "support": {
-    "email": "support@postcodeservice.nl",
+    "email": "support@postcodeservice.com",
     "issues": "https://portal.tig.nl"
   },
   "homepage": "https://postcodeservice.nl/",
