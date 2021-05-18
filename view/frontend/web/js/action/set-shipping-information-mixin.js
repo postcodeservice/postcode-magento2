@@ -56,6 +56,12 @@ define([
                 shippingAddress['extension_attributes'] = {};
             }
 
+            if (shippingAddress['street'] !== undefined) {
+                while (shippingAddress['street'].length > 1) {
+                    shippingAddress['street'].splice(1, 1);
+                }
+            }
+
             // < M2.3.0
             if (shippingAddress.customAttributes !== undefined && shippingAddress.customAttributes.tig_housenumber !== undefined) {
                 shippingAddress['extension_attributes']['tig_housenumber']          = shippingAddress.customAttributes.tig_housenumber;

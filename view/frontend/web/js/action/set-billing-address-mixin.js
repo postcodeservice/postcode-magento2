@@ -56,6 +56,12 @@ define([
                 billingAddress['extension_attributes'] = {};
             }
 
+            if (billingAddress['street'] !== undefined) {
+                while (billingAddress['street'].length > 1) {
+                    billingAddress['street'].splice(1, 1);
+                }
+            }
+
             // < M2.3.0
             if (billingAddress.customAttributes !== undefined && billingAddress.customAttributes.tig_housenumber !== undefined) {
                 billingAddress['extension_attributes']['tig_housenumber']          = billingAddress.customAttributes.tig_housenumber;

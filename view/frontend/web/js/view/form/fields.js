@@ -362,6 +362,17 @@ define([
                 Registry.get(self.parentName + '.street.0').set('value', data.straatnaam);
                 Registry.get(self.parentName + '.city').set('value', data.woonplaats);
 
+                var streetNr = Registry.get(self.parentName + '.street.1');
+                var streetAddition = Registry.get(self.parentName + '.street.2');
+
+                if (streetNr !== undefined) {
+                    streetNr.set('value', '');
+                }
+
+                if (streetAddition !== undefined) {
+                    streetAddition.set('value', '');
+                }
+
                 // Trigger change for subscripe methods.
                 $("input[name*='street[0]']").trigger('change');
                 $("input[name*='city']").trigger('change');
