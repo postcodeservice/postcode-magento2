@@ -250,6 +250,11 @@ define([
                 streetElement.additionalClasses.tig_hidden = true;
                 cityElement.additionalClasses.tig_hidden = true;
 
+                var postcodeField = $('.tig-postcode-field-group div[name$=postcode]');
+                /* jshint ignore:start */
+                country === 'NL' || country === 'BE' ? postcodeField.removeClass('tig-postcode-full-width') : postcodeField.addClass('tig-postcode-full-width');
+                /* jshint ignore:end */
+
                 if (country === 'NL') {
                     $('.tig_hidden').hide(200);
 
