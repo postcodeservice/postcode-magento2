@@ -56,10 +56,8 @@ define([
                 shippingAddress['extension_attributes'] = {};
             }
 
-            if (shippingAddress['street'] !== undefined) {
-                while (shippingAddress['street'].length > 1) {
-                    shippingAddress['street'].splice(1, 1);
-                }
+            if (shippingAddress['street'] !== undefined && shippingAddress['street'].length > 1) {
+                shippingAddress['street'].splice(1);
             }
 
             // < M2.3.0

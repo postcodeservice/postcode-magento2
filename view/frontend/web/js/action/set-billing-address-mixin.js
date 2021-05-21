@@ -56,10 +56,8 @@ define([
                 billingAddress['extension_attributes'] = {};
             }
 
-            if (billingAddress['street'] !== undefined) {
-                while (billingAddress['street'].length > 1) {
-                    billingAddress['street'].splice(1, 1);
-                }
+            if (billingAddress['street'] !== undefined && billingAddress['street'].length > 1) {
+                billingAddress['street'].splice(1);
             }
 
             // < M2.3.0
