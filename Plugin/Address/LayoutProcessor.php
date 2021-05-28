@@ -352,7 +352,10 @@ class LayoutProcessor
             $additionalClass = $additionalClass . ' ' . 'tig_hidden';
         }
 
-        $fields[$section]['visible'] = false;
+        if ($section !== 'city') {
+            $fields[$section]['visible'] = false;
+        }
+
         if ($disableRequired) {
             $fields[$section]['validation']['required-entry'] = false;
         }
