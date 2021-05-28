@@ -237,6 +237,7 @@ define([
                 housenumberAdditionalElement
             ) {
                 streetElement.visible(!(country === 'BE' || country === 'NL'));
+                cityElement.visible(!(country === 'BE' || country === 'NL'));
                 housenumberElement.visible(country === 'BE' || country === 'NL');
                 housenumberAdditionalElement.visible(country === 'BE' || country === 'NL');
 
