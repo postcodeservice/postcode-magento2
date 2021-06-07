@@ -39,7 +39,7 @@ define([
 
     return function (Component) {
         return Component.extend({
-            tigHouseNumber: function() {
+            tigHouseNumber: function () {
                 if (quote.billingAddress().customAttributes.length > 0) {
                     var houseNumberString = "";
                     var customAttributes = quote.billingAddress().customAttributes;
