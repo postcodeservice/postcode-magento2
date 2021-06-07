@@ -61,7 +61,7 @@ var config = {
             },
             'Magento_Checkout/js/view/billing-address': {
                 'TIG_Postcode/js/view/billing-address-mixin': true
-            },
+            }
         }
     },
     map : {
