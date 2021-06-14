@@ -106,19 +106,19 @@ define([
 
                 customAttributes = 'customAttributes';
 
-                if (!_.isUndefined(data.addressInformation) &&
+                if (!_.isUndefined(data.addressInformation) && data.addressInformation &&
                     !_.isUndefined(data.addressInformation.shipping_address) &&
                     !_.isUndefined(data.addressInformation.shipping_address[customAttributes])) {
                     data.addressInformation.shipping_address = this.addToAddress(data.addressInformation.shipping_address, customAttributes);
                 }
 
-                if (!_.isUndefined(data.addressInformation) &&
+                if (!_.isUndefined(data.addressInformation) && data.addressInformation &&
                     !_.isUndefined(data.addressInformation.billing_address) &&
                     !_.isUndefined(data.addressInformation.billing_address[customAttributes])) {
                     data.addressInformation.billing_address = this.addToAddress(data.addressInformation.billing_address, customAttributes);
                 }
 
-                if (!_.isUndefined(data.billingAddress) &&
+                if (!_.isUndefined(data.billingAddress) && data.billingAddress &&
                     !_.isUndefined(data.billingAddress[customAttributes])) {
                     data.billingAddress = this.addToAddress(data.billingAddress, customAttributes);
                 }
