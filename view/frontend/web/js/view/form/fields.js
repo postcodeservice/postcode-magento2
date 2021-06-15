@@ -106,19 +106,19 @@ define([
 
                 customAttributes = 'customAttributes';
 
-                if (!_.isUndefined(data.addressInformation) &&
+                if (!_.isUndefined(data.addressInformation) && data.addressInformation &&
                     !_.isUndefined(data.addressInformation.shipping_address) &&
                     !_.isUndefined(data.addressInformation.shipping_address[customAttributes])) {
                     data.addressInformation.shipping_address = this.addToAddress(data.addressInformation.shipping_address, customAttributes);
                 }
 
-                if (!_.isUndefined(data.addressInformation) &&
+                if (!_.isUndefined(data.addressInformation) && data.addressInformation &&
                     !_.isUndefined(data.addressInformation.billing_address) &&
                     !_.isUndefined(data.addressInformation.billing_address[customAttributes])) {
                     data.addressInformation.billing_address = this.addToAddress(data.addressInformation.billing_address, customAttributes);
                 }
 
-                if (!_.isUndefined(data.billingAddress) &&
+                if (!_.isUndefined(data.billingAddress) && data.billingAddress &&
                     !_.isUndefined(data.billingAddress[customAttributes])) {
                     data.billingAddress = this.addToAddress(data.billingAddress, customAttributes);
                 }
@@ -155,6 +155,17 @@ define([
             // PSM2-116 - If customAttributes exist, the address already contains a tig_housenumber.
             // Sometimes extension attributes get lost, fill them every time the address changes.
             quote.shippingAddress.subscribe(function (address) {
+                if (address.extension_attributes === undefined) {
+                    address.extension_attributes = {};
+                }
+
+                if (address.customAttributes !== undefined && address.customAttributes[0] !== undefined && address.customAttributes[0].attribute_code === 'tig_housenumber') {
+                    address.extension_attributes.tig_housenumber          = address.customAttributes[0].value;
+                    address.extension_attributes.tig_housenumber_addition = address.customAttributes[1].value;
+                }
+            });
+
+            quote.billingAddress.subscribe(function (address) {
                 if (address.extension_attributes === undefined) {
                     address.extension_attributes = {};
                 }
@@ -400,27 +411,50 @@ define([
             }
 
             var shippingAddress = quote.shippingAddress(),
-            addressData = AddressConverter.formAddressDataToQuoteAddress(
+            shippingData = AddressConverter.formAddressDataToQuoteAddress(
                 this.source.get('shippingAddress')
             );
 
             //Copy form data to quote shipping address object (Credit: Magaplaza)
-            for (var field in addressData) {
-                if (addressData.hasOwnProperty(field) &&
-                    shippingAddress.hasOwnProperty(field) &&
-                    typeof addressData[field] != 'function' && //eslint-disable-line eqeqeq
-                    _.isEqual(shippingAddress[field], addressData[field])
+            for (var shippingField in shippingData) {
+                if (shippingData.hasOwnProperty(shippingField) &&
+                    shippingAddress.hasOwnProperty(shippingField) &&
+                    typeof shippingData[shippingField] != 'function' && //eslint-disable-line eqeqeq
+                    _.isEqual(shippingAddress[shippingField], shippingData[shippingField])
                 ) {
-                    shippingAddress[field] = addressData[field];
-                } else if (typeof addressData[field] != 'function' && //eslint-disable-line eqeqeq
-                    !_.isEqual(shippingAddress[field], addressData[field])
+                    shippingAddress[shippingField] = shippingData[field];
+                } else if (typeof shippingData[shippingField] != 'function' && //eslint-disable-line eqeqeq
+                    !_.isEqual(shippingAddress[shippingField], shippingData[shippingField])
                 ) {
-                    shippingAddress = addressData;
+                    shippingAddress = shippingData;
                     break;
                 }
             }
 
             quote.shippingAddress(shippingAddress);
+
+            var billingAddress = quote.billingAddress(),
+            billingData = AddressConverter.formAddressDataToQuoteAddress(
+                this.source.get('billingAddress')
+            );
+
+            //Copy form data to quote shipping address object (Credit: Magaplaza)
+            for (var billingField in billingData) {
+                if (billingData.hasOwnProperty(billingField) &&
+                    billingAddress.hasOwnProperty(billingField) &&
+                    typeof billingData[billingField] != 'function' && //eslint-disable-line eqeqeq
+                    _.isEqual(billingAddress[billingField], billingData[billingField])
+                ) {
+                    billingAddress[billingField] = billingData[billingField];
+                } else if (typeof billingData[billingField] != 'function' && //eslint-disable-line eqeqeq
+                    !_.isEqual(billingAddress[billingField], billingData[billingField])
+                ) {
+                    billingAddress = billingData;
+                    break;
+                }
+            }
+
+            quote.billingAddress(billingAddress);
         },
 
         controlRegistry : function (address) {
