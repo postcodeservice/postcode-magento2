@@ -405,22 +405,22 @@ define([
             }
 
             var shippingAddress = quote.shippingAddress(),
-            addressData = AddressConverter.formAddressDataToQuoteAddress(
+            shippingData = AddressConverter.formAddressDataToQuoteAddress(
                 this.source.get('shippingAddress')
             );
 
             //Copy form data to quote shipping address object (Credit: Magaplaza)
-            for (var field in addressData) {
-                if (addressData.hasOwnProperty(field) &&
-                    shippingAddress.hasOwnProperty(field) &&
-                    typeof addressData[field] != 'function' && //eslint-disable-line eqeqeq
-                    _.isEqual(shippingAddress[field], addressData[field])
+            for (var shippingField in shippingData) {
+                if (shippingData.hasOwnProperty(shippingField) &&
+                    shippingAddress.hasOwnProperty(shippingField) &&
+                    typeof shippingData[shippingField] != 'function' && //eslint-disable-line eqeqeq
+                    _.isEqual(shippingAddress[shippingField], shippingData[shippingField])
                 ) {
-                    shippingAddress[field] = addressData[field];
-                } else if (typeof addressData[field] != 'function' && //eslint-disable-line eqeqeq
-                    !_.isEqual(shippingAddress[field], addressData[field])
+                    shippingAddress[shippingField] = shippingData[field];
+                } else if (typeof shippingData[shippingField] != 'function' && //eslint-disable-line eqeqeq
+                    !_.isEqual(shippingAddress[shippingField], shippingData[shippingField])
                 ) {
-                    shippingAddress = addressData;
+                    shippingAddress = shippingData;
                     break;
                 }
             }
@@ -428,22 +428,22 @@ define([
             quote.shippingAddress(shippingAddress);
 
             var billingAddress = quote.billingAddress(),
-            addressData = AddressConverter.formAddressDataToQuoteAddress(
+            billingData = AddressConverter.formAddressDataToQuoteAddress(
                 this.source.get('billingAddress')
             );
 
             //Copy form data to quote shipping address object (Credit: Magaplaza)
-            for (var field in addressData) {
-                if (addressData.hasOwnProperty(field) &&
-                    billingAddress.hasOwnProperty(field) &&
-                    typeof addressData[field] != 'function' && //eslint-disable-line eqeqeq
-                    _.isEqual(billingAddress[field], addressData[field])
+            for (var billingField in billingData) {
+                if (billingData.hasOwnProperty(billingField) &&
+                    billingAddress.hasOwnProperty(billingField) &&
+                    typeof billingData[billingField] != 'function' && //eslint-disable-line eqeqeq
+                    _.isEqual(billingAddress[billingField], billingData[billingField])
                 ) {
-                    billingAddress[field] = addressData[field];
-                } else if (typeof addressData[field] != 'function' && //eslint-disable-line eqeqeq
-                    !_.isEqual(billingAddress[field], addressData[field])
+                    billingAddress[billingField] = billingData[billingField];
+                } else if (typeof billingData[billingField] != 'function' && //eslint-disable-line eqeqeq
+                    !_.isEqual(billingAddress[billingField], billingData[billingField])
                 ) {
-                    billingAddress = addressData;
+                    billingAddress = billingData;
                     break;
                 }
             }
