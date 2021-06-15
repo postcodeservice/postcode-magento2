@@ -247,19 +247,15 @@ define([
 
                 // Next three lines are for initial load. Fields are available in uiRegistry, but not yet in jQuery.
                 postcodeElement.additionalClasses['tig-postcode-full-width'] = !(country === 'NL' || country === 'BE');
-                streetElement.additionalClasses.tig_hidden = (country === 'NL' || country === 'BE');
-                cityElement.additionalClasses.tig_hidden = (country === 'NL' || country === 'BE');
+                streetElement.additionalClasses.tig_hidden = true;
+                cityElement.additionalClasses.tig_hidden = true;
 
                 var postcodeField = $('.tig-postcode-field-group div[name$=postcode]');
-                var streetField = $('div[name$=street]');
-                var cityField = $('div[name$=city]');
                 /* jshint ignore:start */
                 country === 'NL' || country === 'BE' ? postcodeField.removeClass('tig-postcode-full-width') : postcodeField.addClass('tig-postcode-full-width');
-                country === 'NL' || country === 'BE' ? streetField.removeClass('tig_hidden') : streetField.addClass('tig_hidden');
-                country === 'NL' || country === 'BE' ? cityField.removeClass('tig_hidden') : cityField.addClass('tig_hidden');
                 /* jshint ignore:end */
 
-                if (country === 'BE' || country === 'NL') {
+                if (country === 'NL') {
                     $('.tig_hidden').hide(200);
 
                     return;
