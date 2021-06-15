@@ -165,6 +165,17 @@ define([
                 }
             });
 
+            quote.billingAddress.subscribe(function (address) {
+                if (address.extension_attributes === undefined) {
+                    address.extension_attributes = {};
+                }
+
+                if (address.customAttributes !== undefined && address.customAttributes[0] !== undefined && address.customAttributes[0].attribute_code === 'tig_housenumber') {
+                    address.extension_attributes.tig_housenumber          = address.customAttributes[0].value;
+                    address.extension_attributes.tig_housenumber_addition = address.customAttributes[1].value;
+                }
+            });
+
             var self = this;
             Registry.async(this.provider)(function () {
                 self.initModules();
@@ -415,6 +426,29 @@ define([
             }
 
             quote.shippingAddress(shippingAddress);
+
+            var billingAddress = quote.billingAddress(),
+            addressData = AddressConverter.formAddressDataToQuoteAddress(
+                this.source.get('billingAddress')
+            );
+
+            //Copy form data to quote shipping address object (Credit: Magaplaza)
+            for (var field in addressData) {
+                if (addressData.hasOwnProperty(field) &&
+                    billingAddress.hasOwnProperty(field) &&
+                    typeof addressData[field] != 'function' && //eslint-disable-line eqeqeq
+                    _.isEqual(billingAddress[field], addressData[field])
+                ) {
+                    billingAddress[field] = addressData[field];
+                } else if (typeof addressData[field] != 'function' && //eslint-disable-line eqeqeq
+                    !_.isEqual(billingAddress[field], addressData[field])
+                ) {
+                    billingAddress = addressData;
+                    break;
+                }
+            }
+
+            quote.billingAddress(billingAddress);
         },
 
         controlRegistry : function (address) {
