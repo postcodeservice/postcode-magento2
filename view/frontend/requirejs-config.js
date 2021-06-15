@@ -58,6 +58,9 @@ var config = {
             },
             'MyParcelNL_Magento/js/view/delivery-options': {
                 'TIG_Postcode/js/view/myparcel/delivery-options-mixin': true
+            },
+            'Magento_Checkout/js/view/billing-address': {
+                'TIG_Postcode/js/view/billing-address-mixin': true
             }
         }
     },
