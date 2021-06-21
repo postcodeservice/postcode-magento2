@@ -99,6 +99,14 @@ class Edit extends Template implements BlockInterface
     /**
      * @return string
      */
+    public function isPostcodeNlCheckOn()
+    {
+        return ($this->moduleConfiguration->isNLCheckEnabled() ? "true" : "false");
+    }
+
+    /**
+     * @return string
+     */
     public function isPostcodeBeCheckOn()
     {
         return ($this->moduleConfiguration->isBECheckEnabled() ? "true" : "false");
