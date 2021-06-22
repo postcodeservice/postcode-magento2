@@ -39,6 +39,9 @@
         $,
         Logger
     ){
+        var isPostcodeNlenabled = '<?= $block->isPostcodeNlCheckOn() ?>'
+        var isPostcodeBeEnabled = '<?= $block->isPostcodeBeCheckOn() ?>'
+
         var request = null;
         var timer = null;
 
@@ -131,18 +134,18 @@
         var updateFieldData = function() {
             var country = $('.field.country .control select').val();
 
-            if (country !== 'NL' && country !== 'BE') {
-                enableAddressFields(true);
-                hideAddressFields(false);
-                $('.tig-postcode-field-group-account').removeClass('tig-postcode-field-group');
+            if ((country === 'NL' && isPostcodeNlenabled === 'true') || (country === 'BE' && isPostcodeBeEnabled === 'true')) {
+                hideAddressFields(true);
+                $('.tig-postcode-field-group-account').addClass('tig-postcode-field-group');
 
                 return;
             }
 
-            hideAddressFields(true);
-            $('.tig-postcode-field-group-account').addClass('tig-postcode-field-group');
+            enableAddressFields(true);
+            hideAddressFields(false);
+            $('.tig-postcode-field-group-account').removeClass('tig-postcode-field-group');
 
-            if (country === 'NL') {
+            if (country === 'NL' && isPostcodeNlenabled === 'true') {
                 if (self.timer !== undefined) {
                     clearTimeout(self.timer);
                 }
@@ -194,12 +197,12 @@
             // The method will hide potential visible error messages by passing null as argument
             handleError(null);
 
-            if (country === 'NL' || country === 'BE') {
+            if ((country === 'NL' && isPostcodeNlenabled === 'true') || (country === 'BE' && isPostcodeBeEnabled === 'true')) {
                 $('.field.tig-housenumber').show();
                 $('.field.tig-housenumber-addition').show();
             }
 
-            if (country === 'BE') {
+            if (country === 'BE' && isPostcodeBeEnabled === 'true') {
                 var zip = $('.field.zip .control input').val();
 
                 if (!zip) {
