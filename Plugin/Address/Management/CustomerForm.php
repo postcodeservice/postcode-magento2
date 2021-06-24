@@ -33,9 +33,29 @@ namespace TIG\Postcode\Plugin\Address\Management;
 
 use Magento\Customer\Model\Metadata\Form;
 use Magento\Framework\App\RequestInterface;
+use TIG\Postcode\Services\Address\AttributeParser;
+use TIG\Postcode\Services\Address\StreetFields;
 
 class CustomerForm
 {
+    /**
+     * @var AttributeParser
+     */
+    private $attributeParser;
+
+    /**
+     * @var StreetFields
+     */
+    private $streetFields;
+
+    public function __construct(
+        AttributeParser $attributeParser,
+        StreetFields $streetFields
+    ) {
+        $this->attributeParser = $attributeParser;
+        $this->streetFields = $streetFields;
+    }
+
     /**
      * @param Form             $subject
      * @param                  $result
@@ -52,20 +72,14 @@ class CustomerForm
             return $result;
         }
 
-        $housenumber = $request->getPostValue('tig-housenumber');
-        $housenrAddition = $request->getPostValue('tig-housenumber-addition');
-
-        $street = $result['street'];
-
-        if (is_array($street) && array_key_exists(0, $street)) {
-            $street = $street[0];
-        }
-
-        $result['street'] = [
-            $street,
-            $housenumber,
-            $housenrAddition
+        $attributes = [
+            'tig_housenumber' => $request->getPostValue('tig-housenumber'),
+            'tig_housenumber_addition', $request->getPostValue('tig-housenumber-addition')
         ];
+
+        $this->attributeParser->set($attributes);
+
+        $result['street'] = $this->streetFields->parse($result['street'], $this->attributeParser);
 
         return $result;
     }
