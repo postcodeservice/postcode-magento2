@@ -138,22 +138,22 @@
                 hideAddressFields(true);
                 $('.tig-postcode-field-group-account').addClass('tig-postcode-field-group');
 
+                if (country === 'NL' && isPostcodeNlenabled === 'true') {
+                    if (self.timer !== undefined) {
+                        clearTimeout(self.timer);
+                    }
+
+                    self.timer = setTimeout(function () {
+                        setFieldData();
+                    }, 1000);
+                }
+
                 return;
             }
 
             enableAddressFields(true);
             hideAddressFields(false);
             $('.tig-postcode-field-group-account').removeClass('tig-postcode-field-group');
-
-            if (country === 'NL' && isPostcodeNlenabled === 'true') {
-                if (self.timer !== undefined) {
-                    clearTimeout(self.timer);
-                }
-
-                self.timer = setTimeout(function () {
-                    setFieldData();
-                }, 1000);
-            }
         }.bind(timer);
 
         var setFieldData = function() {
