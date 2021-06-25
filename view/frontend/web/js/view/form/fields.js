@@ -422,7 +422,7 @@ define([
                     typeof shippingData[shippingField] != 'function' && //eslint-disable-line eqeqeq
                     _.isEqual(shippingAddress[shippingField], shippingData[shippingField])
                 ) {
-                    shippingAddress[shippingField] = shippingData[field];
+                    shippingAddress[shippingField] = shippingData[shippingField];
                 } else if (typeof shippingData[shippingField] != 'function' && //eslint-disable-line eqeqeq
                     !_.isEqual(shippingAddress[shippingField], shippingData[shippingField])
                 ) {
