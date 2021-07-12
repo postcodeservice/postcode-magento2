@@ -33,7 +33,7 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
     <default>
         <tig_postcode>
-            <supported_magento_version>2.2.6 - 2.2.11, 2.3.0 - 2.3.6-p1, 2.4.0 - 2.4.2</supported_magento_version>
+            <supported_magento_version>2.3.7, 2.4.2</supported_magento_version>
             <stability/>
             <configuration>
                 <modus>0</modus>
