@@ -97,33 +97,31 @@ define([
             if (typeof options.data === "string") {
                 var data = $.parseJSON(options.data);
 
-                // Handle Magento inconsistencies
-                var customAttributes = 'custom_attributes';
+                if (data != null) {
 
-                if (!_.isUndefined(data.address) && !_.isUndefined(data.address[customAttributes])) {
-                    data.address = this.addToAddress(data.address, customAttributes);
+                    // Handle Magento inconsistencies
+                    var customAttributes = 'custom_attributes';
+
+                    if (!_.isUndefined(data.address) && !_.isUndefined(data.address[customAttributes])) {
+                        data.address = this.addToAddress(data.address, customAttributes);
+                    }
+
+                    customAttributes = 'customAttributes';
+
+                    if (!_.isUndefined(data.addressInformation) && data.addressInformation && !_.isUndefined(data.addressInformation.shipping_address) && !_.isUndefined(data.addressInformation.shipping_address[customAttributes])) {
+                        data.addressInformation.shipping_address = this.addToAddress(data.addressInformation.shipping_address, customAttributes);
+                    }
+
+                    if (!_.isUndefined(data.addressInformation) && data.addressInformation && !_.isUndefined(data.addressInformation.billing_address) && !_.isUndefined(data.addressInformation.billing_address[customAttributes])) {
+                        data.addressInformation.billing_address = this.addToAddress(data.addressInformation.billing_address, customAttributes);
+                    }
+
+                    if (!_.isUndefined(data.billingAddress) && data.billingAddress && !_.isUndefined(data.billingAddress[customAttributes])) {
+                        data.billingAddress = this.addToAddress(data.billingAddress, customAttributes);
+                    }
+
+                    return JSON.stringify(data);
                 }
-
-                customAttributes = 'customAttributes';
-
-                if (!_.isUndefined(data.addressInformation) && data.addressInformation &&
-                    !_.isUndefined(data.addressInformation.shipping_address) &&
-                    !_.isUndefined(data.addressInformation.shipping_address[customAttributes])) {
-                    data.addressInformation.shipping_address = this.addToAddress(data.addressInformation.shipping_address, customAttributes);
-                }
-
-                if (!_.isUndefined(data.addressInformation) && data.addressInformation &&
-                    !_.isUndefined(data.addressInformation.billing_address) &&
-                    !_.isUndefined(data.addressInformation.billing_address[customAttributes])) {
-                    data.addressInformation.billing_address = this.addToAddress(data.addressInformation.billing_address, customAttributes);
-                }
-
-                if (!_.isUndefined(data.billingAddress) && data.billingAddress &&
-                    !_.isUndefined(data.billingAddress[customAttributes])) {
-                    data.billingAddress = this.addToAddress(data.billingAddress, customAttributes);
-                }
-
-                return JSON.stringify(data);
             }
         },
 
