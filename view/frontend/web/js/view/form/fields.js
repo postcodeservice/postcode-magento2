@@ -98,7 +98,6 @@ define([
                 var data = $.parseJSON(options.data);
 
                 if (data != null) {
-
                     // Handle Magento inconsistencies
                     var customAttributes = 'custom_attributes';
 
