@@ -56,4 +56,21 @@
         <plugin name="postcodeCustomerForm" type="TIG\Postcode\Plugin\Address\Management\CustomerForm" />
     </type>
 
+    <!-- Save fields during checkout -->
+    <type name="Magento\Checkout\Model\PaymentInformationManagement">
+        <plugin name="tig-postcode-payment-information-management" sortOrder="10" type="TIG\Postcode\Plugin\Checkout\Model\PaymentInformationManagement"/>
+    </type>
+
+    <type name="Magento\Quote\Model\ShippingAddressManagement">
+        <plugin name="tig-postcode-shipping-address-management" sortOrder="10" type="TIG\Postcode\Plugin\Quote\Model\ShippingAddressManagement"/>
+    </type>
+
+    <type name="Magento\Quote\Model\BillingAddressManagement">
+        <plugin name="tig-postcode-billing-address-management" sortOrder="10" type="TIG\Postcode\Plugin\Quote\Model\BillingAddressManagement"/>
+    </type>
+
+    <!-- Copy QuoteAddress to Customer Address -->
+    <type name="Magento\Quote\Model\Quote\Address">
+        <plugin name="tig-postcode-quote-to-customer-address" type="TIG\Postcode\Plugin\Quote\Model\Quote\Address"/>
+    </type>
 </config>
