@@ -184,7 +184,6 @@
     display: inline-block;
     margin: 0 10px 20px 0;
     width: 100%;
-    max-width: calc(100% / 3 - 7px);
 }
 
 .tig_postcode_field.tig_postcode_be {
