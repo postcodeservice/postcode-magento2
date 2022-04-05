@@ -181,12 +181,12 @@
 
 /**** BE ****/
 .field.tig_postcode_be {
-    display: inline-block;
     margin: 0 10px 20px 0;
     width: 100%;
 }
 
 .tig_postcode_field.tig_postcode_be {
+    display: inline-block;
     max-width: calc(46% - 7px);
 }
 
@@ -196,6 +196,7 @@
 
 .tig_housenumber_field.tig_postcode_be,
 .tig_housenumber_addition_field.tig_postcode_be {
+    display: inline-block;
     max-width: calc(54% / 2 - 7px);
 }
 
