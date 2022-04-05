@@ -147,7 +147,7 @@ define(
                     self.getPostcodeService().setFieldValue(FieldTypes.city, data.plaats);
                     self.getPostcodeService().setFieldValue(FieldTypes.postcode, data.postcode);
 
-                    self.getAutoCompleteResultCity().text(' - ' + data.plaats);
+                    self.getAutoCompleteResultCity().text(data.plaats);
                 },
                 close: function() {
                     domPostcodeField.removeClass('auto-complete-running');

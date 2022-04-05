@@ -136,9 +136,13 @@
     box-sizing: border-box;
 }
 
+.tig_postcode_field.tig_postcode_be .control {
+    position: relative;
+}
+
 .tig-autocomplete-result-city {
     top: 6.5px;
-    left: 46px;
+    right: 6.5px;
     color: #ccc;
     max-width: 100px;
     white-space: nowrap;
