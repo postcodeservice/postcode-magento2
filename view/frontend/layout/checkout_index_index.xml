@@ -32,10 +32,6 @@
 -->
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <head>
-        <css src="TIG_Postcode::css/style.css"/>
-        <css src="TIG_Postcode::css/jquery-ui.css"/>
+        <css src="TIG_Postcode::css/fields.css"/>
     </head>
-    <referenceContainer name="before.body.end">
-        <block class="TIG\Postcode\Block\Frontend\Checkout\DataProvider"/>
-    </referenceContainer>
 </page>

@@ -59,7 +59,6 @@ define([
         currentPostcodeHandler: null,
 
         defaults: {
-            template: 'TIG_Postcode/form/collection',
             imports: {
                 updatePostcode: '${ $.name }:value'
             },

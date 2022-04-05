@@ -1,0 +1,221 @@
+.tig_hidden {
+    display: none;
+}
+
+/**** Validation ****/
+.tig_postcode_field._error .control,
+.tig_postcode_field._warn .control {
+    margin-bottom: 70px;
+}
+
+@media (max-width: 375px) {
+    .tig_postcode_field._error .control,
+    .tig_postcode_field._warn .control {
+        margin-bottom: 95px;
+    }
+}
+
+.tig_postcode_field._error .field-error,
+.tig_postcode_field._warn .message {
+    position: absolute;
+}
+
+.tig_postcode_nl.tig_postcode_field._error .field-error {
+    border: 1px solid #e02b27;
+    background: #f9f9f9;
+    color: #e02b27;
+    padding: 5px;
+    font-size: 1.2rem;
+    box-sizing: border-box;
+    white-space: normal;
+    width: 100%;
+    height: 70px;
+}
+
+.tig_postcode_nl.tig_postcode_field._error + .tig_housenumber_field input,
+.tig_postcode_nl.tig_postcode_field._error + .tig_housenumber_field + .tig_housenumber_addition_field input {
+    border: 1px solid #e02b27;
+}
+
+.fieldset.address {
+    position: relative;
+}
+
+/*! jQuery UI - v1.12.1 - 2016-09-14
+* http://jqueryui.com
+* Copyright jQuery Foundation and other contributors; Licensed MIT */
+
+.ui-helper-hidden-accessible {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+
+.tigJqueryUiClass {
+    position: absolute;
+    top: 0;
+    left: 0;
+    cursor: default;
+}
+
+.ui-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: block;
+    outline: 0;
+}
+
+.tigJqueryUiClass .ui-menu-item {
+    cursor: pointer;
+    list-style-image: url("data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7");
+}
+
+.tigJqueryUiClass .ui-state-error a {
+    color: #5f3f3f;
+}
+
+.tigJqueryUiClass {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1em;
+}
+
+.tigJqueryUiClass .ui-widget {
+    font-size: 1em;
+}
+
+.tigJqueryUiClass input,
+.tigJqueryUiClass select,
+.tigJqueryUiClass textarea,
+.tigJqueryUiClass button {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1em;
+}
+
+.tigJqueryUiClass.ui-widget-content {
+    border: 1px solid #c5c5c5;
+}
+
+.tigJqueryUiClass {
+    border: 1px solid #dddddd;
+    background: #ffffff;
+    color: #333333;
+}
+
+.tigJqueryUiClass a {
+    color: #333333;
+}
+
+.tigJqueryUiClass a {
+    color: #333333;
+}
+
+.tigJqueryUiClass .ui-state-focus {
+    border: 1px solid #003eff;
+    background: #007fff;
+    font-weight: normal;
+    color: #ffffff;
+    display: block;
+}
+
+.tigJqueryUiClass.ui-corner-all a {
+    position: relative;
+    border: 1px solid white;
+    float: left;
+    width: 100%;
+    padding: 10px;
+    margin-top: 4px;
+    cursor: pointer;
+    list-style-image: url(data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7);
+    text-decoration: none;
+    box-sizing: border-box;
+}
+
+.tig-autocomplete-result-city {
+    top: 6.5px;
+    left: 46px;
+    color: #ccc;
+    max-width: 100px;
+    white-space: nowrap;
+    pointer-events: none;
+    position: absolute;
+}
+
+.auto-complete-running + .warning {
+    display: none;
+}
+
+/**** NL ****/
+.field.tig_postcode_nl.tig_postcode_field,
+.field.tig_postcode_nl.tig_housenumber_field,
+.field.tig_postcode_nl.tig_housenumber_addition_field{
+    display: inline-block;
+    margin: 0 10px 20px 0;
+    width: 100%;
+    max-width: calc(100% / 3 - 7px);
+}
+
+@media (max-width: 400px) {
+    .tig_postcode_field.tig_postcode_nl {
+        max-width: 100%;
+    }
+
+    .tig_housenumber_field.tig_postcode_nl,
+    .tig_housenumber_addition_field.tig_postcode_nl {
+        max-width: calc(100% / 2 - 7px);
+    }
+}
+
+.tig_street_fields.tig_postcode_nl, .tig_city_field.tig_postcode_nl {
+    max-width: 100%;
+}
+
+.field.tig_postcode_nl.tig_housenumber_addition_field {
+    margin: 0 0 20px 0;
+}
+
+/**** BE ****/
+.field.tig_postcode_be {
+    display: inline-block;
+    margin: 0 10px 20px 0;
+    width: 100%;
+    max-width: calc(100% / 3 - 7px);
+}
+
+.tig_postcode_field.tig_postcode_be {
+    max-width: calc(46% - 7px);
+}
+
+.tig_street_fields.tig_postcode_be, .tig_city_field.tig_postcode_be {
+    max-width: 100%;
+}
+
+.tig_housenumber_field.tig_postcode_be,
+.tig_housenumber_addition_field.tig_postcode_be {
+    max-width: calc(54% / 2 - 7px);
+}
+
+@media (max-width: 400px) {
+    .tig_postcode_field.tig_postcode_be {
+        max-width: 100%;
+    }
+
+    .tig_housenumber_field.tig_postcode_be,
+    .tig_housenumber_addition_field.tig_postcode_be {
+        max-width: calc(100% / 2 - 7px);
+    }
+}
+
+.tig_housenumber_addition_field.tig_postcode_be {
+    margin: 0 0 20px 0;
+}
+
+/**** Mageplaza OSC ****/
+.one-step-checkout-container .field[name="shippingAddress.postcode"] {
+    max-width: calc(46% - 7px);
+}

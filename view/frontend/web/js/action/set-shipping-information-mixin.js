@@ -28,19 +28,25 @@
  * @copyright   Copyright (c) Total Internet Group B.V. https://tig.nl/copyright
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
-/* jshint ignore:start */
+/*jshint browser:true jquery:true*/
+/*global alert*/
 define([
     'jquery',
     'mage/utils/wrapper',
-    'Magento_Checkout/js/model/quote'
-], function (
-    $,
-    wrapper,
-    quote
-) {
+    'Magento_Checkout/js/model/quote',
+
+], function ($, wrapper, quote) {
     'use strict';
 
+    function findAttribute(attributeName, address) {
+        return address.customAttributes.find(
+            function (element) {
+                return element.attribute_code === attributeName;
+            }
+        );
+    }
     return function (setShippingInformationAction) {
+
         return wrapper.wrap(setShippingInformationAction, function (originalAction) {
             var shippingAddress = quote.shippingAddress();
 
@@ -56,24 +62,23 @@ define([
                 shippingAddress['extension_attributes'] = {};
             }
 
-            if (shippingAddress['street'] !== undefined && shippingAddress['street'].length > 1) {
-                shippingAddress['street'].splice(1);
+            var housenumber = findAttribute('tig_housenumber', shippingAddress);
+            var housenumberAddition = findAttribute('tig_housenumber_addition', shippingAddress);
+            var street = findAttribute('tig_street', shippingAddress);
+
+            if (housenumber) {
+                shippingAddress['extension_attributes']['tig_housenumber'] = housenumber.value;
             }
 
-            // < M2.3.0
-            if (shippingAddress.customAttributes !== undefined && shippingAddress.customAttributes.tig_housenumber !== undefined) {
-                shippingAddress['extension_attributes']['tig_housenumber']          = shippingAddress.customAttributes.tig_housenumber;
-                shippingAddress['extension_attributes']['tig_housenumber_addition'] = shippingAddress.customAttributes.tig_housenumber_addition;
-                return originalAction();
+            if (housenumberAddition) {
+                shippingAddress['extension_attributes']['tig_housenumber_addition'] = housenumberAddition.value;
             }
-            // >= M2.3.0
-            if (shippingAddress.customAttributes[0] !== undefined && shippingAddress.customAttributes[0].attribute_code === 'tig_housenumber') {
-                shippingAddress['extension_attributes']['tig_housenumber']          = shippingAddress.customAttributes[0].value;
-                shippingAddress['extension_attributes']['tig_housenumber_addition'] = shippingAddress.customAttributes[1].value;
+
+            if (street) {
+                shippingAddress['extension_attributes']['tig_street'] = street.value;
             }
 
             return originalAction();
         });
     };
 });
-/* jshint ignore:end */

@@ -52,10 +52,6 @@
         </arguments>
     </type>
 
-    <type name="Magento\Customer\Model\Metadata\Form">
-        <plugin name="postcodeCustomerForm" type="TIG\Postcode\Plugin\Address\Management\CustomerForm" />
-    </type>
-
     <!-- Add fields and config during checkout -->
     <type name="Magento\Checkout\Block\Checkout\LayoutProcessor">
         <plugin name="postcode-change-fieldtypes" type="TIG\Postcode\Plugin\Model\Checkout\LayoutProcessorPlugin" sortOrder="100" />

@@ -89,28 +89,6 @@
                 <field id="modus">1</field>
             </depends>
         </field>
-
-        <field id="checkout_compatible" type="select" translate="label comment" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
-            <label>Checkout usage</label>
-            <comment><![CDATA[Select which checkout you use for the best performance possible.]]></comment>
-            <source_model>TIG\Postcode\Config\Source\Checkouts</source_model>
-            <config_path>tig_postcode/configuration/checkout_compatible</config_path>
-        </field>
-
-        <group id="mageplaza_explanation" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
-            <frontend_model>TIG\Postcode\Block\Adminhtml\Config\Checkout\Mageplaza</frontend_model>
-            <fieldset_css>tig_postcode-section</fieldset_css>
-            <depends>
-                <field id="checkout_compatible">mageplaza</field>
-            </depends>
-        </group>
-        <group id="onestepcheckout_explanation" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
-            <frontend_model>TIG\Postcode\Block\Adminhtml\Config\Checkout\Onestepcheckout</frontend_model>
-            <fieldset_css>tig_postcode-section</fieldset_css>
-            <depends>
-                <field id="checkout_compatible">onestepcheckout</field>
-            </depends>
-        </group>
     </group>
 
     <!-- Field Parser settings -->
@@ -132,12 +110,14 @@
 
         <field id="housenumber_line" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
             <label>House number field</label>
+            <frontend_model>TIG\Postcode\Block\Adminhtml\Config\Form\Field\Disable</frontend_model>
             <source_model>TIG\Postcode\Config\Source\Parser</source_model>
             <config_path>tig_postcode/configuration/fieldparsing_housenumber</config_path>
         </field>
 
         <field id="addition_line" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
             <label>Housenumber addition field</label>
+            <frontend_model>TIG\Postcode\Block\Adminhtml\Config\Form\Field\Disable</frontend_model>
             <source_model>TIG\Postcode\Config\Source\Parser</source_model>
             <config_path>tig_postcode/configuration/fieldparsing_addition</config_path>
         </field>

@@ -47,9 +47,6 @@
             <label>Enable Belgium check</label>
             <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
             <config_path>tig_postcode/countries/enable_be_check</config_path>
-            <depends>
-                <field id="tig_postcode/configuration/checkout_compatible" negative="1">mageplaza</field>
-            </depends>
         </field>
     </group>
 </include>

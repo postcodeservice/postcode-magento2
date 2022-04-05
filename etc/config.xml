@@ -56,11 +56,6 @@
                 <enable_nl_check>1</enable_nl_check>
                 <enable_be_check>0</enable_be_check>
             </countries>
-            <checkout>
-                <postcode_sort_order>65</postcode_sort_order>
-                <city_sort_order>72</city_sort_order>
-                <country_sort_order>64</country_sort_order>
-            </checkout>
         </tig_postcode>
     </default>
 </config>
