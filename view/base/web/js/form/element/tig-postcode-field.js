@@ -78,10 +78,10 @@ define([
          * to restart the handler to initialize fields.
          */
         afterRender: function(){
-            if (!this.currentPostcodeHandler || this.uiInitialized) {
+            this.uiInitialized = true;
+            if (!this.currentPostcodeHandler) {
                 return
             }
-            this.uiInitialized = true;
             this.currentPostcodeHandler.reset();
             this.currentPostcodeHandler.handle();
         },
