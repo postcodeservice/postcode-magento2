@@ -45,6 +45,23 @@ define([
             }
         );
     }
+
+    /**
+     * A custom/extension attribute object can have a different construction
+     * depending on where, how and when the address is being processed.
+     * Therefore make sure the attribute value is correctly retrieved.
+     *
+     * @param attribute
+     * @returns {*}
+     */
+    function getValue(attribute) {
+        if (typeof attribute.value === 'object' && attribute.value.value !== 'undefined') {
+            return attribute.value.value;
+        }
+
+        return attribute.value;
+    }
+
     return function (setShippingInformationAction) {
 
         return wrapper.wrap(setShippingInformationAction, function (originalAction) {
@@ -67,15 +84,15 @@ define([
             var street = findAttribute('tig_street', shippingAddress);
 
             if (housenumber) {
-                shippingAddress['extension_attributes']['tig_housenumber'] = housenumber.value;
+                shippingAddress['extension_attributes']['tig_housenumber'] = getValue(housenumber);
             }
 
             if (housenumberAddition) {
-                shippingAddress['extension_attributes']['tig_housenumber_addition'] = housenumberAddition.value;
+                shippingAddress['extension_attributes']['tig_housenumber_addition'] = getValue(housenumberAddition);
             }
 
             if (street) {
-                shippingAddress['extension_attributes']['tig_street'] = street.value;
+                shippingAddress['extension_attributes']['tig_street'] = getValue(street);
             }
 
             return originalAction();

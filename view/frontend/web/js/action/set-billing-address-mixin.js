@@ -49,6 +49,22 @@ define([
         );
     }
 
+    /**
+     * A custom/extension attribute object can have a different construction
+     * depending on where, how and when the address is being processed.
+     * Therefore make sure the attribute value is correctly retrieved.
+     *
+     * @param attribute
+     * @returns {*}
+     */
+    function getValue(attribute) {
+        if (typeof attribute.value === 'object' && attribute.value.value !== 'undefined') {
+            return attribute.value.value;
+        }
+
+        return attribute.value;
+    }
+
     return function (setBillingAddressAction) {
         return wrapper.wrap(setBillingAddressAction, function (originalAction) {
             var billingAddress = quote.billingAddress();
@@ -70,15 +86,15 @@ define([
             var street = findAttribute('tig_street', billingAddress);
 
             if (housenumber) {
-                billingAddress['extension_attributes']['tig_housenumber'] = housenumber.value;
+                billingAddress['extension_attributes']['tig_housenumber'] = getValue(housenumber);
             }
 
             if (housenumberAddition) {
-                billingAddress['extension_attributes']['tig_housenumber_addition'] = housenumberAddition.value;
+                billingAddress['extension_attributes']['tig_housenumber_addition'] = getValue(housenumberAddition);
             }
 
             if (street) {
-                billingAddress['extension_attributes']['tig_street'] = street.value;
+                billingAddress['extension_attributes']['tig_street'] = getValue(street);
             }
 
             return originalAction();

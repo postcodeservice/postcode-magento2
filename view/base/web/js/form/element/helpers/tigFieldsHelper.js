@@ -53,7 +53,7 @@ define([
          * @param value
          */
         updateHousenumber: function(value){
-            if (this.currentPostcodeHandler && value) {
+            if (this.currentPostcodeHandler) {
                 this.currentPostcodeHandler.handle(FieldTypes.house_number, value);
             }
         },
@@ -64,7 +64,7 @@ define([
          * @param value
          */
         updateHouseNumberAddition: function(value){
-            if (this.currentPostcodeHandler && value) {
+            if (this.currentPostcodeHandler) {
                 this.currentPostcodeHandler.handle(FieldTypes.house_number_addition, value);
             }
         },

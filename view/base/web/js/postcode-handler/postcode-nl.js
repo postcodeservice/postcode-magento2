@@ -84,7 +84,7 @@ define([
 
                 if (data.success !== true) {
                     self.setCurrentState(states.POSTCODE_CALL_FAILED);
-                    self.getPostcodeService().getElement(FieldTypes.postcode).error('Sorry, wij konden geen adresgegevens vinden met de opgegeven postcode en huisnummer combinatie. Indien u er zeker van bent dat de opgegeven postcode en huisnummer correct zijn, vul dan adresinformatie handmatig aan.');
+                    self.getPostcodeService().getElement(FieldTypes.postcode).error('Sorry, we could not find the address on the given zip code and house number combination. If you are sure that the zip code and house number are correct, please fill in the address details manually.');
                     return;
                 }
 
