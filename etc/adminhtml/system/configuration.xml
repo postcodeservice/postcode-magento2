@@ -101,21 +101,21 @@
             <fieldset_css>tig_postcode-section</fieldset_css>
         </group>
 
-        <field id="street_line" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+        <field id="street_line" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
             <label>Street address field</label>
             <frontend_model>TIG\Postcode\Block\Adminhtml\Config\Form\Field\Disable</frontend_model>
             <source_model>TIG\Postcode\Config\Source\Parser</source_model>
             <config_path>tig_postcode/configuration/fieldparsing_street</config_path>
         </field>
 
-        <field id="housenumber_line" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+        <field id="housenumber_line" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
             <label>House number field</label>
             <frontend_model>TIG\Postcode\Block\Adminhtml\Config\Form\Field\Disable</frontend_model>
             <source_model>TIG\Postcode\Config\Source\Parser</source_model>
             <config_path>tig_postcode/configuration/fieldparsing_housenumber</config_path>
         </field>
 
-        <field id="addition_line" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+        <field id="addition_line" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
             <label>Housenumber addition field</label>
             <frontend_model>TIG\Postcode\Block\Adminhtml\Config\Form\Field\Disable</frontend_model>
             <source_model>TIG\Postcode\Config\Source\Parser</source_model>
