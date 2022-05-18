@@ -1,4 +1,4 @@
-.tig_hidden, .amcheckout-wrapper .fieldset.address > .field.tig_hidden, .opc-wrapper  .fieldset > .field.tig_hidden{
+.tig_hidden, .amcheckout-wrapper .fieldset.address > .field.tig_hidden {
     display: none;
 }
 
@@ -178,21 +178,12 @@
     max-width: 100%;
 }
 
-.opc-wrapper .field.tig_postcode_nl.tig_postcode_field {
-    max-width: calc(100% - 8px);
-}
-
 .amcheckout-wrapper .field.tig_postcode_nl.tig_housenumber_field{
     max-width: calc(40% - 7px);
 }
 
 .amcheckout-wrapper .field.tig_postcode_nl.tig_housenumber_addition_field{
     max-width: calc(60% - 7px);
-}
-
-.opc-wrapper .field.tig_postcode_nl.tig_housenumber_field,
-.opc-wrapper .field.tig_postcode_nl.tig_housenumber_addition_field {
-    max-width: calc(50% - 8px);
 }
 
 @media (max-width: 400px) {
@@ -208,15 +199,6 @@
 
 .tig_street_fields.tig_postcode_nl, .tig_city_field.tig_postcode_nl {
     max-width: 100%;
-}
-
-.opc-wrapper .field.tig_postcode_nl.tig_street_field {
-    max-width: calc(100% - 8px);
-    width: calc(50% - 8px);
-}
-
-.opc-wrapper .tig_city_field.tig_postcode_nl {
-    max-width: calc(50% - 8px);
 }
 
 .field.tig_postcode_nl.tig_housenumber_addition_field {
