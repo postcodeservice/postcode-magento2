@@ -56,6 +56,10 @@
     <type name="Magento\Checkout\Block\Checkout\LayoutProcessor">
         <plugin name="postcode-change-fieldtypes" type="TIG\Postcode\Plugin\Model\Checkout\LayoutProcessorPlugin" sortOrder="100" />
     </type>
+    <!-- Add fields and config during mageplaza checkout -->
+    <type name="Mageplaza\Osc\Block\Checkout\LayoutProcessor">
+        <plugin name="postcode-change-fieldtypes" type="TIG\Postcode\Plugin\Model\Osc\LayoutProcessorPlugin" sortOrder="100" />
+    </type>
 
     <type name="Magento\Directory\Model\ResourceModel\Country\Collection">
         <plugin name="add-country-postcode-info" type="TIG\Postcode\Plugin\Model\ResourceModel\Country\CollectionPlugin" />

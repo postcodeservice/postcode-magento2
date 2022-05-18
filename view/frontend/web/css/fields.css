@@ -1,4 +1,5 @@
-.tig_hidden, .amcheckout-wrapper .fieldset.address > .field.tig_hidden {
+.tig_hidden, .amcheckout-wrapper .fieldset.address > .field.tig_hidden,
+.opc-wrapper.one-step-checkout-wrapper  .fieldset > .field.tig_hidden {
     display: none;
 }
 
@@ -178,12 +179,28 @@
     max-width: 100%;
 }
 
+.opc-wrapper.one-step-checkout-wrapper .field.tig_postcode_nl.tig_postcode_field {
+    max-width: calc(100% - 8px);
+    padding: 0 10px;
+}
+
 .amcheckout-wrapper .field.tig_postcode_nl.tig_housenumber_field{
     max-width: calc(40% - 7px);
 }
 
 .amcheckout-wrapper .field.tig_postcode_nl.tig_housenumber_addition_field{
     max-width: calc(60% - 7px);
+}
+
+.opc-wrapper.one-step-checkout-wrapper .field.tig_postcode_nl.tig_housenumber_field {
+    max-width: calc(45%);
+    margin: 0 0 20px 0;
+    padding: 0 10px;
+}
+
+.opc-wrapper.one-step-checkout-wrapper .field.tig_postcode_nl.tig_housenumber_addition_field {
+    padding: 0 9px;
+    max-width: calc(45%);
 }
 
 @media (max-width: 400px) {
@@ -199,6 +216,16 @@
 
 .tig_street_fields.tig_postcode_nl, .tig_city_field.tig_postcode_nl {
     max-width: 100%;
+}
+
+.opc-wrapper.one-step-checkout-wrapper .field.tig_postcode_nl.tig_street_field {
+    max-width: calc(45%);
+    padding: 0 10px;
+}
+
+.opc-wrapper.one-step-checkout-wrapper .tig_city_field.tig_postcode_nl {
+    max-width: calc(45%);
+    padding: 0 10px;
 }
 
 .field.tig_postcode_nl.tig_housenumber_addition_field {
@@ -243,5 +270,5 @@
 
 /**** Mageplaza OSC ****/
 .one-step-checkout-container .field[name="shippingAddress.postcode"] {
-    max-width: calc(46% - 7px);
+    /*max-width: calc(46% - 7px);*/
 }
