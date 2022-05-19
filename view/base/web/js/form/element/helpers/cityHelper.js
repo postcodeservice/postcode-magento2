@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!--
- *
+/**
  *
  *          ..::..
  *     ..::::::::::::..
@@ -18,20 +17,43 @@
  * It is available through the world-wide-web at this URL:
  * http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  * If you are unable to obtain it through the world-wide-web, please send an email
- * to support@postcodeservice.com so we can send you a copy immediately.
+ * to servicedesk@totalinternetgroup.nl so we can send you a copy immediately.
  *
  * DISCLAIMER
  *
  * Do not edit or add to this file if you wish to upgrade this module to newer
  * versions in the future. If you wish to customize this module for your
- * needs please contact support@postcodeservice.com for more information.
+ * needs please contact servicedesk@totalinternetgroup.nl for more information.
  *
  * @copyright   Copyright (c) Total Internet Group B.V. https://tig.nl/copyright
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
- *
--->
-<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
-    <head>
-        <css src="TIG_Postcode::css/fields.css"/>
-    </head>
-</page>
+ */
+define([
+    'underscore',
+    'knockout',
+    '../../../helper/field-types',
+], function (_,ko, FieldTypes) {
+    'use strict';
+
+    return {
+        defaults: {
+            imports: {
+                updateCity: '${ $.parentName }.city:value',
+            },
+            modules: {
+                city: '${ $.parentName }.city',
+            }
+        },
+
+        /**
+         * Called when City is updated
+         *
+         * @param value
+         */
+        updateCity: function(value){
+            if (this.currentPostcodeHandler && value) {
+                this.currentPostcodeHandler.handle(FieldTypes.city, value);
+            }
+        },
+    }
+});

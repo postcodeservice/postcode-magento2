@@ -54,7 +54,7 @@ mkdir -p ${BUILD_DIR}
 mkdir -p ${CACHE_DIR}
 
 if [ ! -f "$CACHE_FILE" ]; then
-    wget "http://magento.mirror.hypernode.com/releases/magento-${MAGENTO_VERSION}.tar.gz" -O $CACHE_FILE
+    wget "https://magento.mirror.hypernode.com/releases/magento-${MAGENTO_VERSION}.tar.gz" -O $CACHE_FILE --no-check-certificate
 fi
 
 tar xzf $CACHE_FILE -C /tmp/magento2

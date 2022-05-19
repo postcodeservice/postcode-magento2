@@ -52,8 +52,38 @@
         </arguments>
     </type>
 
-    <type name="Magento\Customer\Model\Metadata\Form">
-        <plugin name="postcodeCustomerForm" type="TIG\Postcode\Plugin\Address\Management\CustomerForm" />
+    <!-- Add fields and config during checkout -->
+    <type name="Magento\Checkout\Block\Checkout\LayoutProcessor">
+        <plugin name="postcode-change-fieldtypes" type="TIG\Postcode\Plugin\Model\Checkout\LayoutProcessorPlugin" sortOrder="100" />
+    </type>
+    <!-- Add fields and config during mageplaza checkout -->
+    <type name="Mageplaza\Osc\Block\Checkout\LayoutProcessor">
+        <plugin name="postcode-change-fieldtypes" type="TIG\Postcode\Plugin\Model\Osc\LayoutProcessorPlugin" sortOrder="100" />
     </type>
 
+    <type name="Magento\Directory\Model\ResourceModel\Country\Collection">
+        <plugin name="add-country-postcode-info" type="TIG\Postcode\Plugin\Model\ResourceModel\Country\CollectionPlugin" />
+    </type>
+
+    <!-- Save fields during checkout -->
+    <type name="Magento\Checkout\Model\PaymentInformationManagement">
+        <plugin name="tig-postcode-payment-information-management" sortOrder="10" type="TIG\Postcode\Plugin\Checkout\Model\PaymentInformationManagement"/>
+    </type>
+
+    <type name="Magento\Checkout\Model\GuestPaymentInformationManagement">
+        <plugin name="tig-postcode-guest-payment-information-management" sortOrder="10" type="TIG\Postcode\Plugin\Checkout\Model\GuestPaymentInformationManagement"/>
+    </type>
+
+    <type name="Magento\Quote\Model\ShippingAddressManagement">
+        <plugin name="tig-postcode-shipping-address-management" sortOrder="10" type="TIG\Postcode\Plugin\Quote\Model\ShippingAddressManagement"/>
+    </type>
+
+    <type name="Magento\Quote\Model\BillingAddressManagement">
+        <plugin name="tig-postcode-billing-address-management" sortOrder="10" type="TIG\Postcode\Plugin\Quote\Model\BillingAddressManagement"/>
+    </type>
+
+    <!-- Copy QuoteAddress to Customer Address -->
+    <type name="Magento\Quote\Model\Quote\Address">
+        <plugin name="tig-postcode-quote-to-customer-address" type="TIG\Postcode\Plugin\Quote\Model\Quote\Address"/>
+    </type>
 </config>
