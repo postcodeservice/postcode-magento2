@@ -30,7 +30,7 @@
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
 
-namespace TIG\Postcode\Plugin\Model\Checkout;
+namespace TIG\Postcode\Plugin\Model\Osc;
 
 use Magento\Checkout\Block\Checkout\LayoutProcessor;
 use Magento\Framework\App\Config\ScopeConfigInterface;
