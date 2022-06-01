@@ -152,6 +152,10 @@ define([
             // PSM2-116 - If customAttributes exist, the address already contains a tig_housenumber.
             // Sometimes extension attributes get lost, fill them every time the address changes.
             quote.shippingAddress.subscribe(function (address) {
+                if (!address) {
+                    return;
+                }
+                
                 if (address.extension_attributes === undefined) {
                     address.extension_attributes = {};
                 }
@@ -163,6 +167,10 @@ define([
             });
 
             quote.billingAddress.subscribe(function (address) {
+                if (!address) {
+                    return;
+                }
+                
                 if (address.extension_attributes === undefined) {
                     address.extension_attributes = {};
                 }
