@@ -43,10 +43,7 @@ class LayoutProcessorPlugin
     const MAGENTO_POSTCODE_COMPONENT_JS   = "Magento_Ui/js/form/element/post-code";
     const TIG_POSTCODE_COMPONENT_JS       = "TIG_Postcode/js/form/element/tig-postcode-field";
     const TIG_POSTCODE_COMPONENT_TEMPLATE = 'TIG_Postcode/form/element/postcode-field';
-    /**
-     * Get country path
-     */
-    const COUNTRY_CODE_PATH = 'general/country/default';
+    const COUNTRY_CODE_PATH               = 'general/country/default';
 
     /**
      * @var ArrayManager

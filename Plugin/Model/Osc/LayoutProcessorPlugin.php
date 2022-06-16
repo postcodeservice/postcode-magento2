@@ -33,14 +33,17 @@
 namespace TIG\Postcode\Plugin\Model\Osc;
 
 use Magento\Checkout\Block\Checkout\LayoutProcessor;
+use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\Notification\NotifierInterface;
 use Magento\Framework\Stdlib\ArrayManager;
+use Magento\Store\Model\ScopeInterface;
 
 class LayoutProcessorPlugin
 {
     const MAGENTO_POSTCODE_COMPONENT_JS   = "Magento_Ui/js/form/element/post-code";
     const TIG_POSTCODE_COMPONENT_JS       = "TIG_Postcode/js/form/element/tig-postcode-field";
     const TIG_POSTCODE_COMPONENT_TEMPLATE = 'TIG_Postcode/form/element/postcode-field';
+    const COUNTRY_CODE_PATH               = 'general/country/default';
 
     /**
      * @var ArrayManager
@@ -53,13 +56,20 @@ class LayoutProcessorPlugin
     private $notifier;
 
     /**
-     * @param ArrayManager      $arrayManager
-     * @param NotifierInterface $notifier
+     * @var ScopeConfigInterface
      */
-    public function __construct(ArrayManager $arrayManager, NotifierInterface $notifier)
+    private $scopeConfig;
+
+    /**
+     * @param ArrayManager          $arrayManager
+     * @param NotifierInterface     $notifier
+     * @param ScopeConfigInterface  $scopeConfig
+     */
+    public function __construct(ArrayManager $arrayManager, NotifierInterface $notifier, ScopeConfigInterface $scopeConfig)
     {
         $this->arrayManager = $arrayManager;
         $this->notifier     = $notifier;
+        $this->scopeConfig  = $scopeConfig;
     }
 
     /**
@@ -186,6 +196,15 @@ class LayoutProcessorPlugin
             // Update PostcodeField
             $jsLayout = $this->arrayManager->set($postalCodePath . '/component', $jsLayout, self::TIG_POSTCODE_COMPONENT_JS);
             $jsLayout = $this->arrayManager->set($postalCodePath . '/config/elementTmpl', $jsLayout, self::TIG_POSTCODE_COMPONENT_TEMPLATE);
+            // Change default sortOrder of PostcodeField
+            $defaultCountry = $this->scopeConfig->getValue(
+                self::COUNTRY_CODE_PATH,
+                ScopeInterface::SCOPE_WEBSITE
+            );
+            // Change default sortOrder of PostcodeField if country is set to NL or BE
+            if ($defaultCountry === "NL" || $defaultCountry === "BE" ) {
+                $jsLayout = $this->arrayManager->set($postalCodePath . '/config/sortOrder', $jsLayout, 50);
+            }
 
             // Add housenumber fields
             $postcodeParentDataScope = $this->getParentPath($this->arrayManager->get($postalCodePath . '/dataScope', $jsLayout), ".");
