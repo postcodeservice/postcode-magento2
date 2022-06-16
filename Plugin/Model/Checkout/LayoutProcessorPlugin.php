@@ -203,6 +203,7 @@ class LayoutProcessorPlugin
                 ScopeInterface::SCOPE_WEBSITE
             );
             // Change default sortOrder of PostcodeField if country is set to NL or BE
+            // @TODO use a better way to set sort order for postcode field, tried in branch "tryout_billing_address_sortorder_mixin"
             if ($defaultCountry === "NL" || $defaultCountry === "BE" ) {
                 $jsLayout = $this->arrayManager->set($postalCodePath . '/config/sortOrder', $jsLayout, 50);
             }
