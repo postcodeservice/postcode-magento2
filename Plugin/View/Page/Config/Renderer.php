@@ -48,8 +48,6 @@ class Renderer
         $checkoutModules = [
             'Amasty_Checkout'               => 'TIG_Postcode::css/amasty_checkout.css',
             'Mageplaza_Osc'                 => 'TIG_Postcode::css/mageplaza_onestepcheckout.css',
-            'Aheadworks_OneStepCheckout'    => 'TIG_Postcode::css/aheadworks_onestepcheckout.css',
-            'OneStepCheckout_Iosc'          => 'TIG_Postcode::css/onestepcheckout_iosc.css',
         ];
 
         foreach ($checkoutModules as $key => $value) {
