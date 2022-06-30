@@ -1,13 +1,7 @@
-// country specific styling
-@import 'postcode_nl';
-@import 'postcode_be';
-//
-@import 'amasty_checkout';
-@import 'mageplaza_onestepcheckout';
-@import 'onestepcheckout_iosc';
-@import 'aheadworks_onestepcheckout';
-@import 'rubic_clean_checkout';
-
+/** hidden field **/
+.tig_hidden{
+    display: none;
+}
 
 /**** Validation ****/
 .tig_postcode_field._error .control,
