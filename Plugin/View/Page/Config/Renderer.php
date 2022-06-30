@@ -1,27 +1,34 @@
 <?php
 namespace TIG\Postcode\Plugin\View\Page\Config;
 
-use Magento\Framework\View\Asset\File;
 use Magento\Framework\Module\ModuleList;
+use Magento\Framework\App\Config\ScopeConfigInterface;
+use Magento\Framework\View\Page\Config;
 
 class Renderer
 {
-    const CACHE_ID = 'vendor_screenshot_css';
-
-    protected $existingFiles = ['css/styles-l.css', 'css/styles-m.css'];
-
+    /** @var Config  */
     private $config;
+
+    /** @var ScopeConfigInterface */
+    private $scopeConfig;
 
     /** @var ModuleList  */
     public $moduleList;
 
+    /**
+     * @param \Magento\Framework\View\Page\Config   $config
+     * @param ScopeConfigInterface                  $scopeConfig
+     * @param ModuleList                            $moduleList
+     */
     public function __construct(
-        \Magento\Framework\View\Page\Config $config,
-        ModuleList $moduleList
+        Config                  $config,
+        ScopeConfigInterface    $scopeConfig,
+        ModuleList              $moduleList
     ){
-        $this->moduleList = $moduleList;
-        $this->config = $config;
-
+        $this->config       = $config;
+        $this->scopeConfig  = $scopeConfig;
+        $this->moduleList   = $moduleList;
     }
 
     /**
@@ -36,7 +43,7 @@ class Renderer
         \Magento\Framework\View\Page\Config\Renderer $subject,
                                                     $assetestlist = [])
     {
-        $modules = $this->getEnabledModuleList();
+        $modules = $this->moduleList->getNames();
 
         $checkoutModules = [
             'Amasty_Checkout'               => 'TIG_Postcode::css/amasty_checkout.css',
@@ -51,20 +58,19 @@ class Renderer
             }
             if (in_array('TIG_Postcode',$modules)){
                 $this->config->addPageAsset('TIG_Postcode::css/postcode_main.css');
-                $this->config->addPageAsset('TIG_Postcode::css/postcode_nl.css');
-                $this->config->addPageAsset('TIG_Postcode::css/postcode_be.css');
+                // check if NL is enabled
+                if ($this->scopeConfig->getValue('tig_postcode/countries/enable_nl_check',
+                    \Magento\Store\Model\ScopeInterface::SCOPE_STORE)){
+                    $this->config->addPageAsset('TIG_Postcode::css/postcode_nl.css');
+                }
+                // check if BE is enabled
+                if ($this->scopeConfig->getValue('tig_postcode/countries/enable_be_check',
+                    \Magento\Store\Model\ScopeInterface::SCOPE_STORE)){
+                    $this->config->addPageAsset('TIG_Postcode::css/postcode_be.css');
+                }
             }
         }
 
         return [$assetestlist];
-    }
-
-    /**
-     * Return an array of the enabled modules (bin/magento module:status)
-     *
-     * @return array
-     */
-    private function getEnabledModuleList(){
-        return $this->moduleList->getNames();
     }
 }
