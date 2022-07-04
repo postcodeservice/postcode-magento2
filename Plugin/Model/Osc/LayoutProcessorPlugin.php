@@ -65,8 +65,10 @@ class LayoutProcessorPlugin
      * @param NotifierInterface     $notifier
      * @param ScopeConfigInterface  $scopeConfig
      */
-    public function __construct(ArrayManager $arrayManager, NotifierInterface $notifier, ScopeConfigInterface $scopeConfig)
-    {
+    public function __construct(ArrayManager            $arrayManager,
+                                NotifierInterface       $notifier,
+                                ScopeConfigInterface    $scopeConfig
+    ) {
         $this->arrayManager = $arrayManager;
         $this->notifier     = $notifier;
         $this->scopeConfig  = $scopeConfig;
