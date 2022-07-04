@@ -1,0 +1,29 @@
+.amcheckout-wrapper .fieldset.address > .field.tig_hidden {
+    display: none;
+}
+
+.amcheckout-wrapper .tig_postcode_field._error .control,
+.amcheckout-wrapper .tig_postcode_field._warn .control {
+    margin-bottom: 0px;
+}
+.amcheckout-wrapper .tig_postcode_field._error .field-error,
+.amcheckout-wrapper .tig_postcode_field._warn .message {
+    position: relative;
+}
+
+
+.amcheckout-wrapper .field.tig_postcode_nl.tig_postcode_field,
+.amcheckout-wrapper .field.tig_postcode_be.tig_postcode_field {
+    max-width: 100%;
+}
+
+
+.amcheckout-wrapper .field.tig_postcode_nl.tig_housenumber_field,
+.amcheckout-wrapper .field.tig_postcode_be.tig_housenumber_field {
+    max-width: calc(40% - 7px);
+}
+
+.amcheckout-wrapper .field.tig_postcode_nl.tig_housenumber_addition_field,
+.amcheckout-wrapper .field.tig_postcode_be.tig_housenumber_addition_field {
+    max-width: calc(60% - 7px);
+}

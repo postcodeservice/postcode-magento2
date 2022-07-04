@@ -1,0 +1,46 @@
+/**** NL ****/
+.field.tig_postcode_nl.tig_postcode_field,
+.field.tig_postcode_nl.tig_housenumber_field,
+.field.tig_postcode_nl.tig_housenumber_addition_field {
+    display: inline-block;
+    margin: 0 10px 20px 0;
+    width: 100%;
+    max-width: calc(100% / 3 - 7px);
+}
+
+@media (max-width: 400px) {
+    .tig_postcode_field.tig_postcode_nl {
+        max-width: 100%;
+    }
+
+    .tig_housenumber_field.tig_postcode_nl,
+    .tig_housenumber_addition_field.tig_postcode_nl {
+        max-width: calc(100% / 2 - 7px);
+    }
+}
+
+.tig_street_fields.tig_postcode_nl, .tig_city_field.tig_postcode_nl {
+    max-width: 100%;
+}
+
+
+
+.field.tig_postcode_nl.tig_housenumber_addition_field {
+    margin: 0 0 20px 0;
+}
+
+.tig_postcode_nl.tig_postcode_field._error + .tig_housenumber_field input,
+.tig_postcode_nl.tig_postcode_field._error + .tig_housenumber_field + .tig_housenumber_addition_field input {
+    border: 1px solid #e02b27;
+}
+.tig_postcode_nl.tig_postcode_field._error .field-error {
+    border: 1px solid #e02b27;
+    background: #f9f9f9;
+    color: #e02b27;
+    padding: 5px;
+    font-size: 1.2rem;
+    box-sizing: border-box;
+    white-space: normal;
+    width: 100%;
+    height: 70px;
+}
