@@ -42,7 +42,7 @@ class TabTest extends TestCase
     public function testGetVersionNumber()
     {
         $instance = $this->getInstance();
-        $this->assertSame('1.5.0-RC1', $instance->getVersionNumber());
+        $this->assertSame('1.5.0', $instance->getVersionNumber());
     }
 
     public function testGetSupportedMagentoVersions()
