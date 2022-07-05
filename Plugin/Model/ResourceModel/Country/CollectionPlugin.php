@@ -34,6 +34,7 @@ namespace TIG\Postcode\Plugin\Model\ResourceModel\Country;
 
 use Magento\Framework\Module\FullModuleList;
 use TIG\Postcode\Config\Provider\ModuleConfiguration;
+use Magento\Directory\Model\ResourceModel\Country\Collection;
 
 class CollectionPlugin
 {
@@ -208,14 +209,14 @@ class CollectionPlugin
      * @return int[]
      */
     private function getSortOrderAndIncrement(){
-        $sortOrderBase = 81;
+        $sortOrderBase      = 81;
         $sortOrderIncrement = 1;
 
         foreach(self::SORT_ORDER_CONFIG as $module => $config){
             if(!$this->fullModuleList->has($module)) {
                 continue;
             }
-            $sortOrderBase = $config[self::SORT_ORDER_BASE];
+            $sortOrderBase      = $config[self::SORT_ORDER_BASE];
             $sortOrderIncrement = $config[self::SORT_ORDER_INCREMENT];
         }
 
@@ -223,11 +224,11 @@ class CollectionPlugin
     }
 
     /**
-     * @param       \Magento\Directory\Model\ResourceModel\Country\Collection$subject
-     * @param        $result
+     * @param Collection    $subject
+     * @param               $result
      *
      * @return mixed
-     * @see \Magento\Directory\Model\ResourceModel\Country\Collection::toOptionArray
+     * @see Collection::toOptionArray
      */
     public function afterToOptionArray(
         $subject,

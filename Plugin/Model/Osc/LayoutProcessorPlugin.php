@@ -65,9 +65,10 @@ class LayoutProcessorPlugin
      * @param NotifierInterface     $notifier
      * @param ScopeConfigInterface  $scopeConfig
      */
-    public function __construct(ArrayManager            $arrayManager,
-                                NotifierInterface       $notifier,
-                                ScopeConfigInterface    $scopeConfig
+    public function __construct(
+        ArrayManager            $arrayManager,
+        NotifierInterface       $notifier,
+        ScopeConfigInterface    $scopeConfig
     ) {
         $this->arrayManager = $arrayManager;
         $this->notifier     = $notifier;
@@ -168,7 +169,7 @@ class LayoutProcessorPlugin
      */
     public function addAdminErrorMessage($message)
     {
-        $this->notifier->addMajor("TIG Postcode", "Postcodeservice detected one or more compability issues with your shop setup");
+        $this->notifier->addMajor("TIG Postcode", "Postcodeservice detected one or more compatibility issues with your shop setup");
     }
 
     /**
