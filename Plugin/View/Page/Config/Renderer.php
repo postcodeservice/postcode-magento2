@@ -1,11 +1,11 @@
 <?php
 namespace TIG\Postcode\Plugin\View\Page\Config;
 
-use Magento\Framework\Module\ModuleList;
 use Magento\Framework\App\Config\ScopeConfigInterface;
-use Magento\Store\Model\ScopeInterface;
-use Magento\Framework\View\Page\Config\Renderer as pageRender;
+use Magento\Framework\Module\ModuleList;
 use Magento\Framework\View\Page\Config;
+use Magento\Framework\View\Page\Config\Renderer as pageRender;
+use Magento\Store\Model\ScopeInterface;
 
 class Renderer
 {
@@ -14,9 +14,6 @@ class Renderer
 
     /** @var ScopeConfigInterface */
     private $scopeConfig;
-
-    /** @var ScopeInterface */
-    private $scopeStore;
 
     /** @var ModuleList  */
     public $moduleList;
@@ -29,12 +26,10 @@ class Renderer
     public function __construct(
         Config                  $config,
         ScopeConfigInterface    $scopeConfig,
-        ScopeInterface          $scopeStore,
         ModuleList              $moduleList
-    ){
+    ) {
         $this->config       = $config;
         $this->scopeConfig  = $scopeConfig;
-        $this->scopeStore   = $scopeStore;
         $this->moduleList   = $moduleList;
     }
 
@@ -48,8 +43,8 @@ class Renderer
      */
     public function beforeRenderAssets(
         pageRender $subject,
-        $assetestlist = [])
-    {
+        $assetestlist = []
+    ) {
         $modules = $this->moduleList->getNames();
 
         $checkoutModules = [
@@ -58,19 +53,19 @@ class Renderer
         ];
 
         foreach ($checkoutModules as $key => $value) {
-            if (in_array($key, $modules)){
+            if (in_array($key, $modules)) {
                 $this->config->addPageAsset($value);
             }
-            if (in_array('TIG_Postcode',$modules)){
+            if (in_array('TIG_Postcode', $modules)) {
                 $this->config->addPageAsset('TIG_Postcode::css/postcode_main.css');
                 // check if NL is enabled
                 if ($this->scopeConfig->getValue('tig_postcode/countries/enable_nl_check',
-                    $this->scopeStore::SCOPE_STORE)){
+                    ScopeInterface::SCOPE_STORE)) {
                     $this->config->addPageAsset('TIG_Postcode::css/postcode_nl.css');
                 }
                 // check if BE is enabled
                 if ($this->scopeConfig->getValue('tig_postcode/countries/enable_be_check',
-                    $this->scopeStore::SCOPE_STORE)){
+                    ScopeInterface::SCOPE_STORE)) {
                     $this->config->addPageAsset('TIG_Postcode::css/postcode_be.css');
                 }
             }
