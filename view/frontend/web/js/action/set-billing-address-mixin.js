@@ -28,7 +28,8 @@
  * @copyright   Copyright (c) Total Internet Group B.V. https://tig.nl/copyright
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
-/* jshint ignore:start */
+/*jshint browser:true jquery:true*/
+/*global alert*/
 define([
     'jquery',
     'mage/utils/wrapper',
@@ -39,6 +40,30 @@ define([
     quote
 ) {
     'use strict';
+
+    function findAttribute(attributeName, address) {
+        return address.customAttributes.find(
+            function (element) {
+                return element.attribute_code === attributeName;
+            }
+        );
+    }
+
+    /**
+     * A custom/extension attribute object can have a different construction
+     * depending on where, how and when the address is being processed.
+     * Therefore make sure the attribute value is correctly retrieved.
+     *
+     * @param attribute
+     * @returns {*}
+     */
+    function getValue(attribute) {
+        if (typeof attribute.value === 'object' && attribute.value.value !== 'undefined') {
+            return attribute.value.value;
+        }
+
+        return attribute.value;
+    }
 
     return function (setBillingAddressAction) {
         return wrapper.wrap(setBillingAddressAction, function (originalAction) {
@@ -56,24 +81,23 @@ define([
                 billingAddress['extension_attributes'] = {};
             }
 
-            if (billingAddress['street'] !== undefined && billingAddress['street'].length > 1) {
-                billingAddress['street'].splice(1);
+            var housenumber = findAttribute('tig_housenumber', billingAddress);
+            var housenumberAddition = findAttribute('tig_housenumber_addition', billingAddress);
+            var street = findAttribute('tig_street', billingAddress);
+
+            if (housenumber) {
+                billingAddress['extension_attributes']['tig_housenumber'] = getValue(housenumber);
             }
 
-            // < M2.3.0
-            if (billingAddress.customAttributes !== undefined && billingAddress.customAttributes.tig_housenumber !== undefined) {
-                billingAddress['extension_attributes']['tig_housenumber']          = billingAddress.customAttributes.tig_housenumber;
-                billingAddress['extension_attributes']['tig_housenumber_addition'] = billingAddress.customAttributes.tig_housenumber_addition;
-                return originalAction();
+            if (housenumberAddition) {
+                billingAddress['extension_attributes']['tig_housenumber_addition'] = getValue(housenumberAddition);
             }
-            // >= M2.3.0
-            if (billingAddress.customAttributes[0] !== undefined && billingAddress.customAttributes[0].attribute_code === 'tig_housenumber') {
-                billingAddress['extension_attributes']['tig_housenumber']          = billingAddress.customAttributes[0].value;
-                billingAddress['extension_attributes']['tig_housenumber_addition'] = billingAddress.customAttributes[1].value;
+
+            if (street) {
+                billingAddress['extension_attributes']['tig_street'] = getValue(street);
             }
 
             return originalAction();
         });
     };
 });
-/* jshint ignore:end */
