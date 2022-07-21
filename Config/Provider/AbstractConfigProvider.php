@@ -84,7 +84,7 @@ abstract class AbstractConfigProvider
     /**
      * Get Config value with xpath
      *
-     * @param      $xpath
+     * @param string|int     $xpath
      * @param null $store
      *
      * @return mixed
@@ -100,7 +100,11 @@ abstract class AbstractConfigProvider
     }
 
     /**
+     * Check if the output is enabled
+     *
      * @return bool
+     *
+     * @deprecated
      */
     // @codingStandardsIgnoreLine
     protected function isModuleOutputEnabled()
@@ -109,9 +113,12 @@ abstract class AbstractConfigProvider
     }
 
     /**
-     * @param $type
+     * Get the base Url
+     *
+     * @param string|UrlInterface $type
      *
      * @return mixed
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
     // @codingStandardsIgnoreLine
     protected function getBaseUrl($type = UrlInterface::URL_TYPE_WEB)

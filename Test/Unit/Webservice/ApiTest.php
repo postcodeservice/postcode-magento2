@@ -42,7 +42,6 @@ use TIG\Postcode\Webservices\Endpoints\GetAddress;
 use TIG\Postcode\Services\Converter\Factory;
 use Magento\Framework\HTTP\PhpEnvironment\ServerAddress;
 
-
 class ApiTest extends TestCase
 {
     protected $instanceClass = Api::class;
@@ -102,8 +101,7 @@ class ApiTest extends TestCase
                 'clientConfiguration' => $this->clientConfiguration,
                 'converter' => $this->converter,
                 'serverAddress' => $this->serverAddress
-            ]
-        );
+            ]);
     }
 
     public function testApiInstanceForVersionBelow4()
@@ -161,7 +159,7 @@ class ApiTest extends TestCase
         $zendClientParams = $this->zendClient->expects($this->once());
         $zendClientParams->method('setParameterGet')->with($completedRequestParams);
 
-        $fakeResponse = new \Zend_Http_Response('200', array(), '{}');
+        $fakeResponse = new \Zend_Http_Response('200', [], '{}');
 
         $zendRequest = $this->zendClient->expects($this->once());
         $zendRequest->method('request')->willReturn($fakeResponse);
@@ -217,7 +215,7 @@ class ApiTest extends TestCase
         $zendClientParams = $this->zendClient->expects($this->once());
         $zendClientParams->method('setParameterGet')->with($completedRequestParams);
 
-        $fakeResponse = new \Zend_Http_Response('200', array(), '{}');
+        $fakeResponse = new \Zend_Http_Response('200', [], '{}');
 
         $zendRequest = $this->zendClient->expects($this->once());
         $zendRequest->method('request')->willReturn($fakeResponse);
@@ -273,7 +271,7 @@ class ApiTest extends TestCase
         $zendClientParams = $this->zendClient->expects($this->once());
         $zendClientParams->method('setParameterPost')->with($completedRequestParams);
 
-        $fakeResponse = new \Zend_Http_Response('200', array(), '{}');
+        $fakeResponse = new \Zend_Http_Response('200', [], '{}');
 
         $zendRequest = $this->zendClient->expects($this->once());
         $zendRequest->method('request')->willReturn($fakeResponse);
@@ -332,7 +330,7 @@ class ApiTest extends TestCase
         $zendClientParams = $this->zendClient->expects($this->once());
         $zendClientParams->method('setParameterGet')->with($completedRequestParams);
 
-        $fakeResponse = new \Zend_Http_Response('200', array(), '{}');
+        $fakeResponse = new \Zend_Http_Response('200', [], '{}');
 
         $zendRequest = $this->zendClient->expects($this->once());
         $zendRequest->method('request')->willReturn($fakeResponse);
@@ -350,4 +348,3 @@ class ApiTest extends TestCase
         $this->assertEquals(false, $response['success']);
     }
 }
-

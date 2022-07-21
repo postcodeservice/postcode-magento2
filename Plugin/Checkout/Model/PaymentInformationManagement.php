@@ -22,8 +22,12 @@ class PaymentInformationManagement
     }
 
     /**
+     * Before plugin on SavePaymentInformation
+     *
+     * @see \Magento\Checkout\Model\PaymentInformationManagement::savePaymentInformation()
+     *
      * @param \Magento\Checkout\Model\PaymentInformationManagement $subject
-     * @param                                                      $cartId
+     * @param int                                                  $cartId
      * @param PaymentInterface                                     $paymentMethod
      * @param AddressInterface                                     $address
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)

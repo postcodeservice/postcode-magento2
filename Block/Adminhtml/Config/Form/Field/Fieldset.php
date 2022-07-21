@@ -36,6 +36,9 @@ use TIG\Postcode\Config\Provider\ModuleConfiguration;
 
 class Fieldset extends MagentoFieldset
 {
+    /**
+     * @var string[]
+     */
     private $classNames = [
         '1' => 'modus_live',
         '2' => 'modus_test',
@@ -43,9 +46,8 @@ class Fieldset extends MagentoFieldset
     ];
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
-    // @codingStandardsIgnoreLine
     protected function _getFrontendClass($element)
     {
         $modus = $this->_scopeConfig->getValue(ModuleConfiguration::XPATH_CONFIGURATION_MODUS);

@@ -137,7 +137,6 @@ class ModuleConfigurationTest extends AbstractConfigurationTest
         $this->setModus($modus);
 
         $this->assertEquals($expectedResult, $instance->getModus());
-
     }
 
     public function testGetStability()

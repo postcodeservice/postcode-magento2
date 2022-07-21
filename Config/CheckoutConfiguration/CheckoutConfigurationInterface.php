@@ -34,6 +34,8 @@ namespace TIG\Postcode\Config\CheckoutConfiguration;
 interface CheckoutConfigurationInterface
 {
     /**
+     * Get value
+     *
      * @return bool|string
      */
     public function getValue();

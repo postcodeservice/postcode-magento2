@@ -36,6 +36,9 @@ use TIG\Postcode\Config\Provider\ParserConfiguration;
 
 class StreetParser implements CheckoutConfigurationInterface
 {
+    /**
+     * @var ModuleConfiguration
+     */
     private $moduleConfiguration;
 
     /**
@@ -55,6 +58,8 @@ class StreetParser implements CheckoutConfigurationInterface
     }
 
     /**
+     * Get value and return the housenumber information
+     *
      * @return mixed
      */
     public function getValue()

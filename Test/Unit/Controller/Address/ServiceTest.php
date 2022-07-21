@@ -135,7 +135,6 @@ class ServiceTest extends TestCase
         $jsonFactoryMock->expects($this->once())->method('create')->willReturn($this->getObject(Json::class));
 
         return $jsonFactoryMock;
-
     }
 
     private function getAddressCallMock($returns = false, $params, $failResponse = false)

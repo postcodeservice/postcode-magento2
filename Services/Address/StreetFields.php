@@ -53,7 +53,9 @@ class StreetFields
     }
 
     /**
-     * @param                                           $street
+     * Parse data
+     *
+     * @param mixed                                     $street
      * @param AddressExtensionInterface|AttributeParser $attributes
      *
      * @return mixed|string
@@ -81,7 +83,9 @@ class StreetFields
     }
 
     /**
-     * @param                                           $street
+     * Merge type one
+     *
+     * @param mixed                                     $street
      * @param AddressExtensionInterface|AttributeParser $attributes
      *
      * @return string
@@ -98,7 +102,9 @@ class StreetFields
     }
 
     /**
-     * @param                                           $street
+     * Merge type two
+     *
+     * @param mixed                                     $street
      * @param AddressExtensionInterface|AttributeParser $attributes
      *
      * @return mixed
@@ -114,7 +120,9 @@ class StreetFields
     }
 
     /**
-     * @param                                           $street
+     * Merge type three
+     *
+     * @param mixed                                     $street
      * @param AddressExtensionInterface|AttributeParser $attributes
      *
      * @return mixed
@@ -128,7 +136,9 @@ class StreetFields
     }
 
     /**
-     * @param                                           $street
+     * Merge type four
+     *
+     * @param mixed                                     $street
      * @param AddressExtensionInterface|AttributeParser $attributes
      *
      * @return mixed

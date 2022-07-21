@@ -33,10 +33,13 @@ namespace TIG\Postcode\Services\Validation;
 
 class Response implements ValidationInterface
 {
+    /**
+     * @var string[]
+     */
     private $keysToContain = ['success', 'straatnaam', 'woonplaats'];
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function validate($data)
     {
@@ -60,6 +63,8 @@ class Response implements ValidationInterface
     }
 
     /**
+     * Get the Keys
+     *
      * @return array
      */
     public function getKeys()
@@ -68,7 +73,9 @@ class Response implements ValidationInterface
     }
 
     /**
-     * @param $keys
+     * Set the keys
+     *
+     * @param mixed $keys
      */
     public function setKeys($keys)
     {
@@ -76,7 +83,9 @@ class Response implements ValidationInterface
     }
 
     /**
-     * @param $data
+     * Check the keys
+     *
+     * @param mixed $data
      *
      * @return bool
      */
@@ -91,9 +100,9 @@ class Response implements ValidationInterface
     }
 
     /**
-     * Importand note : Before using this method, first trigger the checkKeys method.
+     * Important note : Before using this method, first trigger the checkKeys method.
      *
-     * @param $data
+     * @param mixed $data
      *
      * @return bool
      */
@@ -107,6 +116,8 @@ class Response implements ValidationInterface
     }
 
     /**
+     * Validate Result
+     *
      * @param array $result
      *
      * @return bool
@@ -121,8 +132,10 @@ class Response implements ValidationInterface
     }
 
     /**
-     * BE returns multiple results whereas NL always returns one result. This method is to determine
-     * if multiple results were returned.
+     * Check if multiple results are returned
+     *
+     * BE returns multiple results whereas NL always returns one result.
+     * This method is to determine if multiple results were returned.
      *
      * @param array $data
      *
@@ -134,7 +147,9 @@ class Response implements ValidationInterface
     }
 
     /**
-     * @param $data
+     * Validate elements
+     *
+     * @param mixed $data
      *
      * @return bool
      */

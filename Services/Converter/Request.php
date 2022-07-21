@@ -35,26 +35,28 @@ use TIG\Postcode\Services\Validation\Request as ValidationRequest;
 
 class Request implements ConverterInterface
 {
+    /**
+     * @var ValidationRequest
+     */
     private $validation;
 
     /**
      * Request constructor.
      *
      * The IgnoreLine is used because the Magento phpcs checks only on 'Request' part of the class and Request is
-     * in as an default Magento Class like the session which can only called as a method argument.
+     * in as a default Magento Class like the session which can only called as a method argument.
      * But that check is invalid for our validation class.
      *
      * @param ValidationRequest $validation
      */
     public function __construct(
-        // @codingStandardsIgnoreLine
         ValidationRequest $validation
     ) {
         $this->validation = $validation;
     }
 
     /**
-     * @param $keys
+     * @inheritdoc
      */
     public function setValidationKeys($keys)
     {
@@ -62,7 +64,7 @@ class Request implements ConverterInterface
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function convert($data)
     {

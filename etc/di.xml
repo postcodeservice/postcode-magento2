@@ -30,7 +30,8 @@
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  *
 -->
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
 
      <!--Services\Validation factory list -->
     <type name="TIG\Postcode\Services\Validation\Factory">
@@ -54,32 +55,39 @@
 
     <!-- Add fields and config during checkout -->
     <type name="Magento\Checkout\Block\Checkout\LayoutProcessor">
-        <plugin name="postcode-change-fieldtypes" type="TIG\Postcode\Plugin\Model\Checkout\LayoutProcessorPlugin" sortOrder="100" />
+        <plugin name="postcode-change-fieldtypes" type="TIG\Postcode\Plugin\Model\Checkout\LayoutProcessorPlugin"
+                sortOrder="100" />
     </type>
     <!-- Add fields and config during mageplaza checkout -->
     <type name="Mageplaza\Osc\Block\Checkout\LayoutProcessor">
-        <plugin name="postcode-change-fieldtypes" type="TIG\Postcode\Plugin\Model\Osc\LayoutProcessorPlugin" sortOrder="100" />
+        <plugin name="postcode-change-fieldtypes" type="TIG\Postcode\Plugin\Model\Osc\LayoutProcessorPlugin"
+                sortOrder="100" />
     </type>
 
     <type name="Magento\Directory\Model\ResourceModel\Country\Collection">
-        <plugin name="add-country-postcode-info" type="TIG\Postcode\Plugin\Model\ResourceModel\Country\CollectionPlugin" />
+        <plugin name="add-country-postcode-info"
+                type="TIG\Postcode\Plugin\Model\ResourceModel\Country\CollectionPlugin" />
     </type>
 
     <!-- Save fields during checkout -->
     <type name="Magento\Checkout\Model\PaymentInformationManagement">
-        <plugin name="tig-postcode-payment-information-management" sortOrder="10" type="TIG\Postcode\Plugin\Checkout\Model\PaymentInformationManagement"/>
+        <plugin name="tig-postcode-payment-information-management"
+                sortOrder="10" type="TIG\Postcode\Plugin\Checkout\Model\PaymentInformationManagement"/>
     </type>
 
     <type name="Magento\Checkout\Model\GuestPaymentInformationManagement">
-        <plugin name="tig-postcode-guest-payment-information-management" sortOrder="10" type="TIG\Postcode\Plugin\Checkout\Model\GuestPaymentInformationManagement"/>
+        <plugin name="tig-postcode-guest-payment-information-management"
+                sortOrder="10" type="TIG\Postcode\Plugin\Checkout\Model\GuestPaymentInformationManagement"/>
     </type>
 
     <type name="Magento\Quote\Model\ShippingAddressManagement">
-        <plugin name="tig-postcode-shipping-address-management" sortOrder="10" type="TIG\Postcode\Plugin\Quote\Model\ShippingAddressManagement"/>
+        <plugin name="tig-postcode-shipping-address-management"
+                sortOrder="10" type="TIG\Postcode\Plugin\Quote\Model\ShippingAddressManagement"/>
     </type>
 
     <type name="Magento\Quote\Model\BillingAddressManagement">
-        <plugin name="tig-postcode-billing-address-management" sortOrder="10" type="TIG\Postcode\Plugin\Quote\Model\BillingAddressManagement"/>
+        <plugin name="tig-postcode-billing-address-management"
+                sortOrder="10" type="TIG\Postcode\Plugin\Quote\Model\BillingAddressManagement"/>
     </type>
 
     <!-- Copy QuoteAddress to Customer Address -->

@@ -50,7 +50,7 @@ class FactoryTest extends TestCase
         $this->instance = $this->getInstance([
             'validators' => [
                 'request'  => $this->getObject(Validation\Request::class),
-                'response' => $this->getObject( Validation\Response::class),
+                'response' => $this->getObject(Validation\Response::class),
             ]
         ]);
     }

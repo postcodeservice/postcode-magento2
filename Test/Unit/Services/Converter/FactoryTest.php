@@ -105,8 +105,11 @@ class FactoryTest extends TestCase
 
         $this->assertEquals(
             $instance->convert(
-                'correct', ['postcode' => '1014BA', 'huisnummer' => 37], ['success', 'straatnaam', 'woonplaats']
-            ), ['success' => true, 'straatnaam' => 'Kabelweg', 'woonplaats' => 'Amsterdam']
+                'correct',
+                ['postcode' => '1014BA', 'huisnummer' => 37],
+                ['success', 'straatnaam', 'woonplaats']
+            ),
+            ['success' => true, 'straatnaam' => 'Kabelweg', 'woonplaats' => 'Amsterdam']
         );
     }
 }

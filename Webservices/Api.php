@@ -89,9 +89,12 @@ class Api
     }
 
     /**
+     * Execute getRequest
+     *
      * @param EndpointInterface $endpoint
      *
      * @return array|\Zend_Http_Response
+     * @throws \Zend_Http_Client_Exception
      */
     public function getRequest(EndpointInterface $endpoint)
     {
@@ -115,10 +118,13 @@ class Api
     }
 
     /**
+     * Add headers to request
+     *
      * Set the headers, but only if the api version is 4 or higher. Before version 4 user data is parsed within the
      * requestData array as ['client_id' => 'xxxx', 'secure_code' => 'xxxx']
      *
-     * @param $endpoint;
+     * @param EndpointInterface $endpoint
+     * @throws \Zend_Http_Client_Exception
      */
     private function setHeaders(EndpointInterface $endpoint)
     {
@@ -142,6 +148,8 @@ class Api
     }
 
     /**
+     * Add parameters to request
+     *
      * @param EndpointInterface $endpoint
      */
     private function setParameter(EndpointInterface $endpoint)
@@ -162,6 +170,8 @@ class Api
     }
 
     /**
+     * Set URi for request
+     *
      * @param EndpointInterface $endpoint
      *
      * @throws \Zend_Http_Client_Exception

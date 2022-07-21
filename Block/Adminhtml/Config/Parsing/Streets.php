@@ -37,17 +37,16 @@ use Magento\Framework\Data\Form\Element\AbstractElement;
 
 class Streets extends Template implements RendererInterface
 {
-    const MODULE_NAME = 'TIG_Postcode';
+    public const MODULE_NAME = 'TIG_Postcode';
 
-    // @codingStandardsIgnoreLine
+    /**
+     * @var string
+     */
     protected $_template = 'TIG_Postcode::config/parsing/streets.phtml';
 
     /**
-     * @param AbstractElement $element
-     *
-     * @return string
+     * @inheritdoc
      */
-    // @codeCoverageIgnoreStart
     public function render(AbstractElement $element)
     {
         /** @noinspection PhpUndefinedMethodInspection */
@@ -55,5 +54,4 @@ class Streets extends Template implements RendererInterface
 
         return $this->toHtml();
     }
-    // @codeCoverageIgnoreEnd
 }

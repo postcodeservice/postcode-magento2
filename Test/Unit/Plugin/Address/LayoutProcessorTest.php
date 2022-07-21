@@ -297,7 +297,6 @@ class LayoutProcessorTest extends TestCase
 
         $this->assertArrayHasKey('postcode-field-group', $checkBillingFields);
         $this->assertArrayHasKey('postcode-field-group', $checkShippingFields);
-
     }
 
     public function testBeAfterProcess()

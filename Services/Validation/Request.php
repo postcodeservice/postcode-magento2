@@ -33,10 +33,11 @@ namespace TIG\Postcode\Services\Validation;
 
 class Request implements ValidationInterface
 {
+    /** @var string[]  */
     private $keysToContain = ['postcode', 'huisnummer'];
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function validate($data)
     {
@@ -52,20 +53,29 @@ class Request implements ValidationInterface
     }
 
     /**
-     * @param $keys
+     * @inheritdoc
+     *
+     * @param mixed $keys
      */
     public function setKeys($keys)
     {
         $this->keysToContain = $keys;
     }
 
+    /**
+     * Get keys
+     *
+     * @return string[]
+     */
     public function getKeys()
     {
         return $this->keysToContain;
     }
 
     /**
-     * @param $data
+     * Check keys
+     *
+     * @param mixed $data
      *
      * @return bool
      */

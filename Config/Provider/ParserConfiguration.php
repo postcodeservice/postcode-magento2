@@ -33,17 +33,20 @@ namespace TIG\Postcode\Config\Provider;
 
 class ParserConfiguration extends AbstractConfigProvider
 {
-    const XPATH_STREETMERGING      = 'tig_postcode/configuration/fieldparsing_street';
-    const XPATH_HOUSENUMBERMERGING = 'tig_postcode/configuration/fieldparsing_housenumber';
-    const XPATH_ADDITIONMERGING    = 'tig_postcode/configuration/fieldparsing_addition';
+    public const XPATH_STREETMERGING      = 'tig_postcode/configuration/fieldparsing_street';
+    public const XPATH_HOUSENUMBERMERGING = 'tig_postcode/configuration/fieldparsing_housenumber';
+    public const XPATH_ADDITIONMERGING    = 'tig_postcode/configuration/fieldparsing_addition';
 
-    const DEFAULT_PARSELINE = 1;
+    public const DEFAULT_PARSELINE = 1;
 
-    const PARSE_TYPE_ONE   = 1;
-    const PARSE_TYPE_TWO   = 2;
-    const PARSE_TYPE_THREE = 3;
-    const PARSE_TYPE_FOUR  = 4;
+    public const PARSE_TYPE_ONE   = 1;
+    public const PARSE_TYPE_TWO   = 2;
+    public const PARSE_TYPE_THREE = 3;
+    public const PARSE_TYPE_FOUR  = 4;
 
+    /**
+     * @var int[]
+     */
     private $parslines = [
         '111' => 1, // All on one line.
         '122' => 2, // Number and addition on line two.
@@ -52,7 +55,9 @@ class ParserConfiguration extends AbstractConfigProvider
     ];
 
     /**
-     * @param null $store
+     * Get merge type via store ID
+     *
+     * @param string|int|null $store
      *
      * @return int|mixed
      */
@@ -67,7 +72,9 @@ class ParserConfiguration extends AbstractConfigProvider
     }
 
     /**
-     * @param null $store
+     * Get street merging configuration via store ID
+     *
+     * @param string|int|null $store
      *
      * @return mixed
      */
@@ -77,7 +84,9 @@ class ParserConfiguration extends AbstractConfigProvider
     }
 
     /**
-     * @param null $store
+     * Get house number merging configuration via store ID
+     *
+     * @param string|int|null $store
      *
      * @return mixed
      */
@@ -87,7 +96,9 @@ class ParserConfiguration extends AbstractConfigProvider
     }
 
     /**
-     * @param null $store
+     * Get house number addition merging configuration via store ID
+     *
+     * @param string|int|null $store
      *
      * @return mixed
      */
@@ -97,7 +108,9 @@ class ParserConfiguration extends AbstractConfigProvider
     }
 
     /**
-     * @param null $store
+     * Get line merging format via store ID
+     *
+     * @param string|int|null $store
      *
      * @return string
      */

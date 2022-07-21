@@ -94,6 +94,8 @@ class Service extends Action
     }
 
     /**
+     * Execute
+     *
      * @return \Magento\Framework\Controller\Result\Json
      */
     public function execute()
@@ -119,8 +121,10 @@ class Service extends Action
     }
 
     /**
-     * @param $params
-     * @param $country
+     * Get the method
+     *
+     * @param array|string $params
+     * @param array|string $country
      *
      * @return string
      */
@@ -134,11 +138,13 @@ class Service extends Action
     }
 
     /**
-     * @param $params
+     * Get country code
+     *
+     * @param array|string $params
      *
      * @return string
      */
-    private function getCountry($params)
+    private function getCountry($params): string
     {
         if (key($params) == 'be') {
             return key($params);
@@ -148,7 +154,9 @@ class Service extends Action
     }
 
     /**
-     * @param string $error
+     * Return failure
+     *
+     * @param string|int $error
      *
      * @return \Magento\Framework\Controller\Result\Json
      */
@@ -161,7 +169,9 @@ class Service extends Action
     }
 
     /**
-     * @param $data
+     * Return Json
+     *
+     * @param array|string $data
      *
      * @return \Magento\Framework\Controller\Result\Json
      */
@@ -171,6 +181,14 @@ class Service extends Action
         return $response->setData($data);
     }
 
+    /**
+     * Get endpoint via country and param
+     *
+     * @param string $country
+     * @param string $method
+     *
+     * @return GetAddress|GetBePostcode|GetBeStreet
+     */
     private function getEndpoint($country, $method)
     {
         if ($country == 'be' && $method == 'getpostcode') {

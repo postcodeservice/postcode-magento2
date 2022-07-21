@@ -52,10 +52,13 @@ class Factory
     }
 
     /**
-     * @param $type
-     * @param $data
+     * Validate
+     *
+     * @param mixed $type
+     * @param mixed $data
      *
      * @return bool|mixed
+     * @throws PostcodeException
      */
     public function validate($type, $data)
     {
@@ -67,8 +70,10 @@ class Factory
     }
 
     /**
-     * @param $type
-     * @param $data
+     * Validator
+     *
+     * @param mixed $type
+     * @param mixed $data
      *
      * @return bool|mixed
      * @throws PostcodeException
@@ -84,7 +89,9 @@ class Factory
     }
 
     /**
-     * @param $validator
+     * Check implementations
+     *
+     * @param mixed $validator
      *
      * @throws PostcodeException
      */
