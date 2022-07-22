@@ -55,7 +55,7 @@ class Request implements ValidationInterface
     /**
      * @inheritdoc
      *
-     * @param mixed $keys
+     * @param string[] $keys
      */
     public function setKeys($keys)
     {

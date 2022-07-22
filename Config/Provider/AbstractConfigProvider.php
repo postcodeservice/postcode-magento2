@@ -84,8 +84,8 @@ abstract class AbstractConfigProvider
     /**
      * Get Config value with xpath
      *
-     * @param string|int     $xpath
-     * @param null $store
+     * @param string|int    $xpath
+     * @param null          $store
      *
      * @return mixed
      */
@@ -104,7 +104,8 @@ abstract class AbstractConfigProvider
      *
      * @return bool
      *
-     * @deprecated
+     * @deprecated unused method
+     * @since v1.5.0
      */
     // @codingStandardsIgnoreLine
     protected function isModuleOutputEnabled()

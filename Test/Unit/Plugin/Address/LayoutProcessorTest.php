@@ -41,7 +41,7 @@ class LayoutProcessorTest extends TestCase
     /** @var LayoutProcessor */
     protected $instanceClass = LayoutProcessor::class;
 
-    /** @var \array[][][][][]  */
+    /** @var array[]  */
     private $addressFieldsForMultipleBillingFields = [
         'components' => [
             'checkout' => [
@@ -126,7 +126,7 @@ class LayoutProcessorTest extends TestCase
         ]
     ];
 
-    /** @var \array[][][][][]  */
+    /** @var array[]  */
     private $addressFields = [
         'components' => [
             'checkout' => [
@@ -188,7 +188,7 @@ class LayoutProcessorTest extends TestCase
         ]
     ];
 
-    /** @var \array[][][][][]  */
+    /** @var array[]  */
     private $addressFieldsWithoutBilling = [
         'components' => [
             'checkout' => [

@@ -44,6 +44,7 @@ class Button extends Template implements RendererInterface
     // @codingStandardsIgnoreLine
     protected $_template = 'TIG_Postcode::config/credentials/button.phtml';
 
+    // @codeCoverageIgnoreStart
     /**
      * @inheritdoc
      */

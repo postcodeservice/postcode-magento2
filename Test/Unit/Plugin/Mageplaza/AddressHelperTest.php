@@ -37,7 +37,7 @@ use TIG\Postcode\Config\Provider\ModuleConfiguration;
 
 class AddressHelperTest extends TestCase
 {
-    /** @var AddressHelper\ */
+    /** @var AddressHelper */
     protected $instanceClass = AddressHelper::class;
 
     /**

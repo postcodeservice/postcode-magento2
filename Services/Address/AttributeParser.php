@@ -33,14 +33,10 @@ namespace TIG\Postcode\Services\Address;
 
 class AttributeParser
 {
-    /**
-     * @var null
-     */
+    /** @var null|string  */
     private $tigHousenumber = null;
 
-    /**
-     * @var null
-     */
+    /** @var null|string  */
     private $tigHousenumberAddition = null;
 
     /**
@@ -66,7 +62,7 @@ class AttributeParser
     /**
      * Get House number
      *
-     * @return null
+     * @return null|string
      */
     public function getTigHousenumber()
     {
@@ -76,7 +72,7 @@ class AttributeParser
     /**
      * Get House number Addition
      *
-     * @return null
+     * @return null|string
      */
     public function getTigHousenumberAddition()
     {
