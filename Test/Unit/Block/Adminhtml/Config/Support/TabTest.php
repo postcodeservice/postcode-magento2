@@ -37,14 +37,23 @@ use TIG\Postcode\Test\TestCase;
 
 class TabTest extends TestCase
 {
+    /** @var Tab */
     protected $instanceClass = Tab::class;
 
+    /**
+     * @return void
+     * @throws \Exception
+     */
     public function testGetVersionNumber()
     {
         $instance = $this->getInstance();
         $this->assertSame('1.5.1', $instance->getVersionNumber());
     }
 
+    /**
+     * @return void
+     * @throws \Exception
+     */
     public function testGetSupportedMagentoVersions()
     {
         $instance = $this->getInstance([

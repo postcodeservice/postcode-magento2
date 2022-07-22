@@ -41,6 +41,7 @@ use \TIG\Postcode\Block\Adminhtml\Config\Form\Field\Fieldset;
 
 class FieldsetTest extends TestCase
 {
+    /** @var Fieldset */
     protected $instanceClass = Fieldset::class;
 
     /**
@@ -68,6 +69,7 @@ class FieldsetTest extends TestCase
      * @param $configValue
      * @param $expected
      * @dataProvider fieldProvider
+     * @throws \Exception
      */
     public function testGetFrontendClass($configValue, $expected)
     {

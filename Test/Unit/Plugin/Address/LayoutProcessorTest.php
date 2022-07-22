@@ -38,8 +38,10 @@ use Magento\Framework\App\Config\ScopeConfigInterface;
 
 class LayoutProcessorTest extends TestCase
 {
+    /** @var LayoutProcessor */
     protected $instanceClass = LayoutProcessor::class;
 
+    /** @var \array[][][][][]  */
     private $addressFieldsForMultipleBillingFields = [
         'components' => [
             'checkout' => [
@@ -124,6 +126,7 @@ class LayoutProcessorTest extends TestCase
         ]
     ];
 
+    /** @var \array[][][][][]  */
     private $addressFields = [
         'components' => [
             'checkout' => [
@@ -185,6 +188,7 @@ class LayoutProcessorTest extends TestCase
         ]
     ];
 
+    /** @var \array[][][][][]  */
     private $addressFieldsWithoutBilling = [
         'components' => [
             'checkout' => [
@@ -239,7 +243,9 @@ class LayoutProcessorTest extends TestCase
     {
         return [
             'isDisplayBillingOnPaymentMethodAvailble true' => [true, $this->addressFields, true],
-            'isDisplayBillingOnPaymentMethodAvailble false' => [false, $this->addressFieldsForMultipleBillingFields, true],
+            'isDisplayBillingOnPaymentMethodAvailble false' => [false,
+                $this->addressFieldsForMultipleBillingFields,
+                true],
             'isDisplayBillingOnPaymentMethodAvailble true without billingfields' =>
             [
                 true, $this->addressFieldsWithoutBilling, false
@@ -264,6 +270,7 @@ class LayoutProcessorTest extends TestCase
      * @param $hasBilling
      *
      * @dataProvider dataProvider
+     * @throws \Exception
      */
     public function testAfterProcess($isDisplayBillingOnPaymentMethodAvailble, $fields, $hasBilling)
     {
@@ -274,7 +281,6 @@ class LayoutProcessorTest extends TestCase
 
         $result = $instance->afterProcess(null, $fields);
 
-
         if (!$hasBilling) {
             $billingField = $result['components']['checkout']['children']['steps']['children']['billing-step']
                             ['children']['payment']['children']['payments-list']['children'];
@@ -283,8 +289,8 @@ class LayoutProcessorTest extends TestCase
         }
 
         $checkBillingFields = $result['components']['checkout']['children']['steps']['children']['billing-step']
-                                  ['children']['payment']['children']['afterMethods']['children']['billing-address-form']
-                                  ['children']['form-fields']['children'];
+        ['children']['payment']['children']['afterMethods']['children']
+        ['billing-address-form']['children']['form-fields']['children'];
 
         $checkShippingFields = $result['components']['checkout']['children']['steps']['children']['shipping-step']
                                ['children']['shippingAddress']['children']['shipping-address-fieldset']['children'];
@@ -299,6 +305,10 @@ class LayoutProcessorTest extends TestCase
         $this->assertArrayHasKey('postcode-field-group', $checkShippingFields);
     }
 
+    /**
+     * @return void
+     * @throws \Exception
+     */
     public function testBeAfterProcess()
     {
         $instance = $this->getInstance([
@@ -311,15 +321,24 @@ class LayoutProcessorTest extends TestCase
         $checkShippingFields = $result['components']['checkout']['children']['steps']['children']['shipping-step']
                                ['children']['shippingAddress']['children']['shipping-address-fieldset']['children'];
 
-
         $checkBillingFields = $result['components']['checkout']['children']['steps']['children']['billing-step']
                               ['children']['payment']['children']['payments-list']['children']['test-form']
                               ['children']['form-fields']['children'];
 
-        $this->assertContains('tig_zipcodezone_autocomplete', $checkBillingFields['postcode']['config']['additionalClasses']);
-        $this->assertContains('tig_zipcodezone_autocomplete', $checkShippingFields['postcode']['config']['additionalClasses']);
+        $this->assertContains(
+            'tig_zipcodezone_autocomplete',
+            $checkBillingFields['postcode']['config']['additionalClasses']
+        );
+        $this->assertContains(
+            'tig_zipcodezone_autocomplete',
+            $checkShippingFields['postcode']['config']['additionalClasses']
+        );
     }
 
+    /**
+     * @return void
+     * @throws \Exception
+     */
     public function testAfterProcessWhereModusIsOff()
     {
         $instance = $this->getInstance([

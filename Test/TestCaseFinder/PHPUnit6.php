@@ -31,6 +31,7 @@
  */
 namespace TIG\Postcode\Test;
 
+//@codingStandardsIgnoreStart
 class TestCaseFinder extends \PHPUnit\Framework\TestCase
 {
     public function getMock($className)
@@ -39,3 +40,4 @@ class TestCaseFinder extends \PHPUnit\Framework\TestCase
         return $this->createMock($className);
     }
 }
+//@codingStandardsIgnoreEnd

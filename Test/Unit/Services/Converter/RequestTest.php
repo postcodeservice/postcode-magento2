@@ -36,6 +36,7 @@ use TIG\Postcode\Services\Validation\Request as ValidationRequest;
 
 class RequestTest extends TestInterface
 {
+    /** @var Converter\Request */
     protected $instanceClass = Converter\Request::class;
 
     public function requestDataProvider()
@@ -59,6 +60,7 @@ class RequestTest extends TestInterface
      * @param $data
      * @param $expected
      * @param $validation
+     * @throws \Exception
      */
     public function testRequestConverter($data, $expected, $validation)
     {

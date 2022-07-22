@@ -37,8 +37,12 @@ use TIG\Postcode\Config\Provider\ModuleConfiguration;
 
 class AddressHelperTest extends TestCase
 {
+    /** @var AddressHelper\ */
     protected $instanceClass = AddressHelper::class;
 
+    /**
+     * @return array[]
+     */
     public function pluginProvider()
     {
         return [
@@ -61,6 +65,7 @@ class AddressHelperTest extends TestCase
      * @param $expected
      *
      * @dataProvider pluginProvider
+     * @throws \Exception
      */
     public function testAfterGetAddressFieldPosition($fields, $moduleOff, $expected)
     {

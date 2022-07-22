@@ -37,8 +37,13 @@ use TIG\Postcode\Config\Provider\ModuleConfiguration;
 
 class GetCheckoutCompatibilityTest extends TestCase
 {
+    /** @var GetCheckoutCompatibility */
     protected $instanceClass = GetCheckoutCompatibility::class;
 
+    /**
+     * @return void
+     * @throws \Exception
+     */
     public function testGetValue()
     {
         $moduleConfigMock = $this->getFakeMock(ModuleConfiguration::class)->getMock();

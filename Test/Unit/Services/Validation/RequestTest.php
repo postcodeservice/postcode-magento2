@@ -35,13 +35,22 @@ use TIG\Postcode\Services\Validation;
 
 class RequestTest extends TestInterface
 {
+    /** @var Validation\Request */
     protected $instanceClass = Validation\Request::class;
 
+    /**
+     * @return void
+     * @throws \Exception
+     */
     public function testWhenRequestHasNoData()
     {
         $this->assertFalse($this->getInstance()->validate('request'));
     }
 
+    /**
+     * @return void
+     * @throws \Exception
+     */
     public function testSetAndGetKeys()
     {
         $instance = $this->getInstance();
