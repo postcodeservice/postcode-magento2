@@ -28,7 +28,7 @@ php bin/magento maintenance:enable
 composer require tig/postcode-magento2
 ~~~~
 
-2. Enable the Postcode Service Magento 2 plugin
+2. Enable the Postcode Service Magento 2 extension
 ~~~~shell
 php bin/magento module:enable TIG_Postcode
 ~~~~
@@ -59,7 +59,7 @@ php bin/magento maintenance:disable
 1. Download the extension directly from [github](https://github.com/tig-nl/postcode-magento2) by clicking on *Code* and then *Download ZIP*.
 2. Create the directory *app/code/TIG/Postcode* (Case-sensitive)
 3. Extract the zip and upload the code into *app/code/TIG/Postcode*
-4. Enable the Postcode Service Magento 2 plugin
+4. Enable the Postcode Service Magento 2 extension
 ~~~~shell
 php bin/magento module:enable TIG_Postcode
 ~~~~
@@ -80,3 +80,6 @@ php bin/magento setup:upgrade
 ## Documentation
 For further installation guidance
 https://developers.postcodeservice.com/
+
+## Join our team
+Are you a motivated developer and do you want to work on projects like the Postcode Service and other interesting software projects? Checkout our job offers: https://tigersatwork.nl/  
