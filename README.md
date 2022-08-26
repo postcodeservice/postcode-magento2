@@ -76,6 +76,13 @@ composer update tig/postcode-magento2
 php bin/magento setup:upgrade
 ~~~~
 
+## Examples
+
+### Dutch Postcode Service within the Magento 2 checkout
+![Postcode Service Magento 2 Checkout NL](https://postcodeservice.com/wp-content/uploads/2022/08/postcodeservice-magento-2-nl.gif "Postcode Service Magento 2 Checkout NL")
+
+### Belgium Postcode Service within the Magento 2 checkout
+![Postcode Service Magento 2 Checkout BE](https://postcodeservice.com/wp-content/uploads/2022/08/postcodeservice-magento-2-be.gif "Postcode Service Magento 2 Checkout NL")
 
 ## Documentation
 For further installation guidance
