@@ -1,0 +1,140 @@
+---
+---
+
+// Check https://github.com/pages-themes/cayman/blob/master/_sass/variables.scss for variables
+
+// Headers
+$header-heading-color: #fff !default;
+
+// Text
+$section-headings-color: #04214a;
+$body-text-color: #333;
+$body-link-color: #227cff;
+$blockquote-text-color: #819198 !default;
+
+// Code
+$code-bg-color: #f3f6fa !default;
+$code-text-color: #567482 !default;
+
+// Borders
+$border-color: #dce6f0 !default;
+$table-border-color: #e9ebec !default;
+$hr-border-color: #eff0f1 !default;
+
+@import "{{ site.theme }}";
+
+@mixin only-large {
+  @media screen and (max-width: #{$large-breakpoint}) {
+    @content;
+  }
+}
+
+@font-face {
+  font-family: "Poppins", sans-serif;
+  src: url('https://fonts.googleapis.com/css?family=Poppins:200,400,400i,600,700&display=swap');
+}
+
+body {
+  padding: 0;
+  font-family: "Poppins","Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.page-header {
+  background: linear-gradient(rgba(34, 124, 255, 0.8), #227cff), url('{{ site.baseurl }}/assets/images/postcode-service-background.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.container {
+  & {
+    display: flex;
+  }
+  main {
+    & {
+      flex-grow: 1;
+    }
+    h1 {
+      border-bottom: 1px solid #04214a;
+      font-weight: 600;
+    }
+    h2 {
+      font-weight: 400;
+      color: #227cff;
+    }
+  }
+  nav {
+    a {
+      color: $body-text-color;
+    }
+    & {
+      max-width: 24em;
+      padding-left: 40px;
+      @include only-large {
+        display: none;
+      }
+    }
+
+    & > ul, & > ul > li, & > ul > li > ul, & > ul > li > ul li {
+      display: block !important;
+    }
+    ul {
+      margin: 0;
+      padding-left: 10px;
+    }
+    ul, li {
+      & {
+        display: none;
+      }
+
+      .expand, .expand li {
+        display: block;
+      }
+    }
+    & > ul {
+      position: sticky;
+      top: 20px;
+      padding: 5px;
+    }
+    .active {
+      color: $body-link-color;
+    }
+  }
+}
+
+main {
+  em {
+    font-style: normal;
+    border: #227cff 1px solid;
+    border-radius: 5px;
+    padding: 0px 5px;
+    display: inline-block;
+  }
+
+  li {
+    font-size: 16px;
+  }
+}
+
+
+.error-code-page{
+  nav > ul > li > ul > li > ul {
+    display: none;
+  }
+  .block {
+    padding: 10px;
+    border: #227cff 1px solid;
+    border-radius: 10px;
+    margin-bottom: 20px;
+  }
+  .hide {
+    display: none;
+  }
+  input {
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: 1px solid #227cff;
+    width: 100%;
+  }
+}
