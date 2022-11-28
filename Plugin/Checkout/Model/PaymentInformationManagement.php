@@ -32,9 +32,11 @@ class PaymentInformationManagement
         \Magento\Checkout\Model\PaymentInformationManagement $subject,
         $cartId,
         PaymentInterface $paymentMethod,
-        AddressInterface $address
+        AddressInterface $address = null
     ) {
-        $extAttributes = $address->getExtensionAttributes();
-        $this->fieldsHelper->copyFieldsFromExtensionAttributesToObject($extAttributes, $address);
+        if ($address) {
+            $extAttributes = $address->getExtensionAttributes();
+            $this->fieldsHelper->copyFieldsFromExtensionAttributesToObject($extAttributes, $address);
+        }
     }
 }
