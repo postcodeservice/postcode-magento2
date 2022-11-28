@@ -29,7 +29,7 @@ class PaymentInformationManagement
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public function beforeSavePaymentInformation(
-        \Magento\Checkout\Model\GuestPaymentInformationManagement $subject,
+        \Magento\Checkout\Model\PaymentInformationManagement $subject,
         $cartId,
         PaymentInterface $paymentMethod,
         AddressInterface $address = null
