@@ -87,6 +87,3 @@ php bin/magento setup:upgrade
 ## Documentation
 For further installation guidance
 https://developers.postcodeservice.com/
-
-## Join our team
-Are you a motivated developer and do you want to work on projects like the Postcode Service and other interesting software projects? Checkout our job offers: https://tigersatwork.nl/  
