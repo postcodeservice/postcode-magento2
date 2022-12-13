@@ -99,7 +99,7 @@ class Response implements ValidationInterface
      */
     private function checkStreetNameValue($data)
     {
-        if (strpos($data['straatnaam'], 'limiet bereikt') !== false) {
+        if (strpos($data['straatnaam'] ?? '', 'limiet bereikt') !== false) {
             return false;
         }
 
