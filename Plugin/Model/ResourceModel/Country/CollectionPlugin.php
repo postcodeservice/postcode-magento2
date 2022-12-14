@@ -103,7 +103,7 @@ class CollectionPlugin
             ],
             'tig_street' => [
                 'sortOrder' => $sortOrderBase + 3 * $sortOrderIncrement,
-                'visible' => true,
+                'visible' => false,
                 'classes' => [
                     'tig_street_field' => true,
                     'tig_postcode_nl' => true
