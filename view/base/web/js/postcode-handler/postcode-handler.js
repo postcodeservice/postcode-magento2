@@ -134,11 +134,11 @@ define([
      */
     PostcodeHandler.prototype.reset = function() {
         if (!('tig_postcode' in this.config) || this.config.tig_postcode['enabled'] === false) {
-            this.currentState = STATE_DISABLED;
+            this.setCurrentState(STATE_DISABLED);
             return;
         }
 
-        this.currentState = STATE_INIT;
+        this.setCurrentState(STATE_INIT);
         this.postcodeService.setFieldsConfig(this.config.tig_postcode);
     }
 
