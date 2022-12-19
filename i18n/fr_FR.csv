@@ -32,6 +32,7 @@ Disabled,Désactivé
 "Can not find the address, please fill in manually","Adresse introuvable, veuillez la renseigner manuellement"
 "Housenumber","Numéro"
 "Addition","Complément d'adresse"
+"Housenumber addition","Ajout de numéro de maison"
 "Please select a postcode before filling the street field.","Veuillez sélectionner un code postal avant de renseigner le chanp Adresse"
 "Enable Netherlands check","Activer la vérification pour les Pays-Bas"
 "Enable Belgium check","Activer la vérification pour la Belgique"
