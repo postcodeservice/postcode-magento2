@@ -75,7 +75,7 @@ class CollectionPlugin
     private function getPostcodeNLConfig($sortOrderBase, $sortOrderIncrement): array
     {
         return [
-            'enabled' => $this->moduleConfiguration->isNLCheckEnabled(),
+            'enabled' => $this->moduleConfiguration->isNLCheckEnabled() && !$this->moduleConfiguration->isModusOff(),
             'postcode' => [
                 'sortOrder' => $sortOrderBase,
                 'classes' => [
@@ -103,7 +103,7 @@ class CollectionPlugin
             ],
             'tig_street' => [
                 'sortOrder' => $sortOrderBase + 3 * $sortOrderIncrement,
-                'visible' => true,
+                'visible' => false,
                 'classes' => [
                     'tig_street_field' => true,
                     'tig_postcode_nl' => true
@@ -136,7 +136,7 @@ class CollectionPlugin
      */
     private function getPostcodeBEConfig($sortOrderBase, $sortOrderIncrement) {
         return [
-            'enabled' => $this->moduleConfiguration->isBECheckEnabled(),
+            'enabled' => $this->moduleConfiguration->isBECheckEnabled() && !$this->moduleConfiguration->isModusOff(),
             'postcode' => [
                 'sortOrder' => $sortOrderBase,
                 'classes' => [

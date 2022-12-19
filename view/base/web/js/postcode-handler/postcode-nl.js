@@ -33,13 +33,15 @@ define([
         'underscore',
         './postcode-handler',
         '../helper/field-types',
-        '../helper/postcode-api'
+        '../helper/postcode-api',
+        'mage/translate'
     ], function (
         $,
         _,
         PostcodeHandler,
         FieldTypes,
-        PostcodeApi
+        PostcodeApi,
+        $t
     ) {
         'use strict';
 
@@ -84,7 +86,7 @@ define([
 
                 if (data.success !== true) {
                     self.setCurrentState(states.POSTCODE_CALL_FAILED);
-                    self.getPostcodeService().getElement(FieldTypes.postcode).error('Sorry, we could not find the address on the given zip code and house number combination. If you are sure that the zip code and house number are correct, please fill in the address details manually.');
+                    self.getPostcodeService().getElement(FieldTypes.postcode).error($t('Sorry, we could not find the address on the given zip code and house number combination. If you are sure that the zip code and house number are correct, please fill in the address details manually.'));
                     return;
                 }
 

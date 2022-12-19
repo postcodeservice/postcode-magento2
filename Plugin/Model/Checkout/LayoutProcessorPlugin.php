@@ -152,7 +152,7 @@ class LayoutProcessorPlugin
      */
     private function getParentPath($path, $delimiter = '/', $count = 1)
     {
-        $splitPath = explode($delimiter, $path);
+        $splitPath = !empty($path) ? explode($delimiter, $path) : [];
         for ($i = 0; $i < $count; $i++) {
             array_pop($splitPath);
         }
