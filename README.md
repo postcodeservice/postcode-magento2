@@ -1,6 +1,6 @@
 <p align="center"><img src="https://postcodeservice.com/wp-content/uploads/2021/01/postcode-service-logo__Logo-color.svg" width="300px" /></p>
 
-# TIG Postcode Service Magento 2
+# Postcode Service Magento 2
 [![Latest Stable Version](https://img.shields.io/github/v/release/tig-nl/postcode-magento2?style=for-the-badge&color=227cff)](https://github.com/tig-nl/postcode-magento2/releases/latest)
 ![TIG Postcode Service 2.3.7 versions](https://img.shields.io/badge/Tested%20with%20Magento-2.3.7-%2300cf00?style=for-the-badge)
 ![TIG Postcode Service 2.4.5 versions](https://img.shields.io/badge/Tested%20with%20Magento-2.4.5-%2300cf00?style=for-the-badge)
