@@ -50,6 +50,7 @@ body {
 .container {
   & {
     display: flex;
+    justify-content: center;
   }
   main {
     & {
@@ -64,13 +65,18 @@ body {
       color: #227cff;
     }
   }
+  .main-content {
+    padding: 2rem;
+    margin:unset;
+  }
   nav {
     a {
       color: $body-text-color;
     }
     & {
-      max-width: 24em;
+      width: 300px;
       padding-left: 40px;
+      padding-top: 2rem;
       @include only-large {
         display: none;
       }
