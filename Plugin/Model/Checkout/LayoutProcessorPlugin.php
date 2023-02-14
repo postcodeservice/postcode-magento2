@@ -135,7 +135,7 @@ class LayoutProcessorPlugin
     public function createHousenumberFieldsDefinition($dataScope)
     {
         return [
-            'tig_housenumber'          => $this->createBaseFieldConfig($dataScope, 'tig_housenumber', 'Housenumber', ["sortOrder" => 51]),
+            'tig_housenumber'          => $this->createBaseFieldConfig($dataScope, 'tig_housenumber', 'Housenumber', ["sortOrder" => 51, "validation" => ["required-entry" => true, "validate-number" => true]]),
             'tig_housenumber_addition' => $this->createBaseFieldConfig($dataScope, 'tig_housenumber_addition', 'Housenumber addition', ["sortOrder" => 52]),
             'tig_street'               => $this->createBaseFieldConfig($dataScope, 'tig_street', 'Street Address', ["sortOrder" => 53]),
         ];
