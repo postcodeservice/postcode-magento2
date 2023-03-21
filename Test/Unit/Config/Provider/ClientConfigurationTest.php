@@ -36,6 +36,7 @@ use TIG\Postcode\Config\Provider\ModuleConfiguration;
 
 class ClientConfigurationTest extends AbstractConfigurationTest
 {
+    /** @var ClientConfiguration  */
     protected $instanceClass = ClientConfiguration::class;
 
     /**

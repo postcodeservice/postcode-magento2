@@ -37,19 +37,17 @@ use Magento\Framework\Data\Form\Element\AbstractElement;
 
 class Button extends Template implements RendererInterface
 {
-    const MODULE_NAME = 'TIG_Postcode';
+    public const MODULE_NAME = 'TIG_Postcode';
 
-    const CREDENTIALS_URL = 'https://postcodeservice.nl';
+    public const CREDENTIALS_URL = 'https://postcodeservice.nl';
 
     // @codingStandardsIgnoreLine
     protected $_template = 'TIG_Postcode::config/credentials/button.phtml';
 
-    /**
-     * @param AbstractElement $element
-     *
-     * @return string
-     */
     // @codeCoverageIgnoreStart
+    /**
+     * @inheritdoc
+     */
     public function render(AbstractElement $element)
     {
         /** @noinspection PhpUndefinedMethodInspection */
@@ -60,15 +58,18 @@ class Button extends Template implements RendererInterface
     // @codeCoverageIgnoreEnd
 
     /**
+     * Get Label
+     *
      * @return \Magento\Framework\Phrase
      */
     public function getLabel()
     {
-        // @codingStandardsIgnoreLine
         return __('Request Credentails');
     }
 
     /**
+     * Get credentials Url
+     *
      * @return string
      */
     public function getCredentialsUrl()

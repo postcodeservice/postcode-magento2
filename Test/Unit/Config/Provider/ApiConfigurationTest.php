@@ -35,18 +35,27 @@ use TIG\Postcode\Config\Provider\ApiConfiguration;
 
 class ApiConfigurationTest extends AbstractConfigurationTest
 {
+    /** @var ApiConfiguration */
     protected $instanceClass = ApiConfiguration::class;
 
+    /** @var string  */
     private $base = 'https://api.postcodeservice.com/nl/';
+    /** @var string  */
     private $beBase = 'https://api.postcodeservice.com/be/';
 
+    /** @var string  */
     private $version         = 'v3';
+    /** @var string  */
     private $postcodeVersion = 'v2';
+    /** @var string  */
     private $streetVersion   = 'v2';
 
+    /** @var string  */
     private $postcodeEndpoint = 'postcode-find/';
+    /** @var string  */
     private $streetEndpoint   = 'street-find/';
 
+    /** @var string  */
     private $type = 'json';
 
     /**
@@ -54,36 +63,54 @@ class ApiConfigurationTest extends AbstractConfigurationTest
      */
     private $instance;
 
+    /**
+     * @return void
+     */
     public function setUp()
     {
         parent::setUp();
         $this->instance = $this->getInstance();
     }
 
+    /**
+     * @return void
+     */
     public function testGetBase()
     {
         $this->setXpath(ApiConfiguration::XPATH_API_BASE, $this->base);
         $this->assertEquals($this->base, $this->instance->getBase());
     }
 
+    /**
+     * @return void
+     */
     public function testBeGetBase()
     {
         $this->setXpath(ApiConfiguration::XPATH_API_BE_BASE, $this->beBase);
         $this->assertEquals($this->beBase, $this->instance->getBase('BE'));
     }
 
+    /**
+     * @return void
+     */
     public function testGetVersion()
     {
         $this->setXpath(ApiConfiguration::XPATH_API_VERSION, $this->version);
         $this->assertEquals($this->version, $this->instance->getVersion());
     }
 
+    /**
+     * @return void
+     */
     public function testGetType()
     {
         $this->setXpath(ApiConfiguration::XPATH_API_TYPE, $this->type);
         $this->assertEquals($this->type, $this->instance->getType());
     }
 
+    /**
+     * @return void
+     */
     public function testGetBaseUri()
     {
         $this->setXpathConsecutive(
@@ -103,6 +130,9 @@ class ApiConfigurationTest extends AbstractConfigurationTest
         $this->assertEquals($expected, $this->instance->getBaseUri());
     }
 
+    /**
+     * @return void
+     */
     public function testGetBeBasePostcodeUri()
     {
         $this->setXpathConsecutive(
@@ -122,6 +152,9 @@ class ApiConfigurationTest extends AbstractConfigurationTest
         $this->assertEquals($expected, $this->instance->getBeBaseUri($this->postcodeEndpoint));
     }
 
+    /**
+     * @return void
+     */
     public function testGetBeBaseStreetUri()
     {
         $this->setXpathConsecutive(

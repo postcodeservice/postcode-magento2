@@ -37,6 +37,7 @@ use TIG\Postcode\Services\Converter\Request;
 
 class FactoryTest extends TestCase
 {
+    /** @var Converter\Factory */
     protected $instanceClass = Converter\Factory::class;
 
     /**
@@ -44,6 +45,10 @@ class FactoryTest extends TestCase
      */
     public $instance;
 
+    /**
+     * @return void
+     * @throws \Exception
+     */
     public function setUp()
     {
         parent::setUp();
@@ -56,6 +61,10 @@ class FactoryTest extends TestCase
         ]);
     }
 
+    /**
+     * @return void
+     * @throws \Exception
+     */
     public function testIncorrectClassImplementation()
     {
         $instance = $this->getInstance([
@@ -75,6 +84,9 @@ class FactoryTest extends TestCase
         $this->fail('Should trow an exception, but got none');
     }
 
+    /**
+     * @return void
+     */
     public function testIncorrectConverterTypeGiven()
     {
         try {
@@ -88,6 +100,10 @@ class FactoryTest extends TestCase
         $this->fail('Should trow an exception, but got none');
     }
 
+    /**
+     * @return void
+     * @throws \Exception
+     */
     public function testCorrectConvertion()
     {
         $requestMock = $this->getFakeMock(Request::class)->getMock();
@@ -105,8 +121,11 @@ class FactoryTest extends TestCase
 
         $this->assertEquals(
             $instance->convert(
-                'correct', ['postcode' => '1014BA', 'huisnummer' => 37], ['success', 'straatnaam', 'woonplaats']
-            ), ['success' => true, 'straatnaam' => 'Kabelweg', 'woonplaats' => 'Amsterdam']
+                'correct',
+                ['postcode' => '1014BA', 'huisnummer' => 37],
+                ['success', 'straatnaam', 'woonplaats']
+            ),
+            ['success' => true, 'straatnaam' => 'Kabelweg', 'woonplaats' => 'Amsterdam']
         );
     }
 }

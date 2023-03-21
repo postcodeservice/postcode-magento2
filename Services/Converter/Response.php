@@ -35,6 +35,9 @@ use TIG\Postcode\Services\Validation\Response as ValidationResponse;
 
 class Response implements ConverterInterface
 {
+    /**
+     * @var ValidationResponse
+     */
     private $validation;
 
     /**
@@ -49,7 +52,7 @@ class Response implements ConverterInterface
     }
 
     /**
-     * @param $keys
+     * @inheritdoc
      */
     public function setValidationKeys($keys)
     {
@@ -57,7 +60,7 @@ class Response implements ConverterInterface
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function convert($data)
     {

@@ -36,8 +36,12 @@ use TIG\Postcode\Services\Address\AttributeParser;
 
 class AttributeParserTest extends TestCase
 {
+    /** @var AttributeParser */
     protected $instanceClass = AttributeParser::class;
 
+    /**
+     * @return array[]
+     */
     public function provider()
     {
         return [
@@ -56,6 +60,7 @@ class AttributeParserTest extends TestCase
      * @param $expectedAddition
      *
      * @dataProvider provider
+     * @throws \Exception
      */
     public function testSet($attributes, $expectedHousenumber, $expectedAddition)
     {

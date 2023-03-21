@@ -37,8 +37,13 @@ use TIG\Postcode\Config\Provider\ModuleConfiguration;
 
 class DataProviderTest extends TestCase
 {
+    /** @var DataProvider */
     protected $instanceClass = DataProvider::class;
 
+    /**
+     * @return void
+     * @throws \Exception
+     */
     public function testIsPostcodeBeOn()
     {
         $instance = $this->getInstance([
@@ -48,6 +53,10 @@ class DataProviderTest extends TestCase
         $this->assertEquals(true, $instance->isPostcodeBeCheckOn());
     }
 
+    /**
+     * @return void
+     * @throws \Exception
+     */
     public function testIsPostcodeBeOff()
     {
         $instance = $this->getInstance([

@@ -34,8 +34,10 @@ class Renderer
     }
 
     /**
-     * @param pageRender $subject
-     * @param $assetestlist
+     * Before plugin on @see
+     *
+     * @param pageRender    $subject
+     * @param mixed         $assetestlist
      *
      * @see Renderer::renderAssets()
      *
@@ -59,13 +61,17 @@ class Renderer
             if (in_array('TIG_Postcode', $modules)) {
                 $this->config->addPageAsset('TIG_Postcode::css/postcode_main.css');
                 // check if NL is enabled
-                if ($this->scopeConfig->getValue('tig_postcode/countries/enable_nl_check',
-                    ScopeInterface::SCOPE_STORE)) {
+                if ($this->scopeConfig->getValue(
+                    'tig_postcode/countries/enable_nl_check',
+                    ScopeInterface::SCOPE_STORE
+                )) {
                     $this->config->addPageAsset('TIG_Postcode::css/postcode_nl.css');
                 }
                 // check if BE is enabled
-                if ($this->scopeConfig->getValue('tig_postcode/countries/enable_be_check',
-                    ScopeInterface::SCOPE_STORE)) {
+                if ($this->scopeConfig->getValue(
+                    'tig_postcode/countries/enable_be_check',
+                    ScopeInterface::SCOPE_STORE
+                )) {
                     $this->config->addPageAsset('TIG_Postcode::css/postcode_be.css');
                 }
             }

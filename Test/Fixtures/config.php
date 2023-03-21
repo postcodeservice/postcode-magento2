@@ -29,9 +29,9 @@
  * @copyright   Copyright (c) Total Internet Group B.V. https://tig.nl/copyright
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
-return array (
+return  [
     'modules' =>
-        array (
+         [
             'Magento_Store' => 1,
             'Magento_AdvancedPricingImportExport' => 1,
             'Magento_Directory' => 1,
@@ -153,5 +153,5 @@ return array (
             'Magento_WidgetSampleData' => 1,
             'Magento_Wishlist' => 1,
             'Magento_WishlistSampleData' => 1,
-        ),
-);
+        ],
+];

@@ -33,7 +33,9 @@
 <ruleset name="TIG_Postcode">
     <description>TIG Postcode Coding Standard</description>
 
-    <config name="installed_paths" value="vendor/squizlabs/php_codesniffer/CodeSniffer/Standards,vendor/magento/marketplace-eqp,vendor/object-calisthenics/phpcs-calisthenics-rules/src/"/>
+    <config name="installed_paths"
+            value="vendor/squizlabs/php_codesniffer/CodeSniffer/Standards,vendor/magento/marketplace-eqp,
+            vendor/object-calisthenics/phpcs-calisthenics-rules/src/"/>
 
     <rule ref="MEQP2"/>
 

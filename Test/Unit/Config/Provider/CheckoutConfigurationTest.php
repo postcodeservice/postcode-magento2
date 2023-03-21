@@ -38,8 +38,13 @@ use TIG\Postcode\Test\Unit\Config\CheckoutConfiguration\GetCheckoutCompatibility
 
 class CheckoutConfigurationTest extends TestCase
 {
+    /** @var CheckoutConfiguration */
     protected $instanceClass = CheckoutConfiguration::class;
 
+    /**
+     * @return void
+     * @throws \Exception
+     */
     public function testGetConfig()
     {
         $checkoutCompatibleMock = $this->getFakeMock(GetCheckoutCompatibility::class)->disableOriginalConstructor()
@@ -61,6 +66,10 @@ class CheckoutConfigurationTest extends TestCase
         $this->assertEquals($result, $instance->getConfig());
     }
 
+    /**
+     * @return void
+     * @throws \Exception
+     */
     public function testGetConfigWithInvalidClass()
     {
         $wrongClassMock = $this->getFakeMock(GetCheckoutCompatibilityTest::class)->disableOriginalConstructor()

@@ -37,21 +37,30 @@ use TIG\Postcode\Test\TestCase;
 
 class TabTest extends TestCase
 {
+    /** @var Tab */
     protected $instanceClass = Tab::class;
 
+    /**
+     * @return void
+     * @throws \Exception
+     */
     public function testGetVersionNumber()
     {
         $instance = $this->getInstance();
-        $this->assertSame('1.5.2', $instance->getVersionNumber());
+        $this->assertSame('1.5.3', $instance->getVersionNumber());
     }
 
+    /**
+     * @return void
+     * @throws \Exception
+     */
     public function testGetSupportedMagentoVersions()
     {
         $instance = $this->getInstance([
            'moduleConfiguration' => $this->getConfigurationMock()
         ]);
 
-        $this->assertSame('2.3.7, 2.4.5-p1', $instance->getSupportedMagentoVersions());
+        $this->assertSame('2.3.7, 2.4.6', $instance->getSupportedMagentoVersions());
     }
 
     /**+
@@ -62,7 +71,7 @@ class TabTest extends TestCase
         $mock = $this->getFakeMock(ModuleConfiguration::class)->getMock();
         $mockExpects = $mock->expects($this->once());
         $mockExpects->method('getSupportedMagentoVersions');
-        $mockExpects->willReturn('2.3.7, 2.4.5-p1');
+        $mockExpects->willReturn('2.3.7, 2.4.6');
 
         return $mock;
     }

@@ -54,8 +54,12 @@ class ShippingAddressManagement
     }
 
     /**
+     * Before Plugin on Assign function
+     *
+     * @see MagentoShippingAddressManagement::assign()
+     *
      * @param MagentoShippingAddressManagement               $subject
-     * @param                                                $cartId
+     * @param int                                            $cartId
      * @param AddressInterface                               $address
      */
     public function beforeAssign(

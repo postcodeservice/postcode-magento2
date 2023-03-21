@@ -40,7 +40,7 @@ class Tab extends Template implements RendererInterface
 {
     const MODULE_NAME = 'TIG_Postcode';
 
-    const EXTENSION_VERSION = '1.5.2';
+    const EXTENSION_VERSION = '1.5.3';
 
     // @codingStandardsIgnoreLine
     protected $_template = 'TIG_Postcode::config/support/tab.phtml';
@@ -68,7 +68,7 @@ class Tab extends Template implements RendererInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function render(AbstractElement $element)
     {
@@ -89,6 +89,8 @@ class Tab extends Template implements RendererInterface
     }
 
     /**
+     * Get supported magento version
+     *
      * @return string
      */
     public function getSupportedMagentoVersions()

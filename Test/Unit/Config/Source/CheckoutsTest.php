@@ -36,12 +36,18 @@ use TIG\Postcode\Config\Source\Checkouts;
 
 class CheckoutsTest extends TestCase
 {
+    /** @var Checkouts  */
     protected $instanceClass = Checkouts::class;
 
+    /** @var string[]  */
     private $compatibleCheckouts = [
         'default', 'blank', 'onestepcheckout', 'mageplaza', 'danslo', 'amasty'
     ];
 
+    /**
+     * @return void
+     * @throws \Exception
+     */
     public function testToOptionsArray()
     {
         $instance = $this->getInstance();

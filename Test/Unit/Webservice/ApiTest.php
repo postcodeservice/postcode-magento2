@@ -42,9 +42,9 @@ use TIG\Postcode\Webservices\Endpoints\GetAddress;
 use TIG\Postcode\Services\Converter\Factory;
 use Magento\Framework\HTTP\PhpEnvironment\ServerAddress;
 
-
 class ApiTest extends TestCase
 {
+    /** @var Api */
     protected $instanceClass = Api::class;
 
     /**
@@ -77,6 +77,9 @@ class ApiTest extends TestCase
      */
     private $endpoint;
 
+    /**
+     * @return void
+     */
     public function setUp()
     {
         $this->zendClient = $this->getMock(ZendClient::class);
@@ -93,6 +96,7 @@ class ApiTest extends TestCase
      * @param array $args
      *
      * @return object
+     * @throws \Exception
      */
     public function getInstance(array $args = [])
     {
@@ -102,10 +106,13 @@ class ApiTest extends TestCase
                 'clientConfiguration' => $this->clientConfiguration,
                 'converter' => $this->converter,
                 'serverAddress' => $this->serverAddress
-            ]
-        );
+            ]);
     }
 
+    /**
+     * @return void
+     * @throws \Zend_Http_Exception
+     */
     public function testApiInstanceForVersionBelow4()
     {
         $resetZendParams = $this->zendClient->expects($this->once());
@@ -126,8 +133,16 @@ class ApiTest extends TestCase
         $apiConfigVersion = $this->apiConfiguration->expects($this->once());
         $apiConfigVersion->method('getVersion')->willReturn('v3');
 
-        $requestData = ['postcode' => '1014BA', 'huisnummer' => '37'];
-        $requestDataWithHeader = ['postcode' => '1014BA', 'huisnummer' => '37', 'client_id' => '11111', 'secure_code' => 'APIKEY'];
+        $requestData = [
+            'postcode' => '1014BA',
+            'huisnummer' => '37'
+        ];
+        $requestDataWithHeader = [
+            'postcode' => '1014BA',
+            'huisnummer' => '37',
+            'client_id' => '11111',
+            'secure_code' => 'APIKEY'
+        ];
 
         $this->endpoint->expects($this->any())
             ->method('getRequestData')->willReturnOnConsecutiveCalls($requestData, $requestDataWithHeader);
@@ -154,14 +169,19 @@ class ApiTest extends TestCase
         $serverIp = $this->serverAddress->expects($this->once());
         $serverIp->method('getServerAddress')->willReturn('127.0.0.1');
 
-        $completedRequestParams = ['postcode' => '1014BA', 'huisnummer' => '37', 'client_id' => '11111',
-                                   'secure_code' => 'APIKEY', 'domain' => 'www.fakedomain.com', 'remote_ip' => '127.0.0.1'
+        $completedRequestParams = [
+            'postcode' => '1014BA',
+            'huisnummer' => '37',
+            'client_id' => '11111',
+            'secure_code' => 'APIKEY',
+            'domain' => 'www.fakedomain.com',
+            'remote_ip' => '127.0.0.1'
         ];
 
         $zendClientParams = $this->zendClient->expects($this->once());
         $zendClientParams->method('setParameterGet')->with($completedRequestParams);
 
-        $fakeResponse = new \Zend_Http_Response('200', array(), '{}');
+        $fakeResponse = new \Zend_Http_Response('200', [], '{}');
 
         $zendRequest = $this->zendClient->expects($this->once());
         $zendRequest->method('request')->willReturn($fakeResponse);
@@ -169,6 +189,10 @@ class ApiTest extends TestCase
         $this->getInstance()->getRequest($this->endpoint);
     }
 
+    /**
+     * @return void
+     * @throws \Zend_Http_Exception
+     */
     public function testApiInstanceForVersionAbove4()
     {
         $resetZendParams = $this->zendClient->expects($this->once());
@@ -217,7 +241,7 @@ class ApiTest extends TestCase
         $zendClientParams = $this->zendClient->expects($this->once());
         $zendClientParams->method('setParameterGet')->with($completedRequestParams);
 
-        $fakeResponse = new \Zend_Http_Response('200', array(), '{}');
+        $fakeResponse = new \Zend_Http_Response('200', [], '{}');
 
         $zendRequest = $this->zendClient->expects($this->once());
         $zendRequest->method('request')->willReturn($fakeResponse);
@@ -225,6 +249,10 @@ class ApiTest extends TestCase
         $this->getInstance()->getRequest($this->endpoint);
     }
 
+    /**
+     * @return void
+     * @throws \Zend_Http_Exception
+     */
     public function testApiInstanceForVersionAbove4AsPost()
     {
         $resetZendParams = $this->zendClient->expects($this->once());
@@ -273,7 +301,7 @@ class ApiTest extends TestCase
         $zendClientParams = $this->zendClient->expects($this->once());
         $zendClientParams->method('setParameterPost')->with($completedRequestParams);
 
-        $fakeResponse = new \Zend_Http_Response('200', array(), '{}');
+        $fakeResponse = new \Zend_Http_Response('200', [], '{}');
 
         $zendRequest = $this->zendClient->expects($this->once());
         $zendRequest->method('request')->willReturn($fakeResponse);
@@ -281,6 +309,10 @@ class ApiTest extends TestCase
         $this->getInstance()->getRequest($this->endpoint);
     }
 
+    /**
+     * @return void
+     * @throws \Zend_Http_Exception
+     */
     public function testApiInstanceForBePostcode()
     {
         $resetZendParams = $this->zendClient->expects($this->once());
@@ -332,7 +364,7 @@ class ApiTest extends TestCase
         $zendClientParams = $this->zendClient->expects($this->once());
         $zendClientParams->method('setParameterGet')->with($completedRequestParams);
 
-        $fakeResponse = new \Zend_Http_Response('200', array(), '{}');
+        $fakeResponse = new \Zend_Http_Response('200', [], '{}');
 
         $zendRequest = $this->zendClient->expects($this->once());
         $zendRequest->method('request')->willReturn($fakeResponse);
@@ -340,6 +372,10 @@ class ApiTest extends TestCase
         $this->getInstance()->getRequest($this->endpoint);
     }
 
+    /**
+     * @return void
+     * @throws \Exception
+     */
     public function testApiWithHttpClientException()
     {
         $zendRequest = $this->zendClient->expects($this->once());
@@ -350,4 +386,3 @@ class ApiTest extends TestCase
         $this->assertEquals(false, $response['success']);
     }
 }
-

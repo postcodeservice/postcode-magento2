@@ -36,6 +36,7 @@ use TIG\Postcode\Test\TestCase;
 
 class FactoryTest extends TestCase
 {
+    /** @var Validation\Factory */
     protected $instanceClass = Validation\Factory::class;
 
     /**
@@ -43,6 +44,10 @@ class FactoryTest extends TestCase
      */
     public $instance;
 
+    /**
+     * @return void
+     * @throws \Exception
+     */
     public function setUp()
     {
         parent::setUp();
@@ -50,11 +55,15 @@ class FactoryTest extends TestCase
         $this->instance = $this->getInstance([
             'validators' => [
                 'request'  => $this->getObject(Validation\Request::class),
-                'response' => $this->getObject( Validation\Response::class),
+                'response' => $this->getObject(Validation\Response::class),
             ]
         ]);
     }
 
+    /**
+     * @return void
+     * @throws \Exception
+     */
     public function testIncorrectClassImplementation()
     {
         $instance = $this->getInstance([
@@ -74,6 +83,9 @@ class FactoryTest extends TestCase
         $this->fail('Should trow an exception, but got none');
     }
 
+    /**
+     * @return void
+     */
     public function testIncorrectValidationTypeGiven()
     {
         try {
@@ -87,6 +99,9 @@ class FactoryTest extends TestCase
         $this->fail('Should trow an exception, but got none');
     }
 
+    /**
+     * @return array[]
+     */
     public function requestDataProvider()
     {
         return [
@@ -109,12 +124,16 @@ class FactoryTest extends TestCase
      * @dataProvider requestDataProvider
      * @param $data
      * @param $expected
+     * @throws \TIG\Postcode\Exception
      */
     public function testRequestValidator($data, $expected)
     {
         $this->assertSame($expected, $this->instance->validate('request', $data));
     }
 
+    /**
+     * @return array[]
+     */
     public function responseDataProvider()
     {
         return [
@@ -137,6 +156,9 @@ class FactoryTest extends TestCase
         ];
     }
 
+    /**
+     * @return array[]
+     */
     public function responseDataProviderBe()
     {
         return [
@@ -155,6 +177,7 @@ class FactoryTest extends TestCase
      * @dataProvider responseDataProvider
      * @param $data
      * @param $expected
+     * @throws \Exception
      */
     public function testResponseValidator($data, $expected)
     {
@@ -165,6 +188,7 @@ class FactoryTest extends TestCase
      * @dataProvider responseDataProviderBe
      * @param $data
      * @param $expected
+     * @throws \Exception
      */
     public function testResponseValidatorForBECall($data, $expected)
     {

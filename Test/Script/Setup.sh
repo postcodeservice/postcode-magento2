@@ -67,7 +67,7 @@ find Test/Fixtures -type f -print0 | xargs -0 -n 1 sed -i -e "s/MAGENTO_DB_NAME/
 
 cp -v Test/Fixtures/env.php "${BUILD_DIR}/app/etc/env.php"
 cp -v Test/Fixtures/config.php "${BUILD_DIR}/app/etc/config.php"
-cp -v Test/Fixtures/install-config-mysql.php "${BUILD_DIR}/dev/tests/integration/etc/install-config-mysql.php"
+cp -v Test/Fixtures/update-config-mysql.php "${BUILD_DIR}/dev/tests/integration/etc/update-config-mysql.php"
 cp -v Test/Fixtures/phpunit.xml "${BUILD_DIR}/dev/tests/integration/phpunit.xml"
 
 zip --exclude=node_modules/* --exclude=vendor/* --exclude=.git/* -r build.zip .

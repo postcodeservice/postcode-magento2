@@ -35,11 +35,13 @@ use Magento\Framework\Option\ArrayInterface;
 
 class Parser implements ArrayInterface
 {
-    const STREETFIELD_ONE    = 1;
-    const STREETFIELD_TWO    = 2;
-    const STREETFIELD_THREE  = 3;
+    public const STREETFIELD_ONE    = 1;
+    public const STREETFIELD_TWO    = 2;
+    public const STREETFIELD_THREE  = 3;
 
     /**
+     * Options for the backend configuration
+     *
      * @return array
      */
     public function toOptionArray()

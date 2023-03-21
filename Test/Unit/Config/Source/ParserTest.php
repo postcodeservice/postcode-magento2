@@ -36,8 +36,13 @@ use TIG\Postcode\Config\Source\Parser;
 
 class ParserTest extends TestCase
 {
+    /** @var Parser  */
     protected $instanceClass = Parser::class;
 
+    /**
+     * @return void
+     * @throws \Exception
+     */
     public function testToOptionsArray()
     {
         $instance = $this->getInstance();

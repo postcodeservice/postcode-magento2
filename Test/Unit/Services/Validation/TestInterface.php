@@ -36,6 +36,9 @@ use TIG\Postcode\Test\TestCase;
 
 class TestInterface extends TestCase
 {
+    /**
+     * @return void
+     */
     public function testClassImplementsTheValidationInterface()
     {
         $this->assertArrayHasKey(ValidationInterface::class, class_implements($this->instanceClass));

@@ -63,6 +63,9 @@ abstract class AbstractConfigurationTest extends TestCase
      */
     protected $cryptMock;
 
+    /**
+     * @return void
+     */
     protected function initConfigMocks()
     {
         $this->scopeConfigMock   = $this->getMock(ScopeConfigInterface::class);
@@ -76,6 +79,7 @@ abstract class AbstractConfigurationTest extends TestCase
      * @param array $args
      *
      * @return object
+     * @throws \Exception
      */
     public function getInstance(array $args = [])
     {
@@ -125,6 +129,10 @@ abstract class AbstractConfigurationTest extends TestCase
         );
     }
 
+    /**
+     * @param $enabled
+     * @return void
+     */
     protected function setModuleOutputEnabled($enabled = true)
     {
         $moduleOutPutMock = $this->moduleManagerMock->expects($this->any());
@@ -133,6 +141,11 @@ abstract class AbstractConfigurationTest extends TestCase
         $moduleOutPutMock->willReturn($enabled);
     }
 
+    /**
+     * @param $key
+     * @param $returnValue
+     * @return void
+     */
     protected function setDecryptedKey($key, $returnValue)
     {
         $cryptOutputMock = $this->cryptMock->expects($this->once());
@@ -141,6 +154,10 @@ abstract class AbstractConfigurationTest extends TestCase
         $cryptOutputMock->willReturn($returnValue);
     }
 
+    /**
+     * @param $url
+     * @return void
+     */
     protected function setBaseUrl($url)
     {
         $storeMock = $this->getFakeMock(Store::class)->disableOriginalConstructor()->getMock();

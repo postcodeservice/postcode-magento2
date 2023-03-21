@@ -52,11 +52,14 @@ class Factory
     }
 
     /**
-     * @param       $type
-     * @param       $data
-     * @param array $keys
+     * Convert
+     *
+     * @param mixed         $type
+     * @param mixed         $data
+     * @param array|null    $keys
      *
      * @return mixed
+     * @throws PostcodeException
      */
     public function convert($type, $data, $keys = null)
     {
@@ -68,9 +71,11 @@ class Factory
     }
 
     /**
-     * @param       $type
-     * @param       $data
-     * @param array $keys
+     * Converter
+     *
+     * @param mixed         $type
+     * @param mixed         $data
+     * @param array|null    $keys
      *
      * @return mixed
      * @throws PostcodeException
@@ -90,7 +95,9 @@ class Factory
     }
 
     /**
-     * @param $converter
+     * Check implementation
+     *
+     * @param mixed $converter
      *
      * @throws PostcodeException
      */

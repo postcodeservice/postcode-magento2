@@ -36,6 +36,9 @@ use TIG\Postcode\Test\TestCase;
 
 class TestInterface extends TestCase
 {
+    /**
+     * @return void
+     */
     public function testClassImplementsTheConverterInterface()
     {
         $this->assertArrayHasKey(ConverterInterface::class, class_implements($this->instanceClass));
