@@ -3,23 +3,6 @@
     display: none;
 }
 
-/**** Validation ****/
-.tig_postcode_field._error .control,
-.tig_postcode_field._warn .control {
-    margin-bottom: 70px;
-}
-@media (max-width: 375px) {
-    .tig_postcode_field._error .control,
-    .tig_postcode_field._warn .control {
-        margin-bottom: 95px;
-    }
-}
-.tig_postcode_field._error .field-error,
-.tig_postcode_field._warn .message {
-    position: absolute;
-}
-
-
 
 .fieldset.address {
     position: relative;
