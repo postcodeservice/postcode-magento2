@@ -143,7 +143,7 @@ class LayoutProcessorPlugin
                 $dataScope,
                 'tig_housenumber',
                 'Housenumber',
-                ["sortOrder" => 51]
+                ["sortOrder" => 51, "validation" => ["required-entry" => true, "validate-number" => true]]
             ),
             'tig_housenumber_addition' => $this->createBaseFieldConfig(
                 $dataScope,
