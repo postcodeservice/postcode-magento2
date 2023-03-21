@@ -3,13 +3,13 @@
 # Postcode Service Magento 2
 [![Latest Stable Version](https://img.shields.io/github/v/release/tig-nl/postcode-magento2?style=for-the-badge&color=227cff)](https://github.com/tig-nl/postcode-magento2/releases/latest)
 ![TIG Postcode Service 2.3.7 versions](https://img.shields.io/badge/Tested%20with%20Magento-2.3.7-%2300cf00?style=for-the-badge)
-![TIG Postcode Service 2.4.5 versions](https://img.shields.io/badge/Tested%20with%20Magento-2.4.5-%2300cf00?style=for-the-badge)
+![TIG Postcode Service 2.4.6 versions](https://img.shields.io/badge/Tested%20with%20Magento-2.4.6-%2300cf00?style=for-the-badge)
 [![Total Extension downloads](https://img.shields.io/packagist/dt/tig/postcode-magento2?style=for-the-badge&color=227cff)](https://packagist.org/packages/tig-nl/postcode-magento2/stats)
 ![Build Status](https://img.shields.io/travis/tig-nl/postcode-magento2/master?style=for-the-badge)
 
 
 ## Requirements
-- Magento version 2.4.5, 2.4.4, 2.3.7 or 2.3.6
+- Magento version 2.4.6, 2.4.5, 2.4.4, 2.3.7 or 2.3.6
 - PHP 7.3+
 
 ## Installation
