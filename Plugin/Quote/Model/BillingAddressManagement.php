@@ -54,8 +54,12 @@ class BillingAddressManagement
     }
 
     /**
+     * Before plugin on Assign function
+     *
+     * @see MagentoBillingAddressManagement::assign()
+     *
      * @param MagentoBillingAddressManagement               $subject
-     * @param                                               $cartId
+     * @param int                                           $cartId
      * @param AddressInterface                              $address
      * @param false                                         $useForShipping
      */

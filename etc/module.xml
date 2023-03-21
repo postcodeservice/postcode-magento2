@@ -30,7 +30,8 @@
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  *
 -->
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:TIG_Postcode:etc/tig_module.xsd">
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:TIG_Postcode:etc/tig_module.xsd">
     <module name="TIG_Postcode" setup_version="1.2.2">
         <sequence>
             <module name="Magento_Quote"/>

@@ -68,7 +68,7 @@ class Tab extends Template implements RendererInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function render(AbstractElement $element)
     {
@@ -89,6 +89,8 @@ class Tab extends Template implements RendererInterface
     }
 
     /**
+     * Get supported magento version
+     *
      * @return string
      */
     public function getSupportedMagentoVersions()

@@ -47,6 +47,7 @@ class AddQuoteAddressAttributes implements SchemaPatchInterface
 
     /**
      * CustomerAgeAttribute constructor.
+     *
      * @param ModuleDataSetupInterface $moduleDataSetup
      */
     public function __construct(
@@ -55,9 +56,8 @@ class AddQuoteAddressAttributes implements SchemaPatchInterface
         $this->moduleDataSetup = $moduleDataSetup;
     }
 
-
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function apply()
     {
@@ -97,7 +97,7 @@ class AddQuoteAddressAttributes implements SchemaPatchInterface
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public static function getDependencies()
     {
@@ -105,7 +105,7 @@ class AddQuoteAddressAttributes implements SchemaPatchInterface
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function getAliases()
     {

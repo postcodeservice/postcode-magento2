@@ -41,15 +41,22 @@ use TIG\Postcode\Exception;
 
 class CheckoutConfiguration extends AbstractConfigProvider implements ConfigProviderInterface
 {
-    const XPATH_POSTCODE_SORT_ORDER = 'tig_postcode/checkout/postcode_sort_order';
-    const XPATH_CITY_SORT_ORDER     = 'tig_postcode/checkout/city_sort_order';
-    const XPATH_COUNTRY_SORT_ORDER  = 'tig_postcode/checkout/country_sort_order';
+    private const XPATH_POSTCODE_SORT_ORDER = 'tig_postcode/checkout/postcode_sort_order';
+    private const XPATH_CITY_SORT_ORDER     = 'tig_postcode/checkout/city_sort_order';
+    private const XPATH_COUNTRY_SORT_ORDER  = 'tig_postcode/checkout/country_sort_order';
 
     /**
      * @var array
      */
     private $postcodeConfiguration;
 
+    /**
+     * @param ScopeConfigInterface      $scopeConfig
+     * @param Manager                   $moduleManager
+     * @param Encryptor                 $crypt
+     * @param StoreManagerInterface     $storeManager
+     * @param array                     $postcodeConfiguration
+     */
     public function __construct(
         ScopeConfigInterface $scopeConfig,
         Manager $moduleManager,
@@ -57,12 +64,15 @@ class CheckoutConfiguration extends AbstractConfigProvider implements ConfigProv
         StoreManagerInterface $storeManager,
         $postcodeConfiguration = []
     ) {
-        $this->postcodeConfiguration = $postcodeConfiguration;
+        $this->postcodeConfiguration    = $postcodeConfiguration;
         parent::__construct($scopeConfig, $moduleManager, $crypt, $storeManager);
     }
 
     /**
+     * Get config for postcode
+     *
      * @return array
+     * @throws Exception
      */
     public function getConfig()
     {
@@ -78,8 +88,10 @@ class CheckoutConfiguration extends AbstractConfigProvider implements ConfigProv
     }
 
     /**
-     * @param $configuration
-     * @param $key
+     * Check Implementationn of the configuration
+     *
+     * @param CheckoutConfigurationInterface    $configuration
+     * @param string|int                        $key
      *
      * @throws Exception
      */
@@ -92,7 +104,9 @@ class CheckoutConfiguration extends AbstractConfigProvider implements ConfigProv
     }
 
     /**
-     * @param null $store
+     * Get Postcode sortOrder by store ID
+     *
+     * @param string|int|null $store
      *
      * @return string
      */
@@ -102,7 +116,9 @@ class CheckoutConfiguration extends AbstractConfigProvider implements ConfigProv
     }
 
     /**
-     * @param null $store
+     * Get City sortOrder by store ID
+     *
+     * @param string|int|null $store
      *
      * @return string
      */
@@ -112,7 +128,9 @@ class CheckoutConfiguration extends AbstractConfigProvider implements ConfigProv
     }
 
     /**
-     * @param null $store
+     * Get Country sortOrder by store ID
+     *
+     * @param string|int|null $store
      *
      * @return string
      */

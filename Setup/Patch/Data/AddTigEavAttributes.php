@@ -52,6 +52,8 @@ class AddTigEavAttributes implements DataPatchInterface, PatchRevertableInterfac
     }
 
     /**
+     * Add attributes to the forms
+     *
      * @param string   $entityType
      * @param string   $attribute
      * @param string[] $forms
@@ -77,7 +79,7 @@ class AddTigEavAttributes implements DataPatchInterface, PatchRevertableInterfac
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function apply()
     {
@@ -145,6 +147,9 @@ class AddTigEavAttributes implements DataPatchInterface, PatchRevertableInterfac
         $this->moduleDataSetup->getConnection()->endSetup();
     }
 
+    /**
+     * Revert the changes
+     */
     public function revert()
     {
         $this->moduleDataSetup->getConnection()->startSetup();
@@ -157,7 +162,7 @@ class AddTigEavAttributes implements DataPatchInterface, PatchRevertableInterfac
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public static function getDependencies()
     {
@@ -165,7 +170,7 @@ class AddTigEavAttributes implements DataPatchInterface, PatchRevertableInterfac
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function getAliases()
     {

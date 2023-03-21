@@ -36,8 +36,13 @@ use TIG\Postcode\Webservices\Endpoints\GetAddress;
 
 class GetAddressTest extends TestCase
 {
+    /** @var GetAddress */
     protected $instanceClass = GetAddress::class;
 
+    /**
+     * @return void
+     * @throws \Exception
+     */
     public function testGetEndpoint()
     {
         $instance = $this->getInstance();
@@ -46,6 +51,10 @@ class GetAddressTest extends TestCase
         $this->assertEquals('getAddress/', $result);
     }
 
+    /**
+     * @return void
+     * @throws \Exception
+     */
     public function testGetMethod()
     {
         $instance = $this->getInstance();
@@ -54,6 +63,10 @@ class GetAddressTest extends TestCase
         $this->assertEquals('GET', $result);
     }
 
+    /**
+     * @return void
+     * @throws \Exception
+     */
     public function testTheRequestDataIsSetCorrectly()
     {
         $requestData = ['postcode' => '1014BA', 'huisnummer' => '37'];
@@ -64,6 +77,10 @@ class GetAddressTest extends TestCase
         $this->assertEquals($requestData, $result);
     }
 
+    /**
+     * @return void
+     * @throws \Exception
+     */
     public function testGetCountry()
     {
         $instance = $this->getInstance();
@@ -71,6 +88,10 @@ class GetAddressTest extends TestCase
         $this->assertEquals('NL', $result);
     }
 
+    /**
+     * @return void
+     * @throws \Exception
+     */
     public function testGetResponseKeys()
     {
         $instance = $this->getInstance();

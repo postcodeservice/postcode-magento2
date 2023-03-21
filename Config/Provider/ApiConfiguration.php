@@ -33,15 +33,17 @@ namespace TIG\Postcode\Config\Provider;
 
 class ApiConfiguration extends AbstractConfigProvider
 {
-    const XPATH_API_BASE                 = 'tig_postcode/api/base';
-    const XPATH_API_VERSION              = 'tig_postcode/api/version';
-    const XPATH_API_TYPE                 = 'tig_postcode/api/type';
+    public const XPATH_API_BASE                 = 'tig_postcode/api/base';
+    public const XPATH_API_VERSION              = 'tig_postcode/api/version';
+    public const XPATH_API_TYPE                 = 'tig_postcode/api/type';
 
-    const XPATH_API_BE_BASE              = 'tig_postcode/api_be/base';
-    const XPATH_API_BE_POSTCODE_VERSION  = 'tig_postcode/api_be/postcode_version';
-    const XPATH_API_BE_STREET_VERSION    = 'tig_postcode/api_be/street_version';
+    public const XPATH_API_BE_BASE              = 'tig_postcode/api_be/base';
+    public const XPATH_API_BE_POSTCODE_VERSION  = 'tig_postcode/api_be/postcode_version';
+    public const XPATH_API_BE_STREET_VERSION    = 'tig_postcode/api_be/street_version';
 
     /**
+     * Get base Uri
+     *
      * @return string
      */
     public function getBaseUri()
@@ -50,6 +52,8 @@ class ApiConfiguration extends AbstractConfigProvider
     }
 
     /**
+     * Get Belgium base Uri
+     *
      * @param string $endpoint
      *
      * @return string
@@ -60,8 +64,10 @@ class ApiConfiguration extends AbstractConfigProvider
     }
 
     /**
-     * @param null   $store
-     * @param string $country
+     * Get base path via country and store ID
+     *
+     * @param string            $country
+     * @param string|int|null   $store
      *
      * @return mixed
      */
@@ -78,9 +84,9 @@ class ApiConfiguration extends AbstractConfigProvider
     /**
      * Versioning for BE is not live yet. Implement this function in getBeBaseUri when this goes live.
      *
-     * @param null          $store
-     * @param string|null   $country
-     * @param string|null   $endpoint
+     * @param string                $country
+     * @param string|null           $endpoint
+     * @param string|int|null       $store
      *
      * @return mixed
      */
@@ -99,7 +105,9 @@ class ApiConfiguration extends AbstractConfigProvider
     }
 
     /**
-     * @param null $store
+     * Get type via store ID
+     *
+     * @param string|int|null $store
      *
      * @return mixed
      */

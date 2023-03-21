@@ -34,21 +34,29 @@ namespace TIG\Postcode\Webservices\Endpoints;
 interface EndpointInterface
 {
     /**
+     * Call endpoint
+     *
      * @return mixed
      */
     public function call();
 
     /**
+     * Get endpoint
+     *
      * @return string
      */
     public function getEndpoint();
 
     /**
+     * Get request data
+     *
      * @return array
      */
     public function getRequestData();
 
     /**
+     * Set request data
+     *
      * @param array $data
      *
      * @return mixed
@@ -56,21 +64,29 @@ interface EndpointInterface
     public function setRequestData(array $data);
 
     /**
+     * Get the method
+     *
      * @return string
      */
     public function getMethod();
 
     /**
+     * Get Country
+     *
      * @return string
      */
     public function getCountry();
 
     /**
+     * Get request keys
+     *
      * @return array
      */
     public function getRequestKeys();
 
     /**
+     * Get response keys
+     *
      * @return array
      */
     public function getResponseKeys();

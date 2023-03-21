@@ -37,6 +37,7 @@ class Modus implements ArrayInterface
 {
     /**
      * Return option array for the extension modus.
+     *
      * @return array
      */
     public function toOptionArray()

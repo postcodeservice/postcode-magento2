@@ -36,8 +36,13 @@ use TIG\Postcode\Config\Source\Modus;
 
 class ModusTest extends TestCase
 {
+    /** @var Modus  */
     protected $instanceClass = Modus::class;
 
+    /**
+     * @return void
+     * @throws \Exception
+     */
     public function testToOptionsArray()
     {
         $instance = $this->getInstance();

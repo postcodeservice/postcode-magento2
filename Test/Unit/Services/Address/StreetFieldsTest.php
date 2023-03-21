@@ -38,8 +38,12 @@ use Magento\Quote\Api\Data\AddressExtensionInterface;
 
 class StreetFieldsTest extends TestCase
 {
+    /** @var StreetFields */
     protected $instanceClass = StreetFields::class;
 
+    /**
+     * @return array[]
+     */
     public function parseProvider()
     {
         $attributes = ['tig_housenumber' => 37, 'tig_housenumber_addition' => 'A'];
@@ -66,6 +70,7 @@ class StreetFieldsTest extends TestCase
      * @param $attributes
      * @param $parseSetting
      * @param $expected
+     * @throws \Exception
      */
     public function testParse($street, $attributes, $parseSetting, $expected)
     {

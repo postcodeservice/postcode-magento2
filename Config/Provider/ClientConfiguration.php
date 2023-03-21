@@ -39,8 +39,8 @@ use Magento\Store\Model\StoreManagerInterface;
 
 class ClientConfiguration extends AbstractConfigProvider
 {
-    const XPATH_CONFIGURATION_CLIENT_ID = 'tig_postcode/configuration/client_id';
-    const XPATH_CONFIGURATION_API_KEY   = 'tig_postcode/configuration/api_key';
+    public const XPATH_CONFIGURATION_CLIENT_ID = 'tig_postcode/configuration/client_id';
+    public const XPATH_CONFIGURATION_API_KEY   = 'tig_postcode/configuration/api_key';
 
     /**
      * @var ModuleConfiguration
@@ -50,11 +50,11 @@ class ClientConfiguration extends AbstractConfigProvider
     /**
      * ClientConfiguration constructor.
      *
-     * @param ScopeConfigInterface $scopeConfig
-     * @param Manager              $moduleManager
-     * @param Encryptor            $crypt
+     * @param ScopeConfigInterface  $scopeConfig
+     * @param Manager               $moduleManager
+     * @param Encryptor             $crypt
      * @param StoreManagerInterface $storeManager
-     * @param ModuleConfiguration  $moduleConfiguration
+     * @param ModuleConfiguration   $moduleConfiguration
      */
     public function __construct(
         ScopeConfigInterface $scopeConfig,
@@ -70,7 +70,7 @@ class ClientConfiguration extends AbstractConfigProvider
     /**
      * Returns the client id bases on the modus of the extension.
      *
-     * @param null $store
+     * @param string|int|null $store
      *
      * @return mixed
      */
@@ -83,8 +83,10 @@ class ClientConfiguration extends AbstractConfigProvider
     /**
      * Returns the decrypted API key.
      *
-     * @param null $store
+     * @param string|int|null $store
+     *
      * @return string
+     * @throws \Exception
      */
     public function getApiKey($store = null)
     {
@@ -97,8 +99,8 @@ class ClientConfiguration extends AbstractConfigProvider
     /**
      * Gets the xpath bases on de module modus.
      *
-     * @param      $xpath
-     * @param null $store
+     * @param string|int        $xpath
+     * @param string|int|null   $store
      *
      * @return string
      */
@@ -112,6 +114,8 @@ class ClientConfiguration extends AbstractConfigProvider
     }
 
     /**
+     * Get domain Url
+     *
      * @return mixed
      */
     public function getDomainUrl()

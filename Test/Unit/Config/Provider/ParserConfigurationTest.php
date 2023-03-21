@@ -36,6 +36,7 @@ use TIG\Postcode\Config\Source\Parser;
 
 class ParserConfigurationTest extends AbstractConfigurationTest
 {
+    /** @var ParserConfiguration  */
     protected $instanceClass = ParserConfiguration::class;
 
     /**
@@ -43,26 +44,44 @@ class ParserConfigurationTest extends AbstractConfigurationTest
      */
     private $instance;
 
+    /**
+     * @return void
+     */
     public function setUp()
     {
         parent::setUp();
         $this->instance = $this->getInstance();
     }
 
+    /**
+     * @return array[]
+     */
     public function mergeProvider()
     {
         return [
             'Default Parse Line, when some one has alterd the street input' => [
-                Parser::STREETFIELD_THREE, Parser::STREETFIELD_TWO, Parser::STREETFIELD_TWO, ParserConfiguration::DEFAULT_PARSELINE
+                Parser::STREETFIELD_THREE,
+                Parser::STREETFIELD_TWO,
+                Parser::STREETFIELD_TWO,
+                ParserConfiguration::DEFAULT_PARSELINE
             ],
             'Number and addition on line two' => [
-                Parser::STREETFIELD_ONE, Parser::STREETFIELD_TWO, Parser::STREETFIELD_TWO, ParserConfiguration::PARSE_TYPE_TWO
+                Parser::STREETFIELD_ONE,
+                Parser::STREETFIELD_TWO,
+                Parser::STREETFIELD_TWO,
+                ParserConfiguration::PARSE_TYPE_TWO
             ],
             'Number on line two and addition on three.' => [
-                Parser::STREETFIELD_ONE, Parser::STREETFIELD_TWO, Parser::STREETFIELD_THREE, ParserConfiguration::PARSE_TYPE_THREE
+                Parser::STREETFIELD_ONE,
+                Parser::STREETFIELD_TWO,
+                Parser::STREETFIELD_THREE,
+                ParserConfiguration::PARSE_TYPE_THREE
             ],
             'Number and addition on line three.' => [
-                Parser::STREETFIELD_ONE, Parser::STREETFIELD_THREE, Parser::STREETFIELD_THREE, ParserConfiguration::PARSE_TYPE_FOUR
+                Parser::STREETFIELD_ONE,
+                Parser::STREETFIELD_THREE,
+                Parser::STREETFIELD_THREE,
+                ParserConfiguration::PARSE_TYPE_FOUR
             ]
         ];
     }

@@ -52,6 +52,8 @@ class ActionUrl implements CheckoutConfigurationInterface
     }
 
     /**
+     * Get value and return belgium postcode URLs
+     *
      * @return array
      */
     public function getValue()

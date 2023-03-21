@@ -37,6 +37,7 @@ use Magento\Framework\Serialize\Serializer\Json as JsonHelper;
 
 class ResponseTest extends TestInterface
 {
+    /** @var Converter\Response */
     protected $instanceClass = Converter\Response::class;
 
     public function responseDataProvider()
@@ -62,6 +63,7 @@ class ResponseTest extends TestInterface
      * @param $data
      * @param $expected
      * @param $validation
+     * @throws \Exception
      */
     public function testResponseConverter($dataString, $data, $expected, $validation)
     {

@@ -37,16 +37,15 @@ use Magento\Framework\Data\Form\Element\AbstractElement ;
 class Disable extends Field
 {
     /**
+     * @inheritdoc
+     *
      * @param AbstractElement $element
      *
      * @return string
      */
-    // @codeCoverageIgnoreStart
-    // @codingStandardsIgnoreLine
     protected function _getElementHtml(AbstractElement $element)
     {
         $element->setDisabled('disabled');
         return parent::_getElementHtml($element);
     }
-    // @codeCoverageIgnoreEnd
 }

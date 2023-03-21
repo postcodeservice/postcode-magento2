@@ -31,13 +31,17 @@
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  *
 -->
-<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <head>
         <css src="TIG_Postcode::css/adminhtml_config_postcode.css" />
     </head>
     <body>
         <referenceContainer name="content">
-            <block class="TIG\Postcode\Block\Adminhtml\Config\Support\BodyClass" name="postcode.support" before="system.config.edit" />
+            <block class="TIG\Postcode\Block\Adminhtml\Config\Support\BodyClass"
+                   name="postcode.support"
+                   before="system.config.edit"
+            />
         </referenceContainer>
     </body>
 </page>

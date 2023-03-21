@@ -38,10 +38,10 @@ use Magento\Framework\View\Element\BlockInterface;
 class BodyClass extends Template implements BlockInterface
 {
     /**
+     * @inheritdoc
+     *
      * @return $this
      */
-    // @codeCoverageIgnoreStart
-    // @codingStandardsIgnoreLine
     protected function _prepareLayout()
     {
         if ($this->_request->getParam('section') == 'tig_postcode') {
@@ -50,5 +50,4 @@ class BodyClass extends Template implements BlockInterface
 
         return parent::_prepareLayout();
     }
-    // @codeCoverageIgnoreEnd
 }

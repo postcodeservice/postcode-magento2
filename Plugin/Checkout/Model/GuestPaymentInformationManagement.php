@@ -52,9 +52,13 @@ class GuestPaymentInformationManagement
     }
 
     /**
+     * Before plugin on SavePaymentInformation
+     *
+     * @see \Magento\Checkout\Model\GuestPaymentInformationManagement::savePaymentInformation()
+     *
      * @param \Magento\Checkout\Model\GuestPaymentInformationManagement $subject
-     * @param                                                           $cartId
-     * @param                                                           $email
+     * @param int                                                       $cartId
+     * @param string                                                    $email
      * @param PaymentInterface                                          $paymentMethod
      * @param AddressInterface                                          $address
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)

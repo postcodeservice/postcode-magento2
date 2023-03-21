@@ -31,10 +31,13 @@
  */
 namespace TIG\Postcode\Test;
 
-class TestCaseFinder extends \PHPUnit\Framework\TestCase {
+//@codingStandardsIgnoreStart
+class TestCaseFinder extends \PHPUnit\Framework\TestCase
+{
     public function getMock($className)
     {
         // Support for magento >= 2.2.*
         return $this->createMock($className);
     }
 }
+//@codingStandardsIgnoreEnd
