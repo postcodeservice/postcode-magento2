@@ -56,7 +56,7 @@ php bin/magento maintenance:disable
 ~~~~
 
 ### Installation manually
-1. Download the extension directly from [github](https://github.com/tig-nl/postcode-magento2) by clicking on *Code* and then *Download ZIP*.
+1. Download the extension directly from [github](https://github.com/postcodeservice/postcode-magento2) by clicking on *Code* and then *Download ZIP*.
 2. Create the directory *app/code/TIG/Postcode* (Case-sensitive)
 3. Extract the zip and upload the code into *app/code/TIG/Postcode*
 4. Enable the Postcode Service Magento 2 extension
