@@ -33,14 +33,16 @@ class PaymentInformationManagement
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public function beforeSavePaymentInformation(
-        \Magento\Checkout\Model\PaymentInformationManagement $subject,
+        $subject,
         $cartId,
-        PaymentInterface $paymentMethod,
-        AddressInterface $address = null
+        $paymentMethod,
+        $address
     ) {
-        if ($address) {
-            $extAttributes = $address->getExtensionAttributes();
-            $this->fieldsHelper->copyFieldsFromExtensionAttributesToObject($extAttributes, $address);
+        if (!$address) {
+            return;
         }
+
+        $extAttributes = $address->getExtensionAttributes();
+        $this->fieldsHelper->copyFieldsFromExtensionAttributesToObject($extAttributes, $address);
     }
 }
