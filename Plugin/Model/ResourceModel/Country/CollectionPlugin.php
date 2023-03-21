@@ -38,10 +38,10 @@ use Magento\Directory\Model\ResourceModel\Country\Collection;
 
 class CollectionPlugin
 {
-    const SORT_ORDER_BASE = 'sortOrderBase';
-    const SORT_ORDER_INCREMENT = 'sortOrderIncrement';
+    private const SORT_ORDER_BASE = 'sortOrderBase';
+    private const SORT_ORDER_INCREMENT = 'sortOrderIncrement';
 
-    const SORT_ORDER_CONFIG = [
+    private const SORT_ORDER_CONFIG = [
         'Mageplaza_OSC' => [
             self::SORT_ORDER_BASE => 10,
             self::SORT_ORDER_INCREMENT => 0.1
@@ -58,17 +58,23 @@ class CollectionPlugin
      */
     private $fullModuleList;
 
+    /**
+     * @param ModuleConfiguration   $moduleConfiguration
+     * @param FullModuleList        $fullModuleList
+     */
     public function __construct(
-        ModuleConfiguration $moduleConfiguration,
-        FullModuleList $fullModuleList
-    ){
-        $this->moduleConfiguration = $moduleConfiguration;
-        $this->fullModuleList = $fullModuleList;
+        ModuleConfiguration         $moduleConfiguration,
+        FullModuleList              $fullModuleList
+    ) {
+        $this->moduleConfiguration  = $moduleConfiguration;
+        $this->fullModuleList       = $fullModuleList;
     }
 
     /**
-     * @param $sortOrderBase
-     * @param $sortOrderIncrement
+     * Get postcode configuration for NL
+     *
+     * @param string|int    $sortOrderBase
+     * @param string|int    $sortOrderIncrement
      *
      * @return array
      */
@@ -129,12 +135,15 @@ class CollectionPlugin
     }
 
     /**
-     * @param $sortOrderBase
-     * @param $sortOrderIncrement
+     * Get postcode configuration for BE
+     *
+     * @param string|int    $sortOrderBase
+     * @param string|int    $sortOrderIncrement
      *
      * @return array
      */
-    private function getPostcodeBEConfig($sortOrderBase, $sortOrderIncrement) {
+    private function getPostcodeBEConfig($sortOrderBase, $sortOrderIncrement)
+    {
         return [
             'enabled' => $this->moduleConfiguration->isBECheckEnabled() && !$this->moduleConfiguration->isModusOff(),
             'postcode' => [
@@ -189,10 +198,12 @@ class CollectionPlugin
     }
 
     /**
-     * @param $countryOption
-     * @param $country
-     * @param $sortOrderBase
-     * @param $sortOrderIncrement
+     * Aad Postcode configuration
+     *
+     * @param mixed         $countryOption
+     * @param string        $country
+     * @param string|int    $sortOrderBase
+     * @param string|int    $sortOrderIncrement
      */
     private function addPostcodeConfig(&$countryOption, $country, $sortOrderBase, $sortOrderIncrement)
     {
@@ -206,14 +217,17 @@ class CollectionPlugin
     }
 
     /**
+     * Get sortOrder and increment
+     *
      * @return int[]
      */
-    private function getSortOrderAndIncrement(){
+    private function getSortOrderAndIncrement()
+    {
         $sortOrderBase      = 81;
         $sortOrderIncrement = 1;
 
-        foreach(self::SORT_ORDER_CONFIG as $module => $config){
-            if(!$this->fullModuleList->has($module)) {
+        foreach (self::SORT_ORDER_CONFIG as $module => $config) {
+            if (!$this->fullModuleList->has($module)) {
                 continue;
             }
             $sortOrderBase      = $config[self::SORT_ORDER_BASE];
@@ -224,8 +238,10 @@ class CollectionPlugin
     }
 
     /**
+     * After Plugin function check the @see
+     *
      * @param Collection    $subject
-     * @param               $result
+     * @param mixed         $result
      *
      * @return mixed
      * @see Collection::toOptionArray

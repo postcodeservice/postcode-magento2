@@ -30,31 +30,38 @@
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  *
 -->
-<include xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_include.xsd">
+<include xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_include.xsd">
     <!--Configuration section-->
-    <group id="configuration" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+    <group id="configuration" translate="label" type="text"
+           sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
         <label>Configuration</label>
         <frontend_model>TIG\Postcode\Block\Adminhtml\Config\Form\Field\Fieldset</frontend_model>
         <fieldset_css>tig_postcode-section</fieldset_css>
 
-        <field id="modus" translate="label tooltip" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+        <field id="modus" translate="label tooltip" type="select"
+               sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
             <label>Modus</label>
             <source_model>TIG\Postcode\Config\Source\Modus</source_model>
             <config_path>tig_postcode/configuration/modus</config_path>
         </field>
 
         <!-- Customer fields:live -->
-        <field id="client_id" translate="label tooltip" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+        <field id="client_id" translate="label tooltip" type="text"
+               sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
             <label>Client ID</label>
-            <tooltip>The Client ID can be requested through the 'Request Credentials' button below. For support contact TIG.</tooltip>
+            <tooltip>The Client ID can be requested through the
+                'Request Credentials' button below. For support contact TIG.</tooltip>
             <config_path>tig_postcode/configuration/client_id</config_path>
             <depends>
                 <field id="modus">1</field>
             </depends>
         </field>
-        <field id="api_key" translate="label tooltip" type="obscure" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+        <field id="api_key" translate="label tooltip" type="obscure"
+               sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
             <label>Api key</label>
-            <tooltip>The Api key can be requested through the 'Request Credentials' button below. For support contact TIG.</tooltip>
+            <tooltip>The Api key can be requested through the
+                'Request Credentials' button below. For support contact TIG.</tooltip>
             <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
             <config_path>tig_postcode/configuration/api_key</config_path>
             <depends>
@@ -63,7 +70,8 @@
         </field>
 
         <!-- Customer fields:test -->
-        <field id="client_id_test" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+        <field id="client_id_test" translate="label comment" type="text"
+               sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
             <label>Client ID - TEST</label>
             <comment><![CDATA[You can use our test credentials if needed : <strong>1177</strong>]]></comment>
             <config_path>tig_postcode/configuration/client_id_test</config_path>
@@ -72,7 +80,8 @@
             </depends>
         </field>
 
-        <field id="api_key_test" translate="label comment tooltip" type="obscure" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+        <field id="api_key_test" translate="label comment tooltip" type="obscure"
+               sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
             <label>Api key - TEST</label>
             <comment><![CDATA[You can use our test credentials if needed : <strong>9SRLYBCALURPE2B</strong>]]></comment>
             <tooltip>Our test credentials are limited to 50 request per month.</tooltip>
@@ -92,30 +101,35 @@
     </group>
 
     <!-- Field Parser settings -->
-    <group id="fieldparsing" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+    <group id="fieldparsing" translate="label" type="text"
+           sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
         <label>Advanced configuration</label>
         <fieldset_css>tig_postcode-section</fieldset_css>
         <frontend_model>TIG\Postcode\Block\Adminhtml\Config\Form\Field\Fieldset</frontend_model>
-        <group id="explanation" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+        <group id="explanation" translate="label" type="text"
+               sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
             <frontend_model>TIG\Postcode\Block\Adminhtml\Config\Parsing\Streets</frontend_model>
             <fieldset_css>tig_postcode-section</fieldset_css>
         </group>
 
-        <field id="street_line" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+        <field id="street_line" translate="label comment" type="select"
+               sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
             <label>Street address field</label>
             <frontend_model>TIG\Postcode\Block\Adminhtml\Config\Form\Field\Disable</frontend_model>
             <source_model>TIG\Postcode\Config\Source\Parser</source_model>
             <config_path>tig_postcode/configuration/fieldparsing_street</config_path>
         </field>
 
-        <field id="housenumber_line" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+        <field id="housenumber_line" translate="label comment" type="select"
+               sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
             <label>House number field</label>
             <frontend_model>TIG\Postcode\Block\Adminhtml\Config\Form\Field\Disable</frontend_model>
             <source_model>TIG\Postcode\Config\Source\Parser</source_model>
             <config_path>tig_postcode/configuration/fieldparsing_housenumber</config_path>
         </field>
 
-        <field id="addition_line" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+        <field id="addition_line" translate="label comment" type="select"
+               sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
             <label>Housenumber addition field</label>
             <frontend_model>TIG\Postcode\Block\Adminhtml\Config\Form\Field\Disable</frontend_model>
             <source_model>TIG\Postcode\Config\Source\Parser</source_model>

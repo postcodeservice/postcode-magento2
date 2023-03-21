@@ -38,7 +38,7 @@ use Psr\Log\LoggerInterface;
 
 class TigFieldsHelper
 {
-    const TIG_FIELDS = [
+    public const TIG_FIELDS = [
         'tig_street',
         'tig_housenumber',
         'tig_housenumber_addition',
@@ -54,15 +54,18 @@ class TigFieldsHelper
      */
     public function __construct(
         LoggerInterface $logger
-    ){
+    ) {
         $this->logger = $logger;
     }
 
     /**
-     * @param $extensionAttributes
-     * @param $object
+     * Copy fields from extensions attribute to object
+     *
+     * @param mixed $extensionAttributes
+     * @param mixed $object
      */
-    public function copyFieldsFromExtensionAttributesToObject($extensionAttributes, $object) {
+    public function copyFieldsFromExtensionAttributesToObject($extensionAttributes, $object)
+    {
         if (empty($extensionAttributes)) {
             return;
         }
@@ -76,6 +79,8 @@ class TigFieldsHelper
     }
 
     /**
+     * Copy fields from quote address to customer address
+     *
      * @param QuoteAddressInterface    $quoteAddress
      * @param CustomerAddressInterface $customerAddress
      */
@@ -84,7 +89,7 @@ class TigFieldsHelper
         CustomerAddressInterface $customerAddress
     ) {
         try {
-            foreach(self::TIG_FIELDS as $fieldName){
+            foreach (self::TIG_FIELDS as $fieldName) {
                 $value = $quoteAddress->getData($fieldName);
                 $customerAddress->setCustomAttribute($fieldName, $value);
             }

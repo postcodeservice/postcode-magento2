@@ -44,8 +44,12 @@ use Magento\Framework\Controller\Result\Json;
 
 class ServiceTest extends TestCase
 {
+    /** @var Service */
     protected $instanceClass = Service::class;
 
+    /**
+     * @return array
+     */
     public function dataProvider()
     {
         return [
@@ -91,6 +95,7 @@ class ServiceTest extends TestCase
      * @param $params
      *
      * @dataProvider dataProvider
+     * @throws \Exception
      */
     public function testExecuteShouldAlwaysReturnJsonObject($converterFails, $params)
     {
@@ -112,6 +117,7 @@ class ServiceTest extends TestCase
      * @param $params
      *
      * @dataProvider dataProvider
+     * @throws \Exception
      */
     public function testExecuteWithEmptyResultShouldAlwaysReturnJsonObject($converterFails, $params)
     {
@@ -124,21 +130,29 @@ class ServiceTest extends TestCase
             'getBeStreet' => $this->getBeStreetCallMock($converterFails, $params),
         ]);
 
-
         $result = $instance->execute();
         $this->assertTrue($result instanceof \Magento\Framework\Controller\Result\Json);
     }
 
+    /**
+     * @return mixed
+     * @throws \Exception
+     */
     private function getJsonFactory()
     {
         $jsonFactoryMock = $this->getFakeMock(JsonFactory::class)->setMethods(['create'])->getMock();
         $jsonFactoryMock->expects($this->once())->method('create')->willReturn($this->getObject(Json::class));
 
         return $jsonFactoryMock;
-
     }
 
-    private function getAddressCallMock($returns = false, $params, $failResponse = false)
+    /**
+     * @param $params
+     * @param bool $returns
+     * @param bool $failResponse
+     * @return mixed
+     */
+    private function getAddressCallMock($params, bool $returns = false, bool $failResponse = false)
     {
         $addressMock = $this->getFakeMock(GetAddress::class)->setMethods([
             'setRequestData', 'call', 'getCountry', 'getMethod'
@@ -164,7 +178,12 @@ class ServiceTest extends TestCase
         return $addressMock;
     }
 
-    private function getBePostcodeCallMock($returns = false, $params)
+    /**
+     * @param $params
+     * @param bool $returns
+     * @return mixed
+     */
+    private function getBePostcodeCallMock($params, bool $returns = false)
     {
         $addressMock = $this->getFakeMock(GetBePostcode::class)->setMethods([
             'setRequestData', 'call', 'getCountry', 'getMethod'
@@ -185,7 +204,12 @@ class ServiceTest extends TestCase
         return $addressMock;
     }
 
-    private function getBeStreetCallMock($returns = false, $params)
+    /**
+     * @param $params
+     * @param bool $returns
+     * @return mixed
+     */
+    private function getBeStreetCallMock($params, bool $returns = false)
     {
         $addressMock = $this->getFakeMock(GetBeStreet::class)->setMethods([
             'setRequestData', 'call', 'getCountry', 'getMethod'
@@ -206,6 +230,11 @@ class ServiceTest extends TestCase
         return $addressMock;
     }
 
+    /**
+     * @param $returns
+     * @param $params
+     * @return mixed
+     */
     private function getConverterMock($returns = true, $params = [])
     {
         $converterMock = $this->getFakeMock(Factory::class)->setMethods(['convert'])->getMock();
@@ -214,6 +243,10 @@ class ServiceTest extends TestCase
         return $converterMock;
     }
 
+    /**
+     * @param $returns
+     * @return mixed
+     */
     private function getContextMock($returns = [])
     {
         $requestMock = $this->getFakeMock(RequestInterface::class)->getMockForAbstractClass();

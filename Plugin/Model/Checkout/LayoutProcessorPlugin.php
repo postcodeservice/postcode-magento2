@@ -40,10 +40,10 @@ use Magento\Store\Model\ScopeInterface;
 
 class LayoutProcessorPlugin
 {
-    const MAGENTO_POSTCODE_COMPONENT_JS   = "Magento_Ui/js/form/element/post-code";
-    const TIG_POSTCODE_COMPONENT_JS       = "TIG_Postcode/js/form/element/tig-postcode-field";
-    const TIG_POSTCODE_COMPONENT_TEMPLATE = 'TIG_Postcode/form/element/postcode-field';
-    const COUNTRY_CODE_PATH               = 'general/country/default';
+    private const MAGENTO_POSTCODE_COMPONENT_JS   = "Magento_Ui/js/form/element/post-code";
+    private const TIG_POSTCODE_COMPONENT_JS       = "TIG_Postcode/js/form/element/tig-postcode-field";
+    private const TIG_POSTCODE_COMPONENT_TEMPLATE = 'TIG_Postcode/form/element/postcode-field';
+    private const COUNTRY_CODE_PATH               = 'general/country/default';
 
     /**
      * @var ArrayManager
@@ -76,33 +76,37 @@ class LayoutProcessorPlugin
     }
 
     /**
-     * Adds tracked fields so we can dynamically add classes or visibility
+     * Adds tracked fields, so we can dynamically add classes or visibility
      *
-     * @param $jsLayout
-     * @param $fieldsetChildren
+     * @param string|int|array  $jsLayout
+     * @param string|int|array  $fieldsetChildren
      *
      * @return array
      */
     public function addTrackedFields($jsLayout, $fieldsetChildren): array
     {
-        foreach (
-            [
+        foreach ([
                 'street',
                 'city',
                 'postcode'
-            ] as $key
-        ) {
-            $jsLayout = $this->arrayManager->set($fieldsetChildren . '/' . $key . '/tracks/additionalClasses', $jsLayout, true);
+                 ] as $key) {
+            $jsLayout = $this->arrayManager->set(
+                $fieldsetChildren . '/' . $key . '/tracks/additionalClasses',
+                $jsLayout,
+                true
+            );
         }
 
         return $jsLayout;
     }
 
     /**
-     * @param       $dataScope
-     * @param       $index
-     * @param       $label
-     * @param array $options
+     * Create the base field configuration for the checkout provider
+     *
+     * @param string        $dataScope
+     * @param string        $index
+     * @param string        $label
+     * @param array         $options
      *
      * @return array
      */
@@ -128,25 +132,40 @@ class LayoutProcessorPlugin
     /**
      * Create Field definitions
      *
-     * @param $dataScope
+     * @param string $dataScope
      *
      * @return array[]
      */
     public function createHousenumberFieldsDefinition($dataScope)
     {
         return [
-            'tig_housenumber'          => $this->createBaseFieldConfig($dataScope, 'tig_housenumber', 'Housenumber', ["sortOrder" => 51]),
-            'tig_housenumber_addition' => $this->createBaseFieldConfig($dataScope, 'tig_housenumber_addition', 'Housenumber addition', ["sortOrder" => 52]),
-            'tig_street'               => $this->createBaseFieldConfig($dataScope, 'tig_street', 'Street Address', ["sortOrder" => 53]),
+            'tig_housenumber'          => $this->createBaseFieldConfig(
+                $dataScope,
+                'tig_housenumber',
+                'Housenumber',
+                ["sortOrder" => 51, "validation" => ["required-entry" => true, "validate-number" => true]]
+            ),
+            'tig_housenumber_addition' => $this->createBaseFieldConfig(
+                $dataScope,
+                'tig_housenumber_addition',
+                'Housenumber addition',
+                ["sortOrder" => 52]
+            ),
+            'tig_street'               => $this->createBaseFieldConfig(
+                $dataScope,
+                'tig_street',
+                'Street Address',
+                ["sortOrder" => 53]
+            ),
         ];
     }
 
     /**
      * Split string and remove last n element(s)
      *
-     * @param        $path
-     * @param string $delimiter
-     * @param int    $count
+     * @param array|string      $path
+     * @param string            $delimiter
+     * @param int               $count
      *
      * @return string
      */
@@ -165,11 +184,14 @@ class LayoutProcessorPlugin
      *
      * Used when confronted with incompatible checkout
      *
-     * @param $message
+     * @param mixed $message
      */
     public function addAdminErrorMessage($message)
     {
-        $this->notifier->addMajor("TIG Postcode", "Postcodeservice detected one or more compatibility issues with your shop setup");
+        $this->notifier->addMajor(
+            "TIG Postcode",
+            "Postcodeservice detected one or more compatibility issues with your shop setup"
+        );
     }
 
     /**
@@ -189,28 +211,49 @@ class LayoutProcessorPlugin
         $postalCodePaths = $this->arrayManager->findPaths('postcode', $jsLayout);
         foreach ($postalCodePaths as $postalCodePath) {
             $fieldsetChildren = $this->getParentPath($postalCodePath, '/');
-            if ($this->arrayManager->get($postalCodePath . '/component', $jsLayout) !== self::MAGENTO_POSTCODE_COMPONENT_JS) {
-                $this->addAdminErrorMessage('Incompatible postcode field found @ ' . $postalCodePath . ': ' . $this->arrayManager->get($postalCodePath . '/component', $jsLayout));
+
+            if ($this->arrayManager->get(
+                $postalCodePath . '/component',
+                $jsLayout
+            ) !== self::MAGENTO_POSTCODE_COMPONENT_JS
+                xor $this->arrayManager->get(
+                    $postalCodePath . '/component',
+                    $jsLayout
+                ) === self::TIG_POSTCODE_COMPONENT_JS) {
+                $this->addAdminErrorMessage('Incompatible postcode field found @ ' . $postalCodePath . ': ' .
+                    $this->arrayManager->get($postalCodePath . '/component', $jsLayout));
                 continue;
             }
 
             // Update PostcodeField
-            $jsLayout = $this->arrayManager->set($postalCodePath . '/component', $jsLayout, self::TIG_POSTCODE_COMPONENT_JS);
-            $jsLayout = $this->arrayManager->set($postalCodePath . '/config/elementTmpl', $jsLayout, self::TIG_POSTCODE_COMPONENT_TEMPLATE);
+            $jsLayout = $this->arrayManager->set(
+                $postalCodePath . '/component',
+                $jsLayout,
+                self::TIG_POSTCODE_COMPONENT_JS
+            );
+            $jsLayout = $this->arrayManager->set(
+                $postalCodePath . '/config/elementTmpl',
+                $jsLayout,
+                self::TIG_POSTCODE_COMPONENT_TEMPLATE
+            );
             // Change default sortOrder of PostcodeField
             $defaultCountry = $this->scopeConfig->getValue(
                 self::COUNTRY_CODE_PATH,
                 ScopeInterface::SCOPE_WEBSITE
             );
             // Change default sortOrder of PostcodeField if country is set to NL or BE
-            // @TODO use a better way to set sort order for postcode field, tried in branch "tryout_billing_address_sortorder_mixin"
-            if ($defaultCountry === "NL" || $defaultCountry === "BE" ) {
+            // @TODO use a better way to set sort order for postcode field,
+            // tried in branch "tryout_billing_address_sortorder_mixin"
+            if ($defaultCountry === "NL" || $defaultCountry === "BE") {
                 $jsLayout = $this->arrayManager->set($postalCodePath . '/config/sortOrder', $jsLayout, 50);
             }
 
             // Add housenumber fields
-            $postcodeParentDataScope = $this->getParentPath($this->arrayManager->get($postalCodePath . '/dataScope', $jsLayout), ".");
-            $jsLayout                = $this->arrayManager->merge(
+            $postcodeParentDataScope = $this->getParentPath(
+                $this->arrayManager->get($postalCodePath . '/dataScope', $jsLayout),
+                "."
+            );
+            $jsLayout = $this->arrayManager->merge(
                 $fieldsetChildren,
                 $jsLayout,
                 $this->createHousenumberFieldsDefinition($postcodeParentDataScope)

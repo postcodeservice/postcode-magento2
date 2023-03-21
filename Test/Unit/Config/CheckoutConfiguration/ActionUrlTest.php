@@ -37,8 +37,13 @@ use Magento\Framework\UrlInterface;
 
 class ActionUrlTest extends TestCase
 {
+    /** @var ActionUrl */
     protected $instanceClass = ActionUrl::class;
 
+    /**
+     * @return void
+     * @throws \Exception
+     */
     public function testGetValue()
     {
         $expectsPostcodeNLUrl = 'http://test.nl/postcode/address/service/';

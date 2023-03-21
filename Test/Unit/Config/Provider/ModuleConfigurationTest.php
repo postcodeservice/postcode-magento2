@@ -35,8 +35,12 @@ use TIG\Postcode\Config\Provider\ModuleConfiguration;
 
 class ModuleConfigurationTest extends AbstractConfigurationTest
 {
+    /** @var ModuleConfiguration  */
     protected $instanceClass = ModuleConfiguration::class;
 
+    /**
+     * @return array[]
+     */
     public function liveModusProvider()
     {
         return [
@@ -61,6 +65,9 @@ class ModuleConfigurationTest extends AbstractConfigurationTest
         $this->assertEquals($expected, $instance->isModusLive());
     }
 
+    /**
+     * @return array[]
+     */
     public function modusTestProvider()
     {
         return [
@@ -85,6 +92,9 @@ class ModuleConfigurationTest extends AbstractConfigurationTest
         $this->assertEquals($expected, $instance->isModusTest());
     }
 
+    /**
+     * @return array[]
+     */
     public function offModusProvider()
     {
         return [
@@ -110,6 +120,9 @@ class ModuleConfigurationTest extends AbstractConfigurationTest
         $this->assertEquals($expected, $instance->isModusOff());
     }
 
+    /**
+     * @return array[]
+     */
     public function modusProvider()
     {
         return [
@@ -137,9 +150,11 @@ class ModuleConfigurationTest extends AbstractConfigurationTest
         $this->setModus($modus);
 
         $this->assertEquals($expectedResult, $instance->getModus());
-
     }
 
+    /**
+     * @return void
+     */
     public function testGetStability()
     {
         $value = $this->getRandomSyntax();
@@ -149,6 +164,9 @@ class ModuleConfigurationTest extends AbstractConfigurationTest
         $this->assertEquals($value, $instance->getStability());
     }
 
+    /**
+     * @return void
+     */
     public function testGetSupportedMagentoVersions()
     {
         $value = $this->getRandomSyntax();
@@ -158,6 +176,9 @@ class ModuleConfigurationTest extends AbstractConfigurationTest
         $this->assertEquals($value, $instance->getSupportedMagentoVersions());
     }
 
+    /**
+     * @return void
+     */
     public function testGetCheckoutCompatibility()
     {
         $value = $this->getRandomSyntax();
@@ -167,6 +188,9 @@ class ModuleConfigurationTest extends AbstractConfigurationTest
         $this->assertEquals($value, $instance->getCheckoutCompatibility());
     }
 
+    /**
+     * @return array[]
+     */
     public function checkNLEnabledProvider()
     {
         return [
@@ -175,6 +199,9 @@ class ModuleConfigurationTest extends AbstractConfigurationTest
         ];
     }
 
+    /**
+     * @return array[]
+     */
     public function checkBEEnabledProvider()
     {
         return [

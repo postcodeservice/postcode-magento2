@@ -37,8 +37,12 @@ use TIG\Postcode\Config\Provider\ModuleConfiguration;
 
 class IsPostcodeCheckActiveTest extends TestCase
 {
+    /** @var IsPostcodeCheckActive */
     protected $instanceClass = IsPostcodeCheckActive::class;
 
+    /**
+     * @return array[]
+     */
     public function getValueProvider()
     {
         return [
@@ -51,6 +55,7 @@ class IsPostcodeCheckActiveTest extends TestCase
      * @dataProvider getValueProvider
      * @param $modus
      * @param $expected
+     * @throws \Exception
      */
     public function testGetValue($modus, $expected)
     {

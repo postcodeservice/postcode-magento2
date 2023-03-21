@@ -38,6 +38,8 @@ use Magento\Framework\Event\ObserverInterface;
 class SaveTigFieldsInOrder implements ObserverInterface
 {
     /**
+     * Execute
+     *
      * @param Observer $observer
      *
      * @return $this|void
@@ -48,15 +50,27 @@ class SaveTigFieldsInOrder implements ObserverInterface
         $quote = $observer->getEvent()->getQuote();
 
         if ($quote->getBillingAddress()) {
-            $order->getBillingAddress()->setTigStreet($quote->getBillingAddress()->getExtensionAttributes()->getTigStreet());
-            $order->getBillingAddress()->setTigHousenumber($quote->getBillingAddress()->getExtensionAttributes()->getTigHousenumber());
-            $order->getBillingAddress()->setTigHousenumberAddition($quote->getBillingAddress()->getExtensionAttributes()->getTigHousenumberAddition());
+            $order->getBillingAddress()->setTigStreet(
+                $quote->getBillingAddress()->getExtensionAttributes()->getTigStreet()
+            );
+            $order->getBillingAddress()->setTigHousenumber(
+                $quote->getBillingAddress()->getExtensionAttributes()->getTigHousenumber()
+            );
+            $order->getBillingAddress()->setTigHousenumberAddition(
+                $quote->getBillingAddress()->getExtensionAttributes()->getTigHousenumberAddition()
+            );
         }
 
         if (!$quote->isVirtual()) {
-            $order->getShippingAddress()->setTigStreet($quote->getShippingAddress()->getExtensionAttributes()->getTigStreet());
-            $order->getShippingAddress()->setTigHousenumber($quote->getShippingAddress()->getExtensionAttributes()->getTigHousenumber());
-            $order->getShippingAddress()->setTigHousenumberAddition($quote->getShippingAddress()->getExtensionAttributes()->getTigHousenumberAddition());
+            $order->getShippingAddress()->setTigStreet(
+                $quote->getShippingAddress()->getExtensionAttributes()->getTigStreet()
+            );
+            $order->getShippingAddress()->setTigHousenumber(
+                $quote->getShippingAddress()->getExtensionAttributes()->getTigHousenumber()
+            );
+            $order->getShippingAddress()->setTigHousenumberAddition(
+                $quote->getShippingAddress()->getExtensionAttributes()->getTigHousenumberAddition()
+            );
         }
         return $this;
     }

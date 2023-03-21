@@ -36,16 +36,16 @@ interface ValidationInterface
     /**
      * Validates data and should return false if validation fails.
      *
-     * @param $data
+     * @param mixed $data
      *
      * @return bool|mixed
      */
     public function validate($data);
 
     /**
-     * Defaulted validation keys are postcode and housenumber. Other services might require different params.
+     * Defaulted validation keys are postcode and house number. Other services might require different params.
      *
-     * @param $keys
+     * @param mixed $keys
      */
     public function setKeys($keys);
 }

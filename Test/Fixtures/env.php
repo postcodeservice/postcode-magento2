@@ -29,45 +29,45 @@
  * @copyright   Copyright (c) Total Internet Group B.V. https://tig.nl/copyright
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
-return array (
+return  [
     'backend' =>
-        array (
+         [
             'frontName' => 'admin',
-        ),
+        ],
     'install' =>
-        array (
+         [
             'date' => 'Fri, 15 Dec 2017 12:35:34 +0000',
-        ),
+        ],
     'crypt' =>
-        array (
+         [
             'key' => 'a23dea1d65689d5d22571c3e906ca302',
-        ),
+        ],
     'session' =>
-        array (
+         [
             'save' => 'db',
-        ),
+        ],
     'db' =>
-        array (
+         [
             'table_prefix' => '',
             'connection' =>
-                array (
+                 [
                     'default' =>
-                        array (
+                         [
                             'host' => 'MAGENTO_DB_HOST',
                             'dbname' => 'MAGENTO_DB_NAME',
                             'username' => 'MAGENTO_DB_USER',
                             'password' => 'MAGENTO_DB_PASS',
                             'active' => '1',
-                        ),
-                ),
-        ),
+                        ],
+                ],
+        ],
     'resource' =>
-        array (
+         [
             'default_setup' =>
-                array (
+                 [
                     'connection' => 'default',
-                ),
-        ),
+                ],
+        ],
     'x-frame-options' => 'SAMEORIGIN',
     'MAGE_MODE' => 'default',
-);
+];

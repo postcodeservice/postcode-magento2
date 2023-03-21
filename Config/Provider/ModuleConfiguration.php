@@ -33,12 +33,12 @@ namespace TIG\Postcode\Config\Provider;
 
 class ModuleConfiguration extends AbstractConfigProvider
 {
-    const XPATH_CONFIGURATION_MODUS       = 'tig_postcode/configuration/modus';
-    const XPATH_CHECKOUT_COMPATIBILITY    = 'tig_postcode/configuration/checkout_compatible';
-    const XPATH_MODULE_STABILITY          = 'tig_postcode/stability';
-    const XPATH_SUPPORTED_MAGENTO_VERSION = 'tig_postcode/supported_magento_version';
-    const XPATH_NETHERLANDS_CHECK         = 'tig_postcode/countries/enable_nl_check';
-    const XPATH_BELGIUM_CHECK             = 'tig_postcode/countries/enable_be_check';
+    public const XPATH_CONFIGURATION_MODUS       = 'tig_postcode/configuration/modus';
+    public const XPATH_CHECKOUT_COMPATIBILITY    = 'tig_postcode/configuration/checkout_compatible';
+    public const XPATH_MODULE_STABILITY          = 'tig_postcode/stability';
+    public const XPATH_SUPPORTED_MAGENTO_VERSION = 'tig_postcode/supported_magento_version';
+    public const XPATH_NETHERLANDS_CHECK         = 'tig_postcode/countries/enable_nl_check';
+    public const XPATH_BELGIUM_CHECK             = 'tig_postcode/countries/enable_be_check';
 
     /**
      * Should return on of these values
@@ -46,7 +46,8 @@ class ModuleConfiguration extends AbstractConfigProvider
      *  '2' => test ||
      *  '0' => off
      *
-     * @param null|int $store
+     * @param string|int|null $store
+     *
      * @return mixed
      */
     public function getModus($store = null)
@@ -59,8 +60,10 @@ class ModuleConfiguration extends AbstractConfigProvider
     }
 
     /**
-     * Checks if the extension is on status live
-     * @param null|int $store
+     * Checks if the extension is on status live via store ID
+     *
+     * @param string|int|null $store
+     *
      * @return bool
      */
     public function isModusLive($store = null)
@@ -73,8 +76,10 @@ class ModuleConfiguration extends AbstractConfigProvider
     }
 
     /**
-     * Checks if the extension is on status test
-     * @param null|int $store
+     * Checks if the extension is on status test via store ID
+     *
+     * @param string|int|null $store
+     *
      * @return bool
      */
     public function isModusTest($store = null)
@@ -87,8 +92,10 @@ class ModuleConfiguration extends AbstractConfigProvider
     }
 
     /**
-     * Checks if the extension is on status off.
-     * @param null|int $store
+     * Checks if the extension is on status off via store ID.
+     *
+     * @param string|int|null $store
+     *
      * @return bool
      */
     public function isModusOff($store = null)
@@ -101,7 +108,9 @@ class ModuleConfiguration extends AbstractConfigProvider
     }
 
     /**
-     * @param null $store
+     * Get stability via store ID
+     *
+     * @param string|int|null $store
      *
      * @return string
      */
@@ -111,7 +120,9 @@ class ModuleConfiguration extends AbstractConfigProvider
     }
 
     /**
-     * @param null $store
+     * Get supported magento versions via store ID
+     *
+     * @param string|int|null $store
      *
      * @return string
      */
@@ -121,9 +132,12 @@ class ModuleConfiguration extends AbstractConfigProvider
     }
 
     /**
-     * @param null $store
+     * Get the Checkout compatability via store ID
+     *
+     * @param string|int|null $store
      *
      * @return mixed
+     * @deprecated
      */
     public function getCheckoutCompatibility($store = null)
     {
@@ -131,7 +145,9 @@ class ModuleConfiguration extends AbstractConfigProvider
     }
 
     /**
-     * @param null $store
+     * Check if NL is enabled via store ID
+     *
+     * @param string|int|null $store
      *
      * @return bool
      */
@@ -141,7 +157,9 @@ class ModuleConfiguration extends AbstractConfigProvider
     }
 
     /**
-     * @param null $store
+     * Check if BE is enabled via store ID
+     *
+     * @param string|int|null $store
      *
      * @return bool
      */

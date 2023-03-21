@@ -31,7 +31,9 @@
  */
 namespace TIG\Postcode\Webservices;
 
-use Magento\Framework\HTTP\ZendClient as ZendClient;
+use Laminas\Http\Client as HttpClient;
+use Laminas\Http\Client\Exception\RuntimeException;
+use Laminas\Http\Request;
 use TIG\Postcode\Config\Provider\ApiConfiguration;
 use TIG\Postcode\Config\Provider\ClientConfiguration;
 use TIG\Postcode\Webservices\Endpoints\EndpointInterface;
@@ -41,9 +43,9 @@ use Magento\Framework\HTTP\PhpEnvironment\ServerAddress;
 class Api
 {
     /**
-     * @var ZendClient
+     * @var HttpClient
      */
-    private $zendClient;
+    private $httpClient;
 
     /**
      * @var ApiConfiguration
@@ -68,20 +70,20 @@ class Api
     /**
      * Api constructor.
      *
-     * @param ZendClient          $client
+     * @param HttpClient          $client
      * @param ApiConfiguration    $apiConfiguration
      * @param ClientConfiguration $clientConfiguration
      * @param Factory             $converter
      * @param ServerAddress       $serverAddress
      */
     public function __construct(
-        ZendClient $client,
+        HttpClient $client,
         ApiConfiguration $apiConfiguration,
         ClientConfiguration $clientConfiguration,
         Factory $converter,
         ServerAddress $serverAddress
     ) {
-        $this->zendClient          = $client;
+        $this->httpClient          = $client;
         $this->apiConfiguration    = $apiConfiguration;
         $this->clientConfiguration = $clientConfiguration;
         $this->converter           = $converter;
@@ -89,25 +91,32 @@ class Api
     }
 
     /**
+     * Execute getRequest
+     *
      * @param EndpointInterface $endpoint
      *
-     * @return array|\Zend_Http_Response
+     * @return array|string
      */
     public function getRequest(EndpointInterface $endpoint)
     {
-        $this->zendClient->resetParameters();
+        $this->httpClient->resetParameters();
 
         $this->setUri($endpoint);
         $this->setHeaders($endpoint);
         $this->setParameter($endpoint);
 
         try {
-            $response = $this->zendClient->request();
+            $response = $this->httpClient->send();
             $response = $this->converter->convert('response', $response->getBody(), $endpoint->getResponseKeys());
-        } catch (\Zend_Http_Client_Exception $exception) {
+        } catch (RuntimeException $exception) {
             $response = [
                 'success' => false,
-                'error'   => __('%1 : Zend Http Client exception', $exception->getCode())
+                'error'   => __('%1 : Laminas Http Client exception', $exception->getCode())
+            ];
+        } catch (\TIG\Postcode\Exception $exception) {
+            $response = [
+                'success' => false,
+                'error'   => __('%1 : Postcode exception', $exception->getCode())
             ];
         }
 
@@ -115,18 +124,21 @@ class Api
     }
 
     /**
+     * Add headers to request
+     *
      * Set the headers, but only if the api version is 4 or higher. Before version 4 user data is parsed within the
      * requestData array as ['client_id' => 'xxxx', 'secure_code' => 'xxxx']
      *
-     * @param $endpoint;
+     * @param EndpointInterface $endpoint
+     * @throws \Zend_Http_Client_Exception
      */
     private function setHeaders(EndpointInterface $endpoint)
     {
         $version = str_replace('v', '', $this->apiConfiguration->getVersion());
 
         if ((int)$version >= 4 || $endpoint->getCountry() === 'BE') {
-            $this->zendClient->setConfig(['strict' => false]);
-            $this->zendClient->setHeaders([
+            $this->httpClient->setOptions(['strict' => false]);
+            $this->httpClient->setHeaders([
                 'X-Client_Id'   => $this->clientConfiguration->getClientId(),
                 'X-Secure_Code' => $this->clientConfiguration->getApiKey()
             ]);
@@ -142,29 +154,33 @@ class Api
     }
 
     /**
+     * Add parameters to request
+     *
      * @param EndpointInterface $endpoint
      */
     private function setParameter(EndpointInterface $endpoint)
     {
-        $this->zendClient->setMethod($endpoint->getMethod());
+        $this->httpClient->setMethod($endpoint->getMethod());
 
         $params = $endpoint->getRequestData();
         $params['domain']    = $this->clientConfiguration->getDomainUrl();
         $params['remote_ip'] = $this->serverAddress->getServerAddress();
 
-        if ($endpoint->getMethod() == ZendClient::GET) {
-            $this->zendClient->setParameterGet($params);
+        if ($endpoint->getMethod() == Request::METHOD_GET) {
+            $this->httpClient->setParameterGet($params);
         }
 
-        if ($endpoint->getMethod() == ZendClient::POST) {
-            $this->zendClient->setParameterPost($params);
+        if ($endpoint->getMethod() == Request::METHOD_POST) {
+            $this->httpClient->setParameterPost($params);
         }
     }
 
     /**
+     * Set URi for request
+     *
      * @param EndpointInterface $endpoint
      *
-     * @throws \Zend_Http_Client_Exception
+     * @throws RuntimeException
      */
     private function setUri(EndpointInterface $endpoint)
     {
@@ -173,6 +189,6 @@ class Api
             $uri = $this->apiConfiguration->getBeBaseUri($endpoint->getEndpoint()) . $endpoint->getEndpoint();
         }
 
-        $this->zendClient->setUri($uri);
+        $this->httpClient->setUri($uri);
     }
 }

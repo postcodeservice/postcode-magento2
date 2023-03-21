@@ -66,7 +66,7 @@
         <ini name="xdebug.max_nesting_level" value="200"/>
         <ini name="memory_limit" value="-1"/>
         <!-- Local XML configuration file ('.dist' extension will be added, if the specified file doesn't exist) -->
-        <const name="TESTS_INSTALL_CONFIG_FILE" value="etc/install-config-mysql.php"/>
+        <const name="TESTS_INSTALL_CONFIG_FILE" value="etc/update-config-mysql.php"/>
         <!-- Local XML configuration file ('.dist' extension will be added, if the specified file doesn't exist) -->
         <const name="TESTS_GLOBAL_CONFIG_FILE" value="etc/config-global.php"/>
         <!-- Semicolon-separated 'glob' patterns, that match global XML configuration files -->
@@ -88,7 +88,8 @@
         <!--<const name="TESTS_BAMBOO_PROFILER_METRICS_FILE" value="../../build/profiler_metrics.php"/>-->
         <!-- Magento mode for tests execution. Possible values are "default", "developer" and "production". -->
         <const name="TESTS_MAGENTO_MODE" value="developer"/>
-        <!-- Minimum error log level to listen for. Possible values: -1 ignore all errors, and level constants form http://tools.ietf.org/html/rfc5424 standard -->
+        <!-- Minimum error log level to listen for. Possible values: -1 ignore all errors,
+        and level constants form http://tools.ietf.org/html/rfc5424 standard -->
         <const name="TESTS_ERROR_LOG_LISTENER_LEVEL" value="-1"/>
         <!-- Connection parameters for MongoDB library tests -->
         <!--<const name="MONGODB_CONNECTION_STRING" value="mongodb://localhost:27017"/>-->

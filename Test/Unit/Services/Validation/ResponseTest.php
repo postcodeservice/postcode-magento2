@@ -35,13 +35,22 @@ use TIG\Postcode\Services\Validation;
 
 class ResponseTest extends TestInterface
 {
+    /** @var Validation\Response */
     protected $instanceClass = Validation\Response::class;
 
+    /**
+     * @return void
+     * @throws \Exception
+     */
     public function testWhenResponseHasNoData()
     {
         $this->assertFalse($this->getInstance()->validate('response'));
     }
 
+    /**
+     * @return void
+     * @throws \Exception
+     */
     public function testDefaultGetKeys()
     {
         $expected = ['success', 'straatnaam', 'woonplaats'];

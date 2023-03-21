@@ -35,14 +35,26 @@
         <div>
             <p>
                <strong>
-                   <?php echo $block->escapeHtml(__('Back-end merging')); ?>
+                   <?= $block->escapeHtml(__('Back-end merging')); ?>
                </strong>
             </p>
-            <?php echo $block->escapeHtml(__('These settings have impact on how street address data is stored in the database.'));?>
+            <?=  $block->escapeHtml(
+                __('These settings have impact on how street address data is stored in the database.')
+            );
+?>
             <br/>
-            <?php echo $block->escapeHtml(__('Tampering with the settings may affect the workflow of third party extensions. Use at your own risk.'));?>
+            <?= $block->escapeHtml(
+                __('Tampering with the settings may affect the workflow of' .
+                    ' third party extensions. Use at your own risk.')
+            );
+?>
             <br />
-            <strong><?php echo $block->escapeHtml(__('Note: These settings are disabled in this new release. If you still need this functionality please contact support'));?></strong>
+            <strong>
+                <?= $block->escapeHtml(
+                    __('Note: These settings are disabled in this new release. ' .
+                        'If you still need this functionality please contact support')
+                );?>
+            </strong>
         </div>
     </div>
 </div>

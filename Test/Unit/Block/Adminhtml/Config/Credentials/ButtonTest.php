@@ -36,8 +36,13 @@ use TIG\Postcode\Block\Adminhtml\Config\Credentials\Button;
 
 class ButtonTest extends TestCase
 {
+    /** @var Button */
     protected $instanceClass = Button::class;
 
+    /**
+     * @return void
+     * @throws \Exception
+     */
     public function testGetCredentialsUrl()
     {
         $instance = $this->getInstance();
@@ -47,6 +52,10 @@ class ButtonTest extends TestCase
         $this->assertTrue(is_string(filter_var($url, FILTER_VALIDATE_URL)));
     }
 
+    /**
+     * @return void
+     * @throws \Exception
+     */
     public function testGetLabel()
     {
         $instance = $this->getInstance();
