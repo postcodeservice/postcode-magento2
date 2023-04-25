@@ -47,7 +47,7 @@ class TabTest extends TestCase
     public function testGetVersionNumber()
     {
         $instance = $this->getInstance();
-        $this->assertSame('1.5.3', $instance->getVersionNumber());
+        $this->assertSame('1.5.4', $instance->getVersionNumber());
     }
 
     /**
