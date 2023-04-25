@@ -7,7 +7,7 @@
 
 ---
 
-### Make sure you are using the *latest* version: https://github.com/tig-nl/postcode-magento2/releases/
+### Make sure you are using the *latest* version: https://github.com/postcodeservice/postcode-magento2/releases/
 Issues with outdated version will be rejected.
 - [ ] I've **verified** and **I assure** that I'm running the latest version of the TIG Postcode Magento 2 extension.
 

@@ -61,7 +61,7 @@
                 <ul>
                     <p><?= $block->escapeHtml(__('Documents regarding the Postcode Magento 2 extension:'));?></p>
                     <li>
-                        <a class="pdf" target="_blank" href="https://confluence.tig.nl/x/8IBaAg"
+                        <a class="pdf" target="_blank" href="https://postcodeservice.github.io/postcode-magento2/"
                             title="<?= $block->escapeHtml(__('View the user manual.' .
                             ' Currently the manual is only available in Dutch.'));
                         ?>">
@@ -76,7 +76,7 @@
                         </a>
                     </li>
                     <li>
-                        <a target="_blank" href="https://confluence.tig.nl/x/B4FaAg"
+                        <a target="_blank" href="https://github.com/postcodeservice/postcode-magento2/releases"
                             title="<?= $block->escapeHtml(__('View the complete release notes of the extension.' .
                             ' Currently the release notes is only available in Dutch.'));?>">
                             <?=  $block->escapeHtml(__('Full Release Notes'));?>
@@ -136,8 +136,8 @@
             <h3 data-role="trigger"><?=  $block->escapeHtml(__('Support'));?></h3>
         </div>
         <div class="collapse-content support-postcode-tig" data-role="content" style="display:none;">
-            <p><?= $block->escapeHtml(__('This extension is developed' .
-                    ' by Total Internet Group (<a href="https://tig.nl" target="_blank">TIG</a>).'));
+            <p><?= __('This extension is developed' .
+                    ' by Total Internet Group (<a href="https://tig.nl" target="_blank">TIG</a>).');
                                     ?>
 
             <div class="block_contact">
@@ -172,10 +172,7 @@
                         <span><?= $block->escapeHtml(__('E-mail:'));?></span>
                     </li>
                     <li class="last">
-                        <?= $block->escapeHtml(
-                            __('<a href="mailto:support@postcodeservice.com">support@postcodeservice.com</a>')
-                        );
-                                ?>
+                        <?= __('<a href="mailto:support@postcodeservice.com">support@postcodeservice.com</a>'); ?>
                     </li>
                 </ul>
                 <ul>
