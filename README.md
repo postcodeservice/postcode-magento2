@@ -1,61 +1,62 @@
-<p align="center"><img src="https://postcodeservice.com/wp-content/uploads/2021/01/postcode-service-logo__Logo-color.svg" width="300px" /></p>
-
-# Postcode Service Magento 2
-[![Latest Stable Version](https://img.shields.io/github/v/release/tig-nl/postcode-magento2?style=for-the-badge&color=227cff)](https://github.com/postcodeservice/postcode-magento2/releases/latest)
-![TIG Postcode Service 2.3.7 versions](https://img.shields.io/badge/Tested%20with%20Magento-2.3.7-%2300cf00?style=for-the-badge)
+# Postcode Service Magento 2 extension
+[![Latest Stable Version](https://img.shields.io/github/v/release/postcodeservice/postcode-magento2?style=for-the-badge&color=227cff)](https://github.com/postcodeservice/postcode-magento2/releases/latest)
 ![TIG Postcode Service 2.4.6 versions](https://img.shields.io/badge/Tested%20with%20Magento-2.4.6-%2300cf00?style=for-the-badge)
+![TIG Postcode Service 2.4.5 versions](https://img.shields.io/badge/Tested%20with%20Magento-2.4.5-%2300cf00?style=for-the-badge)
+![TIG Postcode Service 2.4.4 versions](https://img.shields.io/badge/Tested%20with%20Magento-2.4.4-%2300cf00?style=for-the-badge)
 [![Total Extension downloads](https://img.shields.io/packagist/dt/tig/postcode-magento2?style=for-the-badge&color=227cff)](https://packagist.org/packages/tig/postcode-magento2/stats)
-![Build Status](https://img.shields.io/travis/tig-nl/postcode-magento2/master?style=for-the-badge)
-
-
-## Requirements
-- Magento version 2.4.6, 2.4.5, 2.4.4, 2.3.7 or 2.3.6
-- PHP 7.3+
 
 ## Installation
-We strongly recommend that you use a Staging Environment for the installation, and to also make a backup of your environment.
+We strongly recommend that you use a staging environment for the installation, and to also make a backup of your environment.
 
-### Installation using composer (recommended)
-To install the extension login to your environment using SSH. Then navigate to the Magento 2 root directory and run the following commands in the same order as described:
+### Installation using composer (Recommended)
+To install the extension login to your environment using SSH.  
+Then navigate to the Magento 2 root directory and run the following commands in the same order as described:
 
 Enable maintenance mode:
 ~~~~shell
 php bin/magento maintenance:enable
 ~~~~
 
-1. Install the extension:
+Install the extension:
 ~~~~shell
 composer require tig/postcode-magento2
 ~~~~
 
-2. Enable the Postcode Service Magento 2 extension
+Enable the Postcode Service Magento 2 extension
 ~~~~shell
 php bin/magento module:enable TIG_Postcode
 ~~~~
 
-3. Update the Magento 2 environment:
+Update the Magento 2 environment:
 ~~~~shell
 php bin/magento setup:upgrade
 ~~~~
 
-When your Magento environment is running in production mode, you also need to run the following comands:
+When your Magento environment is running in production mode, you also need to run the following commands:
 
-4. Compile DI:
+Compile DI:
 ~~~~shell
 php bin/magento setup:di:compile
 ~~~~
 
-5. Deploy static content:
+Deploy static content:
 ~~~~shell
 php bin/magento setup:static-content:deploy
 ~~~~
 
-6. Disable maintenance mode:
+Disable maintenance mode:
 ~~~~shell
 php bin/magento maintenance:disable
 ~~~~
 
-### Installation manually
+## Update the extension
+To update the Postcode Service Extension run the following commands:
+~~~~shell
+composer update tig/postcode-magento2
+php bin/magento setup:upgrade
+~~~~
+
+## Alternatively, install the extension manually
 1. Download the extension directly from [github](https://github.com/postcodeservice/postcode-magento2) by clicking on *Code* and then *Download ZIP*.
 2. Create the directory *app/code/TIG/Postcode* (Case-sensitive)
 3. Extract the zip and upload the code into *app/code/TIG/Postcode*
@@ -64,26 +65,34 @@ php bin/magento maintenance:disable
 php bin/magento module:enable TIG_Postcode
 ~~~~
 
-5. Update the Magento 2 environment:
-~~~~shell
-php bin/magento setup:upgrade
-~~~~
-
-## Update
-To update the Postcode Service Extension run the following commands:
-~~~~shell
-composer update tig/postcode-magento2
-php bin/magento setup:upgrade
-~~~~
+## Configuration
+When the installation of the extension is finished, it should be available within the backend of the webshop where the plugin can be configured.
+1. Go to Stores -> Configuration -> Sales -> Postcode Service NL/BE.
+2. Open the Configuration tab.
+3. Change the Modus from “Off” to “Test” or “Live”. In case you do not have a live (paid) account yet, you find test credentials at https://developers.postcodeservice.com (keep in mind there is a daily limit). You can subscribe to a paid account via https://postcodeservice.com.
+4. Insert the Client ID and Api key (when you selected “Test” at the previous step, you can find test credentials below the fields).
+5. Save the configuration.
+6. Flush your cache.
 
 ## Examples
-
 ### Dutch Postcode Service within the Magento 2 checkout
 ![Postcode Service Magento 2 Checkout NL](https://postcodeservice.com/wp-content/uploads/2022/08/postcodeservice-magento-2-nl.gif "Postcode Service Magento 2 Checkout NL")
 
 ### Belgium Postcode Service within the Magento 2 checkout
 ![Postcode Service Magento 2 Checkout BE](https://postcodeservice.com/wp-content/uploads/2022/08/postcodeservice-magento-2-be.gif "Postcode Service Magento 2 Checkout NL")
 
-## Documentation
-For further installation guidance
-https://developers.postcodeservice.com/
+## Further documentation
+You can find the underlying Postcode Service API documentation here: https://developers.postcodeservice.com
+
+## Frequently Asked Questions
+What are the costs for using the Postcode Service?  
+The Adobe Magento extension can be used free of charge. The fee for using the Postcode Service can be found at our website https://postcodeservice.com
+
+## Requirements
+Adobe Magento Open Source (Community edition) or Adobe Commerce (Enterprise version).
+
+## Version support
+We follow the release support lines dates from Adobe https://experienceleague.adobe.com/docs/commerce-operations/release/versions.html for the version support of this extension.
+
+## Release history
+See https://github.com/postcodeservice/postcode-magento2/releases
