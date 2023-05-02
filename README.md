@@ -85,8 +85,11 @@ When the installation of the extension is finished, it should be available withi
 You can find the underlying Postcode Service API documentation here: https://developers.postcodeservice.com
 
 ## Frequently Asked Questions
-What are the costs for using the Postcode Service?  
-The Adobe Magento extension can be used free of charge. The fee for using the Postcode Service can be found at our website https://postcodeservice.com
+Q: What are the costs for using the Postcode Service?\
+A: The Adobe Magento extension can be used free of charge. The fee for using the Postcode Service can be found at our website https://postcodeservice.com      
+\
+Q: Which third party extensions are supported and compatible?\
+A: At this time, we do not support third-party checkout extensions, including OneStepCheckout.com, Amasty, and MagePlaza. While we understand the importance of these third party extensions for some webshops, we cannot guarantee their compatibility with our extension and therefore cannot provide support for any issues that may arise as a result of their use. We have received reports from some users about compatibility issues with OneStepCheckout and MagePlaza, but this experience may vary from agency to agency, depending on the custom implementations. However, we are constantly working to improve our extension's functionality and compatibility, and we may revisit this decision in the future.
 
 ## Requirements
 Adobe Magento Open Source (Community edition) or Adobe Commerce (Enterprise version).
