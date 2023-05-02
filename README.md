@@ -32,6 +32,7 @@ Update the Magento 2 environment:
 php bin/magento setup:upgrade
 ~~~~
 
+----------------------------------
 When your Magento environment is running in production mode, you also need to run the following commands:
 
 Compile DI:
@@ -43,13 +44,14 @@ Deploy static content:
 ~~~~shell
 php bin/magento setup:static-content:deploy
 ~~~~
+----------------------------------
 
 Disable maintenance mode:
 ~~~~shell
 php bin/magento maintenance:disable
 ~~~~
 
-## Update the extension
+## How to update the extension
 To update the Postcode Service Extension run the following commands:
 ~~~~shell
 composer update tig/postcode-magento2
@@ -57,29 +59,39 @@ php bin/magento setup:upgrade
 ~~~~
 
 ## Alternatively, install the extension manually
-1. Download the extension directly from [github](https://github.com/postcodeservice/postcode-magento2) by clicking on *Code* and then *Download ZIP*.
-2. Create the directory *app/code/TIG/Postcode* (Case-sensitive)
-3. Extract the zip and upload the code into *app/code/TIG/Postcode*
-4. Enable the Postcode Service Magento 2 extension
+- Download the extension directly from [github](https://github.com/postcodeservice/postcode-magento2) by clicking on *Code* and then *Download ZIP*.
+- Create the directory *app/code/TIG/Postcode* (Case-sensitive)
+- Extract the zip and upload the code into *app/code/TIG/Postcode*
+- Enable the Postcode Service Magento 2 extension
 ~~~~shell
 php bin/magento module:enable TIG_Postcode
 ~~~~
+- Update the Magento 2 environment 
+~~~~shell
+php bin/magento setup:upgrade
+~~~~
 
 ## Configuration
-When the installation of the extension is finished, it should be available within the backend of the webshop where the plugin can be configured.
-1. Go to Stores -> Configuration -> Sales -> Postcode Service NL/BE.
-2. Open the Configuration tab.
-3. Change the Modus from “Off” to “Test” or “Live”. In case you do not have a live (paid) account yet, you find test credentials at https://developers.postcodeservice.com (keep in mind there is a daily limit). You can subscribe to a paid account via https://postcodeservice.com.
-4. Insert the Client ID and Api key (when you selected “Test” at the previous step, you can find test credentials below the fields).
-5. Save the configuration.
-6. Flush your cache.
+After completing the installation process, the extension should be readily available in the backend of your Magento webshop. From there, you can configure the extension according to your requirements:
 
-## Examples
-### Dutch Postcode Service within the Magento 2 checkout
-![Postcode Service Magento 2 Checkout NL](https://postcodeservice.com/wp-content/uploads/2022/08/postcodeservice-magento-2-nl.gif "Postcode Service Magento 2 Checkout NL")
+1. Go to Stores -> Configuration -> Sales -> Postcode Service International
 
-### Belgium Postcode Service within the Magento 2 checkout
-![Postcode Service Magento 2 Checkout BE](https://postcodeservice.com/wp-content/uploads/2022/08/postcodeservice-magento-2-be.gif "Postcode Service Magento 2 Checkout NL")
+2. Open the Configuration tab
+
+3. Change the Modus from "Off" to "Test" or "Live"
+
+4. Insert your Client ID and Api key (Secure Code). When you selected “Test” at the Modus, you can find test credentials below the fields - keep in mind there is a daily limit -.\
+To sign up for a paid account and get your Client ID and Api key, simply visit https://postcodeservice.com and subscribe.  
+
+5. In the 'Countries' section, select the country for which you wish to enable the Postcode Service.  
+6. Flush your cache
+
+## Visual representation of the Postcode Service Magento extension during the checkout process
+### For Dutch postcodes
+<img src="https://postcodeservice.com/wp-content/uploads/2022/08/postcodeservice-magento-2-nl.gif" width="50%">
+
+### For Belgium postcodes
+<img src="https://postcodeservice.com/wp-content/uploads/2022/08/postcodeservice-magento-2-be.gif" width="50%">
 
 ## Further documentation
 You can find the underlying Postcode Service API documentation here: https://developers.postcodeservice.com
