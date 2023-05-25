@@ -34,96 +34,177 @@
 
     <div id="block">
         <div class="block-legend">
-            <h3 ><?= $block->escapeHtml(__('Legend'));?></h3>
+            <h3><?= $block->escapeHtml(__('Legend')); ?></h3>
             <div>
                 <ul id="legend">
                     <li class="disabled">
                         <span class="img"></span>
-                        <span class="text"><?= $block->escapeHtml(__('Extension status'));?>: </span>
-                        <span class="status"><?= $block->escapeHtml(__('Disabled'));?></span>
+                        <span class="text"><?= $block->escapeHtml(__('Extension status')); ?>: </span>
+                        <span class="status"><?= $block->escapeHtml(__('Disabled')); ?></span>
                     </li>
                     <li class="test">
                         <span class="img"></span>
-                        <span class="text"><?= $block->escapeHtml(__('Extension status'));?>: </span>
-                        <span class="status"><?= $block->escapeHtml(__('Test Mode'));?></span>
+                        <span class="text"><?= $block->escapeHtml(__('Extension status')); ?>: </span>
+                        <span class="status"><?= $block->escapeHtml(__('Test Mode')); ?></span>
                     </li>
                     <li class="live">
                         <span class="img"></span>
-                        <span class="text"><?= $block->escapeHtml(__('Extension status'));?>: </span>
-                        <span class="status"><?= $block->escapeHtml(__('Live Mode'));?></span>
+                        <span class="text"><?= $block->escapeHtml(__('Extension status')); ?>: </span>
+                        <span class="status"><?= $block->escapeHtml(__('Live Mode')); ?></span>
                     </li>
                 </ul>
             </div>
 
-            <h3 data-role="trigger"><?= $block->escapeHtml(__('Documentation'));?></h3>
-
+            <h3 data-role="trigger"><?= $block->escapeHtml(__('Documentation')); ?></h3>
             <div>
                 <ul>
-                    <p><?= $block->escapeHtml(__('Documents regarding the Postcode Magento 2 extension:'));?></p>
                     <li>
-                        <a class="pdf" target="_blank" href="https://postcodeservice.github.io/postcode-magento2/"
-                            title="<?= $block->escapeHtml(__('View the user manual.' .
-                            ' Currently the manual is only available in Dutch.'));
-                        ?>">
-                            <?= $block->escapeHtml(__('User manual'));?>
+                        <a class="pdf" target="_blank" href="https://github.com/postcodeservice/tig-extension-tig-postcode-magento2"
+                           title="<?= $block->escapeHtml(__('View the user manual on Github.'));
+                           ?>">
+                            <?= $block->escapeHtml(__('User manual')); ?>
                             <img
                                 class="external_link"
                                 src="<?=
-                                /* @noEscape */ $block->getViewFileUrl('TIG_Postcode::images/external_link_32.png')
+                                /* @noEscape */
+                                $block->getViewFileUrl('TIG_Postcode::images/external_link_32.png')
                                 ?>"
-                                alt="<?= $block->escapeHtml(__('User manual'));?>" width="16" height="16"
+                                alt="<?= $block->escapeHtml(__('User Manual')); ?>" width="16" height="16"
                             />
                         </a>
                     </li>
                     <li>
                         <a target="_blank" href="https://github.com/postcodeservice/postcode-magento2/releases"
-                            title="<?= $block->escapeHtml(__('View the complete release notes of the extension.' .
-                            ' Currently the release notes is only available in Dutch.'));?>">
-                            <?=  $block->escapeHtml(__('Full Release Notes'));?>
+                           title="<?= $block->escapeHtml(__('View the complete release notes of the extension.')); ?>">
+                            <?= $block->escapeHtml(__('Full Release Notes')); ?>
                             <img class="external_link"
-                                src="<?=
-                                /* @noEscape */ $block->getViewFileUrl('TIG_Postcode::images/external_link_32.png')
-                                ?>"
-                                alt="<?= $block->escapeHtml(__('Full Release Notes'));?>"
-                                width="16" height="16"
+                                 src="<?=
+                                 /* @noEscape */
+                                 $block->getViewFileUrl('TIG_Postcode::images/external_link_32.png')
+                                 ?>"
+                                 alt="<?= $block->escapeHtml(__('Full Release Notes')); ?>"
+                                 width="16" height="16"
                             />
                         </a>
                     </li>
                 </ul>
             </div>
 
+            <h3 data-role="trigger"><?= $block->escapeHtml(__('Postcode Service USP')); ?></h3>
+            <div class="advantages-postcode-tig">
+                <div class="block_usp">
+                    <ul>
+                        <li class="first">
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                 xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 26 26"
+                                 enable-background="new 0 0 26 26" width="512px" height="512px">
+                                <path d="m.3,14c-0.2-0.2-0.3-0.5-0.3-0.7s0.1-0.5 0.3-0.7l1.4-1.4c0.4-0.4 1-0.4 1.4,0l.1,.1
+                            5.5,5.9c0.2,0.2 0.5,0.2 0.7,0l13.4-13.9h0.1v-8.88178e-16c0.4-0.4 1-0.4 1.4,0l1.4,1.4c0.4,0.4
+                            0.4,1 0,1.4l0,0-16,16.6c-0.2,0.2-0.4,0.3-0.7,0.3-0.3,0-0.5-0.1-0.7-0.3l-7.8-8.4-.2-.3z"
+                                      fill="#009f3e"/>
+                            </svg>
+                        <li class="last"><?= $block->escapeHtml(__('No analytic data collection')); ?>
+                        </li>
+                    </ul>
+                    <ul>
+                        <li class="first">
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                 xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 26 26"
+                                 enable-background="new 0 0 26 26" width="512px" height="512px">
+                                <path d="m.3,14c-0.2-0.2-0.3-0.5-0.3-0.7s0.1-0.5 0.3-0.7l1.4-1.4c0.4-0.4 1-0.4 1.4,0l.1,.1
+                            5.5,5.9c0.2,0.2 0.5,0.2 0.7,0l13.4-13.9h0.1v-8.88178e-16c0.4-0.4 1-0.4 1.4,0l1.4,1.4c0.4,0.4
+                            0.4,1 0,1.4l0,0-16,16.6c-0.2,0.2-0.4,0.3-0.7,0.3-0.3,0-0.5-0.1-0.7-0.3l-7.8-8.4-.2-.3z"
+                                      fill="#009f3e"/>
+                            </svg>
+                        </li>
+                        <li class="last"><?= $block->escapeHtml(__('Super fast, made for webshops')); ?></li>
+                    </ul>
+                    <ul>
+                        <li class="first">
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                 xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 26 26"
+                                 enable-background="new 0 0 26 26" width="512px" height="512px">
+                                <path d="m.3,14c-0.2-0.2-0.3-0.5-0.3-0.7s0.1-0.5 0.3-0.7l1.4-1.4c0.4-0.4 1-0.4 1.4,0l.1,.1
+                            5.5,5.9c0.2,0.2 0.5,0.2 0.7,0l13.4-13.9h0.1v-8.88178e-16c0.4-0.4 1-0.4 1.4,0l1.4,1.4c0.4,0.4
+                            0.4,1 0,1.4l0,0-16,16.6c-0.2,0.2-0.4,0.3-0.7,0.3-0.3,0-0.5-0.1-0.7-0.3l-7.8-8.4-.2-.3z"
+                                      fill="#009f3e"/>
+                            </svg>
+                        </li>
+                        <li class="last"><?= $block->escapeHtml(__('Logistic vendors independent')); ?></li>
+                    </ul>
+                    <ul>
+                        <li class="first">
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                 xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 26 26"
+                                 enable-background="new 0 0 26 26" width="512px" height="512px">
+                                <path d="m.3,14c-0.2-0.2-0.3-0.5-0.3-0.7s0.1-0.5 0.3-0.7l1.4-1.4c0.4-0.4 1-0.4 1.4,0l.1,.1
+                            5.5,5.9c0.2,0.2 0.5,0.2 0.7,0l13.4-13.9h0.1v-8.88178e-16c0.4-0.4 1-0.4 1.4,0l1.4,1.4c0.4,0.4
+                            0.4,1 0,1.4l0,0-16,16.6c-0.2,0.2-0.4,0.3-0.7,0.3-0.3,0-0.5-0.1-0.7-0.3l-7.8-8.4-.2-.3z"
+                                      fill="#009f3e"/>
+                            </svg>
+                        </li>
+                        <li class="last"><?= $block->escapeHtml(__('Support by phone')); ?></li>
+                    </ul>
+                </div>
+            </div>
         </div>
 
         <div class="block-version">
-            <h3 ><?= $block->escapeHtml(__('Extension version'));?></h3>
+            <h3><?= $block->escapeHtml(__('Extension version')); ?></h3>
             <div>
                 <ul class="version-compatibility">
 
                     <li>
-                        <span class="text"><?= $block->escapeHtml(__('Postcode Service version'));?>:</span>
+                        <span class="text"><?= $block->escapeHtml(__('Postcode Service version')); ?>:</span>
                         <span class="version">
-                            <?= /* @noEscape */  $block->getVersionNumber() .
-                                $block->getStability();
+                            <?= /* @noEscape */
+                            $block->getVersionNumber() .
+                            $block->getStability();
                             ?>
                         </span>
                     </li>
                 </ul>
             </div>
 
-            <h3><?= $block->escapeHtml(__('Magento &amp; 3rd party version compatibility'));?></h3>
+            <h3><?= $block->escapeHtml(__('Magento version compatibility')); ?></h3>
             <div>
                 <ul class="version-compatibility">
                     <li>
                         <span class="text">
-                            <?= $block->escapeHtml(__('Magento Enterprise Edition version'));?>:
+                            <?= $block->escapeHtml(__('Magento Community Edition')); ?>:
                         </span>
-                        <span class="version"><?= /* @noEscape */ $block->getSupportedMagentoVersions(); ?></span>
+                        <span class="version"><?= /* @noEscape */
+                            $block->getSupportedMagentoVersions(); ?></span>
                     </li>
                     <li>
                         <span class="text">
-                            <?= $block->escapeHtml(__('Magento Community Edition version'));?>:
+                            <?= $block->escapeHtml(__('Magento Commerce Edition')); ?>:
                         </span>
-                        <span class="version"><?= /* @noEscape */ $block->getSupportedMagentoVersions(); ?></span>
+                        <span class="version"><?= /* @noEscape */
+                            $block->getSupportedMagentoVersions(); ?></span>
+                    </li>
+                </ul>
+            </div>
+            <h3><?= $block->escapeHtml(__('Third party compatibility')); ?></h3>
+            <div>
+                <ul class="version-compatibility">
+                    <li>
+                        <span class="text">
+                            <?= $block->escapeHtml(__('One Step Checkout (OneStepCheckout.com)')); ?>:
+                        </span>
+                        <span class="version">Not supported</span>
+                    </li>
+                    <li>
+                        <span class="text">
+                            <?= $block->escapeHtml(__('MagePlaza')); ?>:
+                        </span>
+                        <span class="version">Not supported</span>
+                    </li>
+                    <li>
+                        <span class="text">
+                            <?= $block->escapeHtml(__('Amasty')); ?>:
+                        </span>
+                        <span class="version">Not supported</span>
                     </li>
                 </ul>
             </div>
@@ -133,13 +214,10 @@
     <?php // section 1 ?>
     <div id="section">
         <div class="collapse-title" data-role="title">
-            <h3 data-role="trigger"><?=  $block->escapeHtml(__('Support'));?></h3>
+            <h3 data-role="trigger"><?= $block->escapeHtml(__('Support')); ?></h3>
         </div>
         <div class="collapse-content support-postcode-tig" data-role="content" style="display:none;">
-            <p><?= __('This extension is developed' .
-                    ' by Total Internet Group (<a href="https://tig.nl" target="_blank">TIG</a>).');
-                                    ?>
-
+            <p>
             <div class="block_contact">
                 <ul>
                     <li class="first">
@@ -147,8 +225,9 @@
                             <circle cx="256" cy="256" r="256" fill="#F0F0F0"/>
                             <path d="M256 0C145.9 0 52.1 69.5 15.9 167h480.2C459.9 69.5 366.1 0 256 0z" fill="#A2001D"/>
                             <path d="M256 512c110.1 0 203.9-69.5 240.1-167H15.9C52.1 442.5 145.9 512 256 512z"
-                                  fill="#0052B4"/></svg>
-                        <span><?= $block->escapeHtml(__('Phone:'));?></span>
+                                  fill="#0052B4"/>
+                        </svg>
+                        <span><?= $block->escapeHtml(__('Phone:')); ?></span>
                     </li>
                     <li class="last">+31 (0)20 – 218 1024</li>
                 </ul>
@@ -169,7 +248,7 @@
                             87.5v45.2c0 54.2 36.4 82.6 72.4 82.6 24.1 0 47.5-12.2 64.1-33.5 18-23.1
                             27.5-55.7 27.5-94.3 0-65.2-25.4-126.4-71.5-172.5z"/>
                         </svg>
-                        <span><?= $block->escapeHtml(__('E-mail:'));?></span>
+                        <span><?= $block->escapeHtml(__('E-mail:')); ?></span>
                     </li>
                     <li class="last">
                         <?= __('<a href="mailto:support@postcodeservice.com">support@postcodeservice.com</a>'); ?>
@@ -197,11 +276,13 @@
                              40.1 30 40zM44 30h12c-0.2 6.2-2.6 11.9-6.3 16.3 -2.5-1.7-5.3-3.1-8.1-4.1C43 38.4 43.9
                              34.2 44 30zM9.7 47.8c2.4-1.6 4.9-2.8 7.5-3.8 1.9 4.4 4.7 8.3 8.3 11.7C19.3 55 13.8
                              52.1 9.7 47.8zM32.5 55.8c3.5-3.4 6.3-7.3 8.3-11.7 2.6 0.9 5.2 2.2 7.5 3.8C44.2 52.1
-                             38.7 55 32.5 55.8z"/></svg>
-                        <span><?= $block->escapeHtml(__('Website:'));?></span>
+                             38.7 55 32.5 55.8z"/>
+                        </svg>
+                        <span><?= $block->escapeHtml(__('Website:')); ?></span>
                     </li>
-                    <li class="last"><a href="<?= $block->escapeHtml(__('https://postcodeservice.com'));?>"
-                                        target="_blank"><?=  $block->escapeHtml(__('postcodeservice.com'));?>
+                    <li class="last">
+                        <a href="<?= $block->escapeHtml(__('https://postcodeservice.com')); ?>"
+                           target="_blank"><?= $block->escapeHtml(__('postcodeservice.com')); ?>
                         </a>
                     </li>
                 </ul>
@@ -209,98 +290,5 @@
         </div>
     </div>
 
-    <?php // section 2 ?>
-    <div id="section">
-        <div class="collapse-title" data-role="title">
-            <h3 data-role="trigger"><?= $block->escapeHtml(__('Advantages of the Postcode Service'));?></h3>
-        </div>
-        <div class="collapse-content advantages-postcode-tig" data-role="content" style="display:none;">
-            <div class="block_usp">
-                <ul>
-                    <li class="first">
-                        <svg xmlns="http://www.w3.org/2000/svg"
-                             xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 26 26"
-                             enable-background="new 0 0 26 26" width="512px" height="512px">
-                            <path d="m.3,14c-0.2-0.2-0.3-0.5-0.3-0.7s0.1-0.5 0.3-0.7l1.4-1.4c0.4-0.4 1-0.4 1.4,0l.1,.1
-                            5.5,5.9c0.2,0.2 0.5,0.2 0.7,0l13.4-13.9h0.1v-8.88178e-16c0.4-0.4 1-0.4 1.4,0l1.4,1.4c0.4,0.4
-                            0.4,1 0,1.4l0,0-16,16.6c-0.2,0.2-0.4,0.3-0.7,0.3-0.3,0-0.5-0.1-0.7-0.3l-7.8-8.4-.2-.3z"
-                                  fill="#009f3e"/></svg>
-                    </li>
-                    <li class="last"><?= $block->escapeHtml(__('No analytic data collection'));?></li>
-                </ul>
-                <ul>
-                    <li class="first">
-                        <svg xmlns="http://www.w3.org/2000/svg"
-                             xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 26 26"
-                             enable-background="new 0 0 26 26" width="512px" height="512px">
-                            <path d="m.3,14c-0.2-0.2-0.3-0.5-0.3-0.7s0.1-0.5 0.3-0.7l1.4-1.4c0.4-0.4 1-0.4 1.4,0l.1,.1
-                            5.5,5.9c0.2,0.2 0.5,0.2 0.7,0l13.4-13.9h0.1v-8.88178e-16c0.4-0.4 1-0.4 1.4,0l1.4,1.4c0.4,0.4
-                            0.4,1 0,1.4l0,0-16,16.6c-0.2,0.2-0.4,0.3-0.7,0.3-0.3,0-0.5-0.1-0.7-0.3l-7.8-8.4-.2-.3z"
-                                  fill="#009f3e"/></svg>
-                    </li>
-                    <li class="last"><?= $block->escapeHtml(__('Super fast'));?></li>
-                </ul>
-                <ul>
-                    <li class="first">
-                        <svg xmlns="http://www.w3.org/2000/svg"
-                             xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 26 26"
-                             enable-background="new 0 0 26 26" width="512px" height="512px">
-                            <path d="m.3,14c-0.2-0.2-0.3-0.5-0.3-0.7s0.1-0.5 0.3-0.7l1.4-1.4c0.4-0.4 1-0.4 1.4,0l.1,.1
-                            5.5,5.9c0.2,0.2 0.5,0.2 0.7,0l13.4-13.9h0.1v-8.88178e-16c0.4-0.4 1-0.4 1.4,0l1.4,1.4c0.4,0.4
-                            0.4,1 0,1.4l0,0-16,16.6c-0.2,0.2-0.4,0.3-0.7,0.3-0.3,0-0.5-0.1-0.7-0.3l-7.8-8.4-.2-.3z"
-                                  fill="#009f3e"/></svg>
-                    </li>
-                    <li class="last"><?= $block->escapeHtml(__('99,9999% Up time'));?></li>
-                </ul>
-                <ul>
-                    <li class="first">
-                        <svg xmlns="http://www.w3.org/2000/svg"
-                             xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 26 26"
-                             enable-background="new 0 0 26 26" width="512px" height="512px">
-                            <path d="m.3,14c-0.2-0.2-0.3-0.5-0.3-0.7s0.1-0.5 0.3-0.7l1.4-1.4c0.4-0.4 1-0.4 1.4,0l.1,.1
-                            5.5,5.9c0.2,0.2 0.5,0.2 0.7,0l13.4-13.9h0.1v-8.88178e-16c0.4-0.4 1-0.4 1.4,0l1.4,1.4c0.4,0.4
-                            0.4,1 0,1.4l0,0-16,16.6c-0.2,0.2-0.4,0.3-0.7,0.3-0.3,0-0.5-0.1-0.7-0.3l-7.8-8.4-.2-.3z"
-                                  fill="#009f3e"/></svg>
-                    </li>
-                    <li class="last"><?= $block->escapeHtml(__('Conform GDPR and ISO 27001:2005 norm'));?></li>
-                </ul>
-                <ul>
-                    <li class="first">
-                        <svg xmlns="http://www.w3.org/2000/svg"
-                             xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 26 26"
-                             enable-background="new 0 0 26 26" width="512px" height="512px">
-                            <path d="m.3,14c-0.2-0.2-0.3-0.5-0.3-0.7s0.1-0.5 0.3-0.7l1.4-1.4c0.4-0.4 1-0.4 1.4,0l.1,.1
-                            5.5,5.9c0.2,0.2 0.5,0.2 0.7,0l13.4-13.9h0.1v-8.88178e-16c0.4-0.4 1-0.4 1.4,0l1.4,1.4c0.4,0.4
-                            0.4,1 0,1.4l0,0-16,16.6c-0.2,0.2-0.4,0.3-0.7,0.3-0.3,0-0.5-0.1-0.7-0.3l-7.8-8.4-.2-.3z"
-                                  fill="#009f3e"/></svg>
-                    </li>
-                    <li class="last"><?= $block->escapeHtml(__('Support by phone'));?></li>
-                </ul>
-                <ul>
-                    <li class="first">
-                        <svg xmlns="http://www.w3.org/2000/svg"
-                             xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 26 26"
-                             enable-background="new 0 0 26 26" width="512px" height="512px">
-                            <path d="m.3,14c-0.2-0.2-0.3-0.5-0.3-0.7s0.1-0.5 0.3-0.7l1.4-1.4c0.4-0.4 1-0.4 1.4,0l.1,.1
-                            5.5,5.9c0.2,0.2 0.5,0.2 0.7,0l13.4-13.9h0.1v-8.88178e-16c0.4-0.4 1-0.4 1.4,0l1.4,1.4c0.4,0.4
-                            0.4,1 0,1.4l0,0-16,16.6c-0.2,0.2-0.4,0.3-0.7,0.3-0.3,0-0.5-0.1-0.7-0.3l-7.8-8.4-.2-.3z"
-                                  fill="#009f3e"/></svg>
-                    </li>
-                    <li class="last"><?= $block->escapeHtml(__('24/7 SLA support'));?></li>
-                </ul>
-                <ul>
-                    <li class="first">
-                        <svg xmlns="http://www.w3.org/2000/svg"
-                             xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 26 26"
-                             enable-background="new 0 0 26 26" width="512px" height="512px">
-                            <path d="m.3,14c-0.2-0.2-0.3-0.5-0.3-0.7s0.1-0.5 0.3-0.7l1.4-1.4c0.4-0.4 1-0.4 1.4,0l.1,.1
-                            5.5,5.9c0.2,0.2 0.5,0.2 0.7,0l13.4-13.9h0.1v-8.88178e-16c0.4-0.4 1-0.4 1.4,0l1.4,1.4c0.4,0.4
-                            0.4,1 0,1.4l0,0-16,16.6c-0.2,0.2-0.4,0.3-0.7,0.3-0.3,0-0.5-0.1-0.7-0.3l-7.8-8.4-.2-.3z"
-                                  fill="#009f3e"/></svg>
-                    </li>
-                    <li class="last"><?= $block->escapeHtml(__('Supporting Dutch and Belgian addresses'));?></li>
-                </ul>
-            </div>
-        </div>
-    </div>
+
 </div>

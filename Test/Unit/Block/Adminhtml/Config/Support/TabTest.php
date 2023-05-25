@@ -47,7 +47,7 @@ class TabTest extends TestCase
     public function testGetVersionNumber()
     {
         $instance = $this->getInstance();
-        $this->assertSame('1.5.5', $instance->getVersionNumber());
+        $this->assertSame('1.5.6', $instance->getVersionNumber());
     }
 
     /**
@@ -60,7 +60,7 @@ class TabTest extends TestCase
            'moduleConfiguration' => $this->getConfigurationMock()
         ]);
 
-        $this->assertSame('2.3.7, 2.4.6', $instance->getSupportedMagentoVersions());
+        $this->assertSame('2.4.4, 2.4.5, 2.4.6', $instance->getSupportedMagentoVersions());
     }
 
     /**+
@@ -71,7 +71,7 @@ class TabTest extends TestCase
         $mock = $this->getFakeMock(ModuleConfiguration::class)->getMock();
         $mockExpects = $mock->expects($this->once());
         $mockExpects->method('getSupportedMagentoVersions');
-        $mockExpects->willReturn('2.3.7, 2.4.6');
+        $mockExpects->willReturn('2.4.4, 2.4.5, 2.4.6');
 
         return $mock;
     }

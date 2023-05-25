@@ -39,7 +39,7 @@ class Button extends Template implements RendererInterface
 {
     public const MODULE_NAME = 'TIG_Postcode';
 
-    public const CREDENTIALS_URL = 'https://postcodeservice.nl';
+    public const CREDENTIALS_URL = 'https://postcodeservice.com/#compare-packages';
 
     // @codingStandardsIgnoreLine
     protected $_template = 'TIG_Postcode::config/credentials/button.phtml';
@@ -64,7 +64,7 @@ class Button extends Template implements RendererInterface
      */
     public function getLabel()
     {
-        return __('Request Credentails');
+        return __('Get Credentials');
     }
 
     /**

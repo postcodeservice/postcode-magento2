@@ -41,14 +41,21 @@
 
         <field id="enable_nl_check" translate="label comment" type="select"
                sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
-            <label>Enable Netherlands check</label>
+            <label>Netherlands address validation</label>
             <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
             <config_path>tig_postcode/countries/enable_nl_check</config_path>
         </field>
 
         <field id="enable_be_check" translate="label comment" type="select"
                sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
-            <label>Enable Belgium check</label>
+            <label>Belgium address validation</label>
+            <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+            <config_path>tig_postcode/countries/enable_be_check</config_path>
+        </field>
+
+        <field id="enable_de_check" translate="label comment" type="select"
+               sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>German address validation</label>
             <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
             <config_path>tig_postcode/countries/enable_be_check</config_path>
         </field>
