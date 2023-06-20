@@ -34,7 +34,7 @@
 
     <div id="block">
         <div class="block-legend">
-            <h3><?= $block->escapeHtml(__('Legend')); ?></h3>
+            <h3><?= $block->escapeHtml(__('Legend of colors')); ?></h3>
             <div>
                 <ul id="legend">
                     <li class="disabled">
@@ -94,13 +94,35 @@
             <div>
                     <ul>
                         <li>
-                            <?= __('<a href="mailto:support@postcodeservice.com">support@postcodeservice.com</a>'); ?>
+                            <a class="pdf" target="_blank" href="mailto:support@postcodeservice.com"
+                               title="<?= $block->escapeHtml(__('Mail support@postcodeservice.com'));
+                               ?>">
+                                <?= $block->escapeHtml(__('support@postcodeservice.com')); ?>
+                                <img
+                                    class="external_link"
+                                    src="<?=
+                                    /* @noEscape */
+                                    $block->getViewFileUrl('TIG_Postcode::images/external_link_32.png')
+                                    ?>"
+                                    alt="<?= $block->escapeHtml(__('support@postcodeservice.com')); ?>" width="16" height="16"
+                                />
+                            </a>
                         </li>
                     </ul>
                     <ul>
                         <li>
-                            <a href="<?= $block->escapeHtml(__('https://postcodeservice.com/#support')); ?>"
-                               target="_blank"><?= $block->escapeHtml(__('https://postcodeservice.com/#support')); ?>
+                            <a class="pdf" target="_blank" href="https://postcodeservice.com/#support"
+                               title="<?= $block->escapeHtml(__('Contact details https://postcodeservice.com/#support'));
+                               ?>">
+                                <?= $block->escapeHtml(__('postcodeservice.com/#support')); ?>
+                                <img
+                                    class="external_link"
+                                    src="<?=
+                                    /* @noEscape */
+                                    $block->getViewFileUrl('TIG_Postcode::images/external_link_32.png')
+                                    ?>"
+                                    alt="<?= $block->escapeHtml(__('https://postcodeservice.com/#support')); ?>" width="16" height="16"
+                                />
                             </a>
                         </li>
                     </ul>
@@ -119,7 +141,7 @@
                             0.4,1 0,1.4l0,0-16,16.6c-0.2,0.2-0.4,0.3-0.7,0.3-0.3,0-0.5-0.1-0.7-0.3l-7.8-8.4-.2-.3z"
                                       fill="#009f3e"/>
                             </svg>
-                        <li class="last"><?= $block->escapeHtml(__('No analytic data collection')); ?>
+                        <li class="last"><?= $block->escapeHtml(__('No data is collected for analytics or sales')); ?>
                         </li>
                     </ul>
                     <ul>
@@ -133,7 +155,7 @@
                                       fill="#009f3e"/>
                             </svg>
                         </li>
-                        <li class="last"><?= $block->escapeHtml(__('Super fast, made for webshops')); ?></li>
+                        <li class="last"><?= $block->escapeHtml(__('Superfast performance with our core architecture designed for webshops')); ?></li>
                     </ul>
                     <ul>
                         <li class="first">
@@ -146,7 +168,7 @@
                                       fill="#009f3e"/>
                             </svg>
                         </li>
-                        <li class="last"><?= $block->escapeHtml(__('Logistic vendors independent')); ?></li>
+                        <li class="last"><?= $block->escapeHtml(__('Always available because we are independent of logistics vendors')); ?></li>
                     </ul>
                 </div>
             </div>
@@ -159,7 +181,7 @@
                 <ul class="version-compatibility">
 
                     <li>
-                        <span class="text"><?= $block->escapeHtml(__('Postcode Service version')); ?>:</span>
+                        <span class="text"><?= $block->escapeHtml(__('Postcode Service')); ?>:</span>
                         <span class="version">
                             <?= /* @noEscape */
                             $block->getVersionNumber() .
@@ -194,7 +216,7 @@
                 <ul class="version-compatibility">
                     <li>
                         <span class="text">
-                            <?= $block->escapeHtml(__('One Step Checkout (OneStepCheckout.com)')); ?>:
+                            <?= $block->escapeHtml(__('OneStepCheckout.com')); ?>:
                         </span>
                         <span class="version">Not supported</span>
                     </li>
