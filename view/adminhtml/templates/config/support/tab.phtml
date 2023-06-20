@@ -34,27 +34,6 @@
 
     <div id="block">
         <div class="block-legend">
-            <h3><?= $block->escapeHtml(__('Legend of colors')); ?></h3>
-            <div>
-                <ul id="legend">
-                    <li class="disabled">
-                        <span class="img"></span>
-                        <span class="text"><?= $block->escapeHtml(__('Extension status')); ?>: </span>
-                        <span class="status"><?= $block->escapeHtml(__('Disabled')); ?></span>
-                    </li>
-                    <li class="test">
-                        <span class="img"></span>
-                        <span class="text"><?= $block->escapeHtml(__('Extension status')); ?>: </span>
-                        <span class="status"><?= $block->escapeHtml(__('Test Mode')); ?></span>
-                    </li>
-                    <li class="live">
-                        <span class="img"></span>
-                        <span class="text"><?= $block->escapeHtml(__('Extension status')); ?>: </span>
-                        <span class="status"><?= $block->escapeHtml(__('Live Mode')); ?></span>
-                    </li>
-                </ul>
-            </div>
-
             <h3 data-role="trigger"><?= $block->escapeHtml(__('Documentation')); ?></h3>
             <div>
                 <ul>
@@ -86,6 +65,27 @@
                                  width="16" height="16"
                             />
                         </a>
+                    </li>
+                </ul>
+            </div>
+
+            <h3><?= $block->escapeHtml(__('Legend of colors')); ?></h3>
+            <div>
+                <ul id="legend">
+                    <li class="disabled">
+                        <span class="img"></span>
+                        <span class="text"><?= $block->escapeHtml(__('Extension status')); ?>: </span>
+                        <span class="status"><?= $block->escapeHtml(__('Disabled')); ?></span>
+                    </li>
+                    <li class="test">
+                        <span class="img"></span>
+                        <span class="text"><?= $block->escapeHtml(__('Extension status')); ?>: </span>
+                        <span class="status"><?= $block->escapeHtml(__('Test Mode')); ?></span>
+                    </li>
+                    <li class="live">
+                        <span class="img"></span>
+                        <span class="text"><?= $block->escapeHtml(__('Extension status')); ?>: </span>
+                        <span class="status"><?= $block->escapeHtml(__('Live Mode')); ?></span>
                     </li>
                 </ul>
             </div>
