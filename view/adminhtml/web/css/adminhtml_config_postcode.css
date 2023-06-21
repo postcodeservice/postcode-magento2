@@ -35,19 +35,33 @@
 *
 * =================================================================================================================== */
 
-#section { float: left; width: 100%; clear: both; }
-#supporttab { margin-left: 4rem;  }
-#supporttab #section { border-bottom: 1px solid #cccccc; }
-#supporttab #section:last-child { border-bottom: none; }
+#section {
+    float: left;
+    width: 100%;
+    clear: both;
+}
+
+#supporttab {
+    margin-left: 4rem;
+}
+
+#supporttab #section {
+    border-bottom: 1px solid #cccccc;
+}
+
+#supporttab #section:last-child {
+    border-bottom: none;
+}
 
 /* Default styling collapsible tabs */
 .collapse-title[aria-expanded=true] h3:before {
-    font-family:'Admin Icons';
+    font-family: 'Admin Icons', serif;
     content: '\e615';
 
 }
+
 .collapse-title h3:before {
-    font-family:'Admin Icons';
+    font-family: 'Admin Icons', serif;
     font-weight: lighter;
     content: '\e616';
     padding-right: 10px;
@@ -56,15 +70,16 @@
 
 .collapse-content {
     box-sizing: border-box;
-    padding:0 15px 15px 15px;
-    height:auto !important;
-    float:left; width: 100%;
+    padding: 0 15px 15px 15px;
+    height: auto !important;
+    float: left;
+    width: 100%;
 }
 
 #supporttab h3 {
     font-size: 1.7rem;
-    margin:0 !important;
-    padding:1.9rem 2.7rem 1.9rem 1rem;
+    margin: 0 !important;
+    padding: 1.9rem 2.7rem 1.9rem 1rem;
     color: black;
     font-weight: 600;
     cursor: pointer;
@@ -72,9 +87,9 @@
 
 #supporttab h4 {
     font-size: 1.1em;
-    margin:20px 0 5px 0;
-    padding:0;
-    color: rgba(0,136,204,1);
+    margin: 20px 0 5px 0;
+    padding: 0;
+    color: rgba(0, 136, 204, 1);
 }
 
 #supporttab p {
@@ -83,7 +98,7 @@
 
 #supporttab ol, ul {
     margin-left: 20px;
-    position :relative;
+    position: relative;
 }
 
 #supporttab ul li {
@@ -93,7 +108,7 @@
 }
 
 .postcode-config-page .section-config {
-    box-sizing:border-box;
+    box-sizing: border-box;
     padding-left: 20px;
     margin-left: 10px;
     position: relative;
@@ -124,7 +139,6 @@
 }
 
 
-
 /* SupportTab - Legend ============================================================================================== */
 
 #block {
@@ -140,13 +154,13 @@
 
 .block-legend {
     padding: 10px;
-    float:left;
-    width:100%;
+    float: left;
+    width: 100%;
 }
 
-@media screen and (min-width: 1200px){
+@media screen and (min-width: 1200px) {
     .block-legend {
-        float:left;
+        float: left;
         width: 50%;
     }
 }
@@ -155,32 +169,33 @@
 .live span.text,
 .test span.text {
     margin-right: 15px;
-    font-weight: 600;
+    font-weight: 400;
 }
 
-.disabled{
-    border-left: 5px solid #CCCCCC;
-    padding-left: 10px;
+.disabled {
+    border-left: 30px solid #CCCCCC;
+    padding-left: 15px;
 }
 
 .live {
-    border-left: 5px solid #49AB43;
-    padding-left: 10px;
+    border-left: 30px solid #49AB43;
+    padding-left: 15px;
 }
 
 .test {
-    border-left: 5px solid #FFC107;
-    padding-left: 10px;
+    border-left: 30px solid #FFC107;
+    padding-left: 15px;
 }
 
 .advanced span.img {
-    display:block;
-    float:left;
-    margin-top: 2px; margin-right:10px;
+    display: block;
+    float: left;
+    margin-top: 2px;
+    margin-right: 10px;
     border: 6px solid;
     border-color: transparent transparent transparent #ff2e31;
-    width:0;
-    height:0;
+    width: 0;
+    height: 0;
 }
 
 /* SupportTab - 3rd Party | Version compatibility =================================================================== */
@@ -190,40 +205,44 @@
 }
 
 .block-version {
-    padding:10px;
+    padding: 10px;
     background: #F8F8F8;
-    float:left;
+    float: left;
     width: calc(100% - 20px);
     box-sizing: border-box;
 }
 
 
-@media screen and (min-width: 1200px){
+@media screen and (min-width: 1200px) {
     .block-version {
-        float:left;
+        float: left;
         width: 45%;
     }
 }
+
 #supporttab .version-compatibility {
-    float:left;
+    float: left;
     width: calc(100% - 30px);
-    clear:both;
+    clear: both;
 }
+
 #supporttab .version-compatibility li {
     clear: both;
     margin-bottom: 15px;
-    float:left;
+    float: left;
     width: 100%;
 }
-#supporttab .version-compatibility  span.text {
+
+#supporttab .version-compatibility span.text {
     font-weight: 600;
-    float:left;
+    float: left;
     width: calc(50% - 20px);
 }
-#supporttab .version-compatibility  span.version {
-    float:left;
+
+#supporttab .version-compatibility span.version {
+    float: left;
     width: calc(50% - 30px);
-    text-align:right;
+    text-align: right;
     margin-left: 10px;
 }
 
@@ -266,15 +285,15 @@
 }
 
 .postcode-section .admin__page-nav-link:after {
-    float:right;
+    float: right;
     width: 30px;
     height: 45px;
-    margin-top:-10px;
+    margin-top: -10px;
     margin-right: 3px;
 
     background-image: url(../images/postcode_service_logo_monogram.svg) !important;
     background-size: 25px !important;
-    background-repeat:no-repeat;
+    background-repeat: no-repeat;
     content: ' ';
 }
 
@@ -307,14 +326,14 @@
     content: ' ';
 
     width: 150px;
-    float:right;
+    float: right;
     height: 50px;
     background-size: auto 50px;
 }
 
-.postcode-config-page #container:before  {
+.postcode-config-page #container:before {
     content: 'Postcode Service International';
-    text-indent: 0px;
+    text-indent: 0;
     float: left;
     height: 50px;
     background-size: auto 50px;
@@ -328,16 +347,17 @@
 /* SupportTab - Support ============================================================================================= */
 
 .support-postcode-tig ul {
-    float:left;
-    width:100%;
-    clear:both;
+    float: left;
+    width: 100%;
+    clear: both;
     margin-bottom: 0;
 }
 
 .support-postcode-tig li.first {
-    font-weight :600;
+    font-weight: 600;
     width: 300px;
 }
+
 .support-postcode-tig li.last {
     width: 200px;
 }
@@ -345,26 +365,34 @@
 .support-postcode-tig li.first,
 .support-postcode-tig li.last {
     line-height: normal;
-    float:left;
+    float: left;
 }
 
-.support-postcode-tig .block_contact svg { height: 16px; position: absolute; top: 5px; }
-.support-postcode-tig .block_contact span { margin-left:26px; }
+.support-postcode-tig .block_contact svg {
+    height: 16px;
+    position: absolute;
+    top: 5px;
+}
+
+.support-postcode-tig .block_contact span {
+    margin-left: 26px;
+}
 
 
 /* SupportTab - Advantages ============================================================================================= */
 
 .advantages-postcode-tig ul {
-    float:left;
-    width:100%;
-    clear:both;
+    float: left;
+    width: 100%;
+    clear: both;
     margin-bottom: 0;
 }
 
 .advantages-postcode-tig li.first {
-    font-weight :600;
+    font-weight: 400;
     width: 40px;
 }
+
 .advantages-postcode-tig li.last {
     width: 300px;
 }
@@ -372,35 +400,46 @@
 .advantages-postcode-tig li.first,
 .advantages-postcode-tig li.last {
     line-height: normal;
-    float:left;
+    float: left;
+    margin-right: 5px;
 }
 
-.advantages-postcode-tig .block_usp svg { height: 16px; position: absolute; top: 5px; left: -250px;}
-.advantages-postcode-tig .block_usp span { margin-left:26px; }
+.advantages-postcode-tig .block_usp svg {
+    height: 16px;
+    position: absolute;
+    top: 5px;
+    left: -240px;
+}
 
-
-
+.advantages-postcode-tig .block_usp span {
+    margin-left: 30px;
+}
 
 /* Specific Select element fix ====================================================================================== */
 
-#tig_postcode_productoptions_supported_options option { white-space: normal; }
-#tig_postcode_productoptions_supported_options option:before { content: ''; }
+#tig_postcode_productoptions_supported_options option {
+    white-space: normal;
+}
+
+#tig_postcode_productoptions_supported_options option:before {
+    content: '';
+}
 
 /* TIG Admin 2 Columns col-set ====================================================================================== */
 
 .tig-admin-col-set.box {
     background: #F8F8F8;
     padding: 10px;
-    box-sizing:border-box;
+    box-sizing: border-box;
 }
 
 .tig-admin-col-set {
-    float:left;
-    width:100%;
+    float: left;
+    width: 100%;
 }
 
 .tig-admin-col-set .col {
-    float:left;
+    float: left;
     width: 50%;
     padding: 20px;
 }
@@ -408,10 +447,9 @@
 /* From buttons ===================================================================================================== */
 .tig-form-button {
     background-color: #eb5202;
-    border-color: #eb5202;
     color: #ffffff;
     text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.25);
-    border: 1px solid;
+    border: 1px solid #eb5202;
     border-radius: 0;
     display: inline-block;
     font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -431,13 +469,13 @@
     text-decoration: none;
 }
 
-.tig-form-button a{
+.tig-form-button a {
     font-size: 1.6rem;
     letter-spacing: .025em;
     color: #ffffff;
     padding: 0.6rem 1em 0.6rem;
 }
 
-.tig-form-button a:hover{
+.tig-form-button a:hover {
     text-decoration: none;
 }

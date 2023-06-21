@@ -39,7 +39,7 @@
                 <ul>
                     <li>
                         <a class="pdf" target="_blank" href="https://github.com/postcodeservice/tig-extension-tig-postcode-magento2"
-                           title="<?= $block->escapeHtml(__('View the user manual on Github.'));
+                           title="<?= $block->escapeHtml(__('View the user manual on Github'));
                            ?>">
                             <?= $block->escapeHtml(__('User manual')); ?>
                             <img
@@ -54,7 +54,7 @@
                     </li>
                     <li>
                         <a target="_blank" href="https://github.com/postcodeservice/postcode-magento2/releases"
-                           title="<?= $block->escapeHtml(__('View the complete release notes of the extension.')); ?>">
+                           title="<?= $block->escapeHtml(__('View the complete release notes of the extension')); ?>">
                             <?= $block->escapeHtml(__('Full Release Notes')); ?>
                             <img class="external_link"
                                  src="<?=
@@ -69,23 +69,20 @@
                 </ul>
             </div>
 
-            <h3><?= $block->escapeHtml(__('Legend of colors')); ?></h3>
+            <h3><?= $block->escapeHtml(__('Legend of colors vertical bar')); ?></h3>
             <div>
                 <ul id="legend">
                     <li class="disabled">
                         <span class="img"></span>
-                        <span class="text"><?= $block->escapeHtml(__('Extension status')); ?>: </span>
-                        <span class="status"><?= $block->escapeHtml(__('Disabled')); ?></span>
+                        <span class="text"><?= $block->escapeHtml(__('The extension is turned off')); ?></span>
                     </li>
                     <li class="test">
                         <span class="img"></span>
-                        <span class="text"><?= $block->escapeHtml(__('Extension status')); ?>: </span>
-                        <span class="status"><?= $block->escapeHtml(__('Test Mode')); ?></span>
+                        <span class="text"><?= $block->escapeHtml(__('The extension is in Test Modus')); ?></span>
                     </li>
                     <li class="live">
                         <span class="img"></span>
-                        <span class="text"><?= $block->escapeHtml(__('Extension status')); ?>: </span>
-                        <span class="status"><?= $block->escapeHtml(__('Live Mode')); ?></span>
+                        <span class="text"><?= $block->escapeHtml(__('The extension is in Live Modus')); ?></span>
                     </li>
                 </ul>
             </div>
