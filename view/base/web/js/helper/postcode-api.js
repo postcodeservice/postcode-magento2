@@ -28,42 +28,46 @@
  * @copyright   Copyright (c) Total Internet Group B.V. https://tig.nl/copyright
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
-define(['jquery', './postcode-config'], function($, postcodeConfig){
 
+define(['jquery', './postcode-config'], function ($, postcodeConfig) {
+    
     return {
         getPostCodeNL: function (postcode, house_number) {
             return $.ajax(
                 {
                     method: 'GET',
                     url: postcodeConfig.getWebserviceURL_NL(),
-                    showLoader: true,
+                    showLoader: false, // If you prefer a loader, set this value to true
                     data: {
-                        huisnummer: house_number,
-                        postcode: postcode
+                        houseno: house_number,
+                        zipcode: postcode
                     }
                 });
         },
-
+        
         getPostCodeBE: function (postcode) {
+            // Multiresults = 1 enables support for bilingual cities such as Brussel, see
+            // https://developers.postcodeservice.com/#belgium-api-GETbe-v3-zipcode-find
             return $.ajax({
-                method         : 'GET',
-                url            : postcodeConfig.getWebserviceURL_BE_Postcode(),
-                data           : {
-                    zipcodezone : postcode
+                method: 'GET',
+                url: postcodeConfig.getWebserviceURL_BE_Postcode(),
+                data: {
+                    zipcodezone: postcode,
+                    multiresults: 1
                 }
             });
         },
-
-        getStreetBe: function (postcode, street, city) {
+        
+        getStreetBE: function (postcode, street, city) {
             return $.ajax({
-                method         : 'GET',
-                url            : postcodeConfig.getWebserviceURL_BE_Street(),
-                data   : {
-                    zipcode : postcode,
-                    city    : city,
-                    street  : street
-                },
+                method: 'GET',
+                url: postcodeConfig.getWebserviceURL_BE_Street(),
+                data: {
+                    zipcode: postcode,
+                    city: city,
+                    street: street
+                }
             });
         }
-    }
+    };
 });

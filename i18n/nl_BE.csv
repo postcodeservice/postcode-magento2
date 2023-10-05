@@ -1,16 +1,15 @@
-Live,Live
-Test,Test
-Off,Off
-Legend,Legenda
-Disabled,Uit
-Extension status,Extensie status
+"Live","Live"
+"Test","Test"
+"Off","Off"
+"Legend","Legenda"
+"Disabled","Uit"
+"Extension status","Extensie status"
 "Test Mode","Test Modus"
 "Live Mode","Live Modus"
 "Magento &amp; 3rd party version compatibility","Magento &amp; 3rd party versie compatibiliteit"
 "Magento Community Edition version","Magento Community Edition versie"
 "Magento Enterprise Edition version","Magento Enterprise Edition versie"
 Support,Support
-
 "Documentation","Documentatie"
 "Documents regarding the Postcode Magento 2 extension:","Documenten met betrekking tot de Postcode Magento 2 extensie:"
 "View the user manual. Currently the manual is only available in Dutch.","Bekijk de gebruikershandleiding. Momenteel enkel beschikbaar in Nederlands."
@@ -19,9 +18,7 @@ Support,Support
 "Full Release Notes","Volledige Release Notes"
 "Extension version","Extensie versie"
 "Postcode Service version","Postcode Service versie"
-"This extension is developed by Total Internet Group (<a href="https://tig.nl" target="_blank">TIG</a>).","Deze extensie is ontwikkeld door Total Internet Group (<a href=""https://tig.nl"" target=""_blank"">TIG</a>)."
-"<a href="mailto:support@postcodeservice.com">support@postcodeservice.com</a>","<a href="mailto:support@postcodeservice.com">support@postcodeservice.com</a>"
-
+"This extension is developed by Total Internet Group BV / Postcode Service:","Deze extensie is ontwikkeld door Total Internet Group BV / Postcode Service:"
 "Advantages of the Postcode Service","Voordelen van de Postcode Service"
 "No analytic data collection","Geen analytische gegevensverzameling"
 "Super fast","Super snel"
@@ -47,7 +44,7 @@ Support,Support
 "The Api key can be requested through the 'Request Credentials' button below. For support contact TIG.","De 'Api key' kan opgevraagd worden door middel van de 'Opvragen gegevens' knop. Voor support contacteer TIG."
 "Request Credentials","Opvragen Gegevens"
 "Advanced Configuration","Geavanceerde opties"
-"Sorry, we could not find the address on the given zip code and house number combination. If you are sure that the zip code and house number are correct, please fill in the address details manually.","Sorry, wij konden geen adresgegevens vinden met de opgegeven postcode en huisnummer combinatie. Indien u er zeker van bent dat de opgegeven postcode en huisnummer correct zijn, vul dan adresinformatie handmatig aan."
+"Address not found with provided zipcode and house number. If correct, please enter address details manually.","Adres niet gevonden met opgegeven postcode en huisnummer. Als deze correct zijn, voer dan de adresgegevens handmatig in."
 "Zip/Postal Code","Postcode"
 "You can use our test credentials if needed : <strong>1177</strong>","U kunt gebruik maken van onze testgegevens : <strong>1177</strong>"
 "You can use our test credentials if needed : <strong>9SRLYBCALURPE2B</strong>","U kunt gebruik maken van onze testgegevens : <strong>9SRLYBCALURPE2B</strong>"
@@ -57,9 +54,11 @@ Support,Support
 "Enable Belgium check","Zet Belgische check aan"
 "No results found.","Geen resultaten gevonden."
 "No results found. Please fill in manually.","Wij kunnen uw straat niet automatisch ophalen. Zijn de postcode en plaats correct ingevuld?"
-"Busy with loading zipcodes...","Bezig met ophalen van postcodes..."
-"Busy with loading streets...","Bezig met ophalen van straatnamen..."
-"Supporting Dutch and Belgian addresses","Ondersteuning voor Nederlandse en Belgische addressen"
+"Loading zipcodes ...","Ophalen van postcodes ..."
+"Loading streets ...","Ophalen van straatnamen ..."
+"Cannot find street, is it correct?","Controleer uw straatnaam, is het juist?"
+"Zipcode not found.","Postcode niet gevonden."
+"Address validation temporarily unavailable.","Adresvalidatie tijdelijk niet beschikbaar."
 "Countries","Landen"
 "Using MagePlaza OneStepCheckout","Gebruik van MagePlaza OneStepCheckout"
 "The codes to support the MagePlaza OneStepCheckout extension has been moved to a new extension.","De codes om de MagePlaza OneStepCheckout te ondersteunen zijn verhuist naar een losse extensie."
@@ -71,3 +70,4 @@ Support,Support
 "Change the sort order of the Country field in the checkout.","Verander de sorteer volgorde van het veld 'Land' in de checkout."
 "Unexpected error occurred. Please fill in the address details manually.","Er is een onverwachte fout opgetreden. Vul s.v.p. handmatig uw adresgegevens in."
 "Please enter a valid zip code and house number.","Vul s.v.p. een valide postcode en huisnummer in."
+"Could not perform address validation.","Adresvalidatie niet beschikbaar."

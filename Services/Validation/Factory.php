@@ -29,6 +29,7 @@
  * @copyright   Copyright (c) Total Internet Group B.V. https://tig.nl/copyright
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
+
 namespace TIG\Postcode\Services\Validation;
 
 use TIG\Postcode\Exception as PostcodeException;
@@ -38,16 +39,15 @@ class Factory
     /**
      * @var array|ValidationInterface[]
      */
-    private $validators;
+    private array $validators;
 
     /**
      * Factory constructor.
      *
      * @param ValidationInterface[] $validators
      */
-    public function __construct(
-        $validators = []
-    ) {
+    public function __construct(array $validators = [])
+    {
         $this->validators = $validators;
     }
 

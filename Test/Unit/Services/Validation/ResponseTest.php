@@ -53,7 +53,7 @@ class ResponseTest extends TestInterface
      */
     public function testDefaultGetKeys()
     {
-        $expected = ['success', 'straatnaam', 'woonplaats'];
+        $expected = ['street', 'city'];
         $this->assertEquals($expected, $this->getInstance()->getKeys());
     }
 }

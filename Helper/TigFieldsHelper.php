@@ -64,7 +64,7 @@ class TigFieldsHelper
      * @param mixed $extensionAttributes
      * @param mixed $object
      */
-    public function copyFieldsFromExtensionAttributesToObject($extensionAttributes, $object)
+    public function copyFieldsFromExtensionAttributesToObject($extensionAttributes, $object): void
     {
         if (empty($extensionAttributes)) {
             return;
@@ -87,7 +87,7 @@ class TigFieldsHelper
     public function copyFieldsFromQuoteAddressToCustomerAddress(
         QuoteAddressInterface $quoteAddress,
         CustomerAddressInterface $customerAddress
-    ) {
+    ): void {
         try {
             foreach (self::TIG_FIELDS as $fieldName) {
                 $value = $quoteAddress->getData($fieldName);

@@ -199,7 +199,7 @@ class ApiTest extends TestCase
         $resetZendParams->method('resetParameters');
 
         //SetUri
-        $uri = 'https://api.fakelocation.com/v4/json/';
+        $uri = 'https://api.fakelocation.com/v4/';
         $apiConfigUri = $this->apiConfiguration->expects($this->once());
         $apiConfigUri->method('getBaseUri')->willReturn($uri);
 
@@ -259,7 +259,7 @@ class ApiTest extends TestCase
         $resetZendParams->method('resetParameters');
 
         //SetUri
-        $uri = 'https://api.fakelocation.com/v4/json/';
+        $uri = 'https://api.fakelocation.com/v4/';
         $apiConfigUri = $this->apiConfiguration->expects($this->once());
         $apiConfigUri->method('getBaseUri')->willReturn($uri);
 
@@ -324,13 +324,13 @@ class ApiTest extends TestCase
         $apiConfigUri->method('getBeBaseUri')->willReturn($uri);
 
         $endpointGetEndpoint = $this->endpoint->expects($this->exactly(3));
-        $endpointGetEndpoint->method('getEndpoint')->willReturn('postcode-find/');
+        $endpointGetEndpoint->method('getEndpoint')->willReturn('zipcode-find/');
 
         $endpointGetEndpointCountry = $this->endpoint->expects($this->exactly(2));
         $endpointGetEndpointCountry->method('getCountry')->willReturn('BE');
 
         $zendClientUri = $this->zendClient->expects($this->once());
-        $zendClientUri->method('setUri')->with($uri.'postcode-find/');
+        $zendClientUri->method('setUri')->with($uri.'zipcode-find/');
 
         $requestData = ['zipcodezone' => '1000'];
         $requestDataWithHeader = ['zipcodezone' => '1000'];

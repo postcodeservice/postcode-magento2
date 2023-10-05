@@ -51,7 +51,7 @@ class ApiConfigurationTest extends AbstractConfigurationTest
     private $streetVersion   = 'v2';
 
     /** @var string  */
-    private $postcodeEndpoint = 'postcode-find/';
+    private $postcodeEndpoint = 'zipcode-find/';
     /** @var string  */
     private $streetEndpoint   = 'street-find/';
 
@@ -149,7 +149,7 @@ class ApiConfigurationTest extends AbstractConfigurationTest
         );
 
         $expected = $this->beBase . '/' . $this->postcodeVersion . '/';
-        $this->assertEquals($expected, $this->instance->getBeBaseUri($this->postcodeEndpoint));
+        $this->assertEquals($expected, $this->instance->getBEBaseUri($this->postcodeEndpoint));
     }
 
     /**
@@ -171,6 +171,6 @@ class ApiConfigurationTest extends AbstractConfigurationTest
         );
 
         $expected = $this->beBase . '/' . $this->streetVersion . '/';
-        $this->assertEquals($expected, $this->instance->getBeBaseUri($this->streetEndpoint));
+        $this->assertEquals($expected, $this->instance->getBEBaseUri($this->streetEndpoint));
     }
 }

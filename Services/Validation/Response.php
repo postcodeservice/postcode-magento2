@@ -29,6 +29,7 @@
  * @copyright   Copyright (c) Total Internet Group B.V. https://tig.nl/copyright
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
+
 namespace TIG\Postcode\Services\Validation;
 
 class Response implements ValidationInterface
@@ -36,137 +37,64 @@ class Response implements ValidationInterface
     /**
      * @var string[]
      */
-    private $keysToContain = ['success', 'straatnaam', 'woonplaats'];
 
-    /**
-     * @inheritDoc
-     */
-    public function validate($data)
-    {
-        if (!is_array($data)) {
-            return false;
-        }
-
-        if ($this->checkIfRecursive($data)) {
-            return $this->validateElements($data);
-        }
-
-        if (!$this->validateResult($data)) {
-            return false;
-        }
-
-        if (!$this->checkStreetNameValue($data)) {
-            return false;
-        }
-
-        return true;
-    }
-
-    /**
-     * Get the Keys
-     *
-     * @return array
-     */
-    public function getKeys()
-    {
-        return $this->keysToContain;
-    }
+    private array $responseKeys = []; // set in GetAddress, GetBeStreet, GetBePostcode, etc.
 
     /**
      * Set the keys
      *
      * @param mixed $keys
      */
-    public function setKeys($keys)
+    public function setRequestFields($keys): void
     {
-        $this->keysToContain = $keys;
+        $this->responseKeys = $keys;
     }
 
     /**
-     * Check the keys
-     *
-     * @param mixed $data
-     *
-     * @return bool
+     * @inheritDoc
      */
-    private function checkKeys($data)
+    public function validate($data): bool
     {
-        $check = 0;
-        foreach ($this->keysToContain as $key) {
-            array_key_exists($key, $data)?: $check++;
-        }
-
-        return $check == 0;
-    }
-
-    /**
-     * Important note : Before using this method, first trigger the checkKeys method.
-     *
-     * @param mixed $data
-     *
-     * @return bool
-     */
-    private function checkStreetNameValue($data)
-    {
-        if (strpos($data['straatnaam'] ?? '', 'limiet bereikt') !== false) {
+        // if the response is not an array, it's invalid
+        if (!is_array($data)) {
             return false;
         }
 
-        return true;
-    }
-
-    /**
-     * Validate Result
-     *
-     * @param array $result
-     *
-     * @return bool
-     */
-    private function validateResult($result)
-    {
-        if (!$this->checkKeys($result)) {
-            return false;
+        // allow succes === false request to be processed at front-end side
+        if (array_key_exists("success", $data) && $data["success"] === false) {
+            return true;
         }
 
-        return true;
+        return $this->validateResponseFields($data);
     }
 
     /**
-     * Check if multiple results are returned
-     *
-     * BE returns multiple results whereas NL always returns one result.
-     * This method is to determine if multiple results were returned.
-     *
-     * @param array $data
-     *
-     * @return bool
-     */
-    private function checkIfRecursive($data)
-    {
-        return count($data) != count($data, COUNT_RECURSIVE);
-    }
-
-    /**
-     * Validate elements
+     * Check if the required response fields are present
      *
      * @param mixed $data
      *
      * @return bool
      */
-    private function validateElements($data)
+    private function validateResponseFields(array $data): bool
     {
-        $success = false;
-        array_walk(
-            $data,
-            function ($result) use (&$success) {
-                if (!$this->checkKeys($result)) {
-                    $success = false;
-                    return;
-                }
-                $success = true;
+        // If $data is a single-level array (NL) instead of multi-level array (BE),
+        // wrap it in another array for compatibility with the code in this method
+        if (!is_array(reset($data))) {
+            $data = [$data];
+        }
+
+        // Iterate over each element (which is now guaranteed to be an array) in the data array
+        foreach ($data as $item) {
+            // Check if all keys in $this->responseKeys are present in the item
+            $missingKeys = array_diff($this->responseKeys, array_keys($item));
+
+            // If any keys are missing, return false
+            if (!empty($missingKeys)) {
+                return false;
             }
-        );
+        }
 
-        return $success;
+        // If all items passed the check, return true
+        return true;
     }
 }

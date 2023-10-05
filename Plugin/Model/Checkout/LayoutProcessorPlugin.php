@@ -41,8 +41,11 @@ use Magento\Store\Model\ScopeInterface;
 class LayoutProcessorPlugin
 {
     private const MAGENTO_POSTCODE_COMPONENT_JS   = "Magento_Ui/js/form/element/post-code";
+
     private const TIG_POSTCODE_COMPONENT_JS       = "TIG_Postcode/js/form/element/tig-postcode-field";
+
     private const TIG_POSTCODE_COMPONENT_TEMPLATE = 'TIG_Postcode/form/element/postcode-field';
+
     private const COUNTRY_CODE_PATH               = 'general/country/default';
 
     /**
@@ -61,14 +64,14 @@ class LayoutProcessorPlugin
     private $scopeConfig;
 
     /**
-     * @param ArrayManager          $arrayManager
-     * @param NotifierInterface     $notifier
-     * @param ScopeConfigInterface  $scopeConfig
+     * @param ArrayManager         $arrayManager
+     * @param NotifierInterface    $notifier
+     * @param ScopeConfigInterface $scopeConfig
      */
     public function __construct(
-        ArrayManager            $arrayManager,
-        NotifierInterface       $notifier,
-        ScopeConfigInterface    $scopeConfig
+        ArrayManager $arrayManager,
+        NotifierInterface $notifier,
+        ScopeConfigInterface $scopeConfig
     ) {
         $this->arrayManager = $arrayManager;
         $this->notifier     = $notifier;
@@ -78,18 +81,19 @@ class LayoutProcessorPlugin
     /**
      * Adds tracked fields, so we can dynamically add classes or visibility
      *
-     * @param string|int|array  $jsLayout
-     * @param string|int|array  $fieldsetChildren
+     * @param string|int|array $jsLayout
+     * @param string|int|array $fieldsetChildren
      *
      * @return array
      */
     public function addTrackedFields($jsLayout, $fieldsetChildren): array
     {
-        foreach ([
+        foreach (
+            [
                 'street',
                 'city',
                 'postcode'
-                 ] as $key) {
+            ] as $key) {
             $jsLayout = $this->arrayManager->set(
                 $fieldsetChildren . '/' . $key . '/tracks/additionalClasses',
                 $jsLayout,
@@ -103,10 +107,10 @@ class LayoutProcessorPlugin
     /**
      * Create the base field configuration for the checkout provider
      *
-     * @param string        $dataScope
-     * @param string        $index
-     * @param string        $label
-     * @param array         $options
+     * @param string $dataScope
+     * @param string $index
+     * @param string $label
+     * @param array  $options
      *
      * @return array
      */
@@ -136,14 +140,17 @@ class LayoutProcessorPlugin
      *
      * @return array[]
      */
-    public function createHousenumberFieldsDefinition($dataScope)
+    public function createHousenumberFieldsDefinition(string $dataScope): array
     {
         return [
             'tig_housenumber'          => $this->createBaseFieldConfig(
                 $dataScope,
                 'tig_housenumber',
                 'Housenumber',
-                ["sortOrder" => 51, "validation" => ["required-entry" => true, "validate-number" => true]]
+                [
+                    "sortOrder"  => 51,
+                    "validation" => ["required-entry" => true, "validate-number" => true]
+                ]
             ),
             'tig_housenumber_addition' => $this->createBaseFieldConfig(
                 $dataScope,
@@ -156,20 +163,20 @@ class LayoutProcessorPlugin
                 'tig_street',
                 'Street Address',
                 ["sortOrder" => 53]
-            ),
+            )
         ];
     }
 
     /**
      * Split string and remove last n element(s)
      *
-     * @param array|string      $path
-     * @param string            $delimiter
-     * @param int               $count
+     * @param array|string $path
+     * @param string       $delimiter
+     * @param int          $count
      *
      * @return string
      */
-    private function getParentPath($path, $delimiter = '/', $count = 1)
+    private function getParentPath(array|string $path, string $delimiter = '/', int $count = 1): string
     {
         $splitPath = !empty($path) ? explode($delimiter, $path) : [];
         for ($i = 0; $i < $count; $i++) {
@@ -186,7 +193,7 @@ class LayoutProcessorPlugin
      *
      * @param mixed $message
      */
-    public function addAdminErrorMessage($message)
+    public function addAdminErrorMessage($message): void
     {
         $this->notifier->addMajor(
             "TIG Postcode",
@@ -204,24 +211,21 @@ class LayoutProcessorPlugin
      *
      * @see LayoutProcessor::process()
      */
-    public function afterProcess(
-        $subject,
-        $jsLayout
-    ) {
+    public function afterProcess($subject, $jsLayout) {
         $postalCodePaths = $this->arrayManager->findPaths('postcode', $jsLayout);
         foreach ($postalCodePaths as $postalCodePath) {
             $fieldsetChildren = $this->getParentPath($postalCodePath, '/');
 
             if ($this->arrayManager->get(
-                $postalCodePath . '/component',
-                $jsLayout
-            ) !== self::MAGENTO_POSTCODE_COMPONENT_JS
+                    $postalCodePath . '/component',
+                    $jsLayout
+                ) !== self::MAGENTO_POSTCODE_COMPONENT_JS
                 xor $this->arrayManager->get(
                     $postalCodePath . '/component',
                     $jsLayout
                 ) === self::TIG_POSTCODE_COMPONENT_JS) {
                 $this->addAdminErrorMessage('Incompatible postcode field found @ ' . $postalCodePath . ': ' .
-                    $this->arrayManager->get($postalCodePath . '/component', $jsLayout));
+                                            $this->arrayManager->get($postalCodePath . '/component', $jsLayout));
                 continue;
             }
 
@@ -244,6 +248,13 @@ class LayoutProcessorPlugin
             // Change default sortOrder of PostcodeField if country is set to NL or BE
             // @TODO use a better way to set sort order for postcode field,
             // tried in branch "tryout_billing_address_sortorder_mixin"
+
+            // $TODO remove debug data
+            /* $file = fopen('test.txt', 'a+');
+            fwrite($file, $defaultCountry . "--");
+            fclose($file);
+            */
+
             if ($defaultCountry === "NL" || $defaultCountry === "BE") {
                 $jsLayout = $this->arrayManager->set($postalCodePath . '/config/sortOrder', $jsLayout, 50);
             }
@@ -253,7 +264,7 @@ class LayoutProcessorPlugin
                 $this->arrayManager->get($postalCodePath . '/dataScope', $jsLayout),
                 "."
             );
-            $jsLayout = $this->arrayManager->merge(
+            $jsLayout                = $this->arrayManager->merge(
                 $fieldsetChildren,
                 $jsLayout,
                 $this->createHousenumberFieldsDefinition($postcodeParentDataScope)
@@ -262,6 +273,14 @@ class LayoutProcessorPlugin
             // Modify fields
             $jsLayout = $this->addTrackedFields($jsLayout, $fieldsetChildren);
         }
+
+        /* Robert
+        if (isset($jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']
+                  ['children']['shippingAddress']['children']['shipping-address-fieldset']['children']['city'])) {
+            $jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']
+            ['children']['shippingAddress']['children']['shipping-address-fieldset']['children']['city']['sortOrder'] = 49; // your desired sort order
+        }
+        */
 
         return $jsLayout;
     }

@@ -76,13 +76,17 @@
     width: 100%;
 }
 
+#section_support .collapse-title h3,
+#section_benefits .collapse-title h3 {
+    cursor: pointer !important;
+}
+
 #supporttab h3 {
     font-size: 1.7rem;
     margin: 0 !important;
     padding: 1.9rem 2.7rem 1.9rem 1rem;
     color: black;
     font-weight: 600;
-    cursor: pointer;
 }
 
 #supporttab h4 {
@@ -105,6 +109,7 @@
     line-height: 2em;
     list-style-type: none;
     margin-bottom: 10px;
+    margin-left: -10px;
 }
 
 .postcode-config-page .section-config {
@@ -268,7 +273,7 @@
 /* SupportTab - Documentation ======================================================================================= */
 
 .external_link {
-    margin-left: 5px;
+    margin-bottom: 3px;
     vertical-align: middle;
 }
 
@@ -288,11 +293,11 @@
     float: right;
     width: 30px;
     height: 45px;
-    margin-top: -10px;
+    margin-top: -5px;
     margin-right: 3px;
 
     background-image: url(../images/postcode_service_logo_monogram.svg) !important;
-    background-size: 25px !important;
+    background-size: 20px !important;
     background-repeat: no-repeat;
     content: ' ';
 }
@@ -304,14 +309,14 @@
 }
 
 .postcode-config-page .page-main-actions .page-actions .page-actions-inner:before {
-    background-image: url(../images/postcode_service_logo_monogram.svg) !important;
+    background-image: url(../images/postcode_service_logo_color.svg) !important;
     background-repeat: no-repeat;
     content: ' ';
-    width: 50px;
+    width: 150px;
     float: left;
     height: 45px;
     margin-left: 60px;
-    background-size: 35px;
+    background-size: auto 50px;
 }
 
 /* Identity - Content =============================================================================================== */
@@ -332,7 +337,7 @@
 }
 
 .postcode-config-page #container:before {
-    content: 'Postcode Service International';
+    content: 'Postcode Service .com';
     text-indent: 0;
     float: left;
     height: 50px;

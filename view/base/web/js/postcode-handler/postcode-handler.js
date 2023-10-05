@@ -82,7 +82,7 @@ define([
      * @param message
      */
     PostcodeHandler.prototype.log = function(message){
-        console.log('PostcodeService[' + this.id + '][' + this.getISOCode() + ']: ' + message);
+        console.log('Postcodeservice.com extension: [' + this.id + '][' + this.getISOCode() + ']: ' + message);
     }
 
     /**
@@ -97,7 +97,7 @@ define([
             var street = this.getPostcodeService().getFieldValue(FieldTypes.street);
             var house_number = this.getPostcodeService().getFieldValue(FieldTypes.house_number);
             var house_number_addition = this.getPostcodeService().getFieldValue(FieldTypes.house_number_addition);
-            this.log("Updating magento street" , [street, house_number, house_number_addition])
+            this.log("Updating Magento street field" , [street, house_number, house_number_addition])
             this.getPostcodeService().setFieldValue(FieldTypes.magento_street, street +
                 (house_number ? ' ' + house_number : '') +
                 (house_number_addition ? ' ' + house_number_addition : '')

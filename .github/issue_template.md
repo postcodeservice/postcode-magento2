@@ -44,4 +44,4 @@ Issues with outdated version will be rejected.
 
 ### TIG support
 
-- Please ask your question in English to ensure that your issue can help other people internationally. Nevertheless we will respond in English.
+- Please ask your question in English to ensure that your issue can help other people internationally. Nevertheless, we will respond in English.

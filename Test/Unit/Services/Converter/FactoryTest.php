@@ -108,7 +108,7 @@ class FactoryTest extends TestCase
     {
         $requestMock = $this->getFakeMock(Request::class)->getMock();
         $requestMock->expects($this->once())->method('convert')->willReturn(
-            ['success' => true, 'straatnaam' => 'Kabelweg', 'woonplaats' => 'Amsterdam']
+            ['street' => 'Kabelweg', 'city' => 'Amsterdam']
         );
 
         $instance = $this->getInstance(
@@ -122,10 +122,10 @@ class FactoryTest extends TestCase
         $this->assertEquals(
             $instance->convert(
                 'correct',
-                ['postcode' => '1014BA', 'huisnummer' => 37],
-                ['success', 'straatnaam', 'woonplaats']
+                ['zipcode' => '1014BA', 'houseno' => 37],
+                ['street', 'city']
             ),
-            ['success' => true, 'straatnaam' => 'Kabelweg', 'woonplaats' => 'Amsterdam']
+            ['street' => 'Kabelweg', 'city' => 'Amsterdam']
         );
     }
 }

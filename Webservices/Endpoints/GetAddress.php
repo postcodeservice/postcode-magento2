@@ -34,10 +34,10 @@ namespace TIG\Postcode\Webservices\Endpoints;
 // @codingStandardsIgnoreFile
 class GetAddress extends EndpointAbstract
 {
-    protected $endpoint = 'getAddress/';
+    protected $endpoint = 'find/';
 
     protected $country = 'NL';
 
-    protected $requestKeys = ['postcode', 'huisnummer'];
-    protected $responseKeys = ['success', 'straatnaam', 'woonplaats'];
+    protected $requestKeys = ['zipcode', 'houseno']; // NL V5
+    protected $responseKeys = ['street', 'city']; // NL V5
 }

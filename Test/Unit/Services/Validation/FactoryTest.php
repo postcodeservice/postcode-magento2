@@ -138,11 +138,11 @@ class FactoryTest extends TestCase
     {
         return [
             'Correct Data array' => [
-                ['success' => true, 'straatnaam' => 'kabelweg', 'woonplaats' => 'Amsterdam'],
+                ['street' => 'kabelweg', 'city' => 'Amsterdam'],
                 true
             ],
             'Incorrect keys in Data array' => [
-                ['success' => true, 'straatnaam' => 'kabelweg', 'stad' => 'Amsterdam'],
+                ['street' => 'kabelweg', 'city' => 'Amsterdam'],
                 false
             ],
             'Incorrect format of Data' => [
@@ -150,7 +150,7 @@ class FactoryTest extends TestCase
                 false
             ],
             'Limit calls response' => [
-                ['success' => true, 'straatnaam' => 'Opvraag limiet bereikt', 'woonplaats' => 'Amsterdam'],
+                ['street' => 'Opvraag limiet bereikt', 'city' => 'Amsterdam'],
                 false
             ]
         ];
@@ -193,7 +193,7 @@ class FactoryTest extends TestCase
     public function testResponseValidatorForBECall($data, $expected)
     {
         $object = $this->getObject(Validation\Response::class);
-        $object->setKeys(['postcode', 'plaats']);
+        $object->setKeys(['zipcode', 'city']);
 
         $instance = $this->getInstance([
             'validators' => [

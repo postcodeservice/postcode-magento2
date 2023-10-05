@@ -47,5 +47,5 @@ interface ValidationInterface
      *
      * @param mixed $keys
      */
-    public function setKeys($keys);
+    public function setRequestFields($keys);
 }

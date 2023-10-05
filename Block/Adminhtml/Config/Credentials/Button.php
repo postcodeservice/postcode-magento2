@@ -62,9 +62,9 @@ class Button extends Template implements RendererInterface
      *
      * @return \Magento\Framework\Phrase
      */
-    public function getLabel()
+    public function getSignUpLabel()
     {
-        return __('Get Credentials');
+        return __('Sign Up For A Paid Account');
     }
 
     /**

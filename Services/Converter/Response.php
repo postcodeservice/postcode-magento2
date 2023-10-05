@@ -56,7 +56,7 @@ class Response implements ConverterInterface
      */
     public function setValidationKeys($keys)
     {
-        $this->validation->setKeys($keys);
+        $this->validation->setRequestFields($keys);
     }
 
     /**

@@ -51,7 +51,8 @@
                sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
             <label>Client ID</label>
             <tooltip>The Client ID can be requested via the
-                'Request Credentials' button.</tooltip>
+                'Sign Up For A Paid Account' button.
+            </tooltip>
             <config_path>tig_postcode/configuration/client_id</config_path>
             <depends>
                 <field id="modus">1</field>
@@ -59,9 +60,10 @@
         </field>
         <field id="api_key" translate="label tooltip" type="obscure"
                sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
-            <label>Client Secret</label>
-            <tooltip>The Client Secret can be requested via the
-                'Request Credentials' button.</tooltip>
+            <label>Secure Code</label>
+            <tooltip>The Secure Code can be requested via the
+                'Sign Up For A Paid Account' button.
+            </tooltip>
             <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
             <config_path>tig_postcode/configuration/api_key</config_path>
             <depends>
@@ -69,7 +71,8 @@
             </depends>
         </field>
 
-        <field id="credential_button" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+        <field id="credential_button" type="text" sortOrder="40" showInDefault="1" showInWebsite="1"
+               showInStore="1">
             <frontend_model>TIG\Postcode\Block\Adminhtml\Config\Credentials\Button</frontend_model>
             <depends>
                 <field id="modus">1</field>
@@ -80,8 +83,11 @@
         <field id="client_id_test" translate="label comment" type="text"
                sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
             <label>Client ID - TEST</label>
-            <comment><![CDATA[You can use test Client ID if needed: <strong>1177</strong>]]></comment>
-            <tooltip>Test credentials are limited to 50 requests per month.</tooltip>
+            <comment>
+                <![CDATA[You can use Client ID <strong>1177</strong> for testing purposes.<br/>Please note that these test credentials have limitations, including daily usage limits and added delays.]]></comment>
+            <tooltip>The Client ID consists of a number, for example 1177, and can be found in the
+                details of your subscription plan.
+            </tooltip>
             <config_path>tig_postcode/configuration/client_id_test</config_path>
             <depends>
                 <field id="modus">2</field>
@@ -90,9 +96,12 @@
 
         <field id="api_key_test" translate="label comment tooltip" type="obscure"
                sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
-            <label>Client Secret - TEST</label>
-            <comment><![CDATA[You can use test Client Secret if needed: <strong>9SRLYBCALURPE2B</strong>]]></comment>
-            <tooltip>Test credentials are limited to 50 requests per month.</tooltip>
+            <label>Secure Code - TEST</label>
+            <comment>
+                <![CDATA[You can use Secure Code <strong>9SRLYBCALURPE2B</strong> for testing purposes.]]></comment>
+            <tooltip>The Secure Code contains alphanumeric and non-alphanumeric characters, for
+                example 9SRLYBCALURPE2B, and can be found in the details of your subscription plan.
+            </tooltip>
             <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
             <config_path>tig_postcode/configuration/api_key_test</config_path>
             <depends>

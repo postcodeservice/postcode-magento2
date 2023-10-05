@@ -35,10 +35,10 @@ namespace TIG\Postcode\Webservices\Endpoints;
 // @codingStandardsIgnoreFile
 class GetBePostcode extends EndpointAbstract
 {
-    protected $endpoint = 'postcode-find/';
+    protected $endpoint = 'zipcode-find/';
 
     protected $country = 'BE';
 
-    protected $requestKeys = ['zipcodezone'];
-    protected $responseKeys = ['postcode', 'plaats'];
+    protected $requestKeys  = ['zipcodezone', 'multiresults']; // BE V3
+    protected $responseKeys = ['zipcode', 'city']; // BE V3
 }

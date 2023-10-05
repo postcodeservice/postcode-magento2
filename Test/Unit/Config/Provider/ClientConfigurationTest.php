@@ -105,7 +105,7 @@ class ClientConfigurationTest extends AbstractConfigurationTest
         $this->assertEquals($expected, $instance->getModusXpath($value));
     }
 
-    public function testGetApiKey()
+    public function testGetSecureCode()
     {
         $this->setModuleMock(true);
         $instance = $this->getInstance();
@@ -116,7 +116,7 @@ class ClientConfigurationTest extends AbstractConfigurationTest
         $returnCryped = $this->getRandomSyntax();
         $this->setDecryptedKey($value, $returnCryped);
 
-        $this->assertEquals($returnCryped, $instance->getApiKey());
+        $this->assertEquals($returnCryped, $instance->getSecureCode());
     }
 
     public function testGetDomainUrl()

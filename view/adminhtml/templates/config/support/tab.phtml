@@ -34,35 +34,72 @@
 
     <div id="block">
         <div class="block-legend">
+            <div>
+                <ul>
+                    <li>
+                        This extension enables autocompletion of a partly given address in the checkout and check its validity.
+                    </li>
+                </ul>
+            </div>
             <h3 data-role="trigger"><?= $block->escapeHtml(__('Documentation')); ?></h3>
             <div>
                 <ul>
                     <li>
-                        <a class="pdf" target="_blank" href="https://github.com/postcodeservice/tig-extension-tig-postcode-magento2"
-                           title="<?= $block->escapeHtml(__('View the user manual on Github'));
+                        <a class="pdf" target="_blank" href="https://github.com/postcodeservice/tig-extension-tig-postcode-magento2#configuration"
+                           title="<?= $block->escapeHtml(__('View the configuration guidelines on Github'));
                            ?>">
-                            <?= $block->escapeHtml(__('User manual')); ?>
+                            <?= $block->escapeHtml(__('Configuration guidelines')); ?>
                             <img
-                                class="external_link"
-                                src="<?=
-                                /* @noEscape */
-                                $block->getViewFileUrl('TIG_Postcode::images/external_link_32.png')
-                                ?>"
-                                alt="<?= $block->escapeHtml(__('User Manual')); ?>" width="16" height="16"
+                                    class="external_link"
+                                    src="<?=
+                                    /* @noEscape */
+                                    $block->getViewFileUrl('TIG_Postcode::images/postcode_service_external_link_32.svg')
+                                    ?>"
+                                    alt="<?= $block->escapeHtml(__('Configuration guidelines')); ?>" width="16" height="16"
                             />
                         </a>
                     </li>
                     <li>
                         <a target="_blank" href="https://github.com/postcodeservice/postcode-magento2/releases"
-                           title="<?= $block->escapeHtml(__('View the complete release notes of the extension')); ?>">
-                            <?= $block->escapeHtml(__('Full Release Notes')); ?>
+                           title="<?= $block->escapeHtml(__('View the version history and release notes of the extension')); ?>">
+                            <?= $block->escapeHtml(__('Version history and release notes')); ?>
                             <img class="external_link"
                                  src="<?=
                                  /* @noEscape */
-                                 $block->getViewFileUrl('TIG_Postcode::images/external_link_32.png')
+                                 $block->getViewFileUrl('TIG_Postcode::images/postcode_service_external_link_32.svg')
                                  ?>"
-                                 alt="<?= $block->escapeHtml(__('Full Release Notes')); ?>"
+                                 alt="<?= $block->escapeHtml(__('Version history and release notes')); ?>"
                                  width="16" height="16"
+                            />
+                        </a>
+                    </li>
+                    <li>
+                        <a class="pdf" target="_blank" href="https://developers.postcodeservice.com"
+                           title="<?= $block->escapeHtml(__('View the API documentation for further customization'));
+                           ?>">
+                            <?= $block->escapeHtml(__('API documentation for full customization')); ?>
+                            <img
+                                    class="external_link"
+                                    src="<?=
+                                    /* @noEscape */
+                                    $block->getViewFileUrl('TIG_Postcode::images/postcode_service_external_link_32.svg')
+                                    ?>"
+                                    alt="<?= $block->escapeHtml(__('API documentation for full customization')); ?>" width="16" height="16"
+                            />
+                        </a>
+                    </li>
+                    <li>
+                        <a class="pdf" target="_blank" href="https://postcodeservice.com/feature-request/"
+                           title="<?= $block->escapeHtml(__('New feature request form'));
+                           ?>">
+                            <?= $block->escapeHtml(__('New feature request form')); ?>
+                            <img
+                                    class="external_link"
+                                    src="<?=
+                                    /* @noEscape */
+                                    $block->getViewFileUrl('TIG_Postcode::images/postcode_service_external_link_32.svg')
+                                    ?>"
+                                    alt="<?= $block->escapeHtml(__('New feature request form')); ?>" width="16" height="16"
                             />
                         </a>
                     </li>
@@ -87,89 +124,131 @@
                 </ul>
             </div>
 
-            <h3 data-role="trigger"><?= $block->escapeHtml(__('Support')); ?></h3>
-            <div>
-                    <ul>
-                        <li>
-                            <a class="pdf" target="_blank" href="mailto:support@postcodeservice.com"
-                               title="<?= $block->escapeHtml(__('Mail support@postcodeservice.com'));
-                               ?>">
-                                <?= $block->escapeHtml(__('support@postcodeservice.com')); ?>
-                                <img
-                                    class="external_link"
-                                    src="<?=
-                                    /* @noEscape */
-                                    $block->getViewFileUrl('TIG_Postcode::images/external_link_32.png')
-                                    ?>"
-                                    alt="<?= $block->escapeHtml(__('support@postcodeservice.com')); ?>" width="16" height="16"
-                                />
-                            </a>
-                        </li>
-                    </ul>
-                    <ul>
-                        <li>
-                            <a class="pdf" target="_blank" href="https://postcodeservice.com/#support"
-                               title="<?= $block->escapeHtml(__('Contact details https://postcodeservice.com/#support'));
-                               ?>">
-                                <?= $block->escapeHtml(__('postcodeservice.com/#support')); ?>
-                                <img
-                                    class="external_link"
-                                    src="<?=
-                                    /* @noEscape */
-                                    $block->getViewFileUrl('TIG_Postcode::images/external_link_32.png')
-                                    ?>"
-                                    alt="<?= $block->escapeHtml(__('https://postcodeservice.com/#support')); ?>" width="16" height="16"
-                                />
-                            </a>
-                        </li>
-                    </ul>
-            </div>
+            <div id="section_support">
+                <div class="collapse-title" data-role="title">
+                    <h3 data-role="trigger"><?= $block->escapeHtml(__('Technical Support')); ?></h3>
+                </div>
+                <div class="collapse-content support-postcode-tig" data-role="content" style="display:none;">
 
-            <h3 data-role="trigger"><?= $block->escapeHtml(__('Postcode Service USP')); ?></h3>
-            <div class="advantages-postcode-tig">
-                <div class="block_usp">
-                    <ul>
-                        <li class="first">
-                            <svg xmlns="http://www.w3.org/2000/svg"
-                                 xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 26 26"
-                                 enable-background="new 0 0 26 26" width="512px" height="512px">
-                                <path d="m.3,14c-0.2-0.2-0.3-0.5-0.3-0.7s0.1-0.5 0.3-0.7l1.4-1.4c0.4-0.4 1-0.4 1.4,0l.1,.1
-                            5.5,5.9c0.2,0.2 0.5,0.2 0.7,0l13.4-13.9h0.1v-8.88178e-16c0.4-0.4 1-0.4 1.4,0l1.4,1.4c0.4,0.4
-                            0.4,1 0,1.4l0,0-16,16.6c-0.2,0.2-0.4,0.3-0.7,0.3-0.3,0-0.5-0.1-0.7-0.3l-7.8-8.4-.2-.3z"
-                                      fill="#009f3e"/>
-                            </svg>
-                        </li>
-                        <li class="last"><?= $block->escapeHtml(__('Superfast performance with our core architecture designed for webshops')); ?></li>
-                    </ul>
-                    <ul>
-                        <li class="first">
-                            <svg xmlns="http://www.w3.org/2000/svg"
-                                 xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 26 26"
-                                 enable-background="new 0 0 26 26" width="512px" height="512px">
-                                <path d="m.3,14c-0.2-0.2-0.3-0.5-0.3-0.7s0.1-0.5 0.3-0.7l1.4-1.4c0.4-0.4 1-0.4 1.4,0l.1,.1
-                            5.5,5.9c0.2,0.2 0.5,0.2 0.7,0l13.4-13.9h0.1v-8.88178e-16c0.4-0.4 1-0.4 1.4,0l1.4,1.4c0.4,0.4
-                            0.4,1 0,1.4l0,0-16,16.6c-0.2,0.2-0.4,0.3-0.7,0.3-0.3,0-0.5-0.1-0.7-0.3l-7.8-8.4-.2-.3z"
-                                      fill="#009f3e"/>
-                            </svg>
-                        </li>
-                        <li class="last"><?= $block->escapeHtml(__('Always available because we are independent of logistics vendors')); ?></li>
-                    </ul>
-                    <ul>
-                        <li class="first">
-                            <svg xmlns="http://www.w3.org/2000/svg"
-                                 xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 26 26"
-                                 enable-background="new 0 0 26 26" width="512px" height="512px">
-                                <path d="m.3,14c-0.2-0.2-0.3-0.5-0.3-0.7s0.1-0.5 0.3-0.7l1.4-1.4c0.4-0.4 1-0.4 1.4,0l.1,.1
-                            5.5,5.9c0.2,0.2 0.5,0.2 0.7,0l13.4-13.9h0.1v-8.88178e-16c0.4-0.4 1-0.4 1.4,0l1.4,1.4c0.4,0.4
-                            0.4,1 0,1.4l0,0-16,16.6c-0.2,0.2-0.4,0.3-0.7,0.3-0.3,0-0.5-0.1-0.7-0.3l-7.8-8.4-.2-.3z"
-                                      fill="#009f3e"/>
-                            </svg>
-                        <li class="last"><?= $block->escapeHtml(__('No data is collected for analytics or sales')); ?>
-                        </li>
-                    </ul>
+                    <div>
+                        <ul>
+                            <li>
+                                For technical issues, reach us via the support page:
+                            </li>
+                            <li>
+                                <a class="pdf" target="_blank" href="https://postcodeservice.com/support/"
+                                   title="<?= $block->escapeHtml(__('Technical Support https://postcodeservice.com/support/'));
+                                   ?>">
+                                    <?= $block->escapeHtml(__('postcodeservice.com/support')); ?>
+                                    <img
+                                            class="external_link"
+                                            src="<?=
+                                            /* @noEscape */
+                                            $block->getViewFileUrl('TIG_Postcode::images/postcode_service_external_link_32.svg')
+                                            ?>"
+                                            alt="<?= $block->escapeHtml(__('https://postcodeservice.com/support/')); ?>" width="16" height="16"
+                                    />
+                                </a>
+                            </li>
+                            <li>
+                                <?= __('This extension is developed by Total Internet Group BV / Postcode Service:');
+                                ?>
+                            </li>
+                            <li>
+                                <a class="pdf" target="_blank" href="https://postcodeservice.com"
+                                   title="<?= $block->escapeHtml(__('Contact https://www.postcodeservice.com'));
+                                   ?>">
+                                    <?= $block->escapeHtml(__('www.postcodeservice.com')); ?>
+                                    <img
+                                            class="external_link"
+                                            src="<?=
+                                            /* @noEscape */
+                                            $block->getViewFileUrl('TIG_Postcode::images/postcode_service_external_link_32.svg')
+                                            ?>"
+                                            alt="<?= $block->escapeHtml(__('https://www.postcodeservice.com')); ?>" width="16" height="16"
+                                    />
+                                </a>
+                            </li>
+
+                        </ul>
+                    </div>
                 </div>
             </div>
 
+            <div id="section_benefits">
+                <div class="collapse-title" data-role="title">
+                    <h3 data-role="trigger"><?= $block->escapeHtml(__('Postcode Service Benefits')); ?></h3>
+                </div>
+                <div class="collapse-content advantages-postcode-tig" data-role="content" style="display:none;">
+                    <div class="block_usp">
+                        <ul>
+                            <li class="first">
+                                <img
+                                        class="external_link"
+                                        src="<?=
+                                        /* @noEscape */
+                                        $block->getViewFileUrl('TIG_Postcode::images/postcode_service_green_arrow_32.svg')
+                                        ?>"
+                                        alt="<?= $block->escapeHtml(__('Privacy-focused: No analytic data collection')); ?>" width="16" height="16"
+                                />
+                            </li>
+                            <li class="last"><?= $block->escapeHtml(__('Privacy-focused: No analytic data collection')); ?></li>
+                        </ul>
+                        <ul>
+                            <li class="first">
+                                <img
+                                        class="external_link"
+                                        src="<?=
+                                        /* @noEscape */
+                                        $block->getViewFileUrl('TIG_Postcode::images/postcode_service_green_arrow_32.svg')
+                                        ?>"
+                                        alt="<?= $block->escapeHtml(__('Compliant with GDPR and ISO 27001:2013 standards')); ?>" width="16" height="16"
+                                />
+                            </li>
+                            <li class="last"><?= $block->escapeHtml(__('Compliant with GDPR and ISO 27001:2013 standards')); ?></li>
+                        </ul>
+                        <ul>
+                            <li class="first">
+                                <img
+                                        class="external_link"
+                                        src="<?=
+                                        /* @noEscape */
+                                        $block->getViewFileUrl('TIG_Postcode::images/postcode_service_green_arrow_32.svg')
+                                        ?>"
+                                        alt="<?= $block->escapeHtml(__('High reliability: 99.99% uptime in the chain')); ?>" width="16" height="16"
+                                />
+                            </li>
+                            <li class="last"><?= $block->escapeHtml(__('High reliability: 99.99% uptime in the chain')); ?></li>
+                        </ul>
+                        <ul>
+                            <li class="first">
+                                <img
+                                        class="external_link"
+                                        src="<?=
+                                        /* @noEscape */
+                                        $block->getViewFileUrl('TIG_Postcode::images/postcode_service_green_arrow_32.svg')
+                                        ?>"
+                                        alt="<?= $block->escapeHtml(__('Secure: Independent of logistics companies')); ?>" width="16" height="16"
+                                />
+                            </li>
+                            <li class="last"><?= $block->escapeHtml(__('Secure: Independent of logistics companies')); ?></li>
+                        </ul>
+                        <ul>
+                            <li class="first">
+                                <img
+                                        class="external_link"
+                                        src="<?=
+                                        /* @noEscape */
+                                        $block->getViewFileUrl('TIG_Postcode::images/postcode_service_green_arrow_32.svg')
+                                        ?>"
+                                        alt="<?= $block->escapeHtml(__('Phone support available')); ?>" width="16" height="16"
+                                />
+                            </li>
+                            <li class="last"><?= $block->escapeHtml(__('Phone support available')); ?></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div class="block-version">
@@ -178,7 +257,7 @@
                 <ul class="version-compatibility">
 
                     <li>
-                        <span class="text"><?= $block->escapeHtml(__('Postcode Service')); ?>:</span>
+                        <span class="text"><?= $block->escapeHtml(__('Postcode Service Extension Version')); ?>:</span>
                         <span class="version">
                             <?= /* @noEscape */
                             $block->getVersionNumber() .
@@ -208,29 +287,7 @@
                     </li>
                 </ul>
             </div>
-            <h3><?= $block->escapeHtml(__('Third party compatibility')); ?></h3>
-            <div>
-                <ul class="version-compatibility">
-                    <li>
-                        <span class="text">
-                            <?= $block->escapeHtml(__('OneStepCheckout.com')); ?>:
-                        </span>
-                        <span class="version">Not supported</span>
-                    </li>
-                    <li>
-                        <span class="text">
-                            <?= $block->escapeHtml(__('MagePlaza')); ?>:
-                        </span>
-                        <span class="version">Not supported</span>
-                    </li>
-                    <li>
-                        <span class="text">
-                            <?= $block->escapeHtml(__('Amasty')); ?>:
-                        </span>
-                        <span class="version">Not supported</span>
-                    </li>
-                </ul>
-            </div>
         </div>
     </div>
+
 </div>

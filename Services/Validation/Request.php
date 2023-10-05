@@ -29,37 +29,22 @@
  * @copyright   Copyright (c) Total Internet Group B.V. https://tig.nl/copyright
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
+
 namespace TIG\Postcode\Services\Validation;
 
 class Request implements ValidationInterface
 {
-    /** @var string[]  */
-    private $keysToContain = ['postcode', 'huisnummer'];
-
-    /**
-     * @inheritDoc
-     */
-    public function validate($data)
-    {
-        if (!is_array($data)) {
-            return false;
-        }
-
-        if (!$this->checkKeys($data)) {
-            return false;
-        }
-
-        return true;
-    }
+    /** @var string[] */
+    private array $requestKeys = []; // set in GetAddress, GetBeStreet, GetNlStreet, etc.
 
     /**
      * @inheritdoc
      *
      * @param string[] $keys
      */
-    public function setKeys($keys)
+    public function setRequestFields($keys): void
     {
-        $this->keysToContain = $keys;
+        $this->requestKeys = $keys;
     }
 
     /**
@@ -67,25 +52,47 @@ class Request implements ValidationInterface
      *
      * @return string[]
      */
-    public function getKeys()
+    public function getRequestFields(): array
     {
-        return $this->keysToContain;
+        return $this->requestKeys;
     }
 
     /**
-     * Check keys
-     *
-     * @param mixed $data
-     *
-     * @return bool
+     * @inheritDoc
      */
-    private function checkKeys($data)
+    public function validate($data): bool
     {
-        $check = 0;
-        foreach ($this->keysToContain as $key) {
-            array_key_exists($key, $data)?: $check++;
+        // if the response is not an array, it's invalid
+        if (!is_array($data)) {
+            return false;
         }
 
-        return $check == 0;
+        return $this->validateRequestFields($data);
+
     }
+
+    /**
+     * Validates that all request keys are present in the provided data.
+     *
+     * This function iterates over each key in $this->requestKeys and checks if it exists in the provided data array.
+     * If any key is missing, the function immediately returns false. If all keys are present, it returns true.
+     *
+     * @param array $data The data to validate.
+     *
+     * @return bool Returns true if all request keys are present in the data, false otherwise.
+     */
+    public function validateRequestFields(array $data): bool
+    {
+        // Check if all keys are present in the request keys
+        foreach ($this->requestKeys as $key) {
+            // If a key is missing, return false immediately
+            if (!array_key_exists($key, $data)) {
+                return false;
+            }
+        }
+
+        // If all keys were present, return true
+        return true;
+    }
+
 }

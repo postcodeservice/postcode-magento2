@@ -28,6 +28,7 @@
  * @copyright   Copyright (c) Total Internet Group B.V. https://tig.nl/copyright
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
+
 define([
     'underscore',
     'knockout'
@@ -57,13 +58,13 @@ define([
     /**
      * Normalize Sort Orders
      *
-     * To sort the fields dynamically we need to have an numeric sort order.
+     * To sort the fields dynamically we need to have a numeric sort order.
      * Some fields have a 'before: element-x' or 'after: element-y' we solve this
      *
      * By adding .01 to the related field, some One Step Checkouts have low
-     * numeric values 1 - 10 so we add a very small number instead of integers.
+     * numeric values 1 - 10, so we add a very small number instead of integers.
      *
-     * This loops max 5 times so we can resolve up to 5 dependency layers
+     * This loops max 5 times, so we can resolve up to 5 dependency layers
      * For Example: element x after element y, element y after element z ...
      *
      * @param elementArray
