@@ -137,12 +137,16 @@ of your Magento webshop. From there, you can configure the extension according t
 
 ### For Dutch postcodes
 
-<img src="https://postcodeservice.com/wp-content/uploads/2022/08/postcodeservice-magento-2-nl.gif"
-width="50%" alt="postcode_service_magento2-nl>
+<img src="./media/postcode_service_magento_2_nl.gif" width="400" alt="postcode_service_magento2-nl">
 
 ### For Belgium postcodes
 
-<img src="https://postcodeservice.com/wp-content/uploads/2022/08/postcodeservice-magento-2-be.gif" width="50%" alt="postcode_service_magento2-be">
+<img src="./media/postcode_service_magento_2_be.gif" width="400" alt="postcode_service_magento2-be">
+
+### For German postcodes
+
+The functionality for Germany is similar to that for Belgium. Please refer to the preceding example
+for a demonstration of its operation.
 
 ## Further documentation
 

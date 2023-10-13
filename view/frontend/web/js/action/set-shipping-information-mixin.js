@@ -49,7 +49,7 @@ define([
     /**
      * A custom/extension attribute object can have a different construction
      * depending on where, how and when the address is being processed.
-     * Therefore make sure the attribute value is correctly retrieved.
+     * Therefore, make sure the attribute value is correctly retrieved.
      *
      * @param attribute
      * @returns {*}

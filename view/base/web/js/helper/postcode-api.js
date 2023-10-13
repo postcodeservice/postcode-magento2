@@ -68,6 +68,28 @@ define(['jquery', './postcode-config'], function ($, postcodeConfig) {
                     street: street
                 }
             });
+        },
+        
+        getPostCodeDE: function (postcode) {
+            return $.ajax({
+                method: 'GET',
+                url: postcodeConfig.getWebserviceURL_DE_Postcode(),
+                data: {
+                    zipcodezone: postcode,
+                }
+            });
+        },
+        
+        getStreetDE: function (postcode, street, city) {
+            return $.ajax({
+                method: 'GET',
+                url: postcodeConfig.getWebserviceURL_DE_Street(),
+                data: {
+                    zipcode: postcode,
+                    city: city,
+                    street: street
+                }
+            });
         }
     };
 });

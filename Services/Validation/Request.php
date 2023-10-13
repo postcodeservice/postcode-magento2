@@ -68,7 +68,6 @@ class Request implements ValidationInterface
         }
 
         return $this->validateRequestFields($data);
-
     }
 
     /**

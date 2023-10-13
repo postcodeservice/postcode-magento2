@@ -57,7 +57,7 @@
                sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
             <label>German address validation</label>
             <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
-            <config_path>tig_postcode/countries/enable_be_check</config_path>
+            <config_path>tig_postcode/countries/enable_de_check</config_path>
         </field>
     </group>
 </include>

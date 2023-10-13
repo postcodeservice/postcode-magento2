@@ -35,13 +35,15 @@ define([
     '../../../helper/field-types',
     
     '../../../postcode-handler/postcode-nl',
-    '../../../postcode-handler/postcode-be'
-], function (_, ko, FieldTypes, postcodeNL, postcodeBE) {
+    '../../../postcode-handler/postcode-be',
+    '../../../postcode-handler/postcode-de'
+], function (_, ko, FieldTypes, postcodeNL, postcodeBE, postcodeDE) {
     'use strict';
     
     const KnownHandlers = {
         'NL': postcodeNL,
-        'BE': postcodeBE
+        'BE': postcodeBE,
+        'DE': postcodeDE
     };
     
     return {

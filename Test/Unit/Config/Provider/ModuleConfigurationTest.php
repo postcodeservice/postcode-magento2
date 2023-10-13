@@ -210,6 +210,14 @@ class ModuleConfigurationTest extends AbstractConfigurationTest
         ];
     }
 
+    public function checkDEEnabledProvider()
+    {
+        return [
+            'de_on' => [ModuleConfiguration::XPATH_GERMANY_CHECK, 1, 1],
+            'de_off' => [ModuleConfiguration::XPATH_GERMANY_CHECK, 0, 0]
+        ];
+    }
+
     /**
      * @param $xpath
      * @param $enabled

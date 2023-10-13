@@ -46,6 +46,12 @@ class ApiConfiguration extends AbstractConfigProvider
 
     public const XPATH_API_BE_STREET_VERSION   = 'tig_postcode/api_be/street_version';
 
+    public const XPATH_API_DE_BASE             = 'tig_postcode/api_de/base';
+
+    public const XPATH_API_DE_POSTCODE_VERSION = 'tig_postcode/api_de/postcode_version';
+
+    public const XPATH_API_DE_STREET_VERSION   = 'tig_postcode/api_de/street_version';
+
     /**
      * Get base Uri
      *
@@ -69,6 +75,18 @@ class ApiConfiguration extends AbstractConfigProvider
     }
 
     /**
+     * Get German base Uri
+     *
+     * @param string $endpoint
+     *
+     * @return string
+     */
+    public function getDEBaseUri(string $endpoint): string
+    {
+        return $this->getBase('DE') . '/' . $this->getVersion('DE', $endpoint) . '/';
+    }
+
+    /**
      * Get base path via country and store ID
      *
      * @param string          $country
@@ -78,9 +96,14 @@ class ApiConfiguration extends AbstractConfigProvider
      */
     public function getBase(string $country = 'NL', int|string $store = null): mixed
     {
-        $xpath = static::XPATH_API_BASE;
-        if ($country == 'BE') {
+        $xpath = static::XPATH_API_BASE; // NL
+
+        if ($country == 'BE') { // BE
             $xpath = static::XPATH_API_BE_BASE;
+        }
+
+        if ($country == 'DE') { // DE
+            $xpath = static::XPATH_API_DE_BASE;
         }
 
         return $this->getConfigFromXpath($xpath, $store);
@@ -97,7 +120,7 @@ class ApiConfiguration extends AbstractConfigProvider
      */
     public function getVersion(string $country = 'NL', string $endpoint = null, int|string $store = null): mixed
     {
-        $xpath = static::XPATH_API_VERSION;
+        $xpath = static::XPATH_API_VERSION; // NL
 
         if ($country == 'BE') {
             switch ($endpoint) {
@@ -106,6 +129,17 @@ class ApiConfiguration extends AbstractConfigProvider
                     break;
                 case 'street-find/':
                     $xpath = static::XPATH_API_BE_STREET_VERSION;
+                    break;
+            }
+        }
+
+        if ($country == 'DE') {
+            switch ($endpoint) {
+                case 'zipcode-find/':
+                    $xpath = static::XPATH_API_DE_POSTCODE_VERSION;
+                    break;
+                case 'street-find/':
+                    $xpath = static::XPATH_API_DE_STREET_VERSION;
                     break;
             }
         }

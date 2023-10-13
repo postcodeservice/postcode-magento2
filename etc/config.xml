@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?><!--
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
  *
  *
  *          ..::..
@@ -68,13 +69,13 @@
             </search_nl>
             <search_be>
                 <zipcode_results_delay_in_ms>30</zipcode_results_delay_in_ms>
-                <zipcode_results_max>10</zipcode_results_max>
+                <zipcode_results_max>8</zipcode_results_max>
                 <street_results_delay_in_ms>50</street_results_delay_in_ms>
                 <street_results_max>6</street_results_max>
             </search_be>
             <search_de>
                 <zipcode_results_delay_in_ms>30</zipcode_results_delay_in_ms>
-                <zipcode_results_max>10</zipcode_results_max>
+                <zipcode_results_max>8</zipcode_results_max>
                 <street_results_delay_in_ms>50</street_results_delay_in_ms>
                 <street_results_max>6</street_results_max>
             </search_de>

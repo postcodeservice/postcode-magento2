@@ -65,6 +65,10 @@ class Response implements ValidationInterface
             return true;
         }
 
+        if (count($data) === 0) { // empty array
+            return true;
+        }
+
         return $this->validateResponseFields($data);
     }
 
@@ -77,7 +81,7 @@ class Response implements ValidationInterface
      */
     private function validateResponseFields(array $data): bool
     {
-        // If $data is a single-level array (NL) instead of multi-level array (BE),
+        // If $data is a single-level array (NL) instead of multi-level array (BE), (DE),
         // wrap it in another array for compatibility with the code in this method
         if (!is_array(reset($data))) {
             $data = [$data];

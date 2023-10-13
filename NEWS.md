@@ -92,7 +92,7 @@ if (data.error_code) {
 - Revised and updated the Magento User manual to ensure it matches the latest changes.
 - Updated `SECURITY.md` with GitHub’s private reporting option, providing a secure channel for issue
   reporting.
-- Successfully tested the extension with the new Magento 2.4.7-beta1, confirming compatibility and
+- Successfully tested the extension with the new Magento 2.4.7-beta1, Magento 2.4.7-beta2, confirming compatibility and
   performance.
 
 ## UX/UC improvements

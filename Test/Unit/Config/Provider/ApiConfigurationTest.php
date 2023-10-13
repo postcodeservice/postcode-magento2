@@ -42,13 +42,14 @@ class ApiConfigurationTest extends AbstractConfigurationTest
     private $base = 'https://api.postcodeservice.com/nl/';
     /** @var string  */
     private $beBase = 'https://api.postcodeservice.com/be/';
-
     /** @var string  */
-    private $version         = 'v3';
+    private $deBase = 'https://api.postcodeservice.com/de/';
     /** @var string  */
-    private $postcodeVersion = 'v2';
+    private $version         = 'v5';
     /** @var string  */
-    private $streetVersion   = 'v2';
+    private $postcodeVersion = 'v3';
+    /** @var string  */
+    private $streetVersion   = 'v3';
 
     /** @var string  */
     private $postcodeEndpoint = 'zipcode-find/';
@@ -88,6 +89,15 @@ class ApiConfigurationTest extends AbstractConfigurationTest
     {
         $this->setXpath(ApiConfiguration::XPATH_API_BE_BASE, $this->beBase);
         $this->assertEquals($this->beBase, $this->instance->getBase('BE'));
+    }
+
+    /**
+     * @return void
+     */
+    public function testDeGetBase()
+    {
+        $this->setXpath(ApiConfiguration::XPATH_API_DE_BASE, $this->deBase);
+        $this->assertEquals($this->deBase, $this->instance->getBase('DE'));
     }
 
     /**
@@ -155,6 +165,28 @@ class ApiConfigurationTest extends AbstractConfigurationTest
     /**
      * @return void
      */
+    public function testGetDeBasePostcodeUri()
+    {
+        $this->setXpathConsecutive(
+            [
+                ApiConfiguration::XPATH_API_DE_BASE,
+                ApiConfiguration::XPATH_API_DE_POSTCODE_VERSION,
+                ApiConfiguration::XPATH_API_DE_STREET_VERSION,
+            ],
+            [
+                $this->deBase,
+                $this->postcodeVersion,
+                $this->streetVersion
+            ]
+        );
+
+        $expected = $this->deBase . '/' . $this->postcodeVersion . '/';
+        $this->assertEquals($expected, $this->instance->getDEBaseUri($this->postcodeEndpoint));
+    }
+
+    /**
+     * @return void
+     */
     public function testGetBeBaseStreetUri()
     {
         $this->setXpathConsecutive(
@@ -172,5 +204,27 @@ class ApiConfigurationTest extends AbstractConfigurationTest
 
         $expected = $this->beBase . '/' . $this->streetVersion . '/';
         $this->assertEquals($expected, $this->instance->getBEBaseUri($this->streetEndpoint));
+    }
+
+    /**
+     * @return void
+     */
+    public function testGetDeBaseStreetUri()
+    {
+        $this->setXpathConsecutive(
+            [
+                ApiConfiguration::XPATH_API_DE_BASE,
+                ApiConfiguration::XPATH_API_DE_POSTCODE_VERSION,
+                ApiConfiguration::XPATH_API_DE_STREET_VERSION,
+            ],
+            [
+                $this->deBase,
+                $this->postcodeVersion,
+                $this->streetVersion
+            ]
+        );
+
+        $expected = $this->deBase . '/' . $this->streetVersion . '/';
+        $this->assertEquals($expected, $this->instance->getDEBaseUri($this->streetEndpoint));
     }
 }

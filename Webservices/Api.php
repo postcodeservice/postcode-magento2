@@ -138,7 +138,7 @@ class Api
     {
         $version = str_replace('v', '', $this->apiConfiguration->getVersion());
 
-        if ((int) $version >= 4 || $endpoint->getCountry() === 'BE') {
+        if ((int) $version >= 4 || $endpoint->getCountry() === 'BE' || $endpoint->getCountry() === 'DE') {
             $this->httpClient->setOptions(['strict' => false]);
             $this->httpClient->setHeaders([
                 'X-ClientId'   => $this->clientConfiguration->getClientId(),
@@ -190,6 +190,10 @@ class Api
 
         if ($endpoint->getCountry() == 'BE') {
             $uri = $this->apiConfiguration->getBEBaseUri($endpoint->getEndpoint()) . $endpoint->getEndpoint(); // BE
+        }
+
+        if ($endpoint->getCountry() == 'DE') {
+            $uri = $this->apiConfiguration->getDEBaseUri($endpoint->getEndpoint()) . $endpoint->getEndpoint(); // DE
         }
 
         $this->httpClient->setUri($uri);
