@@ -64,21 +64,6 @@
                 <enable_be_check>1</enable_be_check>
                 <enable_de_check>1</enable_de_check>
             </countries>
-            <search_nl>
-                <results_delay_in_ms>30</results_delay_in_ms>
-            </search_nl>
-            <search_be>
-                <zipcode_results_delay_in_ms>30</zipcode_results_delay_in_ms>
-                <zipcode_results_max>8</zipcode_results_max>
-                <street_results_delay_in_ms>50</street_results_delay_in_ms>
-                <street_results_max>6</street_results_max>
-            </search_be>
-            <search_de>
-                <zipcode_results_delay_in_ms>30</zipcode_results_delay_in_ms>
-                <zipcode_results_max>8</zipcode_results_max>
-                <street_results_delay_in_ms>50</street_results_delay_in_ms>
-                <street_results_max>6</street_results_max>
-            </search_de>
         </tig_postcode>
     </default>
 </config>

@@ -214,7 +214,7 @@ define(
             streetField.attr('autocomplete', 'yes');
             
             streetField.autocomplete({
-                delay: 50, // Parameter for the results delay in milliseconds
+                delay: 30, // Parameter for the results delay in milliseconds
                 source: function (street, response) {
                     var postcode = currentPostcodeService.getElement(FieldTypes.postcode).value();
                     var city = currentPostcodeService.getElement(FieldTypes.city).value();

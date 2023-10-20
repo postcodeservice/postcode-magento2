@@ -14,6 +14,7 @@ to:
 
 ```text
 V5: https://api.postcodeservice.com/nl/v5/find?zipcode=4201KB&houseno=63
+See https://developers-staging.postcodeservice.com/#netherlands-api
 ```
 
 - Added support for Belgium bilingual results in bilingual municipalities,
@@ -38,7 +39,7 @@ V3: https://api.postcodeservice.com/be/v3/zipcode-find?zipcodezone=1050&multires
     "city": "Bruxelles",
     "latitude": 50.8222854,
     "longitude": 4.3815707
-  }
+  },
   ...
 ]
 ```
@@ -92,7 +93,8 @@ if (data.error_code) {
 - Revised and updated the Magento User manual to ensure it matches the latest changes.
 - Updated `SECURITY.md` with GitHub’s private reporting option, providing a secure channel for issue
   reporting.
-- Successfully tested the extension with the new Magento 2.4.7-beta1, Magento 2.4.7-beta2, confirming compatibility and
+- Successfully tested the extension with the new Magento 2.4.7-beta1, Magento 2.4.7-beta2,
+  confirming compatibility and
   performance.
 
 ## UX/UC improvements
@@ -102,13 +104,14 @@ if (data.error_code) {
   in `postcode-nl.js`,
   see comment `// The last parameter is the delay in millisecond` in the file.
 - Similarly, decreased the loading speed of the address results for Belgium from 500 milliseconds to
-  50 milliseconds for
+  30 milliseconds for
   streets and 30 milliseconds for zipcodes by default. This can be changed in `postcode-be.js`, see
   twice
   the comment `// Parameter for the results delay in milliseconds`.
 - Eliminated the redundant loading screen for Nederlands in Magento Checkout, enhancing the overall
   user experience in the vanilla Magento Luma checkout theme. You can still turn this on in the
-  file `postcode-api.js` in the method `getPostCodeNL` by setting the variable `showLoader: false` to `true`.
+  file `postcode-api.js` in the method `getPostCodeNL` by setting the variable `showLoader: false`
+  to `true`.
 - Deactivated advanced settings that were not being utilized, thereby simplifying the user
   interface.
 - Added new documentation links from within the extension to the Magento User manual and underlying
@@ -144,5 +147,6 @@ if (data.error_code) {
 
 ## Release credits
 
-- Thanks go out to the following people for contributing to this release: Robert, Tim S., Vincent, Erik de
-  Groot, Viktoriia and Peter S.
+- Thanks go out to the following people for contributing to this release: Robert, Tim S., Vincent,
+  Erik de
+  Groot, Viktoria and Peter S.

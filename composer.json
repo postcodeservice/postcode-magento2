@@ -13,14 +13,14 @@
     {
       "name": "TIG",
       "email": "support@postcodeservice.com",
-      "homepage": "https://postcodeservice.nl/"
+      "homepage": "https://postcodeservice.com"
     }
   ],
   "support": {
     "email": "support@postcodeservice.com",
-    "issues": "https://portal.tig.nl"
+    "issues": "https://postcodeservice.com/support/"
   },
-  "homepage": "https://postcodeservice.nl/",
+  "homepage": "https://postcodeservice.com",
   "minimum-stability": "RC",
   "autoload": {
     "files": [
