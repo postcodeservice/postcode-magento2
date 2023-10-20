@@ -37,7 +37,7 @@ class PaymentInformationManagement
         $cartId,
         $paymentMethod,
         $address
-    ) {
+    ): void {
         if (!$address) {
             return;
         }

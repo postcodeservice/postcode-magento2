@@ -38,9 +38,11 @@ use Magento\Directory\Model\ResourceModel\Country\Collection;
 
 class CollectionPlugin
 {
+    // Constants for sort order base and increment
     private const SORT_ORDER_BASE = 'sortOrderBase';
     private const SORT_ORDER_INCREMENT = 'sortOrderIncrement';
 
+    // Configuration for sort order for Mageplaza OSC
     private const SORT_ORDER_CONFIG = [
         'Mageplaza_OSC' => [
             self::SORT_ORDER_BASE => 10,
@@ -59,6 +61,8 @@ class CollectionPlugin
     private $fullModuleList;
 
     /**
+     * Constructor to initialize module configuration and full module list
+     *
      * @param ModuleConfiguration   $moduleConfiguration
      * @param FullModuleList        $fullModuleList
      */
@@ -80,6 +84,7 @@ class CollectionPlugin
      */
     private function getPostcodeNLConfig($sortOrderBase, $sortOrderIncrement): array
     {
+        // Returns an array of configurations for the postcode fields
         return [
             'enabled' => $this->moduleConfiguration->isNLCheckEnabled() && !$this->moduleConfiguration->isModusOff(),
             'postcode' => [
@@ -198,7 +203,70 @@ class CollectionPlugin
     }
 
     /**
-     * Aad Postcode configuration
+     * Get postcode configuration for DE
+     *
+     * @param string|int    $sortOrderBase
+     * @param string|int    $sortOrderIncrement
+     *
+     * @return array
+     */
+    private function getPostcodeDEConfig($sortOrderBase, $sortOrderIncrement)
+    {
+        return [
+            'enabled' => $this->moduleConfiguration->isDECheckEnabled() && !$this->moduleConfiguration->isModusOff(),
+            'postcode' => [
+                'sortOrder' => $sortOrderBase,
+                'classes' => [
+                    'tig_postcode_field' => true,
+                    'tig_postcode_de' => true
+                ],
+                'visible' => true,
+            ],
+            'tig_housenumber' => [
+                'sortOrder' => $sortOrderBase + $sortOrderIncrement,
+                'visible' => true,
+                'classes' => [
+                    'tig_housenumber_field' => true,
+                    'tig_postcode_de' => true
+                ]
+            ],
+            'tig_housenumber_addition' => [
+                'sortOrder' => $sortOrderBase + 2 * $sortOrderIncrement,
+                'visible' => true,
+                'classes' => [
+                    'tig_housenumber_addition_field' => true,
+                    'tig_postcode_de' => true
+                ]
+            ],
+            'tig_street' => [
+                'sortOrder' => $sortOrderBase + 3 * $sortOrderIncrement,
+                'visible' => true,
+                'classes' => [
+                    'tig_street_field' => true,
+                    'tig_postcode_de' => true
+                ],
+            ],
+            'street' => [
+                'sortOrder' => $sortOrderBase + 4 * $sortOrderIncrement,
+                'visible' => false,
+                'classes' => [
+                    'tig_street_fields' => true,
+                    'tig_postcode_de' => true
+                ]
+            ],
+            'city' => [
+                'sortOrder' => $sortOrderBase + 5 * $sortOrderIncrement,
+                'visible' => true,
+                'classes' => [
+                    'tig_city_field' => true,
+                    'tig_postcode_de' => true
+                ]
+            ],
+        ];
+    }
+
+    /**
+     * Add postcode configuration based on country
      *
      * @param mixed         $countryOption
      * @param string        $country
@@ -207,6 +275,7 @@ class CollectionPlugin
      */
     private function addPostcodeConfig(&$countryOption, $country, $sortOrderBase, $sortOrderIncrement)
     {
+        // Check country and add respective configuration
         if ($country === "NL") {
             $countryOption['tig_postcode'] = $this->getPostcodeNLConfig($sortOrderBase, $sortOrderIncrement);
         }
@@ -214,18 +283,24 @@ class CollectionPlugin
         if ($country === "BE") {
             $countryOption['tig_postcode'] = $this->getPostcodeBEConfig($sortOrderBase, $sortOrderIncrement);
         }
+
+        if ($country === "DE") {
+            $countryOption['tig_postcode'] = $this->getPostcodeDEConfig($sortOrderBase, $sortOrderIncrement);
+        }
     }
 
     /**
-     * Get sortOrder and increment
+     * Get sortOrder base and increment
      *
      * @return int[]
      */
     private function getSortOrderAndIncrement()
     {
+        // Initialize base and increment
         $sortOrderBase      = 81;
         $sortOrderIncrement = 1;
 
+        // Loop through the sort order config and update base and increment if module exists
         foreach (self::SORT_ORDER_CONFIG as $module => $config) {
             if (!$this->fullModuleList->has($module)) {
                 continue;
@@ -238,7 +313,7 @@ class CollectionPlugin
     }
 
     /**
-     * After Plugin function check the @see
+     * Main method that is executed after the `toOptionArray` method of the `Collection` class
      *
      * @param Collection    $subject
      * @param mixed         $result
@@ -246,12 +321,12 @@ class CollectionPlugin
      * @return mixed
      * @see Collection::toOptionArray
      */
-    public function afterToOptionArray(
-        $subject,
-        $result
-    ) {
-        list($sortOrderBase, $sortOrderIncrement) = $this->getSortOrderAndIncrement();
+    public function afterToOptionArray($subject, $result): mixed
+    {
+        // Get sort order base and increment
+        [$sortOrderBase, $sortOrderIncrement] = $this->getSortOrderAndIncrement();
 
+        // Loop through the result and add postcode configuration
         foreach ($result as &$countryOption) {
             $this->addPostcodeConfig(
                 $countryOption,
@@ -261,6 +336,7 @@ class CollectionPlugin
             );
         }
 
+        // Return the modified result
         return $result;
     }
 }

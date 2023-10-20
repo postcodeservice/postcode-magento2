@@ -29,6 +29,7 @@
  * @copyright   Copyright (c) Total Internet Group B.V. https://tig.nl/copyright
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
+
 namespace TIG\Postcode\Controller\Address;
 
 use Magento\Framework\App\Action\Context;
@@ -37,6 +38,8 @@ use Magento\Framework\Controller\Result\JsonFactory;
 use TIG\Postcode\Webservices\Endpoints\GetAddress;
 use TIG\Postcode\Webservices\Endpoints\GetBePostcode;
 use TIG\Postcode\Webservices\Endpoints\GetBeStreet;
+use TIG\Postcode\Webservices\Endpoints\GetDePostcode;
+use TIG\Postcode\Webservices\Endpoints\GetDeStreet;
 use TIG\Postcode\Services\Converter\Factory;
 
 class Service extends Action
@@ -52,29 +55,41 @@ class Service extends Action
     private $converter;
 
     /**
-     * @var GetAddress
+     * @var GetAddress // NL
      */
     private $getAddress;
 
     /**
-     * @var GetBePostcode
+     * @var GetBePostcode // BE
      */
     private $getBePostcode;
 
     /**
-     * @var GetBeStreet
+     * @var GetBeStreet // BE
      */
     private $getBeStreet;
 
     /**
+     * @var GetDePostcode // DE
+     */
+    private $getDePostcode;
+
+    /**
+     * @var GetDeStreet // DE
+     */
+    private $getDeStreet;
+
+    /**
      * Service constructor.
      *
-     * @param Context        $context
-     * @param JsonFactory    $jsonFactory
-     * @param Factory        $converterFactory
-     * @param GetAddress     $getAddress
-     * @param GetBePostcode  $getBePostcode
-     * @param GetBeStreet    $getBeStreet
+     * @param Context       $context
+     * @param JsonFactory   $jsonFactory
+     * @param Factory       $converterFactory
+     * @param GetAddress    $getAddress
+     * @param GetBePostcode $getBePostcode
+     * @param GetBeStreet   $getBeStreet
+     * @param GetDePostcode $getDePostcode
+     * @param GetDeStreet   $getDeStreet
      */
     public function __construct(
         Context $context,
@@ -82,15 +97,19 @@ class Service extends Action
         Factory $converterFactory,
         GetAddress $getAddress,
         GetBePostcode $getBePostcode,
-        GetBeStreet $getBeStreet
+        GetBeStreet $getBeStreet,
+        GetDePostcode $getDePostcode,
+        GetDeStreet $getDeStreet
     ) {
         parent::__construct($context);
 
-        $this->jsonFactory    = $jsonFactory;
-        $this->converter      = $converterFactory;
-        $this->getAddress     = $getAddress;
-        $this->getBePostcode  = $getBePostcode;
-        $this->getBeStreet    = $getBeStreet;
+        $this->jsonFactory   = $jsonFactory;
+        $this->converter     = $converterFactory;
+        $this->getAddress    = $getAddress;
+        $this->getBePostcode = $getBePostcode;
+        $this->getBeStreet   = $getBeStreet;
+        $this->getDePostcode = $getDePostcode;
+        $this->getDeStreet   = $getDeStreet;
     }
 
     /**
@@ -103,10 +122,10 @@ class Service extends Action
         $params = $this->getRequest()->getParams();
 
         $country = $this->getCountry($params);
-        $method = $this->getMethod($params, $country);
+        $method  = $this->getMethod($params, $country);
 
         $endpoint = $this->getEndpoint($country, $method);
-        $params = $this->converter->convert('request', $params, $endpoint->getRequestKeys());
+        $params   = $this->converter->convert('request', $params, $endpoint->getRequestKeys());
         if (!$params) {
             return $this->returnFailure(__('Request validation failed'));
         }
@@ -146,7 +165,11 @@ class Service extends Action
      */
     private function getCountry($params): string
     {
-        if (key($params) == 'be') {
+        if (key($params) == 'be') { // BE
+            return key($params);
+        }
+
+        if (key($params) == 'de') { // DE
             return key($params);
         }
 
@@ -178,6 +201,7 @@ class Service extends Action
     private function returnJson($data)
     {
         $response = $this->jsonFactory->create();
+
         return $response->setData($data);
     }
 
@@ -187,18 +211,26 @@ class Service extends Action
      * @param string $country
      * @param string $method
      *
-     * @return GetAddress|GetBePostcode|GetBeStreet
+     * @return GetAddress|GetBePostcode|GetBeStreet|GetDePostcode|GetDeStreet
      */
     private function getEndpoint($country, $method)
     {
-        if ($country == 'be' && $method == 'getpostcode') {
+        if ($country == 'be' && $method == 'getpostcode') { // BE
             return $this->getBePostcode;
         }
 
-        if ($country == 'be' && $method == 'getstreet') {
+        if ($country == 'be' && $method == 'getstreet') { // BE
             return $this->getBeStreet;
         }
 
-        return $this->getAddress;
+        if ($country == 'de' && $method == 'getpostcode') { // DE
+            return $this->getDePostcode;
+        }
+
+        if ($country == 'de' && $method == 'getstreet') { // DE
+            return $this->getDeStreet;
+        }
+
+        return $this->getAddress; // NL
     }
 }

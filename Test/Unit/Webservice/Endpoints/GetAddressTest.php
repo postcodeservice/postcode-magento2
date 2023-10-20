@@ -96,6 +96,6 @@ class GetAddressTest extends TestCase
     {
         $instance = $this->getInstance();
         $result = $instance->getResponseKeys();
-        $this->assertEquals(['success', 'straatnaam', 'woonplaats'], $result);
+        $this->assertEquals(['street', 'city'], $result);
     }
 }

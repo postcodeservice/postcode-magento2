@@ -53,8 +53,8 @@ define(
             POSTCODE_SHOW_FIELDS_EDIT: 'postcode_show_fields_edit'
         });
         
-        // Constructor for PostcodeHandlerBE
-        function PostcodeHandlerBE(config, postcodeService)
+        // Constructor for PostcodeHandlerDE
+        function PostcodeHandlerDE(config, postcodeService)
         {
             this.debounceBeforeCall = null;
             this.data = {};
@@ -64,19 +64,19 @@ define(
         }
         
         // Setting up prototype chain
-        PostcodeHandlerBE.prototype = Object.create(PostcodeHandler.prototype);
+        PostcodeHandlerDE.prototype = Object.create(PostcodeHandler.prototype);
         
         // Method to get ISO code
-        PostcodeHandlerBE.prototype.getISOCode = function () { return 'BE';};
+        PostcodeHandlerDE.prototype.getISOCode = function () { return 'DE';}; // ISO code for Germany
         
         // Method to destroy autocomplete
-        PostcodeHandlerBE.prototype.destroy = function () {
+        PostcodeHandlerDE.prototype.destroy = function () {
             this.deleteAutoComplete();
             PostcodeHandler.prototype.destroy.call(this);
         };
         
         // Method to delete autocomplete
-        PostcodeHandlerBE.prototype.deleteAutoComplete = function () {
+        PostcodeHandlerDE.prototype.deleteAutoComplete = function () {
             var currentPostcodeService = this.getPostcodeService();
             
             var postcodeField = currentPostcodeService.getElement(FieldTypes.postcode);
@@ -93,7 +93,7 @@ define(
         };
         
         // Method to add autocomplete to postcode field
-        PostcodeHandlerBE.prototype.addAutoCompleteToPostcode = function () {
+        PostcodeHandlerDE.prototype.addAutoCompleteToPostcode = function () {
             var self = this;
             
             var currentPostcodeService = this.getPostcodeService();
@@ -131,7 +131,7 @@ define(
                             data: false
                         }]);
                     
-                    PostcodeApi.getPostCodeBE(zipcodezone.term).done(function (data) {
+                    PostcodeApi.getPostCodeDE(zipcodezone.term).done(function (data) {
                         
                         if (data.success === false) {
                             // If no results are found, a success === false is returned
@@ -200,7 +200,7 @@ define(
         };
         
         // Method to add autocomplete to street field
-        PostcodeHandlerBE.prototype.addAutoCompleteToStreet = function () {
+        PostcodeHandlerDE.prototype.addAutoCompleteToStreet = function () {
             var self = this;
             
             var currentPostcodeService = this.getPostcodeService();
@@ -235,7 +235,7 @@ define(
                             data: false
                         }]);
                     
-                    PostcodeApi.getStreetBE(postcode, street.term, city).done(function (data) {
+                    PostcodeApi.getStreetDE(postcode, street.term, city).done(function (data) {
                         if (data.success === false) {
                             // If no results are found, a success === false is returned
                             let errorMessage = 'Cannot find street, is it correct?';
@@ -261,10 +261,6 @@ define(
                             return;
                         }
                         
-                        // Belgium sometimes has a street that lays within two
-                        // postkantons, e.g. Rue de l'Aur in Bruxelles/Ixelles/Brussel. Filter
-                        // double street names because for this usage we do not the separate
-                        // postkantons items.
                         if (Array.isArray(data)) {
                             var uniqueStreets = data.reduce((unique, item) => {
                                 return unique.includes(item.street) ? unique : [
@@ -316,7 +312,7 @@ define(
         };
         
         // Method to handle field type and value
-        PostcodeHandlerBE.prototype.handle = function (field_type, field_value) {
+        PostcodeHandlerDE.prototype.handle = function (field_type, field_value) {
             if (field_type === FieldTypes.postcode) {
                 this.data.postcode = field_value;
             }
@@ -337,6 +333,6 @@ define(
             PostcodeHandler.prototype.handle.call(this, field_type, field_value);
             return true;
         };
-        return PostcodeHandlerBE;
+        return PostcodeHandlerDE;
     }
 );

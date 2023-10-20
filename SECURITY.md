@@ -1,10 +1,24 @@
 # Security Policy
 
-## Supported Versions
+# How to report security vulnerabilities in this Magento extension
 
-We will dive into any security related issue as long as your Magento version is still supported by Magento. If you are running a Magento version that is not supported by Magento and you wish to upgrade to the latest version, you can contact us for a quote at sales@tig.nl
+GitHub has
+a [mechanism for private disclosure of vulnerabilities](https://docs.github.com/en/code-security/security-advisories/guidance-on-reporting-and-writing/privately-reporting-a-security-vulnerability)
+to repository owners and authorized persons such as maintainers. This repository has this feature
+enabled.
 
 ## Reporting a Vulnerability
 
-Please e-mail us directly at security@tig.nl or use the security issue template on GitHub.
-A security issue gets the highest priority assigned and a reply regarding the vulnerability is given within a typical 24 hours. Thank you!
+See [Privately Reporting a Security Vulnerability](https://docs.github.com/en/code-security/security-advisories/guidance-on-reporting-and-writing/privately-reporting-a-security-vulnerability).
+Go
+to [`postcodeservice/postcode-magento2`](https://github.com/postcodeservice/postcode-magento2/security)'
+s [Security page](https://github.com/postcodeservice/postcode-magento2/security) and click
+on [Report a vulnerability](https://github.com/postcodeservice/postcode-magento2/security/advisories/new).
+This will notify the owners and maintainers.
+
+## Supported Versions
+
+We are committed to addressing any security-related issues, provided your Magento version continues
+to receive support from Magento. If your Magento version is no longer supported, we strongly
+recommend instructing your development team or agency to update to the most recent version.
+

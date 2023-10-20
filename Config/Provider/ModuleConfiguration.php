@@ -29,16 +29,24 @@
  * @copyright   Copyright (c) Total Internet Group B.V. https://tig.nl/copyright
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
+
 namespace TIG\Postcode\Config\Provider;
 
 class ModuleConfiguration extends AbstractConfigProvider
 {
     public const XPATH_CONFIGURATION_MODUS       = 'tig_postcode/configuration/modus';
+
     public const XPATH_CHECKOUT_COMPATIBILITY    = 'tig_postcode/configuration/checkout_compatible';
+
     public const XPATH_MODULE_STABILITY          = 'tig_postcode/stability';
+
     public const XPATH_SUPPORTED_MAGENTO_VERSION = 'tig_postcode/supported_magento_version';
+
     public const XPATH_NETHERLANDS_CHECK         = 'tig_postcode/countries/enable_nl_check';
+
     public const XPATH_BELGIUM_CHECK             = 'tig_postcode/countries/enable_be_check';
+
+    public const XPATH_GERMANY_CHECK             = 'tig_postcode/countries/enable_de_check';
 
     /**
      * Should return on of these values
@@ -50,7 +58,7 @@ class ModuleConfiguration extends AbstractConfigProvider
      *
      * @return mixed
      */
-    public function getModus($store = null)
+    public function getModus(int|string|null $store = null)
     {
         if (!$this->isModuleOutputEnabled()) {
             return '0';
@@ -66,7 +74,7 @@ class ModuleConfiguration extends AbstractConfigProvider
      *
      * @return bool
      */
-    public function isModusLive($store = null)
+    public function isModusLive(int|string|null $store = null): bool
     {
         if ($this->getModus($store) == '1') {
             return true;
@@ -78,11 +86,11 @@ class ModuleConfiguration extends AbstractConfigProvider
     /**
      * Checks if the extension is on status test via store ID
      *
-     * @param string|int|null $store
+     * @param int|string|null $store
      *
      * @return bool
      */
-    public function isModusTest($store = null)
+    public function isModusTest(int|string|null $store = null): bool
     {
         if ($this->getModus($store) == '2') {
             return true;
@@ -98,9 +106,9 @@ class ModuleConfiguration extends AbstractConfigProvider
      *
      * @return bool
      */
-    public function isModusOff($store = null)
+    public function isModusOff(int|string|null $store = null): bool
     {
-        if ($this->getModus($store) == '0' || false == $this->getModus()) {
+        if ($this->getModus($store) == '0' || empty($this->getModus())) {
             return true;
         }
 
@@ -114,7 +122,7 @@ class ModuleConfiguration extends AbstractConfigProvider
      *
      * @return string
      */
-    public function getStability($store = null)
+    public function getStability(int|string|null $store = null)
     {
         return $this->getConfigFromXpath(static::XPATH_MODULE_STABILITY, $store);
     }
@@ -151,7 +159,7 @@ class ModuleConfiguration extends AbstractConfigProvider
      *
      * @return bool
      */
-    public function isNLCheckEnabled($store = null)
+    public function isNLCheckEnabled($store = null): bool
     {
         return (bool) $this->getConfigFromXpath(static::XPATH_NETHERLANDS_CHECK, $store);
     }
@@ -163,8 +171,20 @@ class ModuleConfiguration extends AbstractConfigProvider
      *
      * @return bool
      */
-    public function isBECheckEnabled($store = null)
+    public function isBECheckEnabled($store = null): bool
     {
         return (bool) $this->getConfigFromXpath(static::XPATH_BELGIUM_CHECK, $store);
+    }
+
+    /**
+     * Check if DE is enabled via store ID
+     *
+     * @param string|int|null $store
+     *
+     * @return bool
+     */
+    public function isDECheckEnabled($store = null): bool
+    {
+        return (bool) $this->getConfigFromXpath(static::XPATH_GERMANY_CHECK, $store);
     }
 }

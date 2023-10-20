@@ -56,10 +56,10 @@ class ButtonTest extends TestCase
      * @return void
      * @throws \Exception
      */
-    public function testGetLabel()
+    public function testGetSignUpLabel()
     {
         $instance = $this->getInstance();
-        $label = $instance->getLabel();
+        $label = $instance->getSignUpLabel();
 
         $this->assertTrue(is_string($label->render()));
     }

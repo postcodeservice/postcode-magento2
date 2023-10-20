@@ -29,26 +29,37 @@
  * @copyright   Copyright (c) Total Internet Group B.V. https://tig.nl/copyright
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
+
 namespace TIG\Postcode\Config\Provider;
 
 class ApiConfiguration extends AbstractConfigProvider
 {
-    public const XPATH_API_BASE                 = 'tig_postcode/api/base';
-    public const XPATH_API_VERSION              = 'tig_postcode/api/version';
-    public const XPATH_API_TYPE                 = 'tig_postcode/api/type';
+    public const XPATH_API_BASE                = 'tig_postcode/api/base';
 
-    public const XPATH_API_BE_BASE              = 'tig_postcode/api_be/base';
-    public const XPATH_API_BE_POSTCODE_VERSION  = 'tig_postcode/api_be/postcode_version';
-    public const XPATH_API_BE_STREET_VERSION    = 'tig_postcode/api_be/street_version';
+    public const XPATH_API_VERSION             = 'tig_postcode/api/version';
+
+    public const XPATH_API_TYPE                = 'tig_postcode/api/type';
+
+    public const XPATH_API_BE_BASE             = 'tig_postcode/api_be/base';
+
+    public const XPATH_API_BE_POSTCODE_VERSION = 'tig_postcode/api_be/postcode_version';
+
+    public const XPATH_API_BE_STREET_VERSION   = 'tig_postcode/api_be/street_version';
+
+    public const XPATH_API_DE_BASE             = 'tig_postcode/api_de/base';
+
+    public const XPATH_API_DE_POSTCODE_VERSION = 'tig_postcode/api_de/postcode_version';
+
+    public const XPATH_API_DE_STREET_VERSION   = 'tig_postcode/api_de/street_version';
 
     /**
      * Get base Uri
      *
      * @return string
      */
-    public function getBaseUri()
+    public function getBaseUri(): string
     {
-        return $this->getBase() . '/' . $this->getVersion() . '/' . $this->getType() . '/';
+        return $this->getBase() . '/' . $this->getVersion() . '/';
     }
 
     /**
@@ -58,47 +69,79 @@ class ApiConfiguration extends AbstractConfigProvider
      *
      * @return string
      */
-    public function getBeBaseUri($endpoint)
+    public function getBEBaseUri(string $endpoint): string
     {
         return $this->getBase('BE') . '/' . $this->getVersion('BE', $endpoint) . '/';
     }
 
     /**
+     * Get German base Uri
+     *
+     * @param string $endpoint
+     *
+     * @return string
+     */
+    public function getDEBaseUri(string $endpoint): string
+    {
+        return $this->getBase('DE') . '/' . $this->getVersion('DE', $endpoint) . '/';
+    }
+
+    /**
      * Get base path via country and store ID
      *
-     * @param string            $country
-     * @param string|int|null   $store
+     * @param string          $country
+     * @param int|string|null $store
      *
      * @return mixed
      */
-    public function getBase($country = 'NL', $store = null)
+    public function getBase(string $country = 'NL', int|string $store = null): mixed
     {
-        $xpath = static::XPATH_API_BASE;
-        if ($country == 'BE') {
+        $xpath = static::XPATH_API_BASE; // NL
+
+        if ($country == 'BE') { // BE
             $xpath = static::XPATH_API_BE_BASE;
+        }
+
+        if ($country == 'DE') { // DE
+            $xpath = static::XPATH_API_DE_BASE;
         }
 
         return $this->getConfigFromXpath($xpath, $store);
     }
 
     /**
-     * Versioning for BE is not live yet. Implement this function in getBeBaseUri when this goes live.
+     * Versioning handling for multiple countries
      *
-     * @param string                $country
-     * @param string|null           $endpoint
-     * @param string|int|null       $store
+     * @param string          $country
+     * @param string|null     $endpoint
+     * @param int|string|null $store
      *
      * @return mixed
      */
-    public function getVersion($country = 'NL', $endpoint = null, $store = null)
+    public function getVersion(string $country = 'NL', string $endpoint = null, int|string $store = null): mixed
     {
-        $xpath = static::XPATH_API_VERSION;
-        if ($country == 'BE' && $endpoint == 'postcode-find/') {
-            $xpath = static::XPATH_API_BE_POSTCODE_VERSION;
+        $xpath = static::XPATH_API_VERSION; // NL
+
+        if ($country == 'BE') {
+            switch ($endpoint) {
+                case 'zipcode-find/':
+                    $xpath = static::XPATH_API_BE_POSTCODE_VERSION;
+                    break;
+                case 'street-find/':
+                    $xpath = static::XPATH_API_BE_STREET_VERSION;
+                    break;
+            }
         }
 
-        if ($country == 'BE' && $endpoint == 'street-find/') {
-            $xpath = static::XPATH_API_BE_STREET_VERSION;
+        if ($country == 'DE') {
+            switch ($endpoint) {
+                case 'zipcode-find/':
+                    $xpath = static::XPATH_API_DE_POSTCODE_VERSION;
+                    break;
+                case 'street-find/':
+                    $xpath = static::XPATH_API_DE_STREET_VERSION;
+                    break;
+            }
         }
 
         return $this->getConfigFromXpath($xpath, $store);
@@ -107,11 +150,11 @@ class ApiConfiguration extends AbstractConfigProvider
     /**
      * Get type via store ID
      *
-     * @param string|int|null $store
+     * @param int|string|null $store
      *
      * @return mixed
      */
-    public function getType($store = null)
+    public function getType(int|string $store = null): mixed
     {
         return $this->getConfigFromXpath(static::XPATH_API_TYPE, $store);
     }

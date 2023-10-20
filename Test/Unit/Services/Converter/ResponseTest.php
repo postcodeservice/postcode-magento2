@@ -44,14 +44,14 @@ class ResponseTest extends TestInterface
     {
         return [
             'Correct Response Data' => [
-                '{"success":true,"straatnaam":"Kabelweg","woonplaats":"Amsterdam"}',
-                ['success' => true, 'straatnaam' => 'Kabelweg', 'woonplaats' => 'Amsterdam'],
-                ['success' => true, 'straatnaam' => 'Kabelweg', 'woonplaats' => 'Amsterdam'],
+                '{"street":"Kabelweg","city":"Amsterdam"}',
+                ['street' => 'Kabelweg', 'city' => 'Amsterdam'],
+                ['street' => 'Kabelweg', 'city' => 'Amsterdam'],
                 true
             ],
             'In correct Response Data' => [
-                '{"success":true,"woonplaats":"Amsterdam"}',
-                ['success' => true, 'woonplaats' => 'Amsterdam'],
+                '{"city":"Amsterdam"}',
+                ['city' => 'Amsterdam'],
                 false, false
             ]
         ];
@@ -71,7 +71,7 @@ class ResponseTest extends TestInterface
             'validation' => $this->validationResponseMock($data, $validation)
         ]);
 
-        $instance->setValidationKeys(['success', 'straat', 'woonplaats']);
+        $instance->setValidationKeys(['street', 'city']);
 
         $this->assertSame($expected, $instance->convert($dataString));
     }

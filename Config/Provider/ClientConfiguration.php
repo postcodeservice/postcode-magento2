@@ -88,7 +88,7 @@ class ClientConfiguration extends AbstractConfigProvider
      * @return string
      * @throws \Exception
      */
-    public function getApiKey($store = null)
+    public function getSecureCode($store = null)
     {
         $modusXpath = $this->getModusXpath(static::XPATH_CONFIGURATION_API_KEY, $store);
         $key = $this->getConfigFromXpath($modusXpath, $store);

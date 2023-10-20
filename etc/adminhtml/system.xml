@@ -35,7 +35,7 @@
     <system>
         <section id="tig_postcode" translate="label" type="text"
                  sortOrder="350" showInDefault="1" showInWebsite="1" showInStore="1">
-            <label>Postcode Service International</label>
+            <label>Postcode Service</label>
             <tab>sales</tab>
             <resource>Sales_Postcode::configuration</resource>
             <class>postcode-section</class>

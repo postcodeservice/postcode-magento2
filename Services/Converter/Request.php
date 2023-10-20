@@ -38,7 +38,7 @@ class Request implements ConverterInterface
     /**
      * @var ValidationRequest
      */
-    private $validation;
+    private ValidationRequest $validation;
 
     /**
      * Request constructor.
@@ -49,34 +49,44 @@ class Request implements ConverterInterface
      *
      * @param ValidationRequest $validation
      */
-    public function __construct(
-        ValidationRequest $validation
-    ) {
+    public function __construct(ValidationRequest $validation) {
         $this->validation = $validation;
     }
 
     /**
      * @inheritdoc
      */
-    public function setValidationKeys($keys)
+    public function setValidationKeys($keys): void
     {
-        $this->validation->setKeys($keys);
+        $this->validation->setRequestFields($keys);
     }
 
     /**
+     * Converts the provided data into a new format.
+     *
+     * This function first validates the input data. If the data is invalid,
+     * it returns false. If the data is valid, it constructs a new array
+     * containing only the keys specified by the getRequestFields method of
+     * the validation object, with corresponding values from the input data.
+     *
+     * @param mixed $data The data to convert.
+     * @return bool|array Returns the converted data if the input was valid, false otherwise.
      * @inheritDoc
      */
-    public function convert($data)
+    public function convert($data): bool|array
     {
+        // Validate the input data
         if (!$this->validation->validate($data)) {
             return false;
         }
 
+        // Iterate over each key specified by the getRequestFields method
         $converted = [];
-        foreach ($this->validation->getKeys() as $key) {
+        foreach ($this->validation->getRequestFields() as $key) {
             $converted[$key] = $data[$key];
         }
 
+        // Return the converted data
         return $converted;
     }
 }

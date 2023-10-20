@@ -36,9 +36,7 @@ namespace TIG\Postcode\Webservices\Endpoints;
 class GetBeStreet extends EndpointAbstract
 {
     protected $endpoint = 'street-find/';
-
     protected $country = 'BE';
-
-    protected $requestKeys = ['zipcode', 'city', 'street'];
-    protected $responseKeys = ['straat'];
+    protected $requestKeys = ['zipcode', 'city', 'street']; // BE V3
+    protected $responseKeys = ['street']; // BE V3
 }

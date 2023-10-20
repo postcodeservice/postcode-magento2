@@ -30,6 +30,7 @@
  * @copyright   Copyright (c) Total Internet Group B.V. https://tig.nl/copyright
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
+
 namespace TIG\Postcode\Webservices\Endpoints;
 
 use TIG\Postcode\Webservices\Api;
@@ -38,13 +39,9 @@ use TIG\Postcode\Webservices\Api;
 abstract class EndpointAbstract implements EndpointInterface
 {
     protected $endpoint;
-
     protected $method = 'GET';
-
-    protected $data = [];
-
+    protected $data   = [];
     protected $country;
-
     protected $requestKeys;
     protected $responseKeys;
 
@@ -119,6 +116,7 @@ abstract class EndpointAbstract implements EndpointInterface
     {
         return $this->requestKeys;
     }
+
     /**
      * {@inheritDoc}
      */

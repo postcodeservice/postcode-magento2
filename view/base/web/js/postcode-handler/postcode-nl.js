@@ -28,25 +28,23 @@
  * @copyright   Copyright (c) Total Internet Group B.V. https://tig.nl/copyright
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
-define([
+define(
+    [
+        // Importing required modules and dependencies
         'jquery',
         'underscore',
         './postcode-handler',
         '../helper/field-types',
         '../helper/postcode-api',
         'mage/translate'
-    ], function (
-        $,
-        _,
-        PostcodeHandler,
-        FieldTypes,
-        PostcodeApi,
-        $t
-    ) {
+    ],
+    function ($, _, PostcodeHandler, FieldTypes, PostcodeApi, $t) {
         'use strict';
-
-        const postcodeNlRegex = /^[0-9]{4}\s?[A-Z]{2}$/i;
-
+        
+        // Regular expression for validating Dutch postcodes
+        const postcodeNLRegex = /^[0-9]{4}\s?[A-Z]{2}$/i;
+        
+        // Define the possible states of the postcode handler
         const states = Object.seal({
             INIT: PostcodeHandler.INIT,
             IDLE: 'postcode_idle',
@@ -55,80 +53,102 @@ define([
             POSTCODE_SHOW_FIELDS_SUGGESTION: 'postcode_show_fields_suggestion',
             POSTCODE_SHOW_FIELDS_EDIT: 'postcode_show_fields_edit'
         });
-
-        function PostcodeHandlerNL(
-            config,
-            postcodeService
-        ) {
+        
+        // Constructor function for the Dutch postcode handler
+        function PostcodeHandlerNL(config, postcodeService)
+        {
             this.debounceBeforeCall = null;
-            this.data = {
-
-            };
-            PostcodeHandler.call(
-                this,
-                config,
-                postcodeService
-            );
-
+            this.data = {};
+            PostcodeHandler.call(this, config, postcodeService);
+            
             return (this);
         }
-
+        
+        // Inherit from the generic PostcodeHandler
         PostcodeHandlerNL.prototype = Object.create(PostcodeHandler.prototype);
-
-        PostcodeHandlerNL.prototype.getISOCode = function(){ return "NL";}
-
-        PostcodeHandlerNL.prototype.callApi = _.debounce(function(postcode, house_number){
+        
+        // Method to get the ISO code for Netherlands
+        PostcodeHandlerNL.prototype.getISOCode = function () { return 'NL';};
+        
+        // Method to call the API and handle the response
+        PostcodeHandlerNL.prototype.callApi = _.debounce(function (postcode, house_number) {
             const self = this;
             this.setCurrentState(states.POSTCODE_CALL_MADE);
-
-            PostcodeApi.getPostCodeNL(postcode, house_number).done(function(data){
+            
+            // Call the API and handle the response
+            PostcodeApi.getPostCodeNL(postcode, house_number).done(function (data) {
                 self.getPostcodeService().getElement(FieldTypes.postcode).error('');
-
-                if (data.success !== true) {
+                
+                if (data.success === false) {
+                    let errorMessage = 'Address not found with provided zipcode and house number. If correct, please enter address details manually.';
+                    
+                    if (data.error_code) {
+                        // show error in console
+                        console.error('Postcodeservice.com extension: ' + JSON.stringify(data));
+                        
+                        if (data.error_code > 400) {
+                            errorMessage = 'Could not perform address validation.';
+                        }
+                        if (data.error_code === 429) {
+                            errorMessage = 'Address validation temporarily unavailable.';
+                        }
+                    }
+                    
                     self.setCurrentState(states.POSTCODE_CALL_FAILED);
-                    self.getPostcodeService().getElement(FieldTypes.postcode).error($t('Sorry, we could not find the address on the given zip code and house number combination. If you are sure that the zip code and house number are correct, please fill in the address details manually.'));
+                    self.getPostcodeService()
+                    .getElement(FieldTypes.postcode)
+                    .error($t(errorMessage));
                     return;
                 }
-
-                self.getPostcodeService().setFieldValue(FieldTypes.street, data.straatnaam);
-                self.getPostcodeService().setFieldValue(FieldTypes.city, data.woonplaats);
+                
+                // Set the field values based on the API response
+                self.getPostcodeService().setFieldValue(FieldTypes.street, data.street);
+                self.getPostcodeService().setFieldValue(FieldTypes.city, data.city);
                 self.concatenateFieldsToStreet(FieldTypes.street);
-
+                
                 self.setCurrentState(states.POSTCODE_SHOW_FIELDS_SUGGESTION);
-            }).fail(function(){
+            }).fail(function () {
                 self.setCurrentState(states.POSTCODE_CALL_FAILED);
-            }).always(function(){
+            }).always(function () {
                 self.getPostcodeService().showHideField(FieldTypes.street, true);
                 self.getPostcodeService().showHideField(FieldTypes.city, true);
             });
-        },500);
-
+        }, 30); // The last parameter is the delay in milliseconds for the _.debounce function from
+                // Underscore.js.
+        
+        // Method to handle changes to the postcode or house number fields
         PostcodeHandlerNL.prototype.handle = function (field_type, field_value) {
             if (this.getCurrentState() !== states.INIT) {
                 if (field_type === FieldTypes.postcode) {
                     this.data.postcode = field_value;
                 }
-
+                
                 if (field_type === FieldTypes.house_number) {
                     this.data.house_number = field_value;
                 }
-
-                // Do validation and call, state change is handled in callApi due to debouncing
-                if ((field_type === FieldTypes.postcode || field_type === FieldTypes.house_number) &&
-                    typeof this.data.postcode !== 'undefined' &&
-                    typeof this.data.house_number !== 'undefined' &&
-                    this.data.postcode.match(postcodeNlRegex) &&
+                
+                // Validate the input and call the API if valid, state change is handled in callApi
+                // due to debouncing
+                if ((field_type === FieldTypes.postcode || field_type ===
+                        FieldTypes.house_number) &&
+                    // Ensure that this.data.postcode & this.data.house_number exists, and they are
+                    // strings so that the regex match doesn't fail
+                    typeof this.data.postcode === 'string' &&
+                    typeof this.data.house_number === 'string' &&
+                    this.data.postcode.match(postcodeNLRegex) &&
                     this.data.house_number.match(/[0-9]+/)) {
                     this.callApi(this.data.postcode, this.data.house_number);
                 }
             }
-
+            
+            // Handle changes to the state based on the current state and input
             switch(this.getCurrentState()) {
                 case states.INIT:
                     this.setCurrentState(states.IDLE);
                     var postcodeField = this.getPostcodeService().getElement(FieldTypes.postcode);
-                    var housenumberField = this.getPostcodeService().getElement(FieldTypes.house_number);
-
+                    var housenumberField = this.getPostcodeService()
+                    .getElement(FieldTypes.house_number);
+                    
                     if (postcodeField) {
                         this.handle(FieldTypes.postcode, postcodeField.value());
                     }
@@ -143,15 +163,11 @@ define([
                     }
                     break;
             }
-
-            // Important, concatenates all values to Magento street value
-            PostcodeHandler.prototype.handle.call(
-                this,
-                field_type,
-                field_value
-            );
-        }
-
+            
+            // Concatenate all values to Magento street value
+            PostcodeHandler.prototype.handle.call(this, field_type, field_value);
+        };
+        
         return PostcodeHandlerNL;
     }
 );

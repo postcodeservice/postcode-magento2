@@ -1,16 +1,15 @@
-Live,Live
-Test,Test
-Off,Off
-Legend,Legend
-Disabled,Off
-Extension status,Extension status
+"Live","Live"
+"Test","Test"
+"Off","Off"
+"Legend","Legend"
+"Disabled","Off"
+"Extension status","Extension status"
 "Test Mode","Test Mode"
 "Live Mode","Live Mode"
 "Magento &amp; 3rd party version compatibility","Magento &amp; 3rd party version compatibility"
 "Magento Community Edition version","Magento Community Edition version"
 "Magento Enterprise Edition version","Magento Enterprise Edition version"
 "Support","Support"
-
 "Documentation","Documentation"
 "Documents regarding the Postcode Magento 2 extension:","Documents regarding the Postcode Magento 2 extension:"
 "View the user manual. Currently the manual is only available in Dutch.","View the user manual. Currently the manual is only available in Dutch."
@@ -19,9 +18,7 @@ Extension status,Extension status
 "Full Release Notes","Full Release Notes"
 "Extension version","Extension version"
 "Postcode Service version","Postcode Service version"
-"This extension is developed by Total Internet Group (<a href="https://tig.nl" target="_blank">TIG</a>).","This extension is developed by Total Internet Group (<a href="https://tig.nl" target="_blank">TIG</a>)."
-"<a href="mailto:support@postcodeservice.com">support@postcodeservice.com</a>","<a href="mailto:support@postcodeservice.com">support@postcodeservice.com</a>"
-
+"This extension is developed by Total Internet Group BV / Postcode Service:","This extension is developed by Total Internet Group BV / Postcode Service:"
 "Advantages of the Postcode Service","Advantages of the Postcode Service"
 "No analytic data collection","No analytic data collection"
 "Super fast","Super fast"
@@ -36,11 +33,11 @@ Extension status,Extension status
 "Please select a postcode before filling the street field.","Please select a postcode before filling the street field."
 "Enable Netherlands check","Enable Netherlands check"
 "Enable Belgium check","Enable Belgium check"
+"Enable Germany check","Enable Germany check"
 "No results found.","No results found."
 "No results found. Please fill in manually.","No results found. Please fill in manually."
-"Busy with loading zipcodes...","Busy with loading zipcodes..."
-"Busy with loading streets...","Busy with loading streets..."
-"Supporting Dutch and Belgian addresses","Supporting Dutch and Belgian addresses"
+"Loading zipcodes ...","Loading zipcodes ..."
+"Loading streets ...","Loading streets ..."
 "Countries","Countries"
 "Using MagePlaza OneStepCheckout","Using MagePlaza OneStepCheckout"
 "The codes to support the MagePlaza OneStepCheckout extension has been moved to a new extension.","The codes to support the MagePlaza OneStepCheckout extension has been moved to a new extension."
@@ -52,3 +49,6 @@ Extension status,Extension status
 "Change the sort order of the Country field in the checkout.","Change the sort order of the Country field in the checkout."
 "Unexpected error occurred. Please fill in the address details manually.","Unexpected error occurred. Please fill in the address details manually."
 "Please enter a valid zip code and house number.","Please enter a valid zip code and house number."
+"Could not perform address validation.","Could not perform address validation."
+"Address validation temporarily unavailable.","Address validation temporarily unavailable."
+"Address not found with provided zipcode and house number. If correct, please enter address details manually.","Address not found with provided zipcode and house number. If correct, please enter address details manually."

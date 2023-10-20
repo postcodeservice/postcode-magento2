@@ -38,16 +38,14 @@ class Factory
     /**
      * @var array|ConverterInterface[]
      */
-    private $converters;
+    private array $converters;
 
     /**
      * Factory constructor.
      *
      * @param ConverterInterface[] $converters
      */
-    public function __construct(
-        $converters = []
-    ) {
+    public function __construct(array $converters = []) {
         $this->converters = $converters;
     }
 
@@ -61,7 +59,7 @@ class Factory
      * @return mixed
      * @throws PostcodeException
      */
-    public function convert($type, $data, $keys = null)
+    public function convert($type, $data, $keys = null): mixed
     {
         foreach ($this->converters as $converter) {
             $this->checkImplementation($converter);

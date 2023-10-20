@@ -52,7 +52,7 @@ class ActionUrl implements CheckoutConfigurationInterface
     }
 
     /**
-     * Get value and return belgium postcode URLs
+     * Get value and return NL, Belgium and German postcode URLs
      *
      * @return array
      */
@@ -66,6 +66,14 @@ class ActionUrl implements CheckoutConfigurationInterface
             ),
             'postcode_be_getstreet'   => $this->urlBuilder->getUrl(
                 'postcode/address/service/be/getstreet',
+                ['_secure' => true]
+            ),
+            'postcode_de_getpostcode' => $this->urlBuilder->getUrl(
+                'postcode/address/service/de/getpostcode',
+                ['_secure' => true]
+            ),
+            'postcode_de_getstreet'   => $this->urlBuilder->getUrl(
+                'postcode/address/service/de/getstreet',
                 ['_secure' => true]
             )
         ];

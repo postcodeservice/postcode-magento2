@@ -2,25 +2,25 @@
   "name": "tig/postcode-magento2",
   "description": "TIG Magento 2 Postcode extension",
   "require": {
-    "php": "~7.0|~7.1|~7.2|~7.3|~7.4|~8.0|~8.1|~8.2",
+    "php": "~8.1|~8.2",
     "magento/module-checkout": ">=100.2.6,<=100.2.11|~100.3|~100.4",
     "magento/module-quote": ">=101.0.5,<=101.0.11|~101.1|~101.2"
   },
   "type": "magento2-module",
-  "version": "1.5.5",
+  "version": "1.6.0",
   "license": "CC-BY-NC-ND-3.0",
   "authors": [
     {
       "name": "TIG",
       "email": "support@postcodeservice.com",
-      "homepage": "https://postcodeservice.nl/"
+      "homepage": "https://postcodeservice.com"
     }
   ],
   "support": {
     "email": "support@postcodeservice.com",
-    "issues": "https://portal.tig.nl"
+    "issues": "https://postcodeservice.com/support/"
   },
-  "homepage": "https://postcodeservice.nl/",
+  "homepage": "https://postcodeservice.com",
   "minimum-stability": "RC",
   "autoload": {
     "files": [

@@ -1,8 +1,8 @@
-Live,Production
-Test,Test
-Off,Inactif
-Legend,Légende
-Disabled,Désactivé
+"Live","Production"
+"Test","Test"
+"Off","Inactif"
+"Legend","Légende"
+"Disabled","Désactivé"
 "Extension status","Status de l'extension"
 "Test Mode","Mode Test"
 "Live Mode","Mode Production"
@@ -10,7 +10,6 @@ Disabled,Désactivé
 "Magento Community Edition version","Version Magento Community Edition"
 "Magento Enterprise Edition version","Version Magento Enterprise Edition"
 "Support","Assistance"
-
 "Documentation","Documentation"
 "Documents regarding the Postcode Magento 2 extension:","Documents relatifs à l'extension code postal de Magento 2:"
 "View the user manual. Currently the manual is only available in Dutch.","Consulter le manuel utilisateur. Uniquement disponible en néerlandais."
@@ -19,9 +18,7 @@ Disabled,Désactivé
 "Full Release Notes","Intégralité de la note de version"
 "Extension version","Version de l'extension"
 "Postcode Service version","Version du service code-postal"
-"This extension is developed by Total Internet Group (<a href="https://tig.nl" target="_blank">TIG</a>).","Cette extension est développée par Total Internet Group (<a href="https://tig.nl" target="_blank">TIG</a>)."
-"<a href="mailto:support@postcodeservice.com">support@postcodeservice.com</a>","<a href="mailto:support@postcodeservice.com">support@postcodeservice.com</a>"
-
+"This extension is developed by Total Internet Group BV / Postcode Service:","Cette extension est développée par Total Internet Group BV / Postcode Service:"
 "Advantages of the Postcode Service","Avantages du service code-postal"
 "No analytic data collection","Aucune collecte des données à caractère analytique"
 "Super fast","Extrémenent rapide"
@@ -37,11 +34,13 @@ Disabled,Désactivé
 "Enable Netherlands check","Activer la vérification pour les Pays-Bas"
 "Enable Belgium check","Activer la vérification pour la Belgique"
 "No results found.","Aucun résultat."
-"No results found. Please fill in manually.","Aucun résultat. Veuillez saisir la donnée manuellement."
-"Busy with loading zipcodes...","Chargement des codes-postaux en cours..."
-"Busy with loading streets...","Chargement des rues en cours..."
-"Supporting Dutch and Belgian addresses","Compatible avec les adresses néerlandaise et belges."
+"Cannot find street, is it correct?","Aucun résultat. Veuillez saisir la donnée manuellement."
+"Loading zipcodes ...","Chargement des codes-postaux en cours ..."
+"Loading streets ...","Chargement des rues en cours ..."
 "Countries","Pays"
 "Using MagePlaza OneStepCheckout","Utilisation de MagePlaza OneStepCheckout"
 "Unexpected error occurred. Please fill in the address details manually.","Une erreur inattendue s'est produite. Veuillez remplir les coordonnées manuellement."
 "Please enter a valid zip code and house number.","Veuillez saisir un code postal et un numéro de maison valides."
+"Could not perform address validation.","Impossible d'effectuer la validation de l'adresse."
+"Address validation temporarily unavailable.","Validation de l'adresse temporairement indisponible."
+"Address not found with provided zipcode and house number. If correct, please enter address details manually.","Adresse introuvable avec le code postal et le numéro de maison fournis. Si correct, veuillez saisir les coordonnées manuellement."

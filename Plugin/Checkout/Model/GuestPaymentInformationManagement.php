@@ -69,7 +69,7 @@ class GuestPaymentInformationManagement
         $email,
         $paymentMethod,
         $address
-    ) {
+    ): void {
         if (!$address) {
             return;
         }

@@ -29,6 +29,7 @@
  * @copyright   Copyright (c) Total Internet Group B.V. https://tig.nl/copyright
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
+
 namespace TIG\Postcode\Webservices;
 
 use Laminas\Http\Client as HttpClient;
@@ -127,28 +128,29 @@ class Api
      * Add headers to request
      *
      * Set the headers, but only if the api version is 4 or higher. Before version 4 user data is parsed within the
-     * requestData array as ['client_id' => 'xxxx', 'secure_code' => 'xxxx']
+     * requestData array as ['ClientId' => 'xxxx', 'SecureCode' => 'xxxx']
      *
      * @param EndpointInterface $endpoint
+     *
      * @throws \Zend_Http_Client_Exception
      */
     private function setHeaders(EndpointInterface $endpoint)
     {
         $version = str_replace('v', '', $this->apiConfiguration->getVersion());
 
-        if ((int)$version >= 4 || $endpoint->getCountry() === 'BE') {
+        if ((int) $version >= 4 || $endpoint->getCountry() === 'BE' || $endpoint->getCountry() === 'DE') {
             $this->httpClient->setOptions(['strict' => false]);
             $this->httpClient->setHeaders([
-                'X-Client_Id'   => $this->clientConfiguration->getClientId(),
-                'X-Secure_Code' => $this->clientConfiguration->getApiKey()
+                'X-ClientId'   => $this->clientConfiguration->getClientId(),
+                'X-SecureCode' => $this->clientConfiguration->getSecureCode()
             ]);
 
             return;
         }
 
-        $params = $endpoint->getRequestData();
+        $params                = $endpoint->getRequestData();
         $params['client_id']   = $this->clientConfiguration->getClientId();
-        $params['secure_code'] = $this->clientConfiguration->getApiKey();
+        $params['secure_code'] = $this->clientConfiguration->getSecureCode();
 
         $endpoint->setRequestData($params);
     }
@@ -162,7 +164,7 @@ class Api
     {
         $this->httpClient->setMethod($endpoint->getMethod());
 
-        $params = $endpoint->getRequestData();
+        $params              = $endpoint->getRequestData();
         $params['domain']    = $this->clientConfiguration->getDomainUrl();
         $params['remote_ip'] = $this->serverAddress->getServerAddress();
 
@@ -184,9 +186,14 @@ class Api
      */
     private function setUri(EndpointInterface $endpoint)
     {
-        $uri = $this->apiConfiguration->getBaseUri() . $endpoint->getEndpoint();
+        $uri = $this->apiConfiguration->getBaseUri() . $endpoint->getEndpoint(); // NL
+
         if ($endpoint->getCountry() == 'BE') {
-            $uri = $this->apiConfiguration->getBeBaseUri($endpoint->getEndpoint()) . $endpoint->getEndpoint();
+            $uri = $this->apiConfiguration->getBEBaseUri($endpoint->getEndpoint()) . $endpoint->getEndpoint(); // BE
+        }
+
+        if ($endpoint->getCountry() == 'DE') {
+            $uri = $this->apiConfiguration->getDEBaseUri($endpoint->getEndpoint()) . $endpoint->getEndpoint(); // DE
         }
 
         $this->httpClient->setUri($uri);

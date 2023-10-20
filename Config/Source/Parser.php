@@ -44,7 +44,7 @@ class Parser implements ArrayInterface
      *
      * @return array
      */
-    public function toOptionArray()
+    public function toOptionArray(): array
     {
         // @codingStandardsIgnoreStart
         $options = [

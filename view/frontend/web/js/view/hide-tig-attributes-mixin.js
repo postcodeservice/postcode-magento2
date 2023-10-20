@@ -1,13 +1,13 @@
 'use strict';
 define([
     'TIG_Postcode/js/helper/field-types'
-],function (FieldTypes) {
+], function (FieldTypes) {
     'use strict';
-
+    
     var mixin = {
-
-        getCustomAttributeLabel: function(element) {
-            // Hide TIG Elements
+        
+        getCustomAttributeLabel: function (element) {
+            // Hide Postcode Service TIG Elements
             if (element && 'attribute_code' in element &&
                 [
                     FieldTypes.house_number,
@@ -19,7 +19,7 @@ define([
             return this._super(element);
         }
     };
-
+    
     return function (magentoBlock) {
         return magentoBlock.extend(mixin);
     };

@@ -28,30 +28,41 @@
  * @copyright   Copyright (c) Total Internet Group B.V. https://tig.nl/copyright
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
-define(['underscore'], function(_) {
+
+define(['underscore'], function (_) {
     var postcodeConfig = {
         'action_url': {
             'postcode_service': '/postcode/address/service',
             'postcode_be_getstreet': '/postcode/address/service/be/getstreet',
-            'postcode_be_getpostcode': '/postcode/address/service/be/getpostcode'
+            'postcode_be_getpostcode': '/postcode/address/service/be/getpostcode',
+            'postcode_de_getstreet': '/postcode/address/service/de/getstreet',
+            'postcode_de_getpostcode': '/postcode/address/service/de/getpostcode'
         }
     };
-
+    
     if ('checkoutConfig' in window && 'postcode' in window.checkoutConfig) {
         postcodeConfig = _.extend(postcodeConfig, window.checkoutConfig.postcode);
     }
-
+    
     return {
-        getWebserviceURL_NL : function() {
+        getWebserviceURL_NL: function () {
             return postcodeConfig.action_url.postcode_service;
         },
-
-        getWebserviceURL_BE_Street: function() {
+        
+        getWebserviceURL_BE_Street: function () {
             return postcodeConfig.action_url.postcode_be_getstreet;
         },
-
-        getWebserviceURL_BE_Postcode: function() {
+        
+        getWebserviceURL_BE_Postcode: function () {
             return postcodeConfig.action_url.postcode_be_getpostcode;
+        },
+        
+        getWebserviceURL_DE_Street: function () {
+            return postcodeConfig.action_url.postcode_de_getstreet;
+        },
+        
+        getWebserviceURL_DE_Postcode: function () {
+            return postcodeConfig.action_url.postcode_de_getpostcode;
         }
-    }
+    };
 });

@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?><!--
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
  *
  *
  *          ..::..
@@ -34,7 +35,7 @@
         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
     <default>
         <tig_postcode>
-            <supported_magento_version>2.3.7, 2.4.6</supported_magento_version>
+            <supported_magento_version>2.4.4, 2.4.5, 2.4.6</supported_magento_version>
             <stability/>
             <configuration>
                 <modus>0</modus>
@@ -45,17 +46,23 @@
             </configuration>
             <api>
                 <base>https://api.postcodeservice.com/nl</base>
-                <version>v3</version>
+                <version>v5</version>
                 <type>json</type>
             </api>
             <api_be>
                 <base>https://api.postcodeservice.com/be</base>
-                <postcode_version>v2</postcode_version>
-                <street_version>v2</street_version>
+                <postcode_version>v3</postcode_version>
+                <street_version>v3</street_version>
             </api_be>
+            <api_de>
+                <base>https://api.postcodeservice.com/de</base>
+                <postcode_version>v1</postcode_version>
+                <street_version>v1</street_version>
+            </api_de>
             <countries>
                 <enable_nl_check>1</enable_nl_check>
-                <enable_be_check>0</enable_be_check>
+                <enable_be_check>1</enable_be_check>
+                <enable_de_check>1</enable_de_check>
             </countries>
         </tig_postcode>
     </default>

@@ -34,27 +34,8 @@
     <div>
         <div>
             <p>
-               <strong>
-                   <?= $block->escapeHtml(__('Back-end merging')); ?>
-               </strong>
+                   <?= $block->escapeHtml(__('No advanced settings to display.')); ?>
             </p>
-            <?=  $block->escapeHtml(
-                __('These settings have impact on how street address data is stored in the database.')
-            );
-?>
-            <br/>
-            <?= $block->escapeHtml(
-                __('Tampering with the settings may affect the workflow of' .
-                    ' third party extensions. Use at your own risk.')
-            );
-?>
-            <br />
-            <strong>
-                <?= $block->escapeHtml(
-                    __('Note: These settings are disabled in this new release. ' .
-                        'If you still need this functionality please contact support')
-                );?>
-            </strong>
         </div>
     </div>
 </div>

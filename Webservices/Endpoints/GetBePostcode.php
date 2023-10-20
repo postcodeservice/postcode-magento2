@@ -30,15 +30,14 @@
  * @copyright   Copyright (c) Total Internet Group B.V. https://tig.nl/copyright
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
+
 namespace TIG\Postcode\Webservices\Endpoints;
 
 // @codingStandardsIgnoreFile
 class GetBePostcode extends EndpointAbstract
 {
-    protected $endpoint = 'postcode-find/';
-
-    protected $country = 'BE';
-
-    protected $requestKeys = ['zipcodezone'];
-    protected $responseKeys = ['postcode', 'plaats'];
+    protected $endpoint     = 'zipcode-find/';
+    protected $country      = 'BE';
+    protected $requestKeys  = ['zipcodezone', 'multiresults']; // BE V3
+    protected $responseKeys = ['zipcode', 'city']; // BE V3
 }
