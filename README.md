@@ -1,6 +1,8 @@
 # Postcode Service Magento 2 extension
 
 [![Latest Stable Version](https://img.shields.io/github/v/release/postcodeservice/postcode-magento2?style=for-the-badge&color=227cff)](https://github.com/postcodeservice/postcode-magento2/releases/latest)
+![TIG Postcode Service 2.4.7 versions](https://img.shields.io/badge/Tested%20with%20Magento-2.4.7beta3-%2300cf00?style=for-the-badge)
+![TIG Postcode Service 2.4.7 versions](https://img.shields.io/badge/Tested%20with%20Magento-2.4.7beta2-%2300cf00?style=for-the-badge)
 ![TIG Postcode Service 2.4.7 versions](https://img.shields.io/badge/Tested%20with%20Magento-2.4.7beta1-%2300cf00?style=for-the-badge)
 ![TIG Postcode Service 2.4.6 versions](https://img.shields.io/badge/Tested%20with%20Magento-2.4.6-%2300cf00?style=for-the-badge)
 ![TIG Postcode Service 2.4.5 versions](https://img.shields.io/badge/Tested%20with%20Magento-2.4.5-%2300cf00?style=for-the-badge)
@@ -147,6 +149,11 @@ of your Magento webshop. From there, you can configure the extension according t
 
 The functionality for Germany is similar to that for Belgium. Please refer to the preceding example
 for a demonstration of its operation.
+
+### For France Postcodes
+
+The functionality for France is similar to that for Belgium and Germany. Please refer to the
+preceding example for a demonstration of its operation.
 
 ## Further documentation
 
