@@ -32,28 +32,28 @@
 define(['jquery', './postcode-config'], function ($, postcodeConfig) {
     
     return {
-        getPostCodeNL: function (postcode, house_number) {
+        getPostCodeNL: function (zipcode, house_number) {
             return $.ajax(
                 {
                     method: 'GET',
                     url: postcodeConfig.getWebserviceURL_NL(),
                     showLoader: false, // If you prefer a loader, set this value to true
                     data: {
-                        houseno: house_number,
-                        zipcode: postcode
+                        house_number: house_number,
+                        zipcode: zipcode
                     }
                 });
         },
         
         getPostCodeBE: function (postcode) {
-            // Multiresults = 1 enables support for bilingual cities such as Brussel, see
-            // https://developers.postcodeservice.com/#belgium-api-GETbe-v3-zipcode-find
+            // multi_results = 1 enables support for bilingual cities such as Brussel, see
+            // https://developers.postcodeservice.com/#belgium-api-GETbe-v4-zipcode-find
             return $.ajax({
                 method: 'GET',
                 url: postcodeConfig.getWebserviceURL_BE_Postcode(),
                 data: {
                     zipcodezone: postcode,
-                    multiresults: 1
+                    multi_results: 1
                 }
             });
         },
@@ -75,7 +75,7 @@ define(['jquery', './postcode-config'], function ($, postcodeConfig) {
                 method: 'GET',
                 url: postcodeConfig.getWebserviceURL_DE_Postcode(),
                 data: {
-                    zipcodezone: postcode,
+                    zipcodezone: postcode
                 }
             });
         },
@@ -84,6 +84,28 @@ define(['jquery', './postcode-config'], function ($, postcodeConfig) {
             return $.ajax({
                 method: 'GET',
                 url: postcodeConfig.getWebserviceURL_DE_Street(),
+                data: {
+                    zipcode: postcode,
+                    city: city,
+                    street: street
+                }
+            });
+        },
+        
+        getPostCodeFR: function (postcode) {
+            return $.ajax({
+                method: 'GET',
+                url: postcodeConfig.getWebserviceURL_FR_Postcode(),
+                data: {
+                    zipcodezone: postcode
+                }
+            });
+        },
+        
+        getStreetFR: function (postcode, street, city) {
+            return $.ajax({
+                method: 'GET',
+                url: postcodeConfig.getWebserviceURL_FR_Street(),
                 data: {
                     zipcode: postcode,
                     city: city,

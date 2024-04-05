@@ -1,4 +1,3 @@
-
 /**** BE ****/
 .field.tig_postcode_be {
     margin: 0 10px 20px 0;
@@ -7,10 +6,16 @@
 
 .tig_postcode_field.tig_postcode_be {
     display: inline-block;
-    max-width: calc(46% - 7px);
+    max-width: calc(50% - 5px);
 }
 
-.tig_street_fields.tig_postcode_be, .tig_city_field.tig_postcode_be {
+.tig_city_field.tig_postcode_be {
+    margin: 0 0 20px 0;
+    max-width: calc(50% - 5px);
+    display: inline-block;
+}
+
+.tig_street_fields.tig_postcode_be {
     max-width: 100%;
 }
 
@@ -21,7 +26,8 @@
 }
 
 @media (max-width: 400px) {
-    .tig_postcode_field.tig_postcode_be {
+    .tig_postcode_field.tig_postcode_be, .tig_city_field.tig_postcode_be {
+        display: block;
         max-width: 100%;
     }
 
@@ -34,7 +40,6 @@
 .tig_housenumber_addition_field.tig_postcode_be {
     margin: 0 0 20px 0;
 }
-
 
 .tig_postcode_field.tig_postcode_be .control {
     position: relative;

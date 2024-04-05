@@ -29,13 +29,14 @@
  * @copyright   Copyright (c) Total Internet Group B.V. https://tig.nl/copyright
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
+
 namespace TIG\Postcode\Test\Unit\Config\Provider;
 
 use TIG\Postcode\Config\Provider\ModuleConfiguration;
 
 class ModuleConfigurationTest extends AbstractConfigurationTest
 {
-    /** @var ModuleConfiguration  */
+    /** @var ModuleConfiguration */
     protected $instanceClass = ModuleConfiguration::class;
 
     /**
@@ -98,9 +99,9 @@ class ModuleConfigurationTest extends AbstractConfigurationTest
     public function offModusProvider()
     {
         return [
-            'ModuleOutput disabled' => [false, true, '0'],
-            'ModuleOutput enabled'  => [true, true, '0'],
-            'ModuleOutput enabled & modus on'  => [true, false, '2']
+            'ModuleOutput disabled'           => [false, true, '0'],
+            'ModuleOutput enabled'            => [true, true, '0'],
+            'ModuleOutput enabled & modus on' => [true, false, '2']
         ];
     }
 
@@ -157,7 +158,7 @@ class ModuleConfigurationTest extends AbstractConfigurationTest
      */
     public function testGetStability()
     {
-        $value = $this->getRandomSyntax();
+        $value    = $this->getRandomSyntax();
         $instance = $this->getInstance();
 
         $this->setXpath(ModuleConfiguration::XPATH_MODULE_STABILITY, $value);
@@ -169,7 +170,7 @@ class ModuleConfigurationTest extends AbstractConfigurationTest
      */
     public function testGetSupportedMagentoVersions()
     {
-        $value = $this->getRandomSyntax();
+        $value    = $this->getRandomSyntax();
         $instance = $this->getInstance();
 
         $this->setXpath(ModuleConfiguration::XPATH_SUPPORTED_MAGENTO_VERSION, $value);
@@ -181,7 +182,7 @@ class ModuleConfigurationTest extends AbstractConfigurationTest
      */
     public function testGetCheckoutCompatibility()
     {
-        $value = $this->getRandomSyntax();
+        $value    = $this->getRandomSyntax();
         $instance = $this->getInstance();
 
         $this->setXpath(ModuleConfiguration::XPATH_CHECKOUT_COMPATIBILITY, $value);
@@ -194,8 +195,8 @@ class ModuleConfigurationTest extends AbstractConfigurationTest
     public function checkNLEnabledProvider()
     {
         return [
-            'nl_on' => [ModuleConfiguration::XPATH_NETHERLANDS_CHECK, 1, 1],
-            'nl_off' => [ModuleConfiguration::XPATH_NETHERLANDS_CHECK, 0, 0]
+            'nl_on'  => [ModuleConfiguration::XPATH_NL_ENABLED, 1, 1],
+            'nl_off' => [ModuleConfiguration::XPATH_NL_ENABLED, 0, 0]
         ];
     }
 
@@ -205,16 +206,24 @@ class ModuleConfigurationTest extends AbstractConfigurationTest
     public function checkBEEnabledProvider()
     {
         return [
-            'be_on' => [ModuleConfiguration::XPATH_BELGIUM_CHECK, 1, 1],
-            'be_off' => [ModuleConfiguration::XPATH_BELGIUM_CHECK, 0, 0]
+            'be_on'  => [ModuleConfiguration::XPATH_BE_ENABLED, 1, 1],
+            'be_off' => [ModuleConfiguration::XPATH_BE_ENABLED, 0, 0]
         ];
     }
 
     public function checkDEEnabledProvider()
     {
         return [
-            'de_on' => [ModuleConfiguration::XPATH_GERMANY_CHECK, 1, 1],
-            'de_off' => [ModuleConfiguration::XPATH_GERMANY_CHECK, 0, 0]
+            'de_on'  => [ModuleConfiguration::XPATH_DE_ENABLED, 1, 1],
+            'de_off' => [ModuleConfiguration::XPATH_DE_ENABLED, 0, 0]
+        ];
+    }
+
+    public function checkFREnabledProvider()
+    {
+        return [
+            'fr_on'  => [ModuleConfiguration::XPATH_FR_ENABLED, 1, 1],
+            'fr_off' => [ModuleConfiguration::XPATH_FR_ENABLED, 0, 0]
         ];
     }
 

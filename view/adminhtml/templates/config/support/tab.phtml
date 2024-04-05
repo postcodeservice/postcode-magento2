@@ -252,12 +252,12 @@
         </div>
 
         <div class="block-version">
-            <h3><?= $block->escapeHtml(__('Extension version')); ?></h3>
+            <h3><?= $block->escapeHtml(__('Version information')); ?></h3>
             <div>
                 <ul class="version-compatibility">
 
                     <li>
-                        <span class="text"><?= $block->escapeHtml(__('Postcode Service Extension Version')); ?>:</span>
+                        <span class="text"><?= $block->escapeHtml(__('Postcode Service Extension')); ?>:</span>
                         <span class="version">
                             <?= /* @noEscape */
                             $block->getVersionNumber() .
@@ -265,6 +265,16 @@
                             ?>
                         </span>
                     </li>
+                    <?php $versions = $block->getAPIVersionNumbers(); ?>
+                    <?php foreach ($versions as $country => $version): ?>
+                        <li>
+                            <span class="text"><?= $block->escapeHtml(__('Using %1 API', $country)); ?>:</span>
+                            <span class="version">
+                            <?= /* @noEscape */
+                            $version; ?>
+                            </span>
+                        </li>
+                    <?php endforeach; ?>
                 </ul>
             </div>
 

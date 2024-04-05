@@ -29,6 +29,7 @@
  * @copyright   Copyright (c) Total Internet Group B.V. https://tig.nl/copyright
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
+
 namespace TIG\Postcode\Block\Adminhtml\Config\Support;
 
 use Magento\Framework\View\Element\Template;
@@ -38,9 +39,9 @@ use TIG\Postcode\Config\Provider\ModuleConfiguration;
 
 class Tab extends Template implements RendererInterface
 {
-    const MODULE_NAME = 'TIG_Postcode';
+    const MODULE_NAME       = 'TIG_Postcode';
 
-    const EXTENSION_VERSION = '1.6.0';
+    const EXTENSION_VERSION = '1.7.0';
 
     // @codingStandardsIgnoreLine
     protected $_template = 'TIG_Postcode::config/support/tab.phtml';
@@ -81,11 +82,21 @@ class Tab extends Template implements RendererInterface
     /**
      * Retrieve the version number from the database.
      *
-     * @return bool|false|string
+     * @return string
      */
-    public function getVersionNumber()
+    public function getVersionNumber(): string
     {
         return static::EXTENSION_VERSION;
+    }
+
+    /**
+     * Get Postcode Service used API versions
+     *
+     * @return array
+     */
+    public function getAPIVersionNumbers(): array
+    {
+        return $this->moduleConfiguration->getAPIVersions();
     }
 
     /**
@@ -93,7 +104,7 @@ class Tab extends Template implements RendererInterface
      *
      * @return string
      */
-    public function getSupportedMagentoVersions()
+    public function getSupportedMagentoVersions(): string
     {
         return $this->moduleConfiguration->getSupportedMagentoVersions();
     }

@@ -75,7 +75,7 @@ define(
         
         // Define application configuration
         const appConfig = {
-            COUNTRY: 'DE'
+            COUNTRY: 'FR'
         };
         
         // Function to get error message based on data and default error message
@@ -95,8 +95,8 @@ define(
             return defaultErrorMessage;
         }
         
-        // Constructor for PostcodeHandlerDE
-        function PostcodeHandlerDE(config, postcodeService)
+        // Constructor for PostcodeHandlerFR
+        function PostcodeHandlerFR(config, postcodeService)
         {
             this.debounceBeforeCall = null;
             this.data = {};
@@ -106,19 +106,19 @@ define(
         }
         
         // Inherit from PostcodeHandler
-        PostcodeHandlerDE.prototype = Object.create(PostcodeHandler.prototype);
+        PostcodeHandlerFR.prototype = Object.create(PostcodeHandler.prototype);
         
         // Method to get ISO code
-        PostcodeHandlerDE.prototype.getISOCode = function () { return appConfig.COUNTRY; };
+        PostcodeHandlerFR.prototype.getISOCode = function () { return appConfig.COUNTRY; };
         
         // Method to destroy the handler
-        PostcodeHandlerDE.prototype.destroy = function () {
+        PostcodeHandlerFR.prototype.destroy = function () {
             this.deleteAutoComplete();
             PostcodeHandler.prototype.destroy.call(this);
         };
         
         // Method to delete autocomplete from fields
-        PostcodeHandlerDE.prototype.deleteAutoComplete = function () {
+        PostcodeHandlerFR.prototype.deleteAutoComplete = function () {
             const currentPostcodeService = this.getPostcodeService();
             const postcodeField = currentPostcodeService.getElement(FieldTypes.postcode);
             const domPostcodeField = $('#' + postcodeField.uid);
@@ -136,7 +136,7 @@ define(
         };
         
         // Method to add autocomplete to postcode field
-        PostcodeHandlerDE.prototype.addAutoCompleteToPostcode = async function () {
+        PostcodeHandlerFR.prototype.addAutoCompleteToPostcode = async function () {
             const self = this;
             const currentPostcodeService = this.getPostcodeService();
             const postcodeField = currentPostcodeService.getElement(FieldTypes.postcode);
@@ -172,7 +172,7 @@ define(
                         }]);
                     
                     // Call the API to get postcode data
-                    PostcodeApi.getPostCodeDE(zipcodezone.term).done(function (data) {
+                    PostcodeApi.getPostCodeFR(zipcodezone.term).done(function (data) {
                         
                         // If no results are returned, display an error message
                         if (data.results.length === 0) {
@@ -231,7 +231,7 @@ define(
         };
         
         // Method to add autocomplete to street field
-        PostcodeHandlerDE.prototype.addAutoCompleteToStreet = async function () {
+        PostcodeHandlerFR.prototype.addAutoCompleteToStreet = async function () {
             const self = this;
             const currentPostcodeService = this.getPostcodeService();
             const streetFieldZero = currentPostcodeService.getElement(FieldTypes.street);
@@ -274,7 +274,7 @@ define(
                         }]);
                     
                     // Call the API to get street data
-                    PostcodeApi.getStreetDE(postcode, street.term, city).done(function (data) {
+                    PostcodeApi.getStreetFR(postcode, street.term, city).done(function (data) {
                         if (data.results.length === 0) {
                             const errorMessage = getErrorMessage(
                                 data, displayMessages.STREET_NOT_FOUND);
@@ -340,7 +340,7 @@ define(
         };
         
         // Method to handle field type and value
-        PostcodeHandlerDE.prototype.handle = async function (field_type, field_value) {
+        PostcodeHandlerFR.prototype.handle = async function (field_type, field_value) {
             if (field_type === FieldTypes.postcode) {
                 this.data.postcode = field_value;
             }
@@ -367,6 +367,6 @@ define(
         };
         
         // Return the constructor function
-        return PostcodeHandlerDE;
+        return PostcodeHandlerFR;
     }
 );

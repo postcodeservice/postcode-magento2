@@ -32,12 +32,12 @@
 namespace TIG\Postcode\Test\Unit\Webservice\Endpoints;
 
 use TIG\Postcode\Test\TestCase;
-use TIG\Postcode\Webservices\Endpoints\GetAddress;
+use TIG\Postcode\Webservices\Endpoints\GetNLAddressValidation;
 
 class GetAddressTest extends TestCase
 {
-    /** @var GetAddress */
-    protected $instanceClass = GetAddress::class;
+    /** @var GetNLAddressValidation */
+    protected $instanceClass = GetNLAddressValidation::class;
 
     /**
      * @return void

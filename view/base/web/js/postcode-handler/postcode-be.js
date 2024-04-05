@@ -30,7 +30,6 @@
  */
 define(
     [
-        // Importing required modules and dependencies
         'jquery',
         'knockout',
         'underscore',
@@ -43,7 +42,28 @@ define(
     function ($, ko, _, PostcodeHandler, FieldTypes, PostcodeApi) {
         'use strict';
         
-        // Defining states for the postcode handler
+        // Define display messages for various states
+        const displayMessages = {
+            LOADING_ZIPCODES: 'Loading zipcodes ...',
+            ZIPCODE_NOT_FOUND: 'Zipcode not found.',
+            LOADING_STREET: 'Loading streets ...',
+            STREET_NOT_FOUND: 'Cannot find street, is it correct?'
+        };
+        
+        // Define error messages for various error states
+        const errorMessages = {
+            VALIDATION_UNAVAILABLE: 'Address validation temporarily unavailable.',
+            VALIDATION_FAILED: 'Could not perform address validation.'
+        };
+        
+        // Define UI constants
+        const UI = {
+            DROPDOWN_DELAY_IN_MS: 30,
+            MIN_AUTOCOMPLETE_LENGTH: 2,
+            MAX_DROPDOWN_RESULTS: 7
+        };
+        
+        // Define states for the postcode handler
         const states = Object.seal({
             INIT: PostcodeHandler.INIT,
             IDLE: 'postcode_idle',
@@ -52,6 +72,28 @@ define(
             POSTCODE_SHOW_FIELDS_SUGGESTION: 'postcode_show_fields_suggestion',
             POSTCODE_SHOW_FIELDS_EDIT: 'postcode_show_fields_edit'
         });
+        
+        // Define application configuration
+        const appConfig = {
+            COUNTRY: 'BE'
+        };
+        
+        // Function to get error message based on data and default error message
+        function getErrorMessage(data, defaultErrorMessage)
+        {
+            if (data.error_code) {
+                console.error('Postcodeservice.com extension: ' + JSON.stringify(data));
+                switch(data.error_code) {
+                    case 429:
+                        return errorMessages.VALIDATION_UNAVAILABLE;
+                    default:
+                        return data.error_code > 400
+                            ? errorMessages.VALIDATION_FAILED
+                            : defaultErrorMessage;
+                }
+            }
+            return defaultErrorMessage;
+        }
         
         // Constructor for PostcodeHandlerBE
         function PostcodeHandlerBE(config, postcodeService)
@@ -63,92 +105,79 @@ define(
             return (this);
         }
         
-        // Setting up prototype chain
+        // Inherit from PostcodeHandler
         PostcodeHandlerBE.prototype = Object.create(PostcodeHandler.prototype);
         
         // Method to get ISO code
-        PostcodeHandlerBE.prototype.getISOCode = function () { return 'BE';};
+        PostcodeHandlerBE.prototype.getISOCode = function () { return appConfig.COUNTRY; };
         
-        // Method to destroy autocomplete
+        // Method to destroy the handler
         PostcodeHandlerBE.prototype.destroy = function () {
             this.deleteAutoComplete();
             PostcodeHandler.prototype.destroy.call(this);
         };
         
-        // Method to delete autocomplete
+        // Method to delete autocomplete from fields
         PostcodeHandlerBE.prototype.deleteAutoComplete = function () {
-            var currentPostcodeService = this.getPostcodeService();
+            const currentPostcodeService = this.getPostcodeService();
+            const postcodeField = currentPostcodeService.getElement(FieldTypes.postcode);
+            const domPostcodeField = $('#' + postcodeField.uid);
             
-            var postcodeField = currentPostcodeService.getElement(FieldTypes.postcode);
-            var domPostcodeField = $('#' + postcodeField.uid);
             if (domPostcodeField.length > 0 && domPostcodeField.data('uiAutocomplete')) {
                 domPostcodeField.autocomplete('destroy');
             }
             
-            var streetField = currentPostcodeService.getElement(FieldTypes.street);
-            var domStreetField = $('#' + streetField.uid);
+            const streetField = currentPostcodeService.getElement(FieldTypes.street);
+            const domStreetField = $('#' + streetField.uid);
+            
             if (domStreetField.length > 0 && domStreetField.data('uiAutocomplete')) {
                 domStreetField.autocomplete('destroy');
             }
         };
         
         // Method to add autocomplete to postcode field
-        PostcodeHandlerBE.prototype.addAutoCompleteToPostcode = function () {
-            var self = this;
+        PostcodeHandlerBE.prototype.addAutoCompleteToPostcode = async function () {
+            const self = this;
+            const currentPostcodeService = this.getPostcodeService();
+            const postcodeField = currentPostcodeService.getElement(FieldTypes.postcode);
+            const domPostcodeField = $('#' + postcodeField.uid);
             
-            var currentPostcodeService = this.getPostcodeService();
-            var postcodeField = currentPostcodeService.getElement(FieldTypes.postcode);
-            var domPostcodeField = $('#' + postcodeField.uid);
-            
+            // If the DOM element for the postcode field does not exist, exit the function
             if (domPostcodeField.length === 0) {
                 return;
             }
             
-            domPostcodeField.attr('autocomplete', 'off'); // When autocomplete is off, the browser
-                                                          // does not automatically complete
-                                                          // entries based on earlier typed values.
+            // Turn off browser's autocomplete feature for the postcode field
+            domPostcodeField.attr('autocomplete', 'off');
             
+            // Add jQuery UI Autocomplete to the postcode field
             domPostcodeField.autocomplete({
-                delay: 30, // Parameter for the results delay in milliseconds
+                delay: UI.DROPDOWN_DELAY_IN_MS, // Delay in milliseconds after a keystroke is
+                                                // activated
+                minLength: UI.MIN_AUTOCOMPLETE_LENGTH, // Minimum number of characters required to
+                                                       // start an autocomplete search
                 source: function (zipcodezone, response) {
-                    
-                    if (zipcodezone.term.length <= 1) {
-                        // Only make requests when more than 2 numbers are keyed in:
-                        // It reduces the amount of API calls and keeps the result list more
-                        // compact
-                        this.menu.element.removeClass('tigJqueryUiClass');
-                        return;
-                    }
-                    
+                    // Add classes to the menu element
                     this.menu.element.addClass(this.customScope + '.tigAutocomplete');
                     this.menu.element.addClass('tigJqueryUiClass');
                     
+                    // Add class to indicate that autocomplete is running
                     domPostcodeField.addClass('auto-complete-running');
                     
+                    // Display loading message
                     response([
                         {
-                            label: $.mage.__('Loading zipcodes ...'),
+                            label: $.mage.__(displayMessages.LOADING_ZIPCODES),
                             data: false
                         }]);
                     
+                    // Call the API to get postcode data
                     PostcodeApi.getPostCodeBE(zipcodezone.term).done(function (data) {
                         
-                        if (data.success === false) {
-                            // If no results are found, a success === false is returned
-                            let errorMessage = 'Zipcode not found.';
-                            
-                            if (data.error_code) {
-                                // show error in console
-                                console.error(
-                                    'Postcodeservice.com extension: ' + JSON.stringify(data));
-                                
-                                if (data.error_code > 400) {
-                                    errorMessage = 'Could not perform address validation.';
-                                }
-                                if (data.error_code === 429) {
-                                    errorMessage = 'Address validation temporarily unavailable.';
-                                }
-                            }
+                        // If no results are returned, display an error message
+                        if (data.results.length === 0) {
+                            const errorMessage = getErrorMessage(
+                                data, displayMessages.ZIPCODE_NOT_FOUND);
                             
                             response(
                                 {
@@ -158,28 +187,28 @@ define(
                             return;
                         }
                         
-                        // Add elements to selection box
-                        var selectBoxArr = [];
-                        $.each(data, function (key) {
-                            if (selectBoxArr.length >= 8) {
-                                return false; // Break the loop if more than 8 results are in the
+                        // Prepare data for the selection box
+                        const selectBoxArr = [];
+                        $.each(data.results, function (key) {
+                            if (selectBoxArr.length >= UI.MAX_DROPDOWN_RESULTS) {
+                                return false; // Break the loop if more than x results are in the
                                               // list
                             }
                             selectBoxArr.push({
-                                label: data[key].zipcode + ' - ' + data[key].city,
-                                value: data[key].zipcode,
-                                data: data[key]
+                                label: data.results[key].zipcode + ' - ' + data.results[key].city,
+                                value: data.results[key].zipcode,
+                                data: data.results[key]
                             });
                         });
                         
+                        // Update the autocomplete suggestions
                         response(selectBoxArr);
                     });
                 },
                 select: function (event, ui) {
-                    // If the loader / info messages are selected, do not copy them to the street
-                    // field
-                    if ((ui.item.value === $.mage.__('Loading zipcodes ...')) ||
-                        (ui.item.value === $.mage.__('Zipcode not found.'))) {
+                    // If a loading or error message is selected, do not update the field value
+                    if ((ui.item.value === $.mage.__(displayMessages.LOADING_ZIPCODES)) ||
+                        (ui.item.value === $.mage.__(displayMessages.ZIPCODE_NOT_FOUND))) {
                         ui.item.value = '';
                         return false;
                     }
@@ -188,85 +217,79 @@ define(
                         return false;
                     }
                     
-                    var data = ui.item.data;
+                    // Update the city and postcode fields with the selected data
+                    let data = ui.item.data;
                     self.getPostcodeService().setFieldValue(FieldTypes.city, data.city);
                     self.getPostcodeService().setFieldValue(FieldTypes.postcode, data.zipcode);
                     
                 },
                 close: function () {
+                    // Remove the class indicating that autocomplete is running
                     domPostcodeField.removeClass('auto-complete-running');
                 }
             });
         };
         
         // Method to add autocomplete to street field
-        PostcodeHandlerBE.prototype.addAutoCompleteToStreet = function () {
-            var self = this;
+        PostcodeHandlerBE.prototype.addAutoCompleteToStreet = async function () {
+            const self = this;
+            const currentPostcodeService = this.getPostcodeService();
+            const streetFieldZero = currentPostcodeService.getElement(FieldTypes.street);
+            const streetField = $('#' + streetFieldZero.uid);
             
-            var currentPostcodeService = this.getPostcodeService();
-            var streetFieldZero = currentPostcodeService.getElement(FieldTypes.street);
-            var streetField = $('#' + streetFieldZero.uid);
-            
+            // If the DOM element for the street field does not exist, exit the function
             if (streetField.length === 0) {
                 return;
             }
             
+            // Turn on browser's autocomplete feature for the street field
             streetField.attr('autocomplete', 'yes');
             
+            // Add jQuery UI Autocomplete to the street field
             streetField.autocomplete({
-                delay: 30, // Parameter for the results delay in milliseconds
+                delay: UI.DROPDOWN_DELAY_IN_MS, // Delay in milliseconds after a keystroke is
+                                                // activated
+                minLength: UI.MIN_AUTOCOMPLETE_LENGTH, // Minimum number of characters required to
+                // start an autocomplete search
                 source: function (street, response) {
-                    var postcode = currentPostcodeService.getElement(FieldTypes.postcode).value();
-                    var city = currentPostcodeService.getElement(FieldTypes.city).value();
+                    const postcode = currentPostcodeService.getElement(FieldTypes.postcode).value();
+                    const city = currentPostcodeService.getElement(FieldTypes.city).value();
                     
-                    if (city === '' || postcode === '' || postcode === null) {
+                    // If the required fields are empty, do not make an API request
+                    if (!city?.trim() || !postcode?.trim()) {
                         // If the required fields are empty, do not make an API request
-                        this.menu.element.removeClass('tigJqueryUiClass');
-                        this.menu.element.css('display', 'none');
+                        this.menu.element.removeClass('tigJqueryUiClass').css('display', 'none');
                         return;
                     }
                     
+                    // Add class to the menu element
                     this.menu.element.addClass('tigJqueryUiClass');
                     this.menu.element.appendTo(this.element.closest('.tig_street_autocomplete'));
                     
+                    // Display loading message
                     response([
                         {
-                            label: $.mage.__('Loading streets ...'),
+                            label: $.mage.__(displayMessages.LOADING_STREET),
                             data: false
                         }]);
                     
+                    // Call the API to get street data
                     PostcodeApi.getStreetBE(postcode, street.term, city).done(function (data) {
-                        if (data.success === false) {
-                            // If no results are found, a success === false is returned
-                            let errorMessage = 'Cannot find street, is it correct?';
+                        if (data.results.length === 0) {
+                            const errorMessage = getErrorMessage(
+                                data, displayMessages.STREET_NOT_FOUND);
                             
-                            if (data.error_code) {
-                                // show error in console
-                                console.error(
-                                    'Postcodeservice.com extension: ' + JSON.stringify(data));
-                                
-                                if (data.error_code > 400) {
-                                    errorMessage = 'Could not perform address validation.';
-                                }
-                                if (data.error_code === 429) {
-                                    errorMessage = 'Address validation temporarily unavailable.';
-                                }
-                            }
-                            
-                            response([
+                            response(
                                 {
                                     label: $.mage.__(errorMessage),
                                     data: false
-                                }]);
+                                });
                             return;
                         }
                         
-                        // Belgium sometimes has a street that lays within two
-                        // postkantons, e.g. Rue de l'Aur in Bruxelles/Ixelles/Brussel. Filter
-                        // double street names because for this usage we do not the separate
-                        // postkantons items.
-                        if (Array.isArray(data)) {
-                            var uniqueStreets = data.reduce((unique, item) => {
+                        // Prepare unique list of streets for the selection box
+                        if (Array.isArray(data.results)) {
+                            var uniqueStreets = data.results.reduce((unique, item) => {
                                 return unique.includes(item.street) ? unique : [
                                     ...unique,
                                     item.street];
@@ -280,11 +303,11 @@ define(
                                 }]);
                         }
                         
-                        var selectBoxArr = [];
+                        const selectBoxArr = [];
                         $.each(uniqueStreets, function (index, value) {
-                            if (selectBoxArr.length >= 6) {
-                                return false; // Break the loop if more than 6 results are in the
-                                              // list
+                            if (selectBoxArr.length >= UI.MAX_DROPDOWN_RESULTS) {
+                                return false; // Stop adding to the list after reaching the maximum
+                                              // number of results
                             }
                             selectBoxArr.push({
                                 label: value,
@@ -292,18 +315,19 @@ define(
                             });
                         });
                         
+                        // Update the autocomplete suggestions
                         response(selectBoxArr);
                     });
                 },
                 select: function (event, ui) {
-                    // If the loader / info messages are selected by the end user, do not copy them
-                    // to the street field
-                    if ((ui.item.value === $.mage.__('Loading streets ...')) ||
-                        (ui.item.value === $.mage.__('Cannot find street, is it correct?'))) {
+                    // If a loading or error message is selected, do not update the field value
+                    if ((ui.item.value === $.mage.__(displayMessages.LOADING_STREET)) ||
+                        (ui.item.value === $.mage.__(displayMessages.STREET_NOT_FOUND))) {
                         ui.item.value = '';
                         return false;
                     }
                     
+                    // Update the street field with the selected data
                     if (typeof ui.item.data === false) {
                         return false;
                     }
@@ -316,27 +340,33 @@ define(
         };
         
         // Method to handle field type and value
-        PostcodeHandlerBE.prototype.handle = function (field_type, field_value) {
+        PostcodeHandlerBE.prototype.handle = async function (field_type, field_value) {
             if (field_type === FieldTypes.postcode) {
                 this.data.postcode = field_value;
             }
             
             switch(this.getCurrentState()) {
                 case states.INIT:
+                    // If the current state is INIT, change it to IDLE and add autocomplete to the
+                    // fields
                     this.setCurrentState(states.IDLE);
                     this.getPostcodeService()
                     .addClassesToField(FieldTypes.street, {'tig_street_autocomplete': true});
                     this.getPostcodeService()
                     .addClassesToField(FieldTypes.postcode, {'tig_zipcodezone_autocomplete': true});
-                    this.addAutoCompleteToPostcode(
+                    await this.addAutoCompleteToPostcode(
                         this.getPostcodeService().getElement(FieldTypes.postcode));
-                    this.addAutoCompleteToStreet(
+                    await this.addAutoCompleteToStreet(
                         this.getPostcodeService().getElement(FieldTypes.street));
                     break;
             }
+            
+            // Call the handle method of the parent class
             PostcodeHandler.prototype.handle.call(this, field_type, field_value);
             return true;
         };
+        
+        // Return the constructor function
         return PostcodeHandlerBE;
     }
 );

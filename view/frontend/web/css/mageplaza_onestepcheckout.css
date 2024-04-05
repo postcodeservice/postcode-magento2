@@ -7,13 +7,20 @@
     max-width: calc(45%);
     padding: 0 10px;
 }
-
+.opc-wrapper.one-step-checkout-wrapper .field.tig_postcode_fr.tig_street_field {
+    max-width: calc(45%);
+    padding: 0 10px;
+}
 .opc-wrapper.one-step-checkout-wrapper .tig_city_field.tig_postcode_nl,
 .opc-wrapper.one-step-checkout-wrapper .tig_city_field.tig_postcode_be {
     max-width: calc(50%);
     padding: 0 10px;
 }
 .opc-wrapper.one-step-checkout-wrapper .tig_city_field.tig_postcode_de {
+    max-width: calc(50%);
+    padding: 0 10px;
+}
+.opc-wrapper.one-step-checkout-wrapper .tig_city_field.tig_postcode_fr {
     max-width: calc(50%);
     padding: 0 10px;
 }
@@ -29,6 +36,11 @@
     margin: 0 0 20px 0;
     padding: 0 10px;
 }
+.opc-wrapper.one-step-checkout-wrapper .field.tig_postcode_fr.tig_housenumber_field {
+    max-width: calc(45%);
+    margin: 0 0 20px 0;
+    padding: 0 10px;
+}
 
 .opc-wrapper.one-step-checkout-wrapper .field.tig_postcode_nl.tig_housenumber_addition_field,
 .opc-wrapper.one-step-checkout-wrapper .field.tig_postcode_be.tig_housenumber_addition_field {
@@ -39,13 +51,20 @@
     padding: 0 9px;
     max-width: calc(45%);
 }
-
+.opc-wrapper.one-step-checkout-wrapper .field.tig_postcode_fr.tig_housenumber_addition_field {
+    padding: 0 9px;
+    max-width: calc(45%);
+}
 .opc-wrapper.one-step-checkout-wrapper .field.tig_postcode_nl.tig_postcode_field,
 .opc-wrapper.one-step-checkout-wrapper .field.tig_postcode_be.tig_postcode_field {
     max-width: calc(100% - 8px);
     padding: 0 10px;
 }
 .opc-wrapper.one-step-checkout-wrapper .field.tig_postcode_de.tig_postcode_field {
+    max-width: calc(100% - 8px);
+    padding: 0 10px;
+}
+.opc-wrapper.one-step-checkout-wrapper .field.tig_postcode_fr.tig_postcode_field {
     max-width: calc(100% - 8px);
     padding: 0 10px;
 }

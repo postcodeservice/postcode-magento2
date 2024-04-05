@@ -38,7 +38,7 @@ class Response implements ConverterInterface
     /**
      * @var ValidationResponse
      */
-    private $validation;
+    private ValidationResponse $validation;
 
     /**
      * Request constructor.
@@ -54,9 +54,9 @@ class Response implements ConverterInterface
     /**
      * @inheritdoc
      */
-    public function setValidationKeys($keys)
+    public function setValidationKeys($keys): void
     {
-        $this->validation->setRequestFields($keys);
+        $this->validation->setKeyFields($keys);
     }
 
     /**
@@ -68,7 +68,7 @@ class Response implements ConverterInterface
             $data = json_decode($data, true);
         }
 
-        if (!$this->validation->validate($data)) {
+        if (!$this->validation->validateResponseData($data)) {
             return false;
         }
 

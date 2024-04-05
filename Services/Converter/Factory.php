@@ -52,14 +52,14 @@ class Factory
     /**
      * Convert
      *
-     * @param mixed         $type
-     * @param mixed         $data
-     * @param array|null    $keys
+     * @param mixed      $type
+     * @param mixed      $data
+     * @param array|null $keys
      *
      * @return mixed
      * @throws PostcodeException
      */
-    public function convert($type, $data, $keys = null): mixed
+    public function convert(mixed $type, mixed $data, ?array $keys = null): mixed
     {
         foreach ($this->converters as $converter) {
             $this->checkImplementation($converter);
@@ -71,14 +71,14 @@ class Factory
     /**
      * Converter
      *
-     * @param mixed         $type
-     * @param mixed         $data
-     * @param array|null    $keys
+     * @param mixed      $type
+     * @param mixed      $data
+     * @param array|null $keys
      *
      * @return mixed
      * @throws PostcodeException
      */
-    private function converter($type, $data, $keys)
+    private function converter(mixed $type, mixed $data, ?array $keys): mixed
     {
         if (!isset($this->converters[$type])) {
             // @codingStandardsIgnoreLine
@@ -99,7 +99,7 @@ class Factory
      *
      * @throws PostcodeException
      */
-    private function checkImplementation($converter)
+    private function checkImplementation(mixed $converter): void
     {
         if (!array_key_exists(ConverterInterface::class, class_implements($converter))) {
             // @codingStandardsIgnoreLine

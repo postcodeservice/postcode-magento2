@@ -36,7 +36,9 @@ define(['underscore'], function (_) {
             'postcode_be_getstreet': '/postcode/address/service/be/getstreet',
             'postcode_be_getpostcode': '/postcode/address/service/be/getpostcode',
             'postcode_de_getstreet': '/postcode/address/service/de/getstreet',
-            'postcode_de_getpostcode': '/postcode/address/service/de/getpostcode'
+            'postcode_de_getpostcode': '/postcode/address/service/de/getpostcode',
+            'postcode_fr_getstreet': '/postcode/address/service/fr/getstreet',
+            'postcode_fr_getpostcode': '/postcode/address/service/fr/getpostcode'
         }
     };
     
@@ -48,21 +50,23 @@ define(['underscore'], function (_) {
         getWebserviceURL_NL: function () {
             return postcodeConfig.action_url.postcode_service;
         },
-        
         getWebserviceURL_BE_Street: function () {
             return postcodeConfig.action_url.postcode_be_getstreet;
         },
-        
         getWebserviceURL_BE_Postcode: function () {
             return postcodeConfig.action_url.postcode_be_getpostcode;
         },
-        
         getWebserviceURL_DE_Street: function () {
             return postcodeConfig.action_url.postcode_de_getstreet;
         },
-        
         getWebserviceURL_DE_Postcode: function () {
             return postcodeConfig.action_url.postcode_de_getpostcode;
+        },
+        getWebserviceURL_FR_Street: function () {
+            return postcodeConfig.action_url.postcode_fr_getstreet;
+        },
+        getWebserviceURL_FR_Postcode: function () {
+            return postcodeConfig.action_url.postcode_fr_getpostcode;
         }
     };
 });

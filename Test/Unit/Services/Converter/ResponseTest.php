@@ -86,7 +86,7 @@ class ResponseTest extends TestInterface
     {
         $mock = $this->getMock(ValidationResponse::class);
         $mockExpects = $mock->expects($this->once());
-        $mockExpects->method('validate')->with($data);
+        $mockExpects->method('validateResponseData')->with($data);
         $mockExpects->willReturn($return);
 
         return $mock;

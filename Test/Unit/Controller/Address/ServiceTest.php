@@ -36,11 +36,11 @@ use TIG\Postcode\Controller\Address\Service;
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\App\RequestInterface;
 use TIG\Postcode\Services\Converter\Factory;
-use TIG\Postcode\Webservices\Endpoints\GetAddress;
-use TIG\Postcode\Webservices\Endpoints\GetBePostcode;
-use TIG\Postcode\Webservices\Endpoints\GetBeStreet;
-use TIG\Postcode\Webservices\Endpoints\GetDePostcode;
-use TIG\Postcode\Webservices\Endpoints\GetDeStreet;
+use TIG\Postcode\Webservices\Endpoints\GetNLAddressValidation;
+use TIG\Postcode\Webservices\Endpoints\GetBEZipcodeFind;
+use TIG\Postcode\Webservices\Endpoints\GetBEStreetFind;
+use TIG\Postcode\Webservices\Endpoints\GetDEZipcodeFind;
+use TIG\Postcode\Webservices\Endpoints\GetDEStreetFind;
 use Magento\Framework\Controller\Result\JsonFactory;
 use Magento\Framework\Controller\Result\Json;
 
@@ -182,7 +182,7 @@ class ServiceTest extends TestCase
      */
     private function getAddressCallMock($params, bool $returns = false, bool $failResponse = false)
     {
-        $addressMock = $this->getFakeMock(GetAddress::class)->setMethods([
+        $addressMock = $this->getFakeMock(GetNLAddressValidation::class)->setMethods([
             'setRequestData', 'call', 'getCountry', 'getMethod'
         ])->getMock();
 
@@ -213,7 +213,7 @@ class ServiceTest extends TestCase
      */
     private function getBePostcodeCallMock($params, bool $returns = false)
     {
-        $addressMock = $this->getFakeMock(GetBePostcode::class)->setMethods([
+        $addressMock = $this->getFakeMock(GetBEZipcodeFind::class)->setMethods([
             'setRequestData', 'call', 'getCountry', 'getMethod'
         ])->getMock();
 
@@ -239,7 +239,7 @@ class ServiceTest extends TestCase
      */
     private function getDePostcodeCallMock($params, bool $returns = false)
     {
-        $addressMock = $this->getFakeMock(GetDePostcode::class)->setMethods([
+        $addressMock = $this->getFakeMock(GetDEZipcodeFind::class)->setMethods([
             'setRequestData', 'call', 'getCountry', 'getMethod'
         ])->getMock();
 
@@ -265,7 +265,7 @@ class ServiceTest extends TestCase
      */
     private function getBeStreetCallMock($params, bool $returns = false)
     {
-        $addressMock = $this->getFakeMock(GetBeStreet::class)->setMethods([
+        $addressMock = $this->getFakeMock(GetBEStreetFind::class)->setMethods([
             'setRequestData', 'call', 'getCountry', 'getMethod'
         ])->getMock();
 
@@ -291,7 +291,7 @@ class ServiceTest extends TestCase
      */
     private function getDeStreetCallMock($params, bool $returns = false)
     {
-        $addressMock = $this->getFakeMock(GetDeStreet::class)->setMethods([
+        $addressMock = $this->getFakeMock(GetDEStreetFind::class)->setMethods([
             'setRequestData', 'call', 'getCountry', 'getMethod'
         ])->getMock();
 

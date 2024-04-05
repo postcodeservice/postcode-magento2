@@ -83,7 +83,7 @@ class RequestTest extends TestInterface
     {
         $mock = $this->getMock(ValidationRequest::class);
         $mockExpects = $mock->expects($this->once());
-        $mockExpects->method('validate')->with($data);
+        $mockExpects->method('validateResponseData')->with($data);
         $mockExpects->willReturn($return);
 
         if ($return) {

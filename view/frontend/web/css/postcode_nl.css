@@ -3,7 +3,7 @@
 .field.tig_postcode_nl.tig_housenumber_field,
 .field.tig_postcode_nl.tig_housenumber_addition_field {
     display: inline-block;
-    margin: 20px 10px 20px 0;
+    margin: 0 10px 0 0;
     width: 100%;
     max-width: calc(100% / 3 - 7px);
     min-height: 80px;
@@ -12,6 +12,7 @@
 
 @media (max-width: 400px) {
     .tig_postcode_field.tig_postcode_nl {
+        display: block;
         max-width: 100%;
     }
 
@@ -25,10 +26,8 @@
     max-width: 100%;
 }
 
-
-
 .field.tig_postcode_nl.tig_housenumber_addition_field {
-    margin: 0 0 20px 0;
+    margin: 0;
 }
 
 .tig_postcode_nl.tig_postcode_field._error + .tig_housenumber_field input,

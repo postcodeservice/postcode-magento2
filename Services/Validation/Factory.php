@@ -60,7 +60,7 @@ class Factory
      * @return bool|mixed
      * @throws PostcodeException
      */
-    public function validate($type, $data)
+    public function validate(mixed $type, mixed $data): mixed
     {
         foreach ($this->validators as $validator) {
             $this->checkImplementation($validator);
@@ -78,14 +78,14 @@ class Factory
      * @return bool|mixed
      * @throws PostcodeException
      */
-    private function validator($type, $data)
+    private function validator(mixed $type, mixed $data): mixed
     {
         if (!isset($this->validators[$type])) {
             // @codingStandardsIgnoreLine
             throw new PostcodeException(__('Could not find type %1 as validator', $type));
         }
 
-        return $this->validators[$type]->validate($data);
+        return $this->validators[$type]->validateResponseData($data);
     }
 
     /**
@@ -95,7 +95,7 @@ class Factory
      *
      * @throws PostcodeException
      */
-    private function checkImplementation($validator)
+    private function checkImplementation(mixed $validator): void
     {
         if (!array_key_exists(ValidationInterface::class, class_implements($validator))) {
             // @codingStandardsIgnoreLine

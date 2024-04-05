@@ -41,8 +41,17 @@ define(
     function ($, _, PostcodeHandler, FieldTypes, PostcodeApi, $t) {
         'use strict';
         
-        // Regular expression for validating Dutch postcodes
-        const postcodeNLRegex = /^[0-9]{4}\s?[A-Z]{2}$/i;
+        // Define error messages for various error states
+        const errorMessages = {
+            ADDRESS_NOT_FOUND: 'Address not found with provided zipcode and house number. If correct, please enter address details manually.',
+            VALIDATION_UNAVAILABLE: 'Address validation temporarily unavailable.',
+            VALIDATION_FAILED: 'Could not perform address validation.'
+        };
+        
+        // Define UI constants
+        const UI = {
+            SEARCH_DELAY_IN_MS: 0
+        };
         
         // Define the possible states of the postcode handler
         const states = Object.seal({
@@ -53,6 +62,31 @@ define(
             POSTCODE_SHOW_FIELDS_SUGGESTION: 'postcode_show_fields_suggestion',
             POSTCODE_SHOW_FIELDS_EDIT: 'postcode_show_fields_edit'
         });
+        
+        // Define application configuration
+        const appConfig = {
+            COUNTRY: 'NL'
+        };
+        
+        // Regular expression for validating Dutch zipcodes
+        const postcodeNLRegex = /^[0-9]{4}\s?[A-Z]{2}$/i;
+        
+        // Function to get the appropriate error message based on the error_code in the data object
+        function getErrorMessage(data)
+        {
+            if (data.error_code) {
+                console.error('Postcodeservice.com extension: ' + JSON.stringify(data));
+                switch(data.error_code) {
+                    case 429:
+                        return errorMessages.VALIDATION_UNAVAILABLE;
+                    default:
+                        return data.error_code > 400
+                            ? errorMessages.VALIDATION_FAILED
+                            : errorMessages.ADDRESS_NOT_FOUND;
+                }
+            }
+            return errorMessages.ADDRESS_NOT_FOUND;
+        }
         
         // Constructor function for the Dutch postcode handler
         function PostcodeHandlerNL(config, postcodeService)
@@ -68,7 +102,7 @@ define(
         PostcodeHandlerNL.prototype = Object.create(PostcodeHandler.prototype);
         
         // Method to get the ISO code for Netherlands
-        PostcodeHandlerNL.prototype.getISOCode = function () { return 'NL';};
+        PostcodeHandlerNL.prototype.getISOCode = function () { return appConfig.COUNTRY;};
         
         // Method to call the API and handle the response
         PostcodeHandlerNL.prototype.callApi = _.debounce(function (postcode, house_number) {
@@ -79,21 +113,8 @@ define(
             PostcodeApi.getPostCodeNL(postcode, house_number).done(function (data) {
                 self.getPostcodeService().getElement(FieldTypes.postcode).error('');
                 
-                if (data.success === false) {
-                    let errorMessage = 'Address not found with provided zipcode and house number. If correct, please enter address details manually.';
-                    
-                    if (data.error_code) {
-                        // show error in console
-                        console.error('Postcodeservice.com extension: ' + JSON.stringify(data));
-                        
-                        if (data.error_code > 400) {
-                            errorMessage = 'Could not perform address validation.';
-                        }
-                        if (data.error_code === 429) {
-                            errorMessage = 'Address validation temporarily unavailable.';
-                        }
-                    }
-                    
+                if (data.results.length === 0) {
+                    const errorMessage = getErrorMessage(data);
                     self.setCurrentState(states.POSTCODE_CALL_FAILED);
                     self.getPostcodeService()
                     .getElement(FieldTypes.postcode)
@@ -102,8 +123,8 @@ define(
                 }
                 
                 // Set the field values based on the API response
-                self.getPostcodeService().setFieldValue(FieldTypes.street, data.street);
-                self.getPostcodeService().setFieldValue(FieldTypes.city, data.city);
+                self.getPostcodeService().setFieldValue(FieldTypes.street, data.results[0].street);
+                self.getPostcodeService().setFieldValue(FieldTypes.city, data.results[0].city);
                 self.concatenateFieldsToStreet(FieldTypes.street);
                 
                 self.setCurrentState(states.POSTCODE_SHOW_FIELDS_SUGGESTION);
@@ -113,8 +134,8 @@ define(
                 self.getPostcodeService().showHideField(FieldTypes.street, true);
                 self.getPostcodeService().showHideField(FieldTypes.city, true);
             });
-        }, 30); // The last parameter is the delay in milliseconds for the _.debounce function from
-                // Underscore.js.
+        }, UI.SEARCH_DELAY_IN_MS); // The delay in milliseconds for the
+                                   // _.debounce function from Underscore.js.
         
         // Method to handle changes to the postcode or house number fields
         PostcodeHandlerNL.prototype.handle = function (field_type, field_value) {
@@ -136,8 +157,11 @@ define(
                     typeof this.data.postcode === 'string' &&
                     typeof this.data.house_number === 'string' &&
                     this.data.postcode.match(postcodeNLRegex) &&
-                    this.data.house_number.match(/[0-9]+/)) {
-                    this.callApi(this.data.postcode, this.data.house_number);
+                    (this.data.house_number.match(/^\d+/)[0]) > 0) {
+                    // If 1A is entered in the house_number and default validation is turned off,
+                    // strip the characters after the number, check if it is a positive number
+                    // and perform the validation nevertheless
+                    this.callApi(this.data.postcode, this.data.house_number.match(/^\d+/)[0]);
                 }
             }
             
@@ -145,8 +169,8 @@ define(
             switch(this.getCurrentState()) {
                 case states.INIT:
                     this.setCurrentState(states.IDLE);
-                    var postcodeField = this.getPostcodeService().getElement(FieldTypes.postcode);
-                    var housenumberField = this.getPostcodeService()
+                    const postcodeField = this.getPostcodeService().getElement(FieldTypes.postcode);
+                    const housenumberField = this.getPostcodeService()
                     .getElement(FieldTypes.house_number);
                     
                     if (postcodeField) {

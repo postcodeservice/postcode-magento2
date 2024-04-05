@@ -35,14 +35,14 @@ namespace TIG\Postcode\Services\Validation;
 class Request implements ValidationInterface
 {
     /** @var string[] */
-    private array $requestKeys = []; // set in GetAddress, GetBeStreet, GetNlStreet, etc.
+    private array $requestKeys = []; // set in GetNLAddressValidation, GetBEStreetFind, GetNlStreet, etc.
 
     /**
      * @inheritdoc
      *
-     * @param string[] $keys
+     * @param mixed $keys
      */
-    public function setRequestFields($keys): void
+    public function setKeyFields(mixed $keys): void
     {
         $this->requestKeys = $keys;
     }
@@ -60,7 +60,7 @@ class Request implements ValidationInterface
     /**
      * @inheritDoc
      */
-    public function validate($data): bool
+    public function validateResponseData(mixed $data): bool
     {
         // if the response is not an array, it's invalid
         if (!is_array($data)) {
@@ -76,7 +76,7 @@ class Request implements ValidationInterface
      * This function iterates over each key in $this->requestKeys and checks if it exists in the provided data array.
      * If any key is missing, the function immediately returns false. If all keys are present, it returns true.
      *
-     * @param array $data The data to validate.
+     * @param array $data The data to validateResponseData.
      *
      * @return bool Returns true if all request keys are present in the data, false otherwise.
      */

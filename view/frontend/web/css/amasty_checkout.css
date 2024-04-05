@@ -19,6 +19,9 @@
 .amcheckout-wrapper .field.tig_postcode_de.tig_postcode_field {
     max-width: 100%;
 }
+.amcheckout-wrapper .field.tig_postcode_fr.tig_postcode_field {
+    max-width: 100%;
+}
 
 .amcheckout-wrapper .field.tig_postcode_nl.tig_housenumber_field,
 .amcheckout-wrapper .field.tig_postcode_be.tig_housenumber_field {
@@ -27,11 +30,16 @@
 .amcheckout-wrapper .field.tig_postcode_de.tig_housenumber_field {
     max-width: calc(40% - 7px);
 }
-
+.amcheckout-wrapper .field.tig_postcode_fr.tig_housenumber_field {
+    max-width: calc(40% - 7px);
+}
 .amcheckout-wrapper .field.tig_postcode_nl.tig_housenumber_addition_field,
 .amcheckout-wrapper .field.tig_postcode_be.tig_housenumber_addition_field {
     max-width: calc(60% - 7px);
 }
 .amcheckout-wrapper .field.tig_postcode_de.tig_housenumber_addition_field {
+    max-width: calc(60% - 7px);
+}
+.amcheckout-wrapper .field.tig_postcode_fr.tig_housenumber_addition_field {
     max-width: calc(60% - 7px);
 }

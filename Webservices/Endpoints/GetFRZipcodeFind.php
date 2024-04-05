@@ -34,10 +34,10 @@
 namespace TIG\Postcode\Webservices\Endpoints;
 
 // @codingStandardsIgnoreFile
-class GetBePostcode extends EndpointAbstract
+class GetFRZipcodeFind extends EndpointAbstract
 {
     protected $endpoint     = 'zipcode-find/';
-    protected $country      = 'BE';
-    protected $requestKeys  = ['zipcodezone', 'multiresults']; // BE V3
-    protected $responseKeys = ['zipcode', 'city']; // BE V3
+    protected $country      = 'FR';
+    protected $requestKeys  = ['zipcodezone']; // FR V1
+    protected $responseKeys = ['results', 'error_code']; // FR V1
 }
