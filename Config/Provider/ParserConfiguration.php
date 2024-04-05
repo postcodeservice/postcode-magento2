@@ -29,20 +29,26 @@
  * @copyright   Copyright (c) Total Internet Group B.V. https://tig.nl/copyright
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
+
 namespace TIG\Postcode\Config\Provider;
 
 class ParserConfiguration extends AbstractConfigProvider
 {
     public const XPATH_STREETMERGING      = 'tig_postcode/configuration/fieldparsing_street';
+
     public const XPATH_HOUSENUMBERMERGING = 'tig_postcode/configuration/fieldparsing_housenumber';
+
     public const XPATH_ADDITIONMERGING    = 'tig_postcode/configuration/fieldparsing_addition';
 
-    public const DEFAULT_PARSELINE = 1;
+    public const DEFAULT_PARSELINE        = 1;
 
-    public const PARSE_TYPE_ONE   = 1;
-    public const PARSE_TYPE_TWO   = 2;
-    public const PARSE_TYPE_THREE = 3;
-    public const PARSE_TYPE_FOUR  = 4;
+    public const PARSE_TYPE_ONE           = 1;
+
+    public const PARSE_TYPE_TWO           = 2;
+
+    public const PARSE_TYPE_THREE         = 3;
+
+    public const PARSE_TYPE_FOUR          = 4;
 
     /**
      * @var int[]

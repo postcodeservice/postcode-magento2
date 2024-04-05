@@ -64,7 +64,7 @@ class Button extends Template implements RendererInterface
      */
     public function getSignUpLabel()
     {
-        return __('Sign Up For A Paid Account');
+        return __('No credentials yet? Sign up for a plan');
     }
 
     /**

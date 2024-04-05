@@ -38,7 +38,7 @@ use TIG\Postcode\Test\TestCase;
 use Magento\Framework\HTTP\ZendClient as ZendClient;
 use TIG\Postcode\Config\Provider\ApiConfiguration;
 use TIG\Postcode\Config\Provider\ClientConfiguration;
-use TIG\Postcode\Webservices\Endpoints\GetAddress;
+use TIG\Postcode\Webservices\Endpoints\GetNLAddressValidation;
 use TIG\Postcode\Services\Converter\Factory;
 use Magento\Framework\HTTP\PhpEnvironment\ServerAddress;
 
@@ -87,7 +87,7 @@ class ApiTest extends TestCase
         $this->clientConfiguration = $this->getFakeMock(ClientConfiguration::class, true);
         $this->converter = $this->getFakeMock(Factory::class, true);
         $this->serverAddress = $this->getFakeMock(ServerAddress::class)->disableOriginalConstructor()->getMock();
-        $this->endpoint = $this->getFakeMock(GetAddress::class)->disableOriginalConstructor()->getMock();
+        $this->endpoint = $this->getFakeMock(GetNLAddressValidation::class)->disableOriginalConstructor()->getMock();
 
         return parent::setup();
     }
@@ -167,15 +167,13 @@ class ApiTest extends TestCase
         $clientConfigDomain->method('getDomainUrl')->willReturn('www.fakedomain.com');
 
         $serverIp = $this->serverAddress->expects($this->once());
-        $serverIp->method('getServerAddress')->willReturn('127.0.0.1');
 
         $completedRequestParams = [
             'postcode' => '1014BA',
             'huisnummer' => '37',
             'client_id' => '11111',
             'secure_code' => 'APIKEY',
-            'domain' => 'www.fakedomain.com',
-            'remote_ip' => '127.0.0.1'
+            'domain' => 'www.fakedomain.com'
         ];
 
         $zendClientParams = $this->zendClient->expects($this->once());
@@ -235,7 +233,7 @@ class ApiTest extends TestCase
         $serverIp->method('getServerAddress')->willReturn('127.0.0.1');
 
         $completedRequestParams = ['postcode' => '1014BA', 'huisnummer' => '37',
-                                   'domain' => 'www.fakedomain.com', 'remote_ip' => '127.0.0.1'
+                                   'domain' => 'www.fakedomain.com'
         ];
 
         $zendClientParams = $this->zendClient->expects($this->once());
@@ -295,7 +293,7 @@ class ApiTest extends TestCase
         $serverIp->method('getServerAddress')->willReturn('127.0.0.1');
 
         $completedRequestParams = ['postcode' => '1014BA', 'huisnummer' => '37',
-                                   'domain' => 'www.fakedomain.com', 'remote_ip' => '127.0.0.1'
+                                   'domain' => 'www.fakedomain.com'
         ];
 
         $zendClientParams = $this->zendClient->expects($this->once());
@@ -358,7 +356,7 @@ class ApiTest extends TestCase
         $serverIp->method('getServerAddress')->willReturn('127.0.0.1');
 
         $completedRequestParams = ['zipcodezone' => '1000',
-                                   'domain' => 'www.fakedomain.com', 'remote_ip' => '127.0.0.1'
+                                   'domain' => 'www.fakedomain.com'
         ];
 
         $zendClientParams = $this->zendClient->expects($this->once());

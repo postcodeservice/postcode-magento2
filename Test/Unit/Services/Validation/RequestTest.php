@@ -54,7 +54,7 @@ class RequestTest extends TestInterface
     public function testSetAndGetKeys()
     {
         $instance = $this->getInstance();
-        $instance->setKeys(['zipcode', 'houseno']);
-        $this->assertEquals($instance->getKeys(), ['zipcode', 'houseno']);
+        $instance->setKeys(['zipcode', 'house_number']);
+        $this->assertEquals($instance->getKeys(), ['zipcode', 'house_number']);
     }
 }

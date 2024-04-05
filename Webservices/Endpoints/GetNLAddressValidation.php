@@ -33,10 +33,10 @@
 namespace TIG\Postcode\Webservices\Endpoints;
 
 // @codingStandardsIgnoreFile
-class GetAddress extends EndpointAbstract
+class GetNLAddressValidation extends EndpointAbstract
 {
-    protected $endpoint     = 'find/';
+    protected $endpoint     = 'address-validation/';
     protected $country      = 'NL';
-    protected $requestKeys  = ['zipcode', 'houseno']; // NL V5
-    protected $responseKeys = ['street', 'city']; // NL V5
+    protected $requestKeys  = ['zipcode', 'house_number']; // NL API V6
+    protected $responseKeys = ['results', 'error_code']; // NL API V6
 }

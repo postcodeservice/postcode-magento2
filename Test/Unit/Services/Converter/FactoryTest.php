@@ -122,7 +122,7 @@ class FactoryTest extends TestCase
         $this->assertEquals(
             $instance->convert(
                 'correct',
-                ['zipcode' => '1014BA', 'houseno' => 37],
+                ['zipcode' => '1014BA', 'house_number' => 37],
                 ['street', 'city']
             ),
             ['street' => 'Kabelweg', 'city' => 'Amsterdam']

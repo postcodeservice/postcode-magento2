@@ -211,7 +211,8 @@ class LayoutProcessorPlugin
      *
      * @see LayoutProcessor::process()
      */
-    public function afterProcess($subject, $jsLayout) {
+    public function afterProcess($subject, $jsLayout)
+    {
         $postalCodePaths = $this->arrayManager->findPaths('postcode', $jsLayout);
         foreach ($postalCodePaths as $postalCodePath) {
             $fieldsetChildren = $this->getParentPath($postalCodePath, '/');
@@ -240,41 +241,26 @@ class LayoutProcessorPlugin
                 $jsLayout,
                 self::TIG_POSTCODE_COMPONENT_TEMPLATE
             );
-            // Change default sortOrder of PostcodeField
-            $defaultCountry = $this->scopeConfig->getValue(
-                self::COUNTRY_CODE_PATH,
-                ScopeInterface::SCOPE_WEBSITE
-            );
-            // Change default sortOrder of PostcodeField if country is set to NL or BE or DE
-            // @TODO use a better way to set sort order for postcode field,
-            // tried in branch "tryout_billing_address_sortorder_mixin"
 
-            if ($defaultCountry === "NL" || $defaultCountry === "BE" || $defaultCountry === "DE") {
-                $jsLayout = $this->arrayManager->set($postalCodePath . '/config/sortOrder', $jsLayout, 50);
+            // Order is set in CollectionPlugin.php
+            $jsLayout = $this->arrayManager->set($postalCodePath . '/config/sortOrder', $jsLayout, 50);
+
+            if ($this->arrayManager->get($postalCodePath . '/dataScope', $jsLayout) !== null) {
+                // Add housenumber fields
+                $postcodeParentDataScope = $this->getParentPath(
+                    $this->arrayManager->get($postalCodePath . '/dataScope', $jsLayout),
+                    "."
+                );
+                $jsLayout                = $this->arrayManager->merge(
+                    $fieldsetChildren,
+                    $jsLayout,
+                    $this->createHousenumberFieldsDefinition($postcodeParentDataScope)
+                );
             }
-
-            // Add housenumber fields
-            $postcodeParentDataScope = $this->getParentPath(
-                $this->arrayManager->get($postalCodePath . '/dataScope', $jsLayout),
-                "."
-            );
-            $jsLayout                = $this->arrayManager->merge(
-                $fieldsetChildren,
-                $jsLayout,
-                $this->createHousenumberFieldsDefinition($postcodeParentDataScope)
-            );
 
             // Modify fields
             $jsLayout = $this->addTrackedFields($jsLayout, $fieldsetChildren);
         }
-
-        /* Robert
-        if (isset($jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']
-                  ['children']['shippingAddress']['children']['shipping-address-fieldset']['children']['city'])) {
-            $jsLayout['components']['checkout']['children']['steps']['children']['shipping-step']
-            ['children']['shippingAddress']['children']['shipping-address-fieldset']['children']['city']['sortOrder'] = 49; // your desired sort order
-        }
-        */
 
         return $jsLayout;
     }

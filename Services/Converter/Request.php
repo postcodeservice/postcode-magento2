@@ -58,7 +58,7 @@ class Request implements ConverterInterface
      */
     public function setValidationKeys($keys): void
     {
-        $this->validation->setRequestFields($keys);
+        $this->validation->setKeyFields($keys);
     }
 
     /**
@@ -76,7 +76,7 @@ class Request implements ConverterInterface
     public function convert($data): bool|array
     {
         // Validate the input data
-        if (!$this->validation->validate($data)) {
+        if (!$this->validation->validateResponseData($data)) {
             return false;
         }
 

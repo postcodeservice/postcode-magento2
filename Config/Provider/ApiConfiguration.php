@@ -34,11 +34,11 @@ namespace TIG\Postcode\Config\Provider;
 
 class ApiConfiguration extends AbstractConfigProvider
 {
-    public const XPATH_API_BASE                = 'tig_postcode/api/base';
+    public const XPATH_API_NL_BASE             = 'tig_postcode/api/base';
 
-    public const XPATH_API_VERSION             = 'tig_postcode/api/version';
+    public const XPATH_API_NL_POSTCODE_VERSION = 'tig_postcode/api/version';
 
-    public const XPATH_API_TYPE                = 'tig_postcode/api/type';
+    public const XPATH_API_NL_TYPE             = 'tig_postcode/api/type';
 
     public const XPATH_API_BE_BASE             = 'tig_postcode/api_be/base';
 
@@ -51,6 +51,12 @@ class ApiConfiguration extends AbstractConfigProvider
     public const XPATH_API_DE_POSTCODE_VERSION = 'tig_postcode/api_de/postcode_version';
 
     public const XPATH_API_DE_STREET_VERSION   = 'tig_postcode/api_de/street_version';
+
+    public const XPATH_API_FR_BASE             = 'tig_postcode/api_fr/base';
+
+    public const XPATH_API_FR_POSTCODE_VERSION = 'tig_postcode/api_fr/postcode_version';
+
+    public const XPATH_API_FR_STREET_VERSION   = 'tig_postcode/api_fr/street_version';
 
     /**
      * Get base Uri
@@ -87,6 +93,19 @@ class ApiConfiguration extends AbstractConfigProvider
     }
 
     /**
+     * Get France base Uri
+     *
+     * @param string $endpoint
+     *
+     * @return string
+     */
+    public function getFRBaseUri(string $endpoint): string
+    {
+        return $this->getBase('FR') . '/' . $this->getVersion('FR', $endpoint) . '/';
+    }
+
+
+    /**
      * Get base path via country and store ID
      *
      * @param string          $country
@@ -96,15 +115,12 @@ class ApiConfiguration extends AbstractConfigProvider
      */
     public function getBase(string $country = 'NL', int|string $store = null): mixed
     {
-        $xpath = static::XPATH_API_BASE; // NL
-
-        if ($country == 'BE') { // BE
-            $xpath = static::XPATH_API_BE_BASE;
-        }
-
-        if ($country == 'DE') { // DE
-            $xpath = static::XPATH_API_DE_BASE;
-        }
+        $xpath = match ($country) {
+            'BE' => static::XPATH_API_BE_BASE,
+            'DE' => static::XPATH_API_DE_BASE,
+            'FR' => static::XPATH_API_FR_BASE,
+            default => static::XPATH_API_NL_BASE,
+        };
 
         return $this->getConfigFromXpath($xpath, $store);
     }
@@ -120,29 +136,21 @@ class ApiConfiguration extends AbstractConfigProvider
      */
     public function getVersion(string $country = 'NL', string $endpoint = null, int|string $store = null): mixed
     {
-        $xpath = static::XPATH_API_VERSION; // NL
-
-        if ($country == 'BE') {
-            switch ($endpoint) {
-                case 'zipcode-find/':
-                    $xpath = static::XPATH_API_BE_POSTCODE_VERSION;
-                    break;
-                case 'street-find/':
-                    $xpath = static::XPATH_API_BE_STREET_VERSION;
-                    break;
-            }
-        }
-
-        if ($country == 'DE') {
-            switch ($endpoint) {
-                case 'zipcode-find/':
-                    $xpath = static::XPATH_API_DE_POSTCODE_VERSION;
-                    break;
-                case 'street-find/':
-                    $xpath = static::XPATH_API_DE_STREET_VERSION;
-                    break;
-            }
-        }
+        $xpath = match ($country) {
+            'BE' => match ($endpoint) {
+                'zipcode-find/' => static::XPATH_API_BE_POSTCODE_VERSION,
+                'street-find/' => static::XPATH_API_BE_STREET_VERSION,
+            },
+            'DE' => match ($endpoint) {
+                'zipcode-find/' => static::XPATH_API_DE_POSTCODE_VERSION,
+                'street-find/' => static::XPATH_API_DE_STREET_VERSION,
+            },
+            'FR' => match ($endpoint) {
+                'zipcode-find/' => static::XPATH_API_FR_POSTCODE_VERSION,
+                'street-find/' => static::XPATH_API_FR_STREET_VERSION,
+            },
+            default => static::XPATH_API_NL_POSTCODE_VERSION,
+        };
 
         return $this->getConfigFromXpath($xpath, $store);
     }
@@ -156,6 +164,6 @@ class ApiConfiguration extends AbstractConfigProvider
      */
     public function getType(int|string $store = null): mixed
     {
-        return $this->getConfigFromXpath(static::XPATH_API_TYPE, $store);
+        return $this->getConfigFromXpath(static::XPATH_API_NL_TYPE, $store);
     }
 }

@@ -42,11 +42,21 @@ class ModuleConfiguration extends AbstractConfigProvider
 
     public const XPATH_SUPPORTED_MAGENTO_VERSION = 'tig_postcode/supported_magento_version';
 
-    public const XPATH_NETHERLANDS_CHECK         = 'tig_postcode/countries/enable_nl_check';
+    public const XPATH_NL_ENABLED                = 'tig_postcode/countries/enable_nl_check';
 
-    public const XPATH_BELGIUM_CHECK             = 'tig_postcode/countries/enable_be_check';
+    public const XPATH_BE_ENABLED                = 'tig_postcode/countries/enable_be_check';
 
-    public const XPATH_GERMANY_CHECK             = 'tig_postcode/countries/enable_de_check';
+    public const XPATH_DE_ENABLED                = 'tig_postcode/countries/enable_de_check';
+
+    public const XPATH_FR_ENABLED                = 'tig_postcode/countries/enable_fr_check';
+
+    public const XPATH_NL_API_VERSION            = 'tig_postcode/api/version';
+
+    public const XPATH_BE_API_VERSION            = 'tig_postcode/api_be/postcode_version';
+
+    public const XPATH_DE_API_VERSION            = 'tig_postcode/api_de/postcode_version';
+
+    public const XPATH_FR_API_VERSION            = 'tig_postcode/api_fr/postcode_version';
 
     /**
      * Should return on of these values
@@ -140,51 +150,53 @@ class ModuleConfiguration extends AbstractConfigProvider
     }
 
     /**
-     * Get the Checkout compatability via store ID
+     * Check if a country is enabled via store ID
      *
-     * @param string|int|null $store
-     *
-     * @return mixed
-     * @deprecated
-     */
-    public function getCheckoutCompatibility($store = null)
-    {
-        return $this->getConfigFromXpath(static::XPATH_CHECKOUT_COMPATIBILITY, $store);
-    }
-
-    /**
-     * Check if NL is enabled via store ID
-     *
+     * @param string          $country
      * @param string|int|null $store
      *
      * @return bool
      */
-    public function isNLCheckEnabled($store = null): bool
+    public function isCountryCheckEnabled(string $country, $store = null): bool
     {
-        return (bool) $this->getConfigFromXpath(static::XPATH_NETHERLANDS_CHECK, $store);
+        $countryXpaths = [
+            'NL' => static::XPATH_NL_ENABLED,
+            'BE' => static::XPATH_BE_ENABLED,
+            'DE' => static::XPATH_DE_ENABLED,
+            'FR' => static::XPATH_FR_ENABLED,
+        ];
+
+        return isset($countryXpaths[$country]) && $this->getConfigFromXpath($countryXpaths[$country], $store);
     }
 
     /**
-     * Check if BE is enabled via store ID
+     * Return the specific used Postcode Service API version for each country
      *
-     * @param string|int|null $store
-     *
-     * @return bool
+     * @return array
      */
-    public function isBECheckEnabled($store = null): bool
+    public function getAPIVersions(): array
     {
-        return (bool) $this->getConfigFromXpath(static::XPATH_BELGIUM_CHECK, $store);
-    }
+        $countryXpaths = [
+            'NL' => static::XPATH_NL_API_VERSION,
+            'BE' => static::XPATH_BE_API_VERSION,
+            'DE' => static::XPATH_DE_API_VERSION,
+            'FR' => static::XPATH_FR_API_VERSION,
+        ];
 
-    /**
-     * Check if DE is enabled via store ID
-     *
-     * @param string|int|null $store
-     *
-     * @return bool
-     */
-    public function isDECheckEnabled($store = null): bool
-    {
-        return (bool) $this->getConfigFromXpath(static::XPATH_GERMANY_CHECK, $store);
+        $countryNames = [
+            'NL' => 'Netherlands',
+            'BE' => 'Belgium',
+            'DE' => 'Germany',
+            'FR' => 'France',
+        ];
+
+        $result = [];
+
+        foreach ($countryXpaths as $country => $xpath) {
+            $countryName          = $countryNames[$country] ?? $country;
+            $result[$countryName] = str_ireplace('v', '', $this->getConfigFromXpath($xpath));
+        }
+
+        return $result;
     }
 }

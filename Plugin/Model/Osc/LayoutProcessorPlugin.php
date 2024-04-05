@@ -241,8 +241,8 @@ class LayoutProcessorPlugin
                 self::COUNTRY_CODE_PATH,
                 ScopeInterface::SCOPE_WEBSITE
             );
-            // Change default sortOrder of PostcodeField if country is set to NL or BE
-            if ($defaultCountry === "NL" || $defaultCountry === "BE") {
+            // Change default sortOrder of PostcodeField if country is set to NL or BE or DE or FRE
+            if ($defaultCountry === "NL" || $defaultCountry === "BE" || $defaultCountry === "DE" || $defaultCountry === "FR") {
                 $jsLayout = $this->arrayManager->set($postalCodePath . '/config/sortOrder', $jsLayout, 50);
             }
 

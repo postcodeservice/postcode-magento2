@@ -138,7 +138,8 @@ class Api
     {
         $version = str_replace('v', '', $this->apiConfiguration->getVersion());
 
-        if ((int) $version >= 4 || $endpoint->getCountry() === 'BE' || $endpoint->getCountry() === 'DE') {
+        // From NL Version 4 and up Headers are used to communicate with the Postcode Service API
+        if ((int) $version >= 4 || $endpoint->getCountry() === 'BE' || $endpoint->getCountry() === 'DE' || $endpoint->getCountry() === 'FR') {
             $this->httpClient->setOptions(['strict' => false]);
             $this->httpClient->setHeaders([
                 'X-ClientId'   => $this->clientConfiguration->getClientId(),
@@ -164,9 +165,8 @@ class Api
     {
         $this->httpClient->setMethod($endpoint->getMethod());
 
-        $params              = $endpoint->getRequestData();
-        $params['domain']    = $this->clientConfiguration->getDomainUrl();
-        $params['remote_ip'] = $this->serverAddress->getServerAddress();
+        $params           = $endpoint->getRequestData();
+        $params['domain'] = $this->clientConfiguration->getDomainUrl();
 
         if ($endpoint->getMethod() == Request::METHOD_GET) {
             $this->httpClient->setParameterGet($params);
@@ -186,15 +186,12 @@ class Api
      */
     private function setUri(EndpointInterface $endpoint)
     {
-        $uri = $this->apiConfiguration->getBaseUri() . $endpoint->getEndpoint(); // NL
-
-        if ($endpoint->getCountry() == 'BE') {
-            $uri = $this->apiConfiguration->getBEBaseUri($endpoint->getEndpoint()) . $endpoint->getEndpoint(); // BE
-        }
-
-        if ($endpoint->getCountry() == 'DE') {
-            $uri = $this->apiConfiguration->getDEBaseUri($endpoint->getEndpoint()) . $endpoint->getEndpoint(); // DE
-        }
+        $uri = match ($endpoint->getCountry()) {
+            'BE' => $this->apiConfiguration->getBEBaseUri($endpoint->getEndpoint()) . $endpoint->getEndpoint(),
+            'DE' => $this->apiConfiguration->getDEBaseUri($endpoint->getEndpoint()) . $endpoint->getEndpoint(),
+            'FR' => $this->apiConfiguration->getFRBaseUri($endpoint->getEndpoint()) . $endpoint->getEndpoint(),
+            default => $this->apiConfiguration->getBaseUri() . $endpoint->getEndpoint(),
+        };
 
         $this->httpClient->setUri($uri);
     }

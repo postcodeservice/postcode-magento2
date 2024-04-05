@@ -29,7 +29,7 @@ Support,Support
 "Can not find the address, please fill in manually","Het adres kan niet gevonden worden, vul alsjeblieft handmatig in"
 "Housenumber","Huisnummer"
 "Addition","Bus"
-"Housenumber addition","Huisnummer toevoeging"
+"Housenumber addition","Huisletter + box"
 "Back-end merging","Back-end samenvoeging"
 "These settings have impact on how street address data is stored in the database.","Deze instellingen hebben invloed op hoe adres data wordt opgeslagen in de database."
 "Tampering with the settings may affect the workflow of third party extensions. Use at your own risk.","Het aanpassen van deze instellingen kan de werking van extensies van derden beïnvloeden. Gebruik op eigen risico."

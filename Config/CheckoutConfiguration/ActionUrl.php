@@ -29,6 +29,7 @@
  * @copyright   Copyright (c) Total Internet Group B.V. https://tig.nl/copyright
  * @license     http://creativecommons.org/licenses/by-nc-nd/3.0/nl/deed.en_US
  */
+
 namespace TIG\Postcode\Config\CheckoutConfiguration;
 
 use Magento\Framework\UrlInterface;
@@ -52,14 +53,17 @@ class ActionUrl implements CheckoutConfigurationInterface
     }
 
     /**
-     * Get value and return NL, Belgium and German postcode URLs
+     * Get value and return NL, Belgium, German, France postcode URLs
      *
      * @return array
      */
     public function getValue()
     {
         return [
-            'postcode_service'        => $this->urlBuilder->getUrl('postcode/address/service', ['_secure' => true]),
+            'postcode_service'        => $this->urlBuilder->getUrl(
+                'postcode/address/service',
+                ['_secure' => true]
+            ),
             'postcode_be_getpostcode' => $this->urlBuilder->getUrl(
                 'postcode/address/service/be/getpostcode',
                 ['_secure' => true]
@@ -74,6 +78,14 @@ class ActionUrl implements CheckoutConfigurationInterface
             ),
             'postcode_de_getstreet'   => $this->urlBuilder->getUrl(
                 'postcode/address/service/de/getstreet',
+                ['_secure' => true]
+            ),
+            'postcode_fr_getpostcode' => $this->urlBuilder->getUrl(
+                'postcode/address/service/fr/getpostcode',
+                ['_secure' => true]
+            ),
+            'postcode_fr_getstreet'   => $this->urlBuilder->getUrl(
+                'postcode/address/service/fr/getstreet',
                 ['_secure' => true]
             )
         ];
