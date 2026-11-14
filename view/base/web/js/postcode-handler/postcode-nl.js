@@ -156,12 +156,14 @@ define(
                     // strings so that the regex match doesn't fail
                     typeof this.data.postcode === 'string' &&
                     typeof this.data.house_number === 'string' &&
-                    this.data.postcode.match(postcodeNLRegex) &&
-                    (this.data.house_number.match(/^\d+/)[0]) > 0) {
-                    // If 1A is entered in the house_number and default validation is turned off,
-                    // strip the characters after the number, check if it is a positive number
-                    // and perform the validation nevertheless
-                    this.callApi(this.data.postcode, this.data.house_number.match(/^\d+/)[0]);
+                    this.data.postcode.match(postcodeNLRegex)) {
+                    const houseNumberMatch = this.data.house_number.match(/^\d+/);
+                    if (houseNumberMatch && houseNumberMatch[0] > 0) {
+                        // If 1A is entered in the house_number and default validation is turned off,
+                        // strip the characters after the number, check if it is a positive number
+                        // and perform the validation nevertheless
+                        this.callApi(this.data.postcode, houseNumberMatch[0]);
+                    }
                 }
             }
             
